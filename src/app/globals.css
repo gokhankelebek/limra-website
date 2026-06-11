@@ -1,26 +1,123 @@
 @import "tailwindcss";
 
+/* ------------------------------------------------------------------
+   Limra Mediterranean — design tokens
+   Palette sampled directly from the Susujeek brand book:
+   Olive  #2D5B14 (Pantone P 156-16 C)
+   Terra  #AB5C0C (Pantone P 21-16 C)
+   Cream  #FEEBCB (Pantone P 14-1 C)
+------------------------------------------------------------------ */
+@theme {
+  --color-olive: #2d5b14;
+  --color-olive-deep: #1c3c0d;
+  --color-olive-soft: #4a7a2e;
+  --color-terracotta: #ab5c0c;
+  --color-terracotta-soft: #c47a2a;
+  --color-cream: #feebcb;
+  --color-cream-soft: #fbf3e2;
+  --color-cream-deep: #f3e2c4;
+  --color-ink: #1a1a17;
+
+  --font-display: var(--font-display);
+  --font-roman: var(--font-roman);
+  --font-body: var(--font-body);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  color-scheme: light;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-olive);
+  color: var(--color-cream);
+}
+
+/* Roman inscriptional letterspacing for eyebrows / the wordmark */
+.tracking-roman {
+  letter-spacing: 0.32em;
+}
+
+/* ------------------------------------------------------------------
+   Motion — slow, weighted, "heavy stone door" easing. No bounce.
+------------------------------------------------------------------ */
+@keyframes limra-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes limra-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes limra-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes limra-seal-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92) rotate(-6deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.anim-rise {
+  opacity: 0;
+  animation: limra-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.anim-fade {
+  opacity: 0;
+  animation: limra-fade 1.6s ease forwards;
+}
+.anim-seal {
+  opacity: 0;
+  transform-origin: center;
+  animation: limra-seal-in 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Stagger helpers */
+.delay-1 { animation-delay: 0.15s; }
+.delay-2 { animation-delay: 0.35s; }
+.delay-3 { animation-delay: 0.55s; }
+.delay-4 { animation-delay: 0.8s; }
+.delay-5 { animation-delay: 1.05s; }
+
+/* Medallion ring stroke-draw */
+.seal-ring {
+  stroke-dasharray: var(--ring-len, 600);
+  stroke-dashoffset: var(--ring-len, 600);
+  animation: limra-draw 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-rise,
+  .anim-fade,
+  .anim-seal,
+  .seal-ring {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    stroke-dashoffset: 0;
+  }
 }
