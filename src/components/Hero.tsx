@@ -24,6 +24,7 @@ export default function Hero() {
       <div className="relative z-10 flex flex-col items-center px-6 text-center text-olive">
         <Medallion
           animate
+          variant="seal"
           className="mb-9 h-24 w-24 text-olive lg:h-28 lg:w-28"
           title="Limra meander seal"
         />
