@@ -4,10 +4,13 @@ type MedallionProps = {
   className?: string;
   /** stroke/fill color — defaults to currentColor so it inherits text color */
   color?: string;
-  /** play the draw-in animation (seal variant animates its ring) */
+  /** play the build-in animation: the meander pattern sweeps itself into
+      place around the circle, the ring draws, the monogram settles last */
   animate?: boolean;
   /** "mark" = bare meander medallion · "seal" = medallion in a ring with the L monogram */
   variant?: "mark" | "seal";
+  /** unique per animated instance if several animate on one page (mask ids are document-global) */
+  maskId?: string;
   title?: string;
 };
 
@@ -34,14 +37,42 @@ const SEAL_CY = 251.7;
 const RING_R = 44.35;
 const RING_LEN = Math.ceil(2 * Math.PI * RING_R); // ≈ 279
 
+/**
+ * The meander artwork is filled paths, so it cannot stroke-draw directly.
+ * To make the pattern BUILD itself, a mask containing a thick stroked
+ * circle (covering the full annulus of letterforms) draws around the
+ * center; as the mask's stroke sweeps, the pattern is laid into place
+ * segment by segment — stones set around the ring.
+ */
+function sweepMask(id: string, c: number, r: number, strokeWidth: number) {
+  const len = Math.ceil(2 * Math.PI * r);
+  return (
+    <mask id={id} maskUnits="userSpaceOnUse">
+      <circle
+        cx={c}
+        cy={c}
+        r={r}
+        fill="none"
+        stroke="#fff"
+        strokeWidth={strokeWidth}
+        className="seal-sweep"
+        transform={`rotate(-90 ${c} ${c})`}
+        style={{ ["--ring-len" as string]: String(len) } as CSSProperties}
+      />
+    </mask>
+  );
+}
+
 export default function Medallion({
   className,
   color = "currentColor",
   animate = false,
   variant = "mark",
+  maskId = "limra-sweep",
   title = "Limra medallion",
 }: MedallionProps) {
   if (variant === "mark") {
+    const id = `${maskId}-mark`;
     return (
       <svg
         viewBox="0 0 74 74"
@@ -51,9 +82,8 @@ export default function Medallion({
         fill={color}
       >
         <title>{title}</title>
-        {/* animation class and transform attribute must live on separate
-            groups — CSS transform would override the SVG translate */}
-        <g className={animate ? "anim-seal" : undefined}>
+        {animate && <defs>{sweepMask(id, 37, 24, 30)}</defs>}
+        <g mask={animate ? `url(#${id})` : undefined}>
           <g transform={`translate(${0.1 - MARK_X} ${0.1 - MARK_Y})`}>
             <path fillRule="nonzero" d={D_MARK} />
           </g>
@@ -62,8 +92,9 @@ export default function Medallion({
     );
   }
 
+  const id = `${maskId}-seal`;
   const ringStyle: CSSProperties | undefined = animate
-    ? { ["--ring-len" as string]: String(RING_LEN), animationDelay: "0.15s" }
+    ? { ["--ring-len" as string]: String(RING_LEN), animationDelay: "0.3s" }
     : undefined;
 
   return (
@@ -75,6 +106,7 @@ export default function Medallion({
       fill={color}
     >
       <title>{title}</title>
+      {animate && <defs>{sweepMask(id, 46, 25, 32)}</defs>}
       <circle
         cx="46"
         cy="46"
@@ -82,12 +114,22 @@ export default function Medallion({
         fill="none"
         stroke={color}
         strokeWidth="1"
+        transform="rotate(-90 46 46)"
         className={animate ? "seal-ring" : undefined}
         style={ringStyle}
       />
-      <g className={animate ? "anim-seal" : undefined}>
+      {/* meander pattern — builds around the circle under the sweep mask */}
+      <g mask={animate ? `url(#${id})` : undefined}>
         <g transform={`translate(${46 - SEAL_CX} ${46 - SEAL_CY})`}>
           <path fillRule="nonzero" d={D_SEAL_MEDALLION} />
+        </g>
+      </g>
+      {/* L monogram — settles in once the pattern is complete */}
+      <g
+        className={animate ? "anim-fade" : undefined}
+        style={animate ? { animationDelay: "1.7s" } : undefined}
+      >
+        <g transform={`translate(${46 - SEAL_CX} ${46 - SEAL_CY})`}>
           <path fillRule="nonzero" d={D_MONOGRAM_L} />
         </g>
       </g>

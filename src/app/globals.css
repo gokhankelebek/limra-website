@@ -110,11 +110,20 @@ body {
   animation: limra-draw 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* Meander pattern build — the masking stroke that lays the pattern
+   around the circle, segment by segment */
+.seal-sweep {
+  stroke-dasharray: var(--ring-len, 600);
+  stroke-dashoffset: var(--ring-len, 600);
+  animation: limra-draw 1.8s cubic-bezier(0.45, 0.05, 0.35, 1) forwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .anim-rise,
   .anim-fade,
   .anim-seal,
-  .seal-ring {
+  .seal-ring,
+  .seal-sweep {
     animation: none;
     opacity: 1;
     transform: none;
