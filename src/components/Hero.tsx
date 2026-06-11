@@ -1,19 +1,22 @@
 import Link from "next/link";
 import Medallion from "./Medallion";
+import ScrollRotate from "./ScrollRotate";
 import Wordmark from "./Wordmark";
 
 export default function Hero() {
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-cream">
-      {/* Faint meander watermark — stands in for the DOKU texture / future hero film */}
+      {/* Faint meander watermark — centered on mobile, right-anchored on
+          desktop, turning slowly with scroll like a stone wheel */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.05]"
+        className="pointer-events-none absolute inset-0 overflow-hidden opacity-[0.05]"
       >
-        <Medallion
-          className="absolute -right-40 top-1/2 h-[120vh] w-[120vh] -translate-y-1/2 text-olive"
-          color="currentColor"
-        />
+        <div className="absolute left-1/2 top-1/2 h-[120vh] w-[120vh] -translate-x-1/2 -translate-y-1/2 lg:-right-40 lg:left-auto lg:translate-x-0">
+          <ScrollRotate className="h-full w-full">
+            <Medallion className="h-full w-full text-olive" color="currentColor" />
+          </ScrollRotate>
+        </div>
       </div>
 
       {/* Hairline frame for an architectural, "stone-set" feel */}

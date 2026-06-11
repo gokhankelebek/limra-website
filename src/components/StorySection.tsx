@@ -1,14 +1,19 @@
 import Link from "next/link";
 import Medallion from "./Medallion";
+import ScrollRotate from "./ScrollRotate";
 
 export default function StorySection() {
   return (
     <section className="relative overflow-hidden bg-olive-deep text-cream">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.06]"
+        className="pointer-events-none absolute inset-0 overflow-hidden opacity-[0.06]"
       >
-        <Medallion className="absolute -left-32 -top-32 h-[80vh] w-[80vh] text-cream" />
+        <div className="absolute -left-32 -top-32 h-[80vh] w-[80vh]">
+          <ScrollRotate speed={-0.015} className="h-full w-full">
+            <Medallion className="h-full w-full text-cream" />
+          </ScrollRotate>
+        </div>
       </div>
 
       <div className="relative mx-auto grid max-w-6xl gap-14 px-6 py-28 lg:grid-cols-2 lg:items-center lg:gap-20 lg:px-10 lg:py-36">
