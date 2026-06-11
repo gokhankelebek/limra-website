@@ -38,7 +38,7 @@ export default function Hero() {
           <span className="sr-only">Limra</span>
           <Wordmark
             aria-hidden
-            className="w-72 text-olive sm:w-96 lg:w-[34rem]"
+            className="w-52 text-olive sm:w-64 lg:w-80"
           />
         </h1>
 
