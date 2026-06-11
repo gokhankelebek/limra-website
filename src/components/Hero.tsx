@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Medallion from "./Medallion";
+import Wordmark from "./Wordmark";
 
 export default function Hero() {
   return (
@@ -33,8 +34,12 @@ export default function Hero() {
           Mediterranean Restaurant
         </p>
 
-        <h1 className="anim-rise delay-2 mt-5 font-display text-7xl font-medium leading-[0.95] text-olive sm:text-8xl lg:text-[10rem]">
-          Limra
+        <h1 className="anim-rise delay-2 mt-8">
+          <span className="sr-only">Limra</span>
+          <Wordmark
+            aria-hidden
+            className="w-72 text-olive sm:w-96 lg:w-[34rem]"
+          />
         </h1>
 
         <p className="anim-rise delay-3 mt-6 max-w-xl font-body text-lg font-light italic leading-relaxed text-ink/80 lg:text-xl">

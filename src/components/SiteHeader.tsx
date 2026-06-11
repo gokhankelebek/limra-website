@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Medallion from "./Medallion";
+import Wordmark from "./Wordmark";
 
 const NAV = [
   { label: "Menu", href: "/menu" },
@@ -15,9 +16,8 @@ export default function SiteHeader() {
         {/* Brand lockup */}
         <Link href="/" className="flex items-center gap-3 text-olive">
           <Medallion className="h-10 w-10" />
-          <span className="font-roman text-xl tracking-roman leading-none">
-            LIMRA
-          </span>
+          <span className="sr-only">Limra — home</span>
+          <Wordmark aria-hidden className="w-20" />
         </Link>
 
         {/* Primary nav */}
