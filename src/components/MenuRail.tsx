@@ -32,6 +32,7 @@ export default function MenuRail({ items }: { items: RailItem[] }) {
   // while a click-glide is in flight, the scrollspy stays quiet so the
   // active state doesn't flicker through every category passed en route
   const gliding = useRef(false);
+  const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const sections = items
@@ -59,7 +60,8 @@ export default function MenuRail({ items }: { items: RailItem[] }) {
     const el = document.getElementById(id);
     if (!el) return;
     setActive(id);
-    const targetY = el.getBoundingClientRect().top + window.scrollY - 56;
+    const railHeight = navRef.current?.offsetHeight ?? 56;
+    const targetY = el.getBoundingClientRect().top + window.scrollY - railHeight;
     const finish = () => {
       history.replaceState(null, "", `#${id}`);
       gliding.current = false;
@@ -75,10 +77,12 @@ export default function MenuRail({ items }: { items: RailItem[] }) {
 
   return (
     <nav
+      ref={navRef}
       aria-label="Menu categories"
       className="sticky top-0 z-30 border-b border-olive/15 bg-cream/90 backdrop-blur"
     >
-      <div className="flex h-14 items-center justify-start gap-7 overflow-x-auto px-6 [scrollbar-width:none] sm:justify-center sm:gap-10 [&::-webkit-scrollbar]:hidden">
+      {/* wraps to two centered rows on phones; single 56px line from sm up */}
+      <div className="flex flex-wrap items-center justify-center gap-x-7 px-4 py-2 sm:h-14 sm:flex-nowrap sm:gap-10 sm:px-6 sm:py-0">
         {items.map((item) => {
           const isActive = active === item.id;
           return (

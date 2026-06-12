@@ -131,7 +131,7 @@ function CategorySection({
   return (
     <section
       id={category.id}
-      className={`relative scroll-mt-16 overflow-hidden py-24 lg:py-32 ${
+      className={`relative scroll-mt-24 overflow-hidden py-24 sm:scroll-mt-16 lg:py-32 ${
         onOlive ? "bg-olive-deep text-cream" : "bg-cream text-ink"
       }`}
     >
