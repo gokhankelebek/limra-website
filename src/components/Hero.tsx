@@ -12,7 +12,7 @@ export default function Hero() {
         aria-hidden
         className="pointer-events-none absolute inset-0 overflow-hidden opacity-[0.05]"
       >
-        <div className="absolute left-1/2 top-1/2 h-[120vh] w-[120vh] -translate-x-1/2 -translate-y-1/2 lg:-right-40 lg:left-auto lg:translate-x-0">
+        <div className="wm-120 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:-right-40 lg:left-auto lg:translate-x-0">
           <ScrollRotate className="h-full w-full">
             <Medallion className="h-full w-full text-olive" color="currentColor" />
           </ScrollRotate>

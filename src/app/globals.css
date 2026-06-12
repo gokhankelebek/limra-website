@@ -130,3 +130,17 @@ body {
     stroke-dashoffset: 0;
   }
 }
+
+/* ------------------------------------------------------------------
+   Watermark sizing — lvh is immune to the mobile URL-bar collapse,
+   so the medallion never resizes mid-scroll (vh fallback for old
+   browsers). Sizes: hero 120, story 80, menu sections 70.
+------------------------------------------------------------------ */
+.wm-120 { height: 120vh; width: 120vh; }
+.wm-80  { height: 80vh;  width: 80vh; }
+.wm-70  { height: 70vh;  width: 70vh; }
+@supports (height: 1lvh) {
+  .wm-120 { height: 120lvh; width: 120lvh; }
+  .wm-80  { height: 80lvh;  width: 80lvh; }
+  .wm-70  { height: 70lvh;  width: 70lvh; }
+}

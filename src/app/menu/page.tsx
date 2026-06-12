@@ -141,7 +141,7 @@ function CategorySection({
           className="pointer-events-none absolute inset-0 overflow-hidden opacity-[0.05]"
         >
           <div
-            className={`absolute h-[70vh] w-[70vh] ${
+            className={`wm-70 absolute ${
               index % 4 === 1 ? "-right-32 -top-32" : "-bottom-32 -left-32"
             }`}
           >

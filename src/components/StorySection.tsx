@@ -9,7 +9,7 @@ export default function StorySection() {
         aria-hidden
         className="pointer-events-none absolute inset-0 overflow-hidden opacity-[0.06]"
       >
-        <div className="absolute -left-32 -top-32 h-[80vh] w-[80vh]">
+        <div className="wm-80 absolute -left-32 -top-32">
           <ScrollRotate speed={-0.015} className="h-full w-full">
             <Medallion className="h-full w-full text-cream" />
           </ScrollRotate>
