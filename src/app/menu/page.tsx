@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import JsonLd from "@/components/JsonLd";
 import Medallion from "@/components/Medallion";
 import MenuRail from "@/components/MenuRail";
 import Reveal from "@/components/Reveal";
@@ -20,6 +21,45 @@ export const metadata: Metadata = {
   },
   description:
     "Seasonal Mediterranean cooking with Anatolian roots — cold meze, the charcoal grill, larger plates, and sweets. View the menu and reserve at Limra.",
+  alternates: { canonical: "/menu" },
+};
+
+const DIET_MAP: Record<string, string> = {
+  V: "https://schema.org/VegetarianDiet",
+  VG: "https://schema.org/VeganDiet",
+  GF: "https://schema.org/GlutenFreeDiet",
+};
+
+// Menu structured data generated from the live menu model — updates
+// automatically when the sample data is swapped for the real menu.
+const MENU_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "Menu",
+  name: "Limra Menu",
+  description:
+    "Meze for the middle of the table, mains from the charcoal, sweets from old recipes.",
+  hasMenuSection: menu.map((category) => ({
+    "@type": "MenuSection",
+    name: category.title,
+    description: category.note,
+    hasMenuItem: category.items.map((item) => ({
+      "@type": "MenuItem",
+      name: item.name,
+      description: item.description,
+      offers: {
+        "@type": "Offer",
+        price: item.price.toFixed(2),
+        priceCurrency: "USD",
+      },
+      ...(item.tags?.some((t) => DIET_MAP[t])
+        ? {
+            suitableForDiet: item.tags
+              .filter((t) => DIET_MAP[t])
+              .map((t) => DIET_MAP[t]),
+          }
+        : {}),
+    })),
+  })),
 };
 
 const STAGGER = ["delay-1", "delay-2", "delay-3", "delay-4"] as const;
@@ -200,6 +240,7 @@ function CategorySection({
 export default function MenuPage() {
   return (
     <>
+      <JsonLd data={MENU_SCHEMA} />
       <SiteHeader />
       <main className="flex-1 bg-cream">
         {/* Masthead */}

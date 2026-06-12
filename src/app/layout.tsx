@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Marcellus, Spectral } from "next/font/google";
 import Script from "next/script";
+import JsonLd from "@/components/JsonLd";
 import "./globals.css";
 
 // Pre-paint gate for the home-page entrance: hold the page (CSS does the
@@ -34,18 +35,46 @@ const body = Spectral({
   display: "swap",
 });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Limra — Mediterranean Restaurant",
     template: "%s — Limra",
   },
   description:
     "A modern Mediterranean table, named for an ancient city. Limra brings the warmth and rhythm of the Mediterranean to a contemporary restaurant and café.",
+  alternates: { canonical: "/" },
   openGraph: {
     title: "Limra — Mediterranean Restaurant",
     description: "A modern Mediterranean table, named for an ancient city.",
     type: "website",
+    siteName: "Limra Mediterranean Restaurant",
+    locale: "en_US",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Limra — Mediterranean Restaurant",
+    description: "A modern Mediterranean table, named for an ancient city.",
+  },
+};
+
+// Site-wide Restaurant schema. TODO before launch: add address, phone,
+// geo, openingHoursSpecification, and priceRange once Can & Elif confirm
+// the real details — never publish placeholder NAP data.
+const RESTAURANT_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  name: "Limra Mediterranean Restaurant",
+  alternateName: "Limra",
+  url: SITE_URL,
+  logo: `${SITE_URL}/icon.svg`,
+  image: `${SITE_URL}/opengraph-image`,
+  servesCuisine: "Mediterranean",
+  slogan: "A modern Mediterranean table, named for an ancient city.",
+  acceptsReservations: "True",
+  hasMenu: `${SITE_URL}/menu`,
 };
 
 export default function RootLayout({
@@ -65,6 +94,7 @@ export default function RootLayout({
           strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: INTRO_GATE }}
         />
+        <JsonLd data={RESTAURANT_SCHEMA} />
         {children}
       </body>
     </html>
