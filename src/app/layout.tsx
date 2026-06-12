@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Marcellus, Spectral } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
+
+// Pre-paint gate for the home-page entrance: hold the page (CSS does the
+// hiding) before first paint so the medallion can build alone. Skipped on
+// repeat visits this session and for reduced-motion users.
+const INTRO_GATE = `try{if(location.pathname==="/"&&!sessionStorage.getItem("limra-intro")&&!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("intro-pending")}}catch(e){}`;
 
 // Display headlines — refined, high-contrast serif standing in for the brand's Fiona.
 const display = Cormorant_Garamond({
@@ -50,9 +56,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${display.variable} ${roman.variable} ${body.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-cream text-ink font-body">
+        <Script
+          id="limra-intro-gate"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: INTRO_GATE }}
+        />
         {children}
       </body>
     </html>

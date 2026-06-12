@@ -1,4 +1,5 @@
 import Link from "next/link";
+import IntroSeal from "./IntroSeal";
 import Medallion from "./Medallion";
 import ScrollRotate from "./ScrollRotate";
 import Wordmark from "./Wordmark";
@@ -10,7 +11,7 @@ export default function Hero() {
           desktop, turning slowly with scroll like a stone wheel */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 overflow-hidden opacity-[0.05]"
+        className="hero-chrome pointer-events-none absolute inset-0 overflow-hidden opacity-[0.05]"
       >
         <div className="wm-120 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:-right-40 lg:left-auto lg:translate-x-0">
           <ScrollRotate className="h-full w-full">
@@ -22,16 +23,11 @@ export default function Hero() {
       {/* Hairline frame for an architectural, "stone-set" feel */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-5 border border-olive/15 lg:inset-8"
+        className="hero-chrome pointer-events-none absolute inset-5 border border-olive/15 lg:inset-8"
       />
 
       <div className="relative z-10 flex flex-col items-center px-6 text-center text-olive">
-        <Medallion
-          animate
-          variant="seal"
-          className="mb-9 h-24 w-24 text-olive lg:h-28 lg:w-28"
-          title="Limra meander seal"
-        />
+        <IntroSeal className="mb-9 h-24 w-24 text-olive lg:h-28 lg:w-28" />
 
         <p className="anim-rise delay-1 font-roman text-[0.7rem] uppercase tracking-[0.42em] text-terracotta lg:text-xs">
           Mediterranean Restaurant

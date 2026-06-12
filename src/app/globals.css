@@ -132,6 +132,32 @@ body {
 }
 
 /* ------------------------------------------------------------------
+   Cinematic entrance — while html.intro-pending, the page holds its
+   breath: main animations pause at frame 0, header and hero chrome
+   stay dark, scroll is locked. The IntroProvider overlay runs the
+   medallion build, then releases everything as the seal lands.
+------------------------------------------------------------------ */
+html.intro-pending {
+  overflow: hidden;
+}
+.intro-pending main .anim-rise,
+.intro-pending main .anim-fade,
+.intro-pending main .anim-seal,
+.intro-pending main .seal-ring,
+.intro-pending main .seal-sweep {
+  animation-play-state: paused;
+}
+header,
+.hero-chrome {
+  transition: opacity 1s ease 0.15s;
+}
+.intro-pending header,
+.intro-pending .hero-chrome {
+  opacity: 0;
+  transition: none;
+}
+
+/* ------------------------------------------------------------------
    Watermark sizing — lvh is immune to the mobile URL-bar collapse,
    so the medallion never resizes mid-scroll (vh fallback for old
    browsers). Sizes: hero 120, story 80, menu sections 70.
