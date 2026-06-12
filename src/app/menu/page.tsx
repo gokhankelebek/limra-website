@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     absolute: "Menu | Limra Mediterranean — Meze, Grill, Mains & Sweets",
   },
   description:
-    "Seasonal Mediterranean cooking with Anatolian roots — cold meze, the charcoal grill, larger plates, and sweets. View the menu and reserve at Limra.",
+    "Seasonal Mediterranean cooking in Holly Springs, NC — cold meze, the charcoal grill, larger plates, and sweets. View the menu and reserve at Limra.",
   alternates: { canonical: "/menu" },
 };
 

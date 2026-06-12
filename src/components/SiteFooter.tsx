@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Medallion from "./Medallion";
 import Wordmark from "./Wordmark";
+import { ADDRESS_LINES, CONTACT, DIRECTIONS_URL } from "@/data/contact";
 
 const COLS = [
   {
@@ -58,15 +59,29 @@ export default function SiteFooter() {
             </div>
           ))}
 
-          {/* Contact placeholder */}
+          {/* Contact */}
           <div>
             <p className="font-roman text-[0.7rem] uppercase tracking-[0.24em] text-terracotta">
-              Hours &amp; place
+              Find us
             </p>
             <p className="mt-5 font-body text-base font-light leading-relaxed text-ink/70">
-              Address coming soon
+              <a
+                href={DIRECTIONS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-terracotta"
+              >
+                {ADDRESS_LINES[0]}
+                <br />
+                {ADDRESS_LINES[1]}
+              </a>
               <br />
-              Open daily · 12:00 – 23:00
+              <a
+                href={CONTACT.phoneHref}
+                className="transition-colors hover:text-terracotta"
+              >
+                {CONTACT.phoneDisplay}
+              </a>
             </p>
           </div>
         </div>

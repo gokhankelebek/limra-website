@@ -40,14 +40,14 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Limra — Mediterranean Restaurant",
+    default: "Limra — Mediterranean Restaurant · Holly Springs, NC",
     template: "%s — Limra",
   },
   description:
-    "A modern Mediterranean table, named for an ancient city. Limra brings the warmth and rhythm of the Mediterranean to a contemporary restaurant and café.",
+    "A modern Mediterranean table, named for an ancient city. Mediterranean restaurant and café in Holly Springs, North Carolina.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Limra — Mediterranean Restaurant",
+    title: "Limra — Mediterranean Restaurant · Holly Springs, NC",
     description: "A modern Mediterranean table, named for an ancient city.",
     type: "website",
     siteName: "Limra Mediterranean Restaurant",
@@ -55,14 +55,13 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Limra — Mediterranean Restaurant",
+    title: "Limra — Mediterranean Restaurant · Holly Springs, NC",
     description: "A modern Mediterranean table, named for an ancient city.",
   },
 };
 
-// Site-wide Restaurant schema. TODO before launch: add address, phone,
-// geo, openingHoursSpecification, and priceRange once Can & Elif confirm
-// the real details — never publish placeholder NAP data.
+// Site-wide Restaurant schema. TODO: add openingHoursSpecification and
+// geo coordinates once Can & Elif confirm hours / GBP is live.
 const RESTAURANT_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "Restaurant",
@@ -75,6 +74,16 @@ const RESTAURANT_SCHEMA = {
   slogan: "A modern Mediterranean table, named for an ancient city.",
   acceptsReservations: "True",
   hasMenu: `${SITE_URL}/menu`,
+  telephone: "+1-984-999-5388",
+  priceRange: "$$",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "3109 McChesney Hill Loop",
+    addressLocality: "Holly Springs",
+    addressRegion: "NC",
+    postalCode: "27539",
+    addressCountry: "US",
+  },
 };
 
 export default function RootLayout({
