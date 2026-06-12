@@ -12,7 +12,7 @@ const NAV = [
 export default function SiteHeader() {
   return (
     <header className="absolute inset-x-0 top-0 z-30">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 lg:px-10">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 pb-6 pt-10 lg:px-10 lg:pt-14">
         {/* Brand lockup */}
         <Link href="/" className="flex items-center gap-3 text-olive">
           <Medallion className="h-10 w-10" />

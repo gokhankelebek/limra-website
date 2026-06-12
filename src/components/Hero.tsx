@@ -65,8 +65,8 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll cue */}
-      <div className="anim-fade delay-5 absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-olive/60">
+      {/* Scroll cue — kept inside the hairline frame */}
+      <div className="anim-fade delay-5 absolute bottom-12 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-olive/60 lg:bottom-16">
         <span className="font-roman text-[0.6rem] uppercase tracking-[0.3em]">
           Discover
         </span>
