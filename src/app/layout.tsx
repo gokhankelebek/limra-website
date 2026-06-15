@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Marcellus, Spectral } from "next/font/google";
 import Script from "next/script";
 import JsonLd from "@/components/JsonLd";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 // Pre-paint gate for the home-page entrance: hold the page (CSS does the
@@ -34,8 +35,6 @@ const body = Spectral({
   style: ["normal", "italic"],
   display: "swap",
 });
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

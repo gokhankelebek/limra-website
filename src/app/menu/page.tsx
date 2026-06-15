@@ -14,6 +14,8 @@ import {
   type MenuCategory,
   type MenuItem,
 } from "@/data/menu";
+import { MENU_QUERY } from "@/sanity/lib/queries";
+import { sanityFetch } from "@/sanity/lib/fetch";
 
 export const metadata: Metadata = {
   title: {
@@ -32,35 +34,37 @@ const DIET_MAP: Record<string, string> = {
 
 // Menu structured data generated from the live menu model — updates
 // automatically when the sample data is swapped for the real menu.
-const MENU_SCHEMA = {
-  "@context": "https://schema.org",
-  "@type": "Menu",
-  name: "Limra Menu",
-  description:
-    "Meze for the middle of the table, mains from the charcoal, sweets from old recipes.",
-  hasMenuSection: menu.map((category) => ({
-    "@type": "MenuSection",
-    name: category.title,
-    description: category.note,
-    hasMenuItem: category.items.map((item) => ({
-      "@type": "MenuItem",
-      name: item.name,
-      description: item.description,
-      offers: {
-        "@type": "Offer",
-        price: item.price.toFixed(2),
-        priceCurrency: "USD",
-      },
-      ...(item.tags?.some((t) => DIET_MAP[t])
-        ? {
-            suitableForDiet: item.tags
-              .filter((t) => DIET_MAP[t])
-              .map((t) => DIET_MAP[t]),
-          }
-        : {}),
+function buildMenuSchema(categories: MenuCategory[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Menu",
+    name: "Limra Menu",
+    description:
+      "Meze for the middle of the table, mains from the charcoal, sweets from old recipes.",
+    hasMenuSection: categories.map((category) => ({
+      "@type": "MenuSection",
+      name: category.title,
+      description: category.note,
+      hasMenuItem: category.items.map((item) => ({
+        "@type": "MenuItem",
+        name: item.name,
+        description: item.description,
+        offers: {
+          "@type": "Offer",
+          price: (item.price ?? 0).toFixed(2),
+          priceCurrency: "USD",
+        },
+        ...(item.tags?.some((t) => DIET_MAP[t])
+          ? {
+              suitableForDiet: item.tags
+                .filter((t) => DIET_MAP[t])
+                .map((t) => DIET_MAP[t]),
+            }
+          : {}),
+      })),
     })),
-  })),
-};
+  };
+}
 
 const STAGGER = ["delay-1", "delay-2", "delay-3", "delay-4"] as const;
 
@@ -127,7 +131,9 @@ function DishRow({
     <Reveal
       animation="anim-fade"
       delay={delay}
-      className={`border-t py-7 ${onOlive ? "border-cream/15" : "border-olive/15"}`}
+      className={`border-t py-7 ${onOlive ? "border-cream/15" : "border-olive/15"} ${
+        item.soldOut ? "opacity-45" : ""
+      }`}
     >
       <div className="flex items-baseline justify-between gap-6">
         <h3
@@ -142,7 +148,11 @@ function DishRow({
             onOlive ? "text-cream/70" : "text-olive/70"
           }`}
         >
-          {item.price}
+          {item.soldOut ? (
+            <span className="uppercase tracking-[0.18em]">Sold out</span>
+          ) : (
+            item.price
+          )}
         </p>
       </div>
       <p
@@ -237,10 +247,17 @@ function CategorySection({
   );
 }
 
-export default function MenuPage() {
+export default async function MenuPage() {
+  const { data: categories } = await sanityFetch<MenuCategory[]>(
+    MENU_QUERY,
+    {},
+    menu,
+    "menu"
+  );
+
   return (
     <>
-      <JsonLd data={MENU_SCHEMA} />
+      <JsonLd data={buildMenuSchema(categories)} />
       <SiteHeader />
       <main className="flex-1 bg-cream">
         {/* Masthead */}
@@ -265,9 +282,9 @@ export default function MenuPage() {
           </Reveal>
         </div>
 
-        <MenuRail items={menu.map((c) => ({ id: c.id, label: c.title }))} />
+        <MenuRail items={categories.map((c) => ({ id: c.id, label: c.title }))} />
 
-        {menu.map((category, i) => (
+        {categories.map((category, i) => (
           <CategorySection key={category.id} category={category} index={i} />
         ))}
 

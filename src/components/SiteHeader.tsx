@@ -5,7 +5,7 @@ import Wordmark from "./Wordmark";
 const NAV = [
   { label: "Menu", href: "/menu" },
   { label: "Story", href: "/story" },
-  { label: "Gallery", href: "/gallery" },
+  { label: "Journal", href: "/blog" },
   { label: "Visit", href: "/visit" },
 ];
 
