@@ -8,7 +8,7 @@ import "./globals.css";
 // Pre-paint gate for the home-page entrance: hold the page (CSS does the
 // hiding) before first paint so the medallion can build alone. Skipped on
 // repeat visits this session and for reduced-motion users.
-const INTRO_GATE = `try{if(location.pathname==="/"&&!sessionStorage.getItem("limra-intro")&&!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("intro-pending")}}catch(e){}`;
+const INTRO_GATE = `try{var d=document.documentElement;if(location.pathname==="/"&&!sessionStorage.getItem("limra-intro")&&!matchMedia("(prefers-reduced-motion: reduce)").matches){d.classList.add("intro-pending");setTimeout(function(){d.classList.remove("intro-pending")},4500)}}catch(e){}`;
 
 // Display headlines — refined, high-contrast serif standing in for the brand's Fiona.
 const display = Cormorant_Garamond({
