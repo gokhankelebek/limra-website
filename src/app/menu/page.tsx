@@ -14,8 +14,6 @@ import {
   type MenuCategory,
   type MenuItem,
 } from "@/data/menu";
-import { MENU_QUERY } from "@/sanity/lib/queries";
-import { sanityFetch } from "@/sanity/lib/fetch";
 
 export const metadata: Metadata = {
   title: {
@@ -131,9 +129,7 @@ function DishRow({
     <Reveal
       animation="anim-fade"
       delay={delay}
-      className={`border-t py-7 ${onOlive ? "border-cream/15" : "border-olive/15"} ${
-        item.soldOut ? "opacity-45" : ""
-      }`}
+      className={`border-t py-7 ${onOlive ? "border-cream/15" : "border-olive/15"}`}
     >
       <div className="flex items-baseline justify-between gap-6">
         <h3
@@ -148,11 +144,7 @@ function DishRow({
             onOlive ? "text-cream/70" : "text-olive/70"
           }`}
         >
-          {item.soldOut ? (
-            <span className="uppercase tracking-[0.18em]">Sold out</span>
-          ) : (
-            item.price
-          )}
+          {item.price}
         </p>
       </div>
       <p
@@ -247,13 +239,8 @@ function CategorySection({
   );
 }
 
-export default async function MenuPage() {
-  const { data: categories } = await sanityFetch<MenuCategory[]>(
-    MENU_QUERY,
-    {},
-    menu,
-    "menu"
-  );
+export default function MenuPage() {
+  const categories = menu;
 
   return (
     <>

@@ -12,7 +12,6 @@ export type MenuItem = {
   /** free-form qualifier, e.g. "GF on request" */
   note?: string;
   featured?: boolean;
-  soldOut?: boolean;
 };
 
 export type MenuCategory = {
