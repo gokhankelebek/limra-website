@@ -83,47 +83,11 @@ function DishTags({ item, onOlive }: { item: MenuItem; onOlive: boolean }) {
   );
 }
 
-function FeaturedDish({ item, onOlive }: { item: MenuItem; onOlive: boolean }) {
-  return (
-    <Reveal className="my-10 border-y border-terracotta/30 py-12 text-center">
-      <Link href={`/menu/${item.slug}`} className="group block">
-        <p
-          className={`font-roman text-[0.65rem] uppercase tracking-[0.4em] ${
-            onOlive ? "text-terracotta-soft" : "text-terracotta"
-          }`}
-        >
-          Signature
-        </p>
-        <h3
-          className={`mt-4 font-display text-4xl font-medium lg:text-5xl ${
-            onOlive ? "text-cream" : "text-ink"
-          } transition-colors ${
-            onOlive ? "group-hover:text-terracotta-soft" : "group-hover:text-terracotta"
-          }`}
-        >
-          {item.name}
-        </h3>
-        <p
-          className={`mx-auto mt-3 max-w-md font-body text-[0.95rem] font-light leading-relaxed ${
-            onOlive ? "text-cream/65" : "text-ink/65"
-          }`}
-        >
-          {item.description}
-        </p>
-        <p
-          className={`mt-4 font-roman text-sm tracking-[0.12em] ${
-            onOlive ? "text-cream/70" : "text-olive/70"
-          }`}
-        >
-          {item.price}
-        </p>
-        <DishTags item={item} onOlive={onOlive} />
-      </Link>
-    </Reveal>
-  );
-}
-
-function DishRow({
+/**
+ * Every dish is set identically — centered, tasting-menu composition,
+ * whitespace doing the separating. No headline items.
+ */
+function Dish({
   item,
   onOlive,
   delay,
@@ -133,42 +97,37 @@ function DishRow({
   delay: (typeof STAGGER)[number];
 }) {
   return (
-    <Reveal
-      animation="anim-fade"
-      delay={delay}
-      className={`border-t ${onOlive ? "border-cream/15" : "border-olive/15"}`}
-    >
-      <Link href={`/menu/${item.slug}`} className="group block py-7">
-        <div className="min-w-0">
-          <div className="flex items-baseline justify-between gap-6">
-            <h3
-              className={`font-display text-2xl lg:text-[1.75rem] ${
-                onOlive ? "text-cream" : "text-ink"
-              } transition-colors ${
-                onOlive
-                  ? "group-hover:text-terracotta-soft"
-                  : "group-hover:text-terracotta"
-              }`}
-            >
-              {item.name}
-            </h3>
-            <p
-              className={`shrink-0 font-roman text-sm tracking-[0.12em] ${
-                onOlive ? "text-cream/70" : "text-olive/70"
-              }`}
-            >
-              {item.price}
-            </p>
-          </div>
-          <p
-            className={`mt-2 max-w-lg font-body text-[0.95rem] font-light leading-relaxed ${
-              onOlive ? "text-cream/65" : "text-ink/65"
-            }`}
-          >
-            {item.description}
-          </p>
-          <DishTags item={item} onOlive={onOlive} />
-        </div>
+    <Reveal animation="anim-fade" delay={delay}>
+      <Link
+        href={`/menu/${item.slug}`}
+        className="group block px-4 py-9 text-center"
+      >
+        <h3
+          className={`font-display text-3xl ${
+            onOlive ? "text-cream" : "text-ink"
+          } transition-colors ${
+            onOlive
+              ? "group-hover:text-terracotta-soft"
+              : "group-hover:text-terracotta"
+          }`}
+        >
+          {item.name}
+        </h3>
+        <p
+          className={`mx-auto mt-3 max-w-md font-body text-base font-light italic leading-relaxed ${
+            onOlive ? "text-cream/65" : "text-ink/65"
+          }`}
+        >
+          {item.description}
+        </p>
+        <p
+          className={`mt-4 font-roman text-sm tracking-[0.18em] ${
+            onOlive ? "text-cream/60" : "text-olive/60"
+          }`}
+        >
+          {item.price}
+        </p>
+        <DishTags item={item} onOlive={onOlive} />
       </Link>
     </Reveal>
   );
@@ -182,8 +141,6 @@ function CategorySection({
   index: number;
 }) {
   const onOlive = category.surface === "olive";
-  const featured = category.items.find((i) => i.featured);
-  const rest = category.items.filter((i) => !i.featured);
 
   return (
     <section
@@ -238,11 +195,10 @@ function CategorySection({
           </p>
         </Reveal>
 
-        <div className="mt-12">
-          {featured && <FeaturedDish item={featured} onOlive={onOlive} />}
-          {rest.map((item, i) => (
-            <DishRow
-              key={item.name}
+        <div className="mt-8">
+          {category.items.map((item, i) => (
+            <Dish
+              key={item.slug}
               item={item}
               onOlive={onOlive}
               delay={STAGGER[i % STAGGER.length]}

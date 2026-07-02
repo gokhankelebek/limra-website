@@ -27,30 +27,28 @@ export default function MenuPreview() {
           </h2>
         </Reveal>
 
-        <div className="mt-14 grid gap-x-12 gap-y-10 sm:grid-cols-2">
+        <div className="mx-auto mt-10 max-w-xl">
           {signatures.map((dish, i) => (
             <Reveal
-              key={dish.name}
+              key={dish.slug}
               animation="anim-fade"
               delay={STAGGER[i % STAGGER.length]}
             >
               <Link
                 href={`/menu/${dish.slug}`}
-                className="group block border-t border-olive/15 pt-6"
+                className="group block px-4 py-8 text-center"
               >
-                <div className="flex items-baseline justify-between gap-6">
-                  <h3 className="font-display text-2xl text-ink transition-colors group-hover:text-terracotta">
-                    {dish.name}
-                  </h3>
-                  <p className="shrink-0 font-roman text-sm tracking-[0.12em] text-olive/70">
-                    {dish.price}
-                  </p>
-                </div>
-                <p className="mt-2 font-body text-[0.95rem] font-light leading-relaxed text-ink/65">
+                <p className="font-roman text-[0.6rem] uppercase tracking-[0.3em] text-olive/50">
+                  {dish.category}
+                </p>
+                <h3 className="mt-3 font-display text-3xl text-ink transition-colors group-hover:text-terracotta">
+                  {dish.name}
+                </h3>
+                <p className="mx-auto mt-3 max-w-md font-body text-base font-light italic leading-relaxed text-ink/65">
                   {dish.description}
                 </p>
-                <p className="mt-3 font-roman text-[0.6rem] uppercase tracking-[0.3em] text-olive/50">
-                  {dish.category}
+                <p className="mt-4 font-roman text-sm tracking-[0.18em] text-olive/60">
+                  {dish.price}
                 </p>
               </Link>
             </Reveal>
