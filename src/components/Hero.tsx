@@ -56,7 +56,7 @@ export default function Hero() {
             href="/order"
             className="rounded-full border border-olive/40 px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-olive transition-colors hover:border-olive hover:bg-olive hover:text-cream"
           >
-            Order online
+            Order pickup
           </Link>
         </div>
       </div>

@@ -51,7 +51,7 @@ export const menu: MenuCategory[] = [
         slug: "limra-platter",
         name: "Limra Platter",
         description:
-          "Carved lamb-and-beef döner, rice, chopped salad, grilled pepper, hummus, warm flatbread.",
+          "Carved lamb-and-beef döner, rice, chopped salad, grilled tomato and pepper, hummus, warm flatbread.",
         price: 17,
         image: "/menu/limra-platter.jpg",
         imageAlt:
@@ -60,13 +60,13 @@ export const menu: MenuCategory[] = [
       },
       {
         slug: "iskender-platter",
-        name: "Iskender Platter",
+        name: "İskender Platter",
         description:
-          "Döner over bread, tomato-butter sauce, strained yogurt, roasted peppers, pickles.",
+          "Sliced from the spit over cut pide, tomato-butter sauce, strained yogurt, roasted peppers.",
         price: 16,
         image: "/menu/iskender-platter.jpg",
         imageAlt:
-          "Iskender Platter — döner under tomato-butter sauce with strained yogurt, roasted peppers, and pickles",
+          "İskender Platter — sliced döner over cut pide under tomato-butter sauce with strained yogurt, roasted peppers, and pickles",
       },
     ],
   },
@@ -81,7 +81,7 @@ export const menu: MenuCategory[] = [
         slug: "tantuni-wrap",
         name: "Tantuni Wrap",
         description:
-          "Chopped seared beef, lettuce, tomato, red onion, rolled tight in thin lavash.",
+          "Chopped seared beef, lettuce, tomato, red onion, rolled in thin lavash. Two house sauces.",
         price: 13,
         image: "/menu/tantuni-wrap.jpg",
         imageAlt:
@@ -90,13 +90,13 @@ export const menu: MenuCategory[] = [
       },
       {
         slug: "chicken-wrap-antakya",
-        name: "Chicken Wrap, Antakya Style",
+        name: "Antakya Chicken Wrap",
         description:
-          "Chicken döner rolled with fries, pickles, and a warm spiced sauce.",
+          "Spit-roasted chicken, fries, pickles, warm spiced sauce, rolled in lavash.",
         price: 12,
         image: "/menu/chicken-wrap-antakya.jpg",
         imageAlt:
-          "Chicken Wrap Antakya Style — chicken döner rolled with fries and pickles in lavash",
+          "Antakya Chicken Wrap — spit-roasted chicken rolled with fries and pickles in lavash",
       },
       {
         slug: "medi-wrap",
@@ -162,7 +162,7 @@ export const menu: MenuCategory[] = [
         slug: "limra-loaded-fries",
         name: "Limra Loaded Fries",
         description:
-          "Fries under chicken döner, crispy onions, herb cream, roasted pepper sauce.",
+          "Fries under spit-roasted chicken, crispy onions, herb cream, roasted pepper sauce.",
         price: 11,
         image: "/menu/limra-loaded-fries.jpg",
         imageAlt:
@@ -173,7 +173,7 @@ export const menu: MenuCategory[] = [
         slug: "amalfi-melt",
         name: "Amalfi Melt",
         description:
-          "Beef döner on a toasted roll, greens, red cabbage, herb cream.",
+          "Shaved beef on a toasted roll, greens, red cabbage, herb cream.",
         price: 12,
         image: "/menu/amalfi-melt.jpg",
         imageAlt:
@@ -183,7 +183,7 @@ export const menu: MenuCategory[] = [
         slug: "angora-sandwich",
         name: "Angora Sandwich",
         description:
-          "Chicken döner in a crisp roll, garlic yogurt, tomato, banana peppers.",
+          "Spit-roasted chicken in a crisp roll, garlic yogurt, tomato, banana peppers.",
         price: 12,
         image: "/menu/angora-sandwich.jpg",
         imageAlt:
@@ -193,7 +193,7 @@ export const menu: MenuCategory[] = [
         slug: "medi-taco",
         name: "Medi Taco",
         description:
-          "Three soft tacos, chicken döner, slaw, tomato, herb drizzle.",
+          "Three soft tacos, spiced chicken, slaw, tomato, herb drizzle.",
         price: 11,
         image: "/menu/medi-taco.jpg",
         imageAlt:

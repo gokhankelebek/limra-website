@@ -18,10 +18,10 @@ import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Menu | Limra Mediterranean — Meze, Grill, Mains & Sweets",
+    absolute: "Menu | Limra Mediterranean — Platters, Wraps & Bowls",
   },
   description:
-    "Seasonal Mediterranean cooking in Holly Springs, NC — cold meze, the charcoal grill, larger plates, and sweets. View the menu and reserve at Limra.",
+    "Mediterranean cooking in Holly Springs, NC — döner platters, wraps rolled warm, and bowls built to order. View the menu and reserve at Limra.",
   alternates: { canonical: "/menu" },
 };
 
@@ -39,7 +39,7 @@ function buildMenuSchema(categories: MenuCategory[]) {
     "@type": "Menu",
     name: "Limra Menu",
     description:
-      "Meze for the middle of the table, mains from the charcoal, sweets from old recipes.",
+      "Platters from the spit, wraps rolled warm, bowls for the middle of the day.",
     hasMenuSection: categories.map((category) => ({
       "@type": "MenuSection",
       name: category.title,
