@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import Reveal from "./Reveal";
 import { menu } from "@/data/menu";
@@ -34,9 +35,22 @@ export default function MenuPreview() {
               animation="anim-fade"
               delay={STAGGER[i % STAGGER.length]}
             >
-              <div className="border-t border-olive/15 pt-6">
-                <div className="flex items-baseline justify-between gap-6">
-                  <h3 className="font-display text-2xl text-ink">
+              <Link
+                href={`/menu/${dish.slug}`}
+                className="group block border-t border-olive/15 pt-6"
+              >
+                <div className="border border-olive/15 p-1">
+                  <Image
+                    src={dish.image}
+                    alt={dish.imageAlt}
+                    width={800}
+                    height={600}
+                    sizes="(max-width: 640px) 90vw, 400px"
+                    className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+                  />
+                </div>
+                <div className="mt-5 flex items-baseline justify-between gap-6">
+                  <h3 className="font-display text-2xl text-ink transition-colors group-hover:text-terracotta">
                     {dish.name}
                   </h3>
                   <p className="shrink-0 font-roman text-sm tracking-[0.12em] text-olive/70">
@@ -49,7 +63,7 @@ export default function MenuPreview() {
                 <p className="mt-3 font-roman text-[0.6rem] uppercase tracking-[0.3em] text-olive/50">
                   {dish.category}
                 </p>
-              </div>
+              </Link>
             </Reveal>
           ))}
         </div>

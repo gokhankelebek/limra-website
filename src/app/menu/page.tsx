@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import Medallion from "@/components/Medallion";
@@ -14,6 +15,7 @@ import {
   type MenuCategory,
   type MenuItem,
 } from "@/data/menu";
+import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: {
@@ -47,6 +49,8 @@ function buildMenuSchema(categories: MenuCategory[]) {
         "@type": "MenuItem",
         name: item.name,
         description: item.description,
+        image: `${SITE_URL}${item.image}`,
+        url: `${SITE_URL}/menu/${item.slug}`,
         offers: {
           "@type": "Offer",
           price: (item.price ?? 0).toFixed(2),
@@ -83,35 +87,53 @@ function DishTags({ item, onOlive }: { item: MenuItem; onOlive: boolean }) {
 function FeaturedDish({ item, onOlive }: { item: MenuItem; onOlive: boolean }) {
   return (
     <Reveal className="my-10 border-y border-terracotta/30 py-12 text-center">
-      <p
-        className={`font-roman text-[0.65rem] uppercase tracking-[0.4em] ${
-          onOlive ? "text-terracotta-soft" : "text-terracotta"
-        }`}
-      >
-        Signature
-      </p>
-      <h3
-        className={`mt-4 font-display text-4xl font-medium lg:text-5xl ${
-          onOlive ? "text-cream" : "text-ink"
-        }`}
-      >
-        {item.name}
-      </h3>
-      <p
-        className={`mx-auto mt-3 max-w-md font-body text-[0.95rem] font-light leading-relaxed ${
-          onOlive ? "text-cream/65" : "text-ink/65"
-        }`}
-      >
-        {item.description}
-      </p>
-      <p
-        className={`mt-4 font-roman text-sm tracking-[0.12em] ${
-          onOlive ? "text-cream/70" : "text-olive/70"
-        }`}
-      >
-        {item.price}
-      </p>
-      <DishTags item={item} onOlive={onOlive} />
+      <Link href={`/menu/${item.slug}`} className="group block">
+        <p
+          className={`font-roman text-[0.65rem] uppercase tracking-[0.4em] ${
+            onOlive ? "text-terracotta-soft" : "text-terracotta"
+          }`}
+        >
+          Signature
+        </p>
+        <div
+          className={`mx-auto mt-7 max-w-md border p-2 ${
+            onOlive ? "border-cream/15" : "border-olive/15"
+          }`}
+        >
+          <Image
+            src={item.image}
+            alt={item.imageAlt}
+            width={880}
+            height={660}
+            sizes="(max-width: 640px) 90vw, 440px"
+            className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+          />
+        </div>
+        <h3
+          className={`mt-7 font-display text-4xl font-medium lg:text-5xl ${
+            onOlive ? "text-cream" : "text-ink"
+          } transition-colors ${
+            onOlive ? "group-hover:text-terracotta-soft" : "group-hover:text-terracotta"
+          }`}
+        >
+          {item.name}
+        </h3>
+        <p
+          className={`mx-auto mt-3 max-w-md font-body text-[0.95rem] font-light leading-relaxed ${
+            onOlive ? "text-cream/65" : "text-ink/65"
+          }`}
+        >
+          {item.description}
+        </p>
+        <p
+          className={`mt-4 font-roman text-sm tracking-[0.12em] ${
+            onOlive ? "text-cream/70" : "text-olive/70"
+          }`}
+        >
+          {item.price}
+        </p>
+        <DishTags item={item} onOlive={onOlive} />
+      </Link>
     </Reveal>
   );
 }
@@ -129,32 +151,57 @@ function DishRow({
     <Reveal
       animation="anim-fade"
       delay={delay}
-      className={`border-t py-7 ${onOlive ? "border-cream/15" : "border-olive/15"}`}
+      className={`border-t ${onOlive ? "border-cream/15" : "border-olive/15"}`}
     >
-      <div className="flex items-baseline justify-between gap-6">
-        <h3
-          className={`font-display text-2xl lg:text-[1.75rem] ${
-            onOlive ? "text-cream" : "text-ink"
-          }`}
-        >
-          {item.name}
-        </h3>
-        <p
-          className={`shrink-0 font-roman text-sm tracking-[0.12em] ${
-            onOlive ? "text-cream/70" : "text-olive/70"
-          }`}
-        >
-          {item.price}
-        </p>
-      </div>
-      <p
-        className={`mt-2 max-w-lg font-body text-[0.95rem] font-light leading-relaxed ${
-          onOlive ? "text-cream/65" : "text-ink/65"
-        }`}
+      <Link
+        href={`/menu/${item.slug}`}
+        className="group flex items-start gap-5 py-7"
       >
-        {item.description}
-      </p>
-      <DishTags item={item} onOlive={onOlive} />
+        <div
+          className={`shrink-0 border p-1 ${
+            onOlive ? "border-cream/15" : "border-olive/15"
+          }`}
+        >
+          <Image
+            src={item.image}
+            alt=""
+            width={160}
+            height={160}
+            sizes="80px"
+            className="h-20 w-20 object-cover"
+          />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex items-baseline justify-between gap-6">
+            <h3
+              className={`font-display text-2xl lg:text-[1.75rem] ${
+                onOlive ? "text-cream" : "text-ink"
+              } transition-colors ${
+                onOlive
+                  ? "group-hover:text-terracotta-soft"
+                  : "group-hover:text-terracotta"
+              }`}
+            >
+              {item.name}
+            </h3>
+            <p
+              className={`shrink-0 font-roman text-sm tracking-[0.12em] ${
+                onOlive ? "text-cream/70" : "text-olive/70"
+              }`}
+            >
+              {item.price}
+            </p>
+          </div>
+          <p
+            className={`mt-2 max-w-lg font-body text-[0.95rem] font-light leading-relaxed ${
+              onOlive ? "text-cream/65" : "text-ink/65"
+            }`}
+          >
+            {item.description}
+          </p>
+          <DishTags item={item} onOlive={onOlive} />
+        </div>
+      </Link>
     </Reveal>
   );
 }

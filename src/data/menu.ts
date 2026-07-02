@@ -1,13 +1,16 @@
-// SAMPLE DATA — placeholder menu written in brand voice.
-// Replace with Can & Elif's final menu before launch; structure stays.
+// The real Limra menu — items and photography provided by the owners.
+// PRICES ARE PLACEHOLDERS until Can & Elif confirm the final list.
 
 export type DietaryTag = "V" | "VG" | "GF" | "N";
 
 export type MenuItem = {
+  slug: string;
   name: string;
   description: string;
   /** bare number, no currency symbol — rendered quiet per design spec */
   price: number;
+  image: string;
+  imageAlt: string;
   tags?: DietaryTag[];
   /** free-form qualifier, e.g. "GF on request" */
   note?: string;
@@ -27,7 +30,7 @@ export type MenuCategory = {
 export const menuIntro = {
   eyebrow: "The Table",
   title: "Menu",
-  line: "Meze for the middle of the table, mains from the charcoal, sweets from old recipes.",
+  line: "Platters from the spit, wraps rolled warm, bowls for the middle of the day.",
 };
 
 export const menuClosing = {
@@ -38,140 +41,172 @@ export const menuClosing = {
 
 export const menu: MenuCategory[] = [
   {
-    id: "cold-and-bright",
+    id: "platters",
     numeral: "I",
-    title: "Cold & Bright",
-    note: "Small plates, meant for the middle of the table.",
+    title: "Platters",
+    note: "Built on rice, carved from the vertical spit.",
     surface: "cream",
     items: [
       {
-        name: "Muhammara",
+        slug: "limra-platter",
+        name: "Limra Platter",
         description:
-          "Roasted red pepper, walnut, pomegranate molasses, grilled flatbread.",
-        price: 12,
-        tags: ["VG", "N"],
+          "Carved lamb-and-beef döner, rice, chopped salad, grilled pepper, hummus, warm flatbread.",
+        price: 17,
+        image: "/menu/limra-platter.jpg",
+        imageAlt:
+          "Limra Platter — carved döner over rice with salad, grilled tomato and pepper, hummus, and grilled flatbread",
         featured: true,
       },
       {
-        name: "Smoked Eggplant",
-        description: "Strained yogurt, brown butter, Aleppo pepper.",
-        price: 13,
-        tags: ["V", "GF"],
-      },
-      {
-        name: "Whipped Feta",
-        description: "Honey, black sesame, warm pide.",
-        price: 11,
-        tags: ["V"],
-      },
-      {
-        name: "Vine Leaves",
-        description: "Hand-rolled, sour cherry, pine nut, lemon.",
-        price: 10,
-        tags: ["VG", "GF", "N"],
-      },
-    ],
-  },
-  {
-    id: "from-the-fire",
-    numeral: "II",
-    title: "From the Fire",
-    note: "Charcoal and oak, cooked to order.",
-    surface: "olive",
-    items: [
-      {
-        name: "Adana Skewer",
+        slug: "iskender-platter",
+        name: "Iskender Platter",
         description:
-          "Hand-minced lamb, sumac onion, charred pepper, flatbread.",
-        price: 26,
-        note: "GF on request",
-        featured: true,
-      },
-      {
-        name: "Half Chicken",
-        description: "Lemon, oregano, garlic, charred scallion.",
-        price: 22,
-        tags: ["GF"],
-      },
-      {
-        name: "Lahmacun",
-        description: "Thin-crust flatbread, spiced lamb, parsley, lemon.",
+          "Döner over bread, tomato-butter sauce, strained yogurt, roasted peppers, pickles.",
         price: 16,
-      },
-      {
-        name: "Grilled Halloumi",
-        description: "Stone fruit, hot honey, mint.",
-        price: 14,
-        tags: ["V", "GF"],
+        image: "/menu/iskender-platter.jpg",
+        imageAlt:
+          "Iskender Platter — döner under tomato-butter sauce with strained yogurt, roasted peppers, and pickles",
       },
     ],
   },
   {
-    id: "larger-plates",
-    numeral: "III",
-    title: "Larger Plates",
-    note: "Built around the season, served with warm bread.",
-    surface: "cream",
-    items: [
-      {
-        name: "Whole Levrek",
-        description: "Sea bass, fennel, charred lemon, olive oil.",
-        price: 34,
-        tags: ["GF"],
-        featured: true,
-      },
-      {
-        name: "Hünkar Beğendi",
-        description: "Braised lamb shoulder, smoked eggplant purée.",
-        price: 29,
-        tags: ["GF"],
-      },
-      {
-        name: "Mantı",
-        description: "Handmade dumplings, garlic yogurt, Aleppo butter.",
-        price: 24,
-        note: "V option",
-      },
-      {
-        name: "Roast Cauliflower",
-        description: "Tahini, pomegranate, green herbs, crisped chickpeas.",
-        price: 19,
-        tags: ["VG", "GF"],
-      },
-    ],
-  },
-  {
-    id: "to-finish",
-    numeral: "IV",
-    title: "To Finish",
-    note: "Old recipes, lighter hands.",
+    id: "wraps",
+    numeral: "II",
+    title: "Wraps",
+    note: "Rolled to order in warm lavash.",
     surface: "olive",
     items: [
       {
-        name: "Künefe",
-        description: "Shredded pastry, sweet cheese, pistachio, served warm.",
-        price: 14,
-        tags: ["V", "N"],
+        slug: "tantuni-wrap",
+        name: "Tantuni Wrap",
+        description:
+          "Chopped seared beef, lettuce, tomato, red onion, rolled tight in thin lavash.",
+        price: 13,
+        image: "/menu/tantuni-wrap.jpg",
+        imageAlt:
+          "Tantuni Wrap — chopped seared beef with lettuce, tomato, and red onion rolled in lavash, with two house sauces",
         featured: true,
       },
       {
-        name: "Pistachio Baklava",
-        description: "Forty layers, clotted cream.",
+        slug: "chicken-wrap-antakya",
+        name: "Chicken Wrap, Antakya Style",
+        description:
+          "Chicken döner rolled with fries, pickles, and a warm spiced sauce.",
         price: 12,
-        tags: ["V", "N"],
+        image: "/menu/chicken-wrap-antakya.jpg",
+        imageAlt:
+          "Chicken Wrap Antakya Style — chicken döner rolled with fries and pickles in lavash",
       },
       {
-        name: "Olive Oil Cake",
-        description: "Citrus, labneh cream, candied peel.",
+        slug: "medi-wrap",
+        name: "Medi Wrap",
+        description:
+          "Beef döner, iceberg, red cabbage, house white sauce. Served with fries.",
+        price: 12,
+        image: "/menu/medi-wrap.jpg",
+        imageAlt:
+          "Medi Wrap — beef döner with iceberg and red cabbage in lavash, served with fries and pickles",
+      },
+      {
+        slug: "vegan-cig-kofte-wrap",
+        name: "Vegan Çiğ Köfte Wrap",
+        description:
+          "Hand-kneaded bulgur köfte, crisp greens, tomato, lemon, rolled in lavash.",
         price: 11,
-        tags: ["V"],
+        image: "/menu/vegan-cig-kofte-wrap.jpg",
+        imageAlt:
+          "Vegan Çiğ Köfte Wrap — hand-kneaded bulgur köfte with greens and tomato in lavash, lemon on the side",
+        tags: ["VG"],
+      },
+    ],
+  },
+  {
+    id: "bowls",
+    numeral: "III",
+    title: "Bowls",
+    note: "The whole table, in one bowl.",
+    surface: "cream",
+    items: [
+      {
+        slug: "apendos-bowl",
+        name: "Apendos Bowl",
+        description:
+          "Seared beef strips, rice, hummus, spiced chickpeas, çiğ köfte, yogurt dip, flatbread.",
+        price: 15,
+        image: "/menu/apendos-bowl.jpg",
+        imageAlt:
+          "Apendos Bowl — seared beef strips over rice with hummus, spiced chickpeas, çiğ köfte, and yogurt dip",
+        featured: true,
       },
       {
-        name: "Baked Rice Pudding",
-        description: "Mastic, cinnamon, caramelized top.",
-        price: 9,
-        tags: ["V", "GF"],
+        slug: "hummus-bowl",
+        name: "Hummus Bowl",
+        description:
+          "Chicken döner over hummus, crisp potatoes, slaw, olives, crispy onions.",
+        price: 13,
+        image: "/menu/hummus-bowl.jpg",
+        imageAlt:
+          "Hummus Bowl — chicken döner over hummus with crisp potatoes, slaw, olives, and crispy onions",
+      },
+    ],
+  },
+  {
+    id: "sandwiches-and-sides",
+    numeral: "IV",
+    title: "Sandwiches & Sides",
+    note: "Between bread, and what belongs beside it.",
+    surface: "olive",
+    items: [
+      {
+        slug: "limra-loaded-fries",
+        name: "Limra Loaded Fries",
+        description:
+          "Fries under chicken döner, crispy onions, herb cream, roasted pepper sauce.",
+        price: 11,
+        image: "/menu/limra-loaded-fries.jpg",
+        imageAlt:
+          "Limra Loaded Fries — fries loaded with chicken döner, crispy onions, herb cream, and roasted pepper sauce",
+        featured: true,
+      },
+      {
+        slug: "amalfi-melt",
+        name: "Amalfi Melt",
+        description:
+          "Beef döner on a toasted roll, greens, red cabbage, herb cream.",
+        price: 12,
+        image: "/menu/amalfi-melt.jpg",
+        imageAlt:
+          "Amalfi Melt — beef döner on a toasted roll with greens, red cabbage, and herb cream, pickles alongside",
+      },
+      {
+        slug: "angora-sandwich",
+        name: "Angora Sandwich",
+        description:
+          "Chicken döner in a crisp roll, garlic yogurt, tomato, banana peppers.",
+        price: 12,
+        image: "/menu/angora-sandwich.jpg",
+        imageAlt:
+          "Angora Sandwich — chicken döner in a crisp roll with garlic yogurt and tomato, pickles alongside",
+      },
+      {
+        slug: "medi-taco",
+        name: "Medi Taco",
+        description:
+          "Three soft tacos, chicken döner, slaw, tomato, herb drizzle.",
+        price: 11,
+        image: "/menu/medi-taco.jpg",
+        imageAlt:
+          "Medi Taco — three soft tacos with chicken döner, slaw, tomato, and herb drizzle",
       },
     ],
   },
 ];
+
+export const allDishes = menu.flatMap((category) =>
+  category.items.map((item) => ({ ...item, category }))
+);
+
+export function findDish(slug: string) {
+  return allDishes.find((d) => d.slug === slug);
+}
