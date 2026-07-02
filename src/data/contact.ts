@@ -10,6 +10,15 @@ export const CONTACT = {
   phoneHref: "tel:+19849995388",
 } as const;
 
+// PLACEHOLDER HOURS — plausible until Can & Elif confirm the real ones.
+export const HOURS = [
+  { days: "Monday – Thursday", time: "11 am – 9 pm", schemaDays: ["Monday", "Tuesday", "Wednesday", "Thursday"], opens: "11:00", closes: "21:00" },
+  { days: "Friday – Saturday", time: "11 am – 10 pm", schemaDays: ["Friday", "Saturday"], opens: "11:00", closes: "22:00" },
+  { days: "Sunday", time: "11 am – 8 pm", schemaDays: ["Sunday"], opens: "11:00", closes: "20:00" },
+] as const;
+
+export const HOURS_SUMMARY = "Open daily from 11 am";
+
 export const ADDRESS_LINES = [
   CONTACT.streetAddress,
   `${CONTACT.locality}, ${CONTACT.region} ${CONTACT.postalCode}`,

@@ -1,7 +1,12 @@
 import Link from "next/link";
 import Medallion from "./Medallion";
 import Wordmark from "./Wordmark";
-import { ADDRESS_LINES, CONTACT, DIRECTIONS_URL } from "@/data/contact";
+import {
+  ADDRESS_LINES,
+  CONTACT,
+  DIRECTIONS_URL,
+  HOURS_SUMMARY,
+} from "@/data/contact";
 
 const COLS = [
   {
@@ -82,6 +87,8 @@ export default function SiteFooter() {
               >
                 {CONTACT.phoneDisplay}
               </a>
+              <br />
+              {HOURS_SUMMARY}
             </p>
           </div>
         </div>

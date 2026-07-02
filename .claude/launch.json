@@ -1,7 +1,17 @@
 {
   "version": "0.0.1",
   "configurations": [
-    { "name": "limra", "runtimeExecutable": "npm", "runtimeArgs": ["run", "dev"], "port": 3000 },
-    { "name": "limra-prod", "runtimeExecutable": "npm", "runtimeArgs": ["run", "start"], "port": 3000 }
+    {
+      "name": "limra",
+      "runtimeExecutable": "/bin/sh",
+      "runtimeArgs": ["-c", "PATH=/Users/gokhankelebek/.nvm/versions/node/v22.17.0/bin:$PATH npm run dev"],
+      "port": 3000
+    },
+    {
+      "name": "limra-prod",
+      "runtimeExecutable": "/bin/sh",
+      "runtimeArgs": ["-c", "PATH=/Users/gokhankelebek/.nvm/versions/node/v22.17.0/bin:$PATH npm run start"],
+      "port": 3000
+    }
   ]
 }

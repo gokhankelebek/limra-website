@@ -152,10 +152,10 @@ export const menu: MenuCategory[] = [
     ],
   },
   {
-    id: "sandwiches-and-sides",
+    id: "from-the-counter",
     numeral: "IV",
-    title: "Sandwiches & Sides",
-    note: "Between bread, and what belongs beside it.",
+    title: "From the Counter",
+    note: "For one hand, or for the middle of the table.",
     surface: "olive",
     items: [
       {

@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Marcellus, Spectral } from "next/font/google";
 import Script from "next/script";
 import JsonLd from "@/components/JsonLd";
 import { SITE_URL } from "@/lib/site";
+import { HOURS } from "@/data/contact";
 import "./globals.css";
 
 // Pre-paint gate for the home-page entrance: hold the page (CSS does the
@@ -59,8 +60,8 @@ export const metadata: Metadata = {
   },
 };
 
-// Site-wide Restaurant schema. TODO: add openingHoursSpecification and
-// geo coordinates once Can & Elif confirm hours / GBP is live.
+// Site-wide Restaurant schema. Hours are placeholders pending owner
+// confirmation. TODO: add geo coordinates once GBP is live.
 const RESTAURANT_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "Restaurant",
@@ -83,6 +84,12 @@ const RESTAURANT_SCHEMA = {
     postalCode: "27539",
     addressCountry: "US",
   },
+  openingHoursSpecification: HOURS.map((h) => ({
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: [...h.schemaDays],
+    opens: h.opens,
+    closes: h.closes,
+  })),
 };
 
 export default function RootLayout({

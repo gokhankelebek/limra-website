@@ -1,16 +1,22 @@
 import type { MetadataRoute } from "next";
-
-const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+import { allDishes } from "@/data/menu";
+import { SITE_URL } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   return [
-    { url: `${BASE}/`, lastModified: now, changeFrequency: "weekly", priority: 1 },
-    { url: `${BASE}/menu`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
-    { url: `${BASE}/reserve`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE}/order`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE}/story`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${BASE}/gallery`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
-    { url: `${BASE}/visit`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE_URL}/`, lastModified: now, changeFrequency: "weekly", priority: 1 },
+    { url: `${SITE_URL}/menu`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+    ...allDishes.map((dish) => ({
+      url: `${SITE_URL}/menu/${dish.slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+    { url: `${SITE_URL}/reserve`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE_URL}/order`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE_URL}/story`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE_URL}/gallery`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${SITE_URL}/visit`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
   ];
 }

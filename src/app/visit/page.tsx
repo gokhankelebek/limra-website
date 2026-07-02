@@ -8,6 +8,7 @@ import {
   ADDRESS_LINES,
   CONTACT,
   DIRECTIONS_URL,
+  HOURS,
   MAP_EMBED_URL,
 } from "@/data/contact";
 
@@ -74,8 +75,32 @@ export default function VisitPage() {
                 {CONTACT.phoneDisplay}
               </a>
             </p>
-            <p className="mt-2 font-body text-base font-light italic text-ink/55">
-              Hours posted soon.
+          </Reveal>
+        </section>
+
+        {/* Hours */}
+        <section className="px-6 pb-20">
+          <Reveal className="mx-auto max-w-md text-center">
+            <p className="font-roman text-[0.7rem] uppercase tracking-[0.4em] text-terracotta">
+              Hours
+            </p>
+            <div className="mt-7">
+              {HOURS.map((h) => (
+                <div
+                  key={h.days}
+                  className="flex items-baseline justify-between gap-6 border-t border-olive/15 py-4"
+                >
+                  <p className="font-body text-base font-light text-ink/75">
+                    {h.days}
+                  </p>
+                  <p className="shrink-0 font-roman text-sm tracking-[0.14em] text-olive/80">
+                    {h.time}
+                  </p>
+                </div>
+              ))}
+            </div>
+            <p className="mt-4 font-body text-sm font-light italic text-ink/50">
+              Holiday hours may differ.
             </p>
           </Reveal>
         </section>
