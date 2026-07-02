@@ -15,7 +15,7 @@ export default function ComingSoon({
   return (
     <>
       <SiteHeader />
-      <main className="flex flex-1 items-center justify-center bg-cream px-6 py-40 text-center text-olive">
+      <main id="main" className="flex flex-1 items-center justify-center bg-cream px-6 py-40 text-center text-olive">
         <div className="flex max-w-xl flex-col items-center">
           <Medallion animate variant="seal" className="mb-9 h-20 w-20 text-olive" />
           <p className="font-roman text-[0.7rem] uppercase tracking-[0.4em] text-terracotta">

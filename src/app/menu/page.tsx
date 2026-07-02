@@ -246,7 +246,7 @@ export default function MenuPage() {
     <>
       <JsonLd data={buildMenuSchema(categories)} />
       <SiteHeader />
-      <main className="flex-1 bg-cream">
+      <main id="main" className="flex-1 bg-cream">
         {/* Masthead */}
         <div className="px-6 pb-20 pt-36 text-center text-olive">
           <Reveal delay="delay-1" className="flex justify-center">

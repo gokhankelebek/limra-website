@@ -24,7 +24,7 @@ export default function VisitPage() {
   return (
     <>
       <SiteHeader />
-      <main className="flex-1 bg-cream">
+      <main id="main" className="flex-1 bg-cream">
         {/* Masthead */}
         <div className="px-6 pb-16 pt-36 text-center text-olive">
           <Reveal delay="delay-1" className="flex justify-center">
