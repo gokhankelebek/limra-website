@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import Reveal from "./Reveal";
 import { menu } from "@/data/menu";
@@ -39,17 +38,7 @@ export default function MenuPreview() {
                 href={`/menu/${dish.slug}`}
                 className="group block border-t border-olive/15 pt-6"
               >
-                <div className="border border-olive/15 p-1">
-                  <Image
-                    src={dish.image}
-                    alt={dish.imageAlt}
-                    width={800}
-                    height={600}
-                    sizes="(max-width: 640px) 90vw, 400px"
-                    className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-                  />
-                </div>
-                <div className="mt-5 flex items-baseline justify-between gap-6">
+                <div className="flex items-baseline justify-between gap-6">
                   <h3 className="font-display text-2xl text-ink transition-colors group-hover:text-terracotta">
                     {dish.name}
                   </h3>

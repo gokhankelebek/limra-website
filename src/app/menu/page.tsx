@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import Medallion from "@/components/Medallion";
@@ -95,22 +94,8 @@ function FeaturedDish({ item, onOlive }: { item: MenuItem; onOlive: boolean }) {
         >
           Signature
         </p>
-        <div
-          className={`mx-auto mt-7 max-w-md border p-2 ${
-            onOlive ? "border-cream/15" : "border-olive/15"
-          }`}
-        >
-          <Image
-            src={item.image}
-            alt={item.imageAlt}
-            width={880}
-            height={660}
-            sizes="(max-width: 640px) 90vw, 440px"
-            className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-          />
-        </div>
         <h3
-          className={`mt-7 font-display text-4xl font-medium lg:text-5xl ${
+          className={`mt-4 font-display text-4xl font-medium lg:text-5xl ${
             onOlive ? "text-cream" : "text-ink"
           } transition-colors ${
             onOlive ? "group-hover:text-terracotta-soft" : "group-hover:text-terracotta"
@@ -153,25 +138,8 @@ function DishRow({
       delay={delay}
       className={`border-t ${onOlive ? "border-cream/15" : "border-olive/15"}`}
     >
-      <Link
-        href={`/menu/${item.slug}`}
-        className="group flex items-start gap-5 py-7"
-      >
-        <div
-          className={`shrink-0 border p-1 ${
-            onOlive ? "border-cream/15" : "border-olive/15"
-          }`}
-        >
-          <Image
-            src={item.image}
-            alt=""
-            width={160}
-            height={160}
-            sizes="80px"
-            className="h-20 w-20 object-cover"
-          />
-        </div>
-        <div className="min-w-0 flex-1">
+      <Link href={`/menu/${item.slug}`} className="group block py-7">
+        <div className="min-w-0">
           <div className="flex items-baseline justify-between gap-6">
             <h3
               className={`font-display text-2xl lg:text-[1.75rem] ${
