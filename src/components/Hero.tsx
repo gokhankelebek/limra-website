@@ -26,7 +26,9 @@ export default function Hero() {
         className="hero-chrome pointer-events-none absolute inset-5 border border-olive/15 lg:inset-8"
       />
 
-      <div className="relative z-10 flex flex-col items-center px-6 text-center text-olive">
+      {/* pt clears the absolute header on short screens (e.g. Galaxy Note 8);
+          on tall screens the flex centering still rules and padding is slack */}
+      <div className="relative z-10 flex flex-col items-center px-6 pb-28 pt-32 text-center text-olive lg:pt-36">
         <IntroSeal className="mb-9 h-24 w-24 text-olive lg:h-28 lg:w-28" />
 
         <p className="anim-rise delay-1 font-roman text-[0.7rem] uppercase tracking-[0.42em] text-terracotta lg:text-xs">
