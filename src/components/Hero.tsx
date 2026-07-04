@@ -59,6 +59,10 @@ export default function Hero() {
             Order pickup
           </Link>
         </div>
+
+        <p className="anim-rise delay-5 mt-9 font-roman text-[0.66rem] uppercase tracking-[0.32em] text-terracotta">
+          Opening this summer
+        </p>
       </div>
 
       {/* Scroll cue — kept inside the hairline frame */}

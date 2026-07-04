@@ -6,6 +6,7 @@ import {
   CONTACT,
   DIRECTIONS_URL,
   HOURS_SUMMARY,
+  SOCIALS,
 } from "@/data/contact";
 
 const COLS = [
@@ -89,6 +90,21 @@ export default function SiteFooter() {
               </a>
               <br />
               {HOURS_SUMMARY}
+            </p>
+            <p className="mt-5 font-roman text-[0.62rem] uppercase tracking-[0.22em] text-olive/60">
+              {SOCIALS.map((s, i) => (
+                <span key={s.label}>
+                  {i > 0 && " · "}
+                  <a
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="transition-colors hover:text-terracotta"
+                  >
+                    {s.label}
+                  </a>
+                </span>
+              ))}
             </p>
           </div>
         </div>

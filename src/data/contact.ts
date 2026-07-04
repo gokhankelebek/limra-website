@@ -10,14 +10,36 @@ export const CONTACT = {
   phoneHref: "tel:+19849995388",
 } as const;
 
-// PLACEHOLDER HOURS — plausible until Can & Elif confirm the real ones.
+// Hours as published on limramedi.com: 11am — 9pm, daily.
 export const HOURS = [
-  { days: "Monday – Thursday", time: "11 am – 9 pm", schemaDays: ["Monday", "Tuesday", "Wednesday", "Thursday"], opens: "11:00", closes: "21:00" },
-  { days: "Friday – Saturday", time: "11 am – 10 pm", schemaDays: ["Friday", "Saturday"], opens: "11:00", closes: "22:00" },
-  { days: "Sunday", time: "11 am – 8 pm", schemaDays: ["Sunday"], opens: "11:00", closes: "20:00" },
+  {
+    days: "Every day",
+    time: "11 am – 9 pm",
+    schemaDays: [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ],
+    opens: "11:00",
+    closes: "21:00",
+  },
 ] as const;
 
-export const HOURS_SUMMARY = "Open daily from 11 am";
+export const HOURS_SUMMARY = "Open daily · 11 am – 9 pm";
+
+export const SERVICE_LINE = "Dine-in · Takeout · Delivery";
+
+// From limramedi.com — used in the footer and Restaurant schema sameAs.
+export const SOCIALS = [
+  { label: "Instagram", href: "https://www.instagram.com/limra_mediterranean/" },
+  { label: "Facebook", href: "https://www.facebook.com/limramediterranean/" },
+  { label: "YouTube", href: "https://www.youtube.com/channel/UCKFsf848BAsKtnWZyG56Qsw" },
+  { label: "Yelp", href: "https://www.yelp.com/biz/limra-mediterranean-restaurant-and-cafe-holly-springs" },
+] as const;
 
 export const ADDRESS_LINES = [
   CONTACT.streetAddress,

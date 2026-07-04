@@ -10,6 +10,7 @@ import {
   DIRECTIONS_URL,
   HOURS,
   MAP_EMBED_URL,
+  SERVICE_LINE,
 } from "@/data/contact";
 
 export const metadata: Metadata = {
@@ -43,7 +44,8 @@ export default function VisitPage() {
           </Reveal>
           <Reveal delay="delay-4">
             <p className="mx-auto mt-6 max-w-md font-body text-lg font-light italic leading-relaxed text-ink/70">
-              A seat at the table is closer than you think.
+              Opening this summer — a seat at the table is closer than you
+              think.
             </p>
           </Reveal>
         </div>
@@ -99,6 +101,9 @@ export default function VisitPage() {
                 </div>
               ))}
             </div>
+            <p className="mt-6 font-roman text-[0.66rem] uppercase tracking-[0.24em] text-olive/60">
+              {SERVICE_LINE}
+            </p>
             <p className="mt-4 font-body text-sm font-light italic text-ink/50">
               Holiday hours may differ.
             </p>

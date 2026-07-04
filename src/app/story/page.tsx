@@ -152,17 +152,23 @@ export default function StoryPage() {
             </div>
           </div>
           <div className="relative">
-            <Movement numeral="III" title="Can &amp; Elif" onOlive>
+            <Movement numeral="III" title="The Chefs" onOlive>
               <p>
-                Limra is kept by Can and Elif — husband and wife. One name
-                over the door, two pairs of hands behind it.
+                Limra is kept by Can and Elif Engin — husband and wife, both
+                chefs. One name over the door, two crafts behind it.
               </p>
               <p>
-                They built Limra around the food they grew up sharing: bread
-                warm from the fire, meat carved from the spit, vegetables in
-                season, sauces made in the kitchen each morning. Nothing
-                leaves the counter that they would not set on their own
-                table.
+                Chef Can spent more than fifteen years in professional
+                kitchens — luxury hotels, state dinners, protocol tables set
+                for heads of state. At the height of that path he began
+                again in the United States, from the window of a small food
+                truck, where every plate had to prove itself in a single
+                bite.
+              </p>
+              <p>
+                Chef Elif built Elif&apos;s Vanilla Cakery, making cakes for
+                weddings and celebrations. At Limra she keeps the pastry
+                counter — baklava and desserts, made fresh for the case.
               </p>
             </Movement>
           </div>
@@ -172,8 +178,26 @@ export default function StoryPage() {
         <section className="bg-cream px-6 py-24 lg:py-32">
           <Movement numeral="IV" title="The Table">
             <p>
-              A modern Mediterranean table. You order at the counter; the
-              rest is done the old way — over fire, by hand, without hurry.
+              The food truck&apos;s line kept growing, and the idea grew with
+              it: keep the energy, give it room to breathe. Limra is the
+              answer — an elevated Mediterranean bistro in Holly Springs.
+            </p>
+            <p>
+              Döner and gyro turning at the spit. A buffet kept alive
+              through the day, hot and cold. A case of baklava and pastries,
+              and an espresso counter worth lingering at. Move the way you
+              want to eat — quick if you&apos;re in a rush, slow if
+              you&apos;re not.
+            </p>
+            <p>
+              Beyond the doors, the same kitchen travels — catering
+              celebrations and gatherings at your table.
+            </p>
+            <p className="italic">
+              More than a restaurant — a table that brings people together.
+              <span className="mt-2 block font-roman text-[0.66rem] uppercase not-italic tracking-[0.28em] text-terracotta">
+                — Can &amp; Elif
+              </span>
             </p>
           </Movement>
           <Reveal className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
