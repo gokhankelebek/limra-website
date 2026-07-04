@@ -132,18 +132,20 @@ export default function VisitPage() {
               The table is set when you are.
             </p>
             <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row">
-              <Link
-                href="/reserve"
+              <a
+                href={DIRECTIONS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="rounded-full bg-cream px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-olive transition-colors hover:bg-cream-deep"
               >
-                Reserve a table
-              </Link>
-              <Link
-                href="/order"
+                Get directions
+              </a>
+              <a
+                href={CONTACT.phoneHref}
                 className="rounded-full border border-cream/40 px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-cream transition-colors hover:border-cream hover:bg-cream hover:text-olive"
               >
-                Order pickup
-              </Link>
+                Call us
+              </a>
             </div>
           </Reveal>
         </section>

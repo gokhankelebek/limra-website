@@ -1,11 +1,6 @@
-import ComingSoon from "@/components/ComingSoon";
-export const metadata = { title: "Order pickup" };
+import { redirect } from "next/navigation";
+
+// Pre-opening: ordering isn't live yet — route to the updates list.
 export default function Page() {
-  return (
-    <ComingSoon
-      eyebrow="To go"
-      title="Order pickup"
-      blurb="Pickup ordering is on the way — call ahead and we will have it ready."
-    />
-  );
+  redirect("/updates");
 }

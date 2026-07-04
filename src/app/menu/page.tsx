@@ -255,16 +255,16 @@ export default function MenuPage() {
             </p>
             <div className="mt-9 flex flex-col items-center gap-4 sm:flex-row">
               <Link
-                href="/reserve"
+                href={menuClosing.primary.href}
                 className="rounded-full bg-olive px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-cream transition-colors hover:bg-olive-deep"
               >
-                {menuClosing.reserveLabel}
+                {menuClosing.primary.label}
               </Link>
               <Link
-                href="/order"
+                href={menuClosing.secondary.href}
                 className="rounded-full border border-olive/40 px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-olive transition-colors hover:border-olive hover:bg-olive hover:text-cream"
               >
-                {menuClosing.orderLabel}
+                {menuClosing.secondary.label}
               </Link>
             </div>
           </Reveal>

@@ -33,10 +33,10 @@ export default function VisitStrip() {
         </a>
         <div className="mt-9 flex flex-col items-center gap-4 sm:flex-row">
           <Link
-            href="/reserve"
+            href="/updates"
             className="rounded-full bg-cream px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-olive transition-colors hover:bg-cream-deep"
           >
-            Reserve a table
+            Get opening updates
           </Link>
           <Link
             href="/visit"

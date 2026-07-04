@@ -47,16 +47,16 @@ export default function Hero() {
 
         <div className="anim-rise delay-4 mt-10 flex flex-col items-center gap-4 sm:flex-row">
           <Link
-            href="/reserve"
+            href="/updates"
             className="rounded-full bg-olive px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-cream transition-colors hover:bg-olive-deep"
           >
-            Reserve a table
+            Get opening updates
           </Link>
           <Link
-            href="/order"
+            href="/menu"
             className="rounded-full border border-olive/40 px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-olive transition-colors hover:border-olive hover:bg-olive hover:text-cream"
           >
-            Order pickup
+            See the menu
           </Link>
         </div>
 

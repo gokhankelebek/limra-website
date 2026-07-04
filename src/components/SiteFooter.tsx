@@ -22,8 +22,7 @@ const COLS = [
     title: "Visit",
     links: [
       { label: "Find us", href: "/visit" },
-      { label: "Reserve a table", href: "/reserve" },
-      { label: "Order pickup", href: "/order" },
+      { label: "Opening updates", href: "/updates" },
     ],
   },
 ];

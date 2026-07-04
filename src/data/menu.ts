@@ -34,9 +34,9 @@ export const menuIntro = {
 };
 
 export const menuClosing = {
-  line: "The table is set when you are.",
-  reserveLabel: "Reserve a table",
-  orderLabel: "Order pickup",
+  line: "The first tables are set this summer.",
+  primary: { label: "Get opening updates", href: "/updates" },
+  secondary: { label: "Plan your visit", href: "/visit" },
 };
 
 export const menu: MenuCategory[] = [

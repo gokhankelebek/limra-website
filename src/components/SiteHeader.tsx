@@ -43,16 +43,10 @@ export default function SiteHeader() {
         {/* Actions */}
         <div className="flex items-center gap-3">
           <Link
-            href="/order"
-            className="hidden font-roman text-[0.72rem] uppercase tracking-[0.18em] text-olive/80 transition-colors hover:text-terracotta sm:inline"
-          >
-            Order
-          </Link>
-          <Link
-            href="/reserve"
+            href="/updates"
             className="rounded-full border border-olive px-5 py-2 font-roman text-[0.72rem] uppercase tracking-[0.18em] text-olive transition-colors hover:bg-olive hover:text-cream"
           >
-            Reserve
+            Updates
           </Link>
           <MobileNav />
         </div>
