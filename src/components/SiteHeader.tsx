@@ -12,7 +12,7 @@ const NAV = [
 
 export default function SiteHeader() {
   return (
-    <header className="absolute inset-x-0 top-0 z-30">
+    <header className="absolute inset-x-0 top-0 z-40">
       <a
         href="#main"
         className="sr-only z-[70] rounded-full bg-olive px-5 py-2 font-roman text-[0.7rem] uppercase tracking-[0.18em] text-cream focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
