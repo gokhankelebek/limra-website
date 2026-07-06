@@ -15,6 +15,7 @@ import {
   type MenuCategory,
   type MenuItem,
 } from "@/data/menu";
+import { BLUR } from "@/data/menu-blur";
 import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -114,6 +115,8 @@ function Dish({
           <div className="overflow-hidden">
             <Image
               src={item.image}
+              placeholder="blur"
+              blurDataURL={BLUR[item.slug]}
               alt={item.imageAlt}
               width={880}
               height={660}

@@ -7,6 +7,7 @@ import Reveal from "@/components/Reveal";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import { allDishes, findDish } from "@/data/menu";
+import { BLUR } from "@/data/menu-blur";
 import { SITE_URL } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -112,6 +113,8 @@ export default async function DishPage({
           <Reveal delay="delay-4" className="mt-12 border border-olive/15 p-2">
             <Image
               src={dish.image}
+              placeholder="blur"
+              blurDataURL={BLUR[dish.slug]}
               alt={dish.imageAlt}
               width={1320}
               height={990}
@@ -156,6 +159,8 @@ export default async function DishPage({
                       <div className="border border-olive/15 p-1">
                         <Image
                           src={sib.image}
+                          placeholder="blur"
+                          blurDataURL={BLUR[sib.slug]}
                           alt={sib.imageAlt}
                           width={440}
                           height={330}

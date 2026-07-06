@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Reveal from "./Reveal";
 import { allDishes } from "@/data/menu";
+import { BLUR } from "@/data/menu-blur";
 
 const RAIL_SLUGS = [
   "limra-platter",
@@ -44,6 +45,8 @@ export default function MenuPreview() {
                 <div className="overflow-hidden">
                   <Image
                     src={dish.image}
+                    placeholder="blur"
+                    blurDataURL={BLUR[dish.slug]}
                     alt={dish.imageAlt}
                     width={560}
                     height={420}

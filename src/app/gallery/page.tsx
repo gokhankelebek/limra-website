@@ -6,6 +6,7 @@ import Reveal from "@/components/Reveal";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import { allDishes } from "@/data/menu";
+import { BLUR } from "@/data/menu-blur";
 
 export const metadata: Metadata = {
   title: {
@@ -59,6 +60,8 @@ export default function GalleryPage() {
                     <div className="overflow-hidden">
                       <Image
                         src={dish.image}
+                        placeholder="blur"
+                        blurDataURL={BLUR[dish.slug]}
                         alt={dish.imageAlt}
                         width={880}
                         height={660}

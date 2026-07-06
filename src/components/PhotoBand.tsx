@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { findDish } from "@/data/menu";
+import { BLUR } from "@/data/menu-blur";
 
 const BAND_SLUGS = ["tantuni-wrap", "limra-loaded-fries", "iskender-platter"];
 
@@ -22,6 +23,8 @@ export default function PhotoBand() {
         >
           <Image
             src={dish.image}
+            placeholder="blur"
+            blurDataURL={BLUR[dish.slug]}
             alt={dish.imageAlt}
             width={880}
             height={880}

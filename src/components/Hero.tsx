@@ -5,6 +5,7 @@ import Medallion from "./Medallion";
 import ScrollRotate from "./ScrollRotate";
 import Wordmark from "./Wordmark";
 import { findDish } from "@/data/menu";
+import { BLUR } from "@/data/menu-blur";
 
 export default function Hero() {
   const heroDish = findDish("limra-platter");
@@ -88,6 +89,8 @@ export default function Hero() {
               <div className="overflow-hidden">
                 <Image
                   src={heroDish.image}
+                  placeholder="blur"
+                  blurDataURL={BLUR[heroDish.slug]}
                   alt={heroDish.imageAlt}
                   width={1320}
                   height={1179}
