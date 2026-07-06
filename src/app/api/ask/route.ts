@@ -97,8 +97,10 @@ export async function POST(req: Request) {
       err instanceof Anthropic.APIError
         ? (err.type ?? "api_error")
         : "connection_error";
+    const message =
+      err instanceof Anthropic.APIError ? err.message : "connection failed";
     return Response.json(
-      { error: "upstream", status, type },
+      { error: "upstream", status, type, message },
       { status: 502 }
     );
   }
