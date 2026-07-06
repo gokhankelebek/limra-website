@@ -84,17 +84,42 @@ export async function POST(req: Request) {
     messages,
   });
 
+  // Await the first event before responding: connection/auth/billing
+  // failures surface as a diagnosable status instead of a broken stream.
+  const iterator = stream[Symbol.asyncIterator]();
+  let first: IteratorResult<Anthropic.MessageStreamEvent>;
+  try {
+    first = await iterator.next();
+  } catch (err) {
+    console.error("ask-limra upstream error", err);
+    const status = err instanceof Anthropic.APIError ? err.status : 0;
+    const type =
+      err instanceof Anthropic.APIError
+        ? (err.type ?? "api_error")
+        : "connection_error";
+    return Response.json(
+      { error: "upstream", status, type },
+      { status: 502 }
+    );
+  }
+
   const encoder = new TextEncoder();
   const readable = new ReadableStream<Uint8Array>({
     async start(controller) {
+      const emit = (event: Anthropic.MessageStreamEvent) => {
+        if (
+          event.type === "content_block_delta" &&
+          event.delta.type === "text_delta"
+        ) {
+          controller.enqueue(encoder.encode(event.delta.text));
+        }
+      };
       try {
-        for await (const event of stream) {
-          if (
-            event.type === "content_block_delta" &&
-            event.delta.type === "text_delta"
-          ) {
-            controller.enqueue(encoder.encode(event.delta.text));
-          }
+        if (!first.done) emit(first.value);
+        for (;;) {
+          const next = await iterator.next();
+          if (next.done) break;
+          emit(next.value);
         }
         const final = await stream.finalMessage();
         if (final.stop_reason === "refusal") {
@@ -104,7 +129,8 @@ export async function POST(req: Request) {
             )
           );
         }
-      } catch {
+      } catch (err) {
+        console.error("ask-limra stream error", err);
         controller.enqueue(
           encoder.encode(
             "\n\nSomething slipped in the kitchen. Try again in a moment, or call us."
