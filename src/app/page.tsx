@@ -2,6 +2,7 @@ import IntroProvider from "@/components/IntroContext";
 import SiteHeader from "@/components/SiteHeader";
 import Hero from "@/components/Hero";
 import StorySection from "@/components/StorySection";
+import PhotoBand from "@/components/PhotoBand";
 import MenuPreview from "@/components/MenuPreview";
 import VisitStrip from "@/components/VisitStrip";
 import SiteFooter from "@/components/SiteFooter";
@@ -13,6 +14,7 @@ export default function Home() {
       <main id="main" className="flex-1">
         <Hero />
         <StorySection />
+        <PhotoBand />
         <MenuPreview />
         <VisitStrip />
       </main>

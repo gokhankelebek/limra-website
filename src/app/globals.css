@@ -13,6 +13,7 @@
   --color-olive-soft: #4a7a2e;
   --color-terracotta: #ab5c0c;
   --color-terracotta-soft: #c47a2a;
+  --color-terracotta-deep: #8f4c09;
   --color-cream: #feebcb;
   --color-cream-soft: #fbf3e2;
   --color-cream-deep: #f3e2c4;
@@ -84,11 +85,11 @@ body {
 
 .anim-rise {
   opacity: 0;
-  animation: limra-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: limra-rise 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 .anim-fade {
   opacity: 0;
-  animation: limra-fade 1.6s ease forwards;
+  animation: limra-fade 0.7s ease forwards;
 }
 .anim-seal {
   opacity: 0;
@@ -97,11 +98,11 @@ body {
 }
 
 /* Stagger helpers */
-.delay-1 { animation-delay: 0.15s; }
-.delay-2 { animation-delay: 0.35s; }
-.delay-3 { animation-delay: 0.55s; }
-.delay-4 { animation-delay: 0.8s; }
-.delay-5 { animation-delay: 1.05s; }
+.delay-1 { animation-delay: 0.06s; }
+.delay-2 { animation-delay: 0.14s; }
+.delay-3 { animation-delay: 0.22s; }
+.delay-4 { animation-delay: 0.32s; }
+.delay-5 { animation-delay: 0.44s; }
 
 /* Medallion ring stroke-draw */
 .seal-ring {

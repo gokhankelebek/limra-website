@@ -82,7 +82,7 @@ export default function GalleryPage() {
         </section>
 
         {/* Closing */}
-        <section className="bg-olive-deep px-6 py-24 text-center text-cream">
+        <section className="bg-olive-deep px-6 py-16 text-center text-cream lg:py-20">
           <Reveal className="flex flex-col items-center">
             <Medallion variant="seal" className="h-16 w-16 text-cream" />
             <p className="mt-7 max-w-md font-body text-xl font-light italic leading-relaxed text-cream/80">
@@ -91,7 +91,7 @@ export default function GalleryPage() {
             <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row">
               <Link
                 href="/menu"
-                className="rounded-full bg-cream px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-olive transition-colors hover:bg-cream-deep"
+                className="rounded-full bg-terracotta px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-cream transition-colors hover:bg-terracotta-deep"
               >
                 View the menu
               </Link>

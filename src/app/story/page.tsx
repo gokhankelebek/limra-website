@@ -91,7 +91,7 @@ export default function StoryPage() {
         </div>
 
         {/* I — The City */}
-        <section className="relative overflow-hidden bg-olive-deep px-6 py-24 text-cream lg:py-32">
+        <section className="relative overflow-hidden bg-olive-deep px-6 py-16 text-cream lg:py-24">
           <div
             aria-hidden
             className="pointer-events-none absolute inset-0 overflow-hidden opacity-[0.05]"
@@ -120,7 +120,7 @@ export default function StoryPage() {
         </section>
 
         {/* II — The Seal */}
-        <section className="bg-cream px-6 py-24 lg:py-32">
+        <section className="bg-cream px-6 py-16 lg:py-24">
           <Movement numeral="II" title="The Seal">
             <p>
               Our seal is drawn from the name itself. The letters of LIMRA,
@@ -140,7 +140,7 @@ export default function StoryPage() {
         </section>
 
         {/* III — The Couple */}
-        <section className="relative overflow-hidden bg-olive-deep px-6 py-24 text-cream lg:py-32">
+        <section className="relative overflow-hidden bg-olive-deep px-6 py-16 text-cream lg:py-24">
           <div
             aria-hidden
             className="pointer-events-none absolute inset-0 overflow-hidden opacity-[0.05]"
@@ -175,7 +175,7 @@ export default function StoryPage() {
         </section>
 
         {/* IV — The Table */}
-        <section className="bg-cream px-6 py-24 lg:py-32">
+        <section className="bg-cream px-6 py-16 lg:py-24">
           <Movement numeral="IV" title="The Table">
             <p>
               The food truck&apos;s line kept growing, and the idea grew with
@@ -203,7 +203,7 @@ export default function StoryPage() {
           <Reveal className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link
               href="/menu"
-              className="rounded-full bg-olive px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-cream transition-colors hover:bg-olive-deep"
+              className="rounded-full bg-terracotta px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-cream transition-colors hover:bg-terracotta-deep"
             >
               View the menu
             </Link>

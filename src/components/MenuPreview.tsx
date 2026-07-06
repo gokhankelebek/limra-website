@@ -1,70 +1,93 @@
+import Image from "next/image";
 import Link from "next/link";
 import Reveal from "./Reveal";
-import { menu } from "@/data/menu";
+import { allDishes } from "@/data/menu";
 
-const STAGGER = ["delay-1", "delay-2", "delay-3", "delay-4"] as const;
+const RAIL_SLUGS = [
+  "limra-platter",
+  "tantuni-wrap",
+  "apendos-bowl",
+  "limra-loaded-fries",
+  "medi-taco",
+  "iskender-platter",
+];
 
 /**
- * Home-page taste of the menu — the signature dish from each category,
- * linking through to the full editorial menu.
+ * Home-page signature rail — a snap-scrolling strip of dish cards.
+ * Appetite first; flick through on a phone like a counter display.
  */
 export default function MenuPreview() {
-  const signatures = menu.flatMap((category) =>
-    category.items
-      .filter((item) => item.featured)
-      .map((item) => ({ ...item, category: category.title }))
-  );
+  const dishes = RAIL_SLUGS.map((slug) =>
+    allDishes.find((d) => d.slug === slug)
+  ).filter((d): d is NonNullable<typeof d> => Boolean(d));
 
   return (
-    <section className="bg-cream px-6 py-24 lg:py-32">
-      <div className="mx-auto max-w-4xl">
-        <Reveal className="text-center">
-          <p className="font-roman text-[0.7rem] uppercase tracking-[0.4em] text-terracotta">
-            The table
-          </p>
-          <h2 className="mt-5 font-display text-5xl font-medium text-olive lg:text-6xl">
-            A first taste.
-          </h2>
-        </Reveal>
+    <section className="overflow-hidden bg-cream py-16 lg:py-24">
+      <Reveal className="px-6 text-center">
+        <p className="font-roman text-[0.7rem] uppercase tracking-[0.4em] text-terracotta">
+          The Table
+        </p>
+        <h2 className="mt-5 font-display text-5xl font-medium text-olive lg:text-6xl">
+          Come hungry.
+        </h2>
+      </Reveal>
 
-        <div className="mx-auto mt-10 max-w-xl">
-          {signatures.map((dish, i) => (
-            <Reveal
+      <Reveal animation="anim-fade" delay="delay-2">
+        <div className="mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-4 [scrollbar-width:none] sm:px-10 lg:px-16 [&::-webkit-scrollbar]:hidden">
+          {dishes.map((dish) => (
+            <Link
               key={dish.slug}
-              animation="anim-fade"
-              delay={STAGGER[i % STAGGER.length]}
+              href={`/menu/${dish.slug}`}
+              className="group w-[240px] shrink-0 snap-start sm:w-[280px]"
             >
-              <Link
-                href={`/menu/${dish.slug}`}
-                className="group block px-4 py-8 text-center"
-              >
-                <p className="font-roman text-[0.6rem] uppercase tracking-[0.3em] text-olive/50">
-                  {dish.category}
-                </p>
-                <h3 className="mt-3 font-display text-3xl text-ink transition-colors group-hover:text-terracotta">
+              <div className="overflow-hidden border border-olive/15 p-1.5">
+                <div className="overflow-hidden">
+                  <Image
+                    src={dish.image}
+                    alt={dish.imageAlt}
+                    width={560}
+                    height={420}
+                    sizes="280px"
+                    className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
+                  />
+                </div>
+              </div>
+              <div className="mt-3 flex items-start justify-between gap-3">
+                <h3 className="font-display text-xl leading-tight text-ink transition-colors group-hover:text-terracotta">
                   {dish.name}
                 </h3>
-                <p className="mx-auto mt-3 max-w-md font-body text-base font-light italic leading-relaxed text-ink/65">
-                  {dish.description}
-                </p>
-                <p className="mt-4 font-roman text-sm tracking-[0.18em] text-olive/60">
+                <span className="mt-0.5 shrink-0 rounded-full bg-terracotta px-2.5 py-0.5 font-roman text-[0.64rem] tracking-[0.12em] text-cream">
                   {dish.price}
-                </p>
-              </Link>
-            </Reveal>
+                </span>
+              </div>
+              <p className="mt-1 font-roman text-[0.56rem] uppercase tracking-[0.24em] text-olive/55">
+                {dish.category.title}
+              </p>
+            </Link>
           ))}
-        </div>
 
-        <Reveal className="mt-14 text-center">
+          {/* end card — the invitation to keep going */}
           <Link
             href="/menu"
-            className="group inline-flex items-center gap-3 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-olive transition-colors hover:text-terracotta"
+            className="group flex w-[240px] shrink-0 snap-start flex-col items-center justify-center border border-olive/15 text-center sm:w-[280px]"
           >
-            View the full menu
-            <span className="h-px w-10 bg-current transition-all group-hover:w-14" />
+            <span className="font-display text-2xl text-olive transition-colors group-hover:text-terracotta">
+              The full menu
+            </span>
+            <span className="mt-3 h-px w-10 bg-terracotta transition-all group-hover:w-16" />
           </Link>
-        </Reveal>
-      </div>
+        </div>
+      </Reveal>
+
+      <Reveal className="mt-8 px-6 text-center">
+        <Link
+          href="/menu"
+          className="group inline-flex items-center gap-3 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-olive transition-colors hover:text-terracotta"
+        >
+          View the full menu
+          <span className="h-px w-10 bg-current transition-all group-hover:w-14" />
+        </Link>
+      </Reveal>
     </section>
   );
 }

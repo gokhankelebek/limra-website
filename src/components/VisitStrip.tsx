@@ -8,7 +8,7 @@ import { ADDRESS_LINES, CONTACT, DIRECTIONS_URL } from "@/data/contact";
  */
 export default function VisitStrip() {
   return (
-    <section className="bg-olive-deep px-6 py-24 text-center text-cream lg:py-28">
+    <section className="bg-olive-deep px-6 py-16 text-center text-cream lg:py-20">
       <Reveal className="flex flex-col items-center">
         <p className="font-roman text-[0.7rem] uppercase tracking-[0.4em] text-terracotta-soft">
           Find us
@@ -34,7 +34,7 @@ export default function VisitStrip() {
         <div className="mt-9 flex flex-col items-center gap-4 sm:flex-row">
           <Link
             href="/updates"
-            className="rounded-full bg-cream px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-olive transition-colors hover:bg-cream-deep"
+            className="rounded-full bg-terracotta px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-cream transition-colors hover:bg-terracotta-deep"
           >
             Get opening updates
           </Link>

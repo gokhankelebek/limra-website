@@ -60,7 +60,7 @@ export default function NotifyForm() {
           ))}
           <a
             href={CONTACT.phoneHref}
-            className="rounded-full bg-olive px-6 py-2.5 font-roman text-[0.7rem] uppercase tracking-[0.18em] text-cream transition-colors hover:bg-olive-deep"
+            className="rounded-full bg-terracotta px-6 py-2.5 font-roman text-[0.7rem] uppercase tracking-[0.18em] text-cream transition-colors hover:bg-terracotta-deep"
           >
             Call us
           </a>
@@ -105,7 +105,7 @@ export default function NotifyForm() {
         <button
           type="submit"
           disabled={status === "sending"}
-          className="shrink-0 rounded-full bg-olive px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-cream transition-colors hover:bg-olive-deep disabled:opacity-60"
+          className="shrink-0 rounded-full bg-terracotta px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-cream transition-colors hover:bg-terracotta-deep disabled:opacity-60"
         >
           {status === "sending" ? "One moment" : "Notify me"}
         </button>

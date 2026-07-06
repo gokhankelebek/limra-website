@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import Medallion from "@/components/Medallion";
@@ -73,19 +74,25 @@ function DishTags({ item, onOlive }: { item: MenuItem; onOlive: boolean }) {
   const parts = [...(item.tags ?? []), ...(item.note ? [item.note] : [])];
   if (!parts.length) return null;
   return (
-    <p
-      className={`mt-2 font-roman text-[0.6rem] uppercase tracking-[0.3em] ${
-        onOlive ? "text-cream/50" : "text-olive/50"
-      }`}
-    >
-      {parts.join(" · ")}
+    <p className="mt-3 flex flex-wrap gap-1.5">
+      {parts.map((part) => (
+        <span
+          key={part}
+          className={`rounded-full border px-2.5 py-0.5 font-roman text-[0.55rem] uppercase tracking-[0.18em] ${
+            onOlive
+              ? "border-cream/25 text-cream/60"
+              : "border-olive/25 text-olive/60"
+          }`}
+        >
+          {part}
+        </span>
+      ))}
     </p>
   );
 }
 
 /**
- * Every dish is set identically — centered, tasting-menu composition,
- * whitespace doing the separating. No headline items.
+ * Photo-forward dish card — every dish set identically, appetite first.
  */
 function Dish({
   item,
@@ -98,34 +105,45 @@ function Dish({
 }) {
   return (
     <Reveal animation="anim-fade" delay={delay}>
-      <Link
-        href={`/menu/${item.slug}`}
-        className="group block px-4 py-9 text-center"
-      >
-        <h3
-          className={`font-display text-3xl ${
-            onOlive ? "text-cream" : "text-ink"
-          } transition-colors ${
-            onOlive
-              ? "group-hover:text-terracotta-soft"
-              : "group-hover:text-terracotta"
+      <Link href={`/menu/${item.slug}`} className="group block">
+        <div
+          className={`overflow-hidden border p-1.5 ${
+            onOlive ? "border-cream/15" : "border-olive/15"
           }`}
         >
-          {item.name}
-        </h3>
+          <div className="overflow-hidden">
+            <Image
+              src={item.image}
+              alt={item.imageAlt}
+              width={880}
+              height={660}
+              sizes="(max-width: 640px) 90vw, 400px"
+              className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+            />
+          </div>
+        </div>
+        <div className="mt-4 flex items-start justify-between gap-3">
+          <h3
+            className={`font-display text-2xl leading-tight ${
+              onOlive ? "text-cream" : "text-ink"
+            } transition-colors ${
+              onOlive
+                ? "group-hover:text-terracotta-soft"
+                : "group-hover:text-terracotta"
+            }`}
+          >
+            {item.name}
+          </h3>
+          <span className="mt-0.5 shrink-0 rounded-full bg-terracotta px-3 py-1 font-roman text-[0.68rem] tracking-[0.12em] text-cream">
+            {item.price}
+          </span>
+        </div>
         <p
-          className={`mx-auto mt-3 max-w-md font-body text-base font-light italic leading-relaxed ${
+          className={`mt-2 font-body text-[0.95rem] font-light leading-relaxed ${
             onOlive ? "text-cream/65" : "text-ink/65"
           }`}
         >
           {item.description}
-        </p>
-        <p
-          className={`mt-4 font-roman text-sm tracking-[0.18em] ${
-            onOlive ? "text-cream/60" : "text-olive/60"
-          }`}
-        >
-          {item.price}
         </p>
         <DishTags item={item} onOlive={onOlive} />
       </Link>
@@ -145,7 +163,7 @@ function CategorySection({
   return (
     <section
       id={category.id}
-      className={`relative scroll-mt-24 overflow-hidden py-24 sm:scroll-mt-16 lg:py-32 ${
+      className={`relative scroll-mt-24 overflow-hidden py-16 sm:scroll-mt-16 lg:py-24 ${
         onOlive ? "bg-olive-deep text-cream" : "bg-cream text-ink"
       }`}
     >
@@ -169,7 +187,7 @@ function CategorySection({
         </div>
       )}
 
-      <div className="relative mx-auto max-w-2xl px-6">
+      <div className="relative mx-auto max-w-4xl px-6">
         <Reveal className="text-center">
           <p
             className={`font-roman text-[0.7rem] uppercase tracking-[0.4em] ${
@@ -195,7 +213,7 @@ function CategorySection({
           </p>
         </Reveal>
 
-        <div className="mt-8">
+        <div className="mt-10 grid gap-x-8 gap-y-10 sm:grid-cols-2">
           {category.items.map((item, i) => (
             <Dish
               key={item.slug}
@@ -247,7 +265,7 @@ export default function MenuPage() {
         ))}
 
         {/* Closing CTA */}
-        <section className="bg-cream px-6 py-28 text-center text-olive">
+        <section className="bg-cream px-6 py-20 text-center text-olive">
           <Reveal className="flex flex-col items-center">
             <Medallion variant="seal" className="h-20 w-20" />
             <p className="mt-8 max-w-md font-body text-xl font-light italic leading-relaxed text-ink/75">
@@ -256,7 +274,7 @@ export default function MenuPage() {
             <div className="mt-9 flex flex-col items-center gap-4 sm:flex-row">
               <Link
                 href={menuClosing.primary.href}
-                className="rounded-full bg-olive px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-cream transition-colors hover:bg-olive-deep"
+                className="rounded-full bg-terracotta px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-cream transition-colors hover:bg-terracotta-deep"
               >
                 {menuClosing.primary.label}
               </Link>
