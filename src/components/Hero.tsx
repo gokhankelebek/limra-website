@@ -35,16 +35,21 @@ export default function Hero() {
       <div className="relative z-10 flex flex-col items-center px-6 pb-28 pt-32 text-center text-olive lg:justify-center lg:pt-36">
         <IntroSeal className="mb-9 h-24 w-24 text-olive lg:h-28 lg:w-28" />
 
-        <p className="anim-rise delay-1 font-roman text-[0.7rem] uppercase tracking-[0.42em] text-terracotta lg:text-xs">
-          Mediterranean Restaurant
-        </p>
-
-        <h1 className="anim-rise delay-2 mt-8">
-          <span className="sr-only">Limra</span>
-          <Wordmark
-            aria-hidden
-            className="w-52 text-olive sm:w-64 lg:w-80"
-          />
+        {/* One h1 carrying the full descriptive heading for crawlers and
+            screen readers — visually identical to the old eyebrow + mark */}
+        <h1>
+          <span className="anim-rise delay-1 block font-roman text-[0.7rem] font-normal uppercase tracking-[0.42em] text-terracotta lg:text-xs">
+            Mediterranean Restaurant
+          </span>
+          <span className="anim-rise delay-2 mt-8 block">
+            <span className="sr-only">
+              — Limra, Holly Springs, North Carolina
+            </span>
+            <Wordmark
+              aria-hidden
+              className="w-52 text-olive sm:w-64 lg:w-80"
+            />
+          </span>
         </h1>
 
         <p className="anim-rise delay-3 mt-6 max-w-xl font-body text-lg font-light italic leading-relaxed text-ink/80 lg:text-xl">
