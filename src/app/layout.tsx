@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Marcellus, Spectral } from "next/font/google";
 import Script from "next/script";
+import AskLimra from "@/components/AskLimra";
 import JsonLd from "@/components/JsonLd";
 import { SITE_URL } from "@/lib/site";
 import { HOURS, SOCIALS } from "@/data/contact";
@@ -112,6 +113,7 @@ export default function RootLayout({
         />
         <JsonLd data={RESTAURANT_SCHEMA} />
         {children}
+        <AskLimra />
       </body>
     </html>
   );
