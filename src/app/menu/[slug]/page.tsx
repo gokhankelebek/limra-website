@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
+import Medallion from "@/components/Medallion";
 import Reveal from "@/components/Reveal";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
@@ -109,19 +110,26 @@ export default async function DishPage({
             </Reveal>
           </div>
 
-          {/* Photo — framed like the rest of the house */}
-          <Reveal delay="delay-4" className="mt-12 border border-olive/15 p-2">
-            <Image
-              src={dish.image}
-              placeholder="blur"
-              blurDataURL={BLUR[dish.slug]}
-              alt={dish.imageAlt}
-              width={1320}
-              height={990}
-              priority
-              sizes="(max-width: 768px) 100vw, 720px"
-              className="aspect-[4/3] w-full object-cover"
-            />
+          {/* Photo — the vault: a soft wide arch, sealed by the house */}
+          <Reveal delay="delay-4" className="relative mt-12">
+            <div className="rounded-t-[10rem] border border-olive/15 bg-cream p-2">
+              <div className="overflow-hidden rounded-t-[9.5rem]">
+                <Image
+                  src={dish.image}
+                  placeholder="blur"
+                  blurDataURL={BLUR[dish.slug]}
+                  alt={dish.imageAlt}
+                  width={1320}
+                  height={990}
+                  priority
+                  sizes="(max-width: 768px) 100vw, 720px"
+                  className="aspect-[4/3] w-full object-cover"
+                />
+              </div>
+            </div>
+            <span className="absolute -bottom-5 right-10 flex h-12 w-12 items-center justify-center rounded-full border border-olive/20 bg-cream">
+              <Medallion className="h-8 w-8 text-olive" />
+            </span>
           </Reveal>
 
           {/* Actions */}
@@ -156,17 +164,19 @@ export default async function DishPage({
                     delay={(["delay-1", "delay-2", "delay-3"] as const)[i]}
                   >
                     <Link href={`/menu/${sib.slug}`} className="group block">
-                      <div className="border border-olive/15 p-1">
-                        <Image
-                          src={sib.image}
-                          placeholder="blur"
-                          blurDataURL={BLUR[sib.slug]}
-                          alt={sib.imageAlt}
-                          width={440}
-                          height={330}
-                          sizes="(max-width: 640px) 90vw, 220px"
-                          className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                        />
+                      <div className="rounded-t-full border border-olive/15 bg-cream p-1">
+                        <div className="overflow-hidden rounded-t-full">
+                          <Image
+                            src={sib.image}
+                            placeholder="blur"
+                            blurDataURL={BLUR[sib.slug]}
+                            alt={sib.imageAlt}
+                            width={440}
+                            height={550}
+                            sizes="(max-width: 640px) 90vw, 220px"
+                            className="aspect-[4/5] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                          />
+                        </div>
                       </div>
                       <div className="mt-4 flex items-baseline justify-between gap-3">
                         <h3 className="font-display text-xl text-ink transition-colors group-hover:text-terracotta">

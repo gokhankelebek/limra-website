@@ -56,17 +56,18 @@ export default function GalleryPage() {
                 delay={STAGGER[i % STAGGER.length]}
               >
                 <Link href={`/menu/${dish.slug}`} className="group block">
-                  <div className="overflow-hidden border border-olive/15 p-1.5">
-                    <div className="overflow-hidden">
+                  {/* the colonnade — every plate in its own arch */}
+                  <div className="rounded-t-full border border-olive/15 bg-cream p-1.5">
+                    <div className="overflow-hidden rounded-t-full">
                       <Image
                         src={dish.image}
                         placeholder="blur"
                         blurDataURL={BLUR[dish.slug]}
                         alt={dish.imageAlt}
                         width={880}
-                        height={660}
+                        height={1100}
                         sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 370px"
-                        className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                        className="aspect-[4/5] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                       />
                     </div>
                   </div>

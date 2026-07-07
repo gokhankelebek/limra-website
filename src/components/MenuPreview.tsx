@@ -39,45 +39,48 @@ export default function MenuPreview() {
             <Link
               key={dish.slug}
               href={`/menu/${dish.slug}`}
-              className="group w-[240px] shrink-0 snap-start sm:w-[280px]"
+              className="group w-[220px] shrink-0 snap-start pb-4 text-center sm:w-[250px]"
             >
-              <div className="overflow-hidden border border-olive/15 p-1.5">
-                <div className="overflow-hidden">
-                  <Image
-                    src={dish.image}
-                    placeholder="blur"
-                    blurDataURL={BLUR[dish.slug]}
-                    alt={dish.imageAlt}
-                    width={560}
-                    height={420}
-                    sizes="280px"
-                    className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
-                  />
+              {/* the plate — round crop ringed like the seal, price tag on the rim */}
+              <div className="relative mx-auto w-full">
+                <div className="rounded-full border border-olive/20 bg-cream p-1.5">
+                  <div className="overflow-hidden rounded-full">
+                    <Image
+                      src={dish.image}
+                      placeholder="blur"
+                      blurDataURL={BLUR[dish.slug]}
+                      alt={dish.imageAlt}
+                      width={560}
+                      height={560}
+                      sizes="250px"
+                      className="aspect-square w-full rounded-full object-cover transition-transform duration-500 group-hover:rotate-2 group-hover:scale-[1.05]"
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="mt-3 flex items-start justify-between gap-3">
-                <h3 className="font-display text-xl leading-tight text-ink transition-colors group-hover:text-terracotta">
-                  {dish.name}
-                </h3>
-                <span className="mt-0.5 shrink-0 rounded-full bg-terracotta px-2.5 py-0.5 font-roman text-[0.64rem] tracking-[0.12em] text-cream">
+                <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 rounded-full bg-terracotta px-3 py-1 font-roman text-[0.64rem] tracking-[0.12em] text-cream">
                   {dish.price}
                 </span>
               </div>
+              <h3 className="mt-5 font-display text-xl leading-tight text-ink transition-colors group-hover:text-terracotta">
+                {dish.name}
+              </h3>
               <p className="mt-1 font-roman text-[0.56rem] uppercase tracking-[0.24em] text-olive/55">
                 {dish.category.title}
               </p>
             </Link>
           ))}
 
-          {/* end card — the invitation to keep going */}
+          {/* end plate — the invitation to keep going */}
           <Link
             href="/menu"
-            className="group flex w-[240px] shrink-0 snap-start flex-col items-center justify-center border border-olive/15 text-center sm:w-[280px]"
+            className="group flex w-[220px] shrink-0 snap-start flex-col items-center justify-center pb-4 text-center sm:w-[250px]"
           >
-            <span className="font-display text-2xl text-olive transition-colors group-hover:text-terracotta">
-              The full menu
+            <span className="flex aspect-square w-full flex-col items-center justify-center rounded-full border border-olive/20 transition-colors group-hover:border-olive/40">
+              <span className="font-display text-2xl text-olive transition-colors group-hover:text-terracotta">
+                The full menu
+              </span>
+              <span className="mt-3 h-px w-10 bg-terracotta transition-all group-hover:w-16" />
             </span>
-            <span className="mt-3 h-px w-10 bg-terracotta transition-all group-hover:w-16" />
           </Link>
         </div>
       </Reveal>
