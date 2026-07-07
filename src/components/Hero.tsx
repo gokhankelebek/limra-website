@@ -75,6 +75,39 @@ export default function Hero() {
         <p className="anim-rise delay-5 mt-9 font-roman text-[0.66rem] uppercase tracking-[0.32em] text-terracotta">
           Opening this summer
         </p>
+
+        {/* Mobile: the signature plate right in the hero, peeking into the
+            first screen. Desktop gets the full split-panel version below. */}
+        {heroDish && (
+          <Link
+            href={`/menu/${heroDish.slug}`}
+            className="anim-fade delay-5 group mt-10 block w-full max-w-sm lg:hidden"
+          >
+            <div className="overflow-hidden border border-olive/15 bg-cream p-1.5">
+              <div className="overflow-hidden">
+                <Image
+                  src={heroDish.image}
+                  placeholder="blur"
+                  blurDataURL={BLUR[heroDish.slug]}
+                  alt={heroDish.imageAlt}
+                  width={880}
+                  height={660}
+                  priority
+                  sizes="(max-width: 1023px) 90vw, 1px"
+                  className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                />
+              </div>
+            </div>
+            <div className="mt-3 flex items-baseline justify-between gap-4">
+              <span className="font-display text-xl text-ink transition-colors group-hover:text-terracotta">
+                {heroDish.name}
+              </span>
+              <span className="shrink-0 rounded-full bg-terracotta px-2.5 py-0.5 font-roman text-[0.64rem] tracking-[0.12em] text-cream">
+                {heroDish.price}
+              </span>
+            </div>
+          </Link>
+        )}
       </div>
 
       {/* The signature plate — desktop only; mobile meets the food one
