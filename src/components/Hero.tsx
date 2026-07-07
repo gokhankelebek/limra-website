@@ -81,31 +81,25 @@ export default function Hero() {
         {heroDish && (
           <Link
             href={`/menu/${heroDish.slug}`}
-            className="anim-fade delay-5 group mt-10 block w-full max-w-xs lg:hidden"
+            className="anim-fade delay-5 group relative mt-10 block w-full max-w-sm overflow-hidden rounded-2xl lg:hidden"
           >
-            <div className="rounded-t-full border border-olive/15 bg-cream p-1.5">
-              <div className="overflow-hidden rounded-t-full">
-                <Image
-                  src={heroDish.image}
-                  placeholder="blur"
-                  blurDataURL={BLUR[heroDish.slug]}
-                  alt={heroDish.imageAlt}
-                  width={880}
-                  height={1100}
-                  priority
-                  sizes="(max-width: 1023px) 80vw, 1px"
-                  className="aspect-[4/5] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                />
-              </div>
-            </div>
-            <div className="mt-3 flex items-baseline justify-between gap-4">
-              <span className="font-display text-xl text-ink transition-colors group-hover:text-terracotta">
-                {heroDish.name}
-              </span>
-              <span className="shrink-0 rounded-full bg-terracotta px-2.5 py-0.5 font-roman text-[0.64rem] tracking-[0.12em] text-cream">
-                {heroDish.price}
-              </span>
-            </div>
+            <Image
+              src={heroDish.image}
+              placeholder="blur"
+              blurDataURL={BLUR[heroDish.slug]}
+              alt={heroDish.imageAlt}
+              width={880}
+              height={660}
+              priority
+              sizes="(max-width: 1023px) 90vw, 1px"
+              className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            />
+            <span className="absolute right-3 top-3 rounded-full bg-terracotta px-3 py-1 font-roman text-[0.66rem] tracking-[0.12em] text-cream">
+              {heroDish.price}
+            </span>
+            <span className="absolute bottom-3 left-3 rounded-full bg-cream/90 px-4 py-1.5 font-display text-base text-ink backdrop-blur-sm">
+              {heroDish.name}
+            </span>
           </Link>
         )}
       </div>
@@ -116,35 +110,25 @@ export default function Hero() {
         <div className="hero-chrome relative z-10 hidden items-center justify-center px-12 pb-16 pt-28 lg:flex">
           <Link
             href={`/menu/${heroDish.slug}`}
-            className="group block w-full max-w-md"
+            className="group relative block w-full max-w-lg overflow-hidden rounded-3xl"
           >
-            <div className="relative rounded-t-full border border-olive/15 bg-cream p-2">
-              <div className="overflow-hidden rounded-t-full">
-                <Image
-                  src={heroDish.image}
-                  placeholder="blur"
-                  blurDataURL={BLUR[heroDish.slug]}
-                  alt={heroDish.imageAlt}
-                  width={1320}
-                  height={1650}
-                  priority
-                  sizes="(min-width: 1024px) 40vw, 1px"
-                  className="aspect-[4/5] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                />
-              </div>
-              {/* the house seal, stamped on the threshold */}
-              <span className="absolute -bottom-5 right-8 flex h-12 w-12 items-center justify-center rounded-full border border-olive/20 bg-cream">
-                <Medallion className="h-8 w-8 text-olive" />
-              </span>
-            </div>
-            <div className="mt-6 flex items-baseline justify-between gap-4">
-              <span className="font-display text-2xl text-ink transition-colors group-hover:text-terracotta">
-                {heroDish.name}
-              </span>
-              <span className="shrink-0 rounded-full bg-terracotta px-3 py-1 font-roman text-[0.68rem] tracking-[0.12em] text-cream">
-                {heroDish.price}
-              </span>
-            </div>
+            <Image
+              src={heroDish.image}
+              placeholder="blur"
+              blurDataURL={BLUR[heroDish.slug]}
+              alt={heroDish.imageAlt}
+              width={1320}
+              height={1650}
+              priority
+              sizes="(min-width: 1024px) 42vw, 1px"
+              className="aspect-[4/5] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+            />
+            <span className="absolute right-5 top-5 rounded-full bg-terracotta px-3.5 py-1.5 font-roman text-[0.7rem] tracking-[0.12em] text-cream">
+              {heroDish.price}
+            </span>
+            <span className="absolute bottom-5 left-5 rounded-full bg-cream/90 px-5 py-2 font-display text-xl text-ink backdrop-blur-sm">
+              {heroDish.name}
+            </span>
           </Link>
         </div>
       )}

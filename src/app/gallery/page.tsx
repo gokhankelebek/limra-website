@@ -56,26 +56,26 @@ export default function GalleryPage() {
                 delay={STAGGER[i % STAGGER.length]}
               >
                 <Link href={`/menu/${dish.slug}`} className="group block">
-                  {/* the colonnade — every plate in its own arch */}
-                  <div className="rounded-t-full border border-olive/15 bg-cream p-1.5">
-                    <div className="overflow-hidden rounded-t-full">
-                      <Image
-                        src={dish.image}
-                        placeholder="blur"
-                        blurDataURL={BLUR[dish.slug]}
-                        alt={dish.imageAlt}
-                        width={880}
-                        height={1100}
-                        sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 370px"
-                        className="aspect-[4/5] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                      />
-                    </div>
+                  <div className="relative overflow-hidden rounded-xl">
+                    <Image
+                      src={dish.image}
+                      placeholder="blur"
+                      blurDataURL={BLUR[dish.slug]}
+                      alt={dish.imageAlt}
+                      width={880}
+                      height={660}
+                      sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 370px"
+                      className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                    />
+                    <span className="absolute right-3 top-3 rounded-full bg-terracotta px-3 py-1 font-roman text-[0.64rem] tracking-[0.12em] text-cream">
+                      {dish.price}
+                    </span>
                   </div>
-                  <div className="mt-4 text-center">
+                  <div className="mt-3">
                     <h2 className="font-display text-2xl text-ink transition-colors group-hover:text-terracotta">
                       {dish.name}
                     </h2>
-                    <p className="mt-1 font-roman text-[0.62rem] uppercase tracking-[0.28em] text-olive/55">
+                    <p className="mt-0.5 font-roman text-[0.62rem] uppercase tracking-[0.28em] text-olive/55">
                       {dish.category.title}
                     </p>
                   </div>

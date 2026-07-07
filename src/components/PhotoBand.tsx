@@ -16,29 +16,25 @@ export default function PhotoBand() {
   return (
     <section
       aria-label="From the kitchen"
-      className="grid grid-cols-3 gap-3 bg-cream px-4 py-10 sm:gap-5 sm:px-8 lg:gap-8 lg:px-16 lg:py-14"
+      className="grid grid-cols-3 gap-1 bg-cream"
     >
-      {/* three arched windows — thresholds into the kitchen */}
+      {/* full-bleed, edge to edge — pure appetite */}
       {dishes.map((dish) => (
         <Link
           key={dish.slug}
           href={`/menu/${dish.slug}`}
-          className="group block"
+          className="group block overflow-hidden"
         >
-          <div className="rounded-t-full border border-olive/15 bg-cream p-1 sm:p-1.5">
-            <div className="overflow-hidden rounded-t-full">
-              <Image
-                src={dish.image}
-                placeholder="blur"
-                blurDataURL={BLUR[dish.slug]}
-                alt={dish.imageAlt}
-                width={880}
-                height={1170}
-                sizes="33vw"
-                className="aspect-[3/4] w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-              />
-            </div>
-          </div>
+          <Image
+            src={dish.image}
+            placeholder="blur"
+            blurDataURL={BLUR[dish.slug]}
+            alt={dish.imageAlt}
+            width={880}
+            height={880}
+            sizes="33vw"
+            className="aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-[1.04] md:aspect-[4/3]"
+          />
         </Link>
       ))}
     </section>

@@ -107,25 +107,22 @@ function Dish({
   return (
     <Reveal animation="anim-fade" delay={delay}>
       <Link href={`/menu/${item.slug}`} className="group block">
-        <div
-          className={`overflow-hidden border p-1.5 ${
-            onOlive ? "border-cream/15" : "border-olive/15"
-          }`}
-        >
-          <div className="overflow-hidden">
-            <Image
-              src={item.image}
-              placeholder="blur"
-              blurDataURL={BLUR[item.slug]}
-              alt={item.imageAlt}
-              width={880}
-              height={660}
-              sizes="(max-width: 640px) 90vw, 400px"
-              className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-            />
-          </div>
+        <div className="relative overflow-hidden rounded-xl">
+          <Image
+            src={item.image}
+            placeholder="blur"
+            blurDataURL={BLUR[item.slug]}
+            alt={item.imageAlt}
+            width={880}
+            height={660}
+            sizes="(max-width: 640px) 90vw, 400px"
+            className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+          />
+          <span className="absolute right-3 top-3 rounded-full bg-terracotta px-3 py-1 font-roman text-[0.68rem] tracking-[0.12em] text-cream">
+            {item.price}
+          </span>
         </div>
-        <div className="mt-4 flex items-start justify-between gap-3">
+        <div className="mt-3">
           <h3
             className={`font-display text-2xl leading-tight ${
               onOlive ? "text-cream" : "text-ink"
@@ -137,9 +134,6 @@ function Dish({
           >
             {item.name}
           </h3>
-          <span className="mt-0.5 shrink-0 rounded-full bg-terracotta px-3 py-1 font-roman text-[0.68rem] tracking-[0.12em] text-cream">
-            {item.price}
-          </span>
         </div>
         <p
           className={`mt-2 font-body text-[0.95rem] font-light leading-relaxed ${
