@@ -49,7 +49,7 @@ export default function Hero() {
             </span>
             <Wordmark
               aria-hidden
-              className="w-52 text-olive sm:w-64 lg:w-80"
+              className="mx-auto w-52 text-olive sm:w-64 lg:w-80"
             />
           </span>
         </h1>
