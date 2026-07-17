@@ -23,9 +23,37 @@ export const contentType = "image/png";
 
 const OLIVE = "#2D5B14";
 const CREAM = "#FEEBCB";
+const TERRACOTTA = "#A44D14";
 
-// Built entirely from the official brand vectors — no webfont stand-ins.
-export default function OpenGraphImage() {
+const TAGLINE_TOP = "MEDITERRANEAN RESTAURANT";
+const TAGLINE_BOTTOM = "HOLLY SPRINGS, NC · OPENING SUMMER 2026";
+const TAGLINE = TAGLINE_TOP + TAGLINE_BOTTOM;
+
+// Roman caps for the tagline — fetched per render on the edge; if the fetch
+// fails the line still renders in the default face rather than 500ing.
+async function loadMarcellus(): Promise<ArrayBuffer | null> {
+  try {
+    const css = await (
+      await fetch(
+        `https://fonts.googleapis.com/css2?family=Marcellus&text=${encodeURIComponent(
+          TAGLINE
+        )}`
+      )
+    ).text();
+    const resource = css.match(
+      /src: url\((.+?)\) format\('(?:opentype|truetype)'\)/
+    );
+    if (!resource) return null;
+    const res = await fetch(resource[1]);
+    return res.ok ? await res.arrayBuffer() : null;
+  } catch {
+    return null;
+  }
+}
+
+// Wordmark and seal built entirely from the official brand vectors.
+export default async function OpenGraphImage() {
+  const marcellus = await loadMarcellus();
   return new ImageResponse(
     (
       <div
@@ -68,8 +96,30 @@ export default function OpenGraphImage() {
             <path fillRule="nonzero" d={D_A} />
           </g>
         </svg>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 14,
+            fontFamily: marcellus ? "Marcellus" : undefined,
+            color: TERRACOTTA,
+          }}
+        >
+          <div style={{ display: "flex", fontSize: 24, letterSpacing: 8 }}>
+            {TAGLINE_TOP}
+          </div>
+          <div style={{ display: "flex", fontSize: 20, letterSpacing: 6 }}>
+            {TAGLINE_BOTTOM}
+          </div>
+        </div>
       </div>
     ),
-    size
+    {
+      ...size,
+      fonts: marcellus
+        ? [{ name: "Marcellus", data: marcellus, style: "normal" as const }]
+        : undefined,
+    }
   );
 }

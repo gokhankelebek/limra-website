@@ -29,7 +29,11 @@ export const HOURS = [
   },
 ] as const;
 
-export const HOURS_SUMMARY = "Open daily · 11 am – 9 pm";
+export const HOURS_SUMMARY = "From opening day · 11 am – 9 pm";
+
+// Every "Order online" button points here — swap for the real ordering
+// platform URL the day it exists.
+export const ORDER_URL = "/order";
 
 export const SERVICE_LINE = "Dine-in · Takeout · Delivery";
 

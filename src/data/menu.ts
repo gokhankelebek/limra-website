@@ -1,6 +1,8 @@
 // The real Limra menu — items and photography provided by the owners.
 // PRICES ARE PLACEHOLDERS until Can & Elif confirm the final list.
 
+import { ORDER_URL } from "./contact";
+
 export type DietaryTag = "V" | "VG" | "GF" | "N";
 
 export type MenuItem = {
@@ -11,6 +13,8 @@ export type MenuItem = {
   price: number;
   image: string;
   imageAlt: string;
+  /** art-directed object-position for cropped renders, e.g. "20% 65%" */
+  crop?: string;
   tags?: DietaryTag[];
   /** free-form qualifier, e.g. "GF on request" */
   note?: string;
@@ -22,8 +26,12 @@ export type MenuCategory = {
   /** roman numeral eyebrow — a nod to the ancient city */
   numeral: string;
   title: string;
+  /** short form for the milestone rail and tight indexes */
+  shortLabel: string;
   note: string;
   surface: "cream" | "olive";
+  /** "anticipation" — announced at the threshold, set at opening */
+  kind?: "anticipation";
   items: MenuItem[];
 };
 
@@ -35,7 +43,7 @@ export const menuIntro = {
 
 export const menuClosing = {
   line: "The first tables are set this summer.",
-  primary: { label: "Get opening updates", href: "/updates" },
+  primary: { label: "Order online", href: ORDER_URL },
   secondary: { label: "Plan your visit", href: "/visit" },
 };
 
@@ -44,6 +52,7 @@ export const menu: MenuCategory[] = [
     id: "platters",
     numeral: "I",
     title: "Platters",
+    shortLabel: "Platters",
     note: "Built on rice, carved from the vertical spit.",
     surface: "cream",
     items: [
@@ -56,6 +65,7 @@ export const menu: MenuCategory[] = [
         image: "/menu/limra-platter.jpg",
         imageAlt:
           "Limra Platter — carved döner over rice with salad, grilled tomato and pepper, hummus, and grilled flatbread",
+        crop: "50% 50%",
         featured: true,
       },
       {
@@ -67,6 +77,7 @@ export const menu: MenuCategory[] = [
         image: "/menu/iskender-platter.jpg",
         imageAlt:
           "İskender Platter — sliced döner over cut pide under tomato-butter sauce with strained yogurt, roasted peppers, and pickles",
+        crop: "50% 50%",
       },
     ],
   },
@@ -74,6 +85,7 @@ export const menu: MenuCategory[] = [
     id: "wraps",
     numeral: "II",
     title: "Wraps",
+    shortLabel: "Wraps",
     note: "Rolled to order in warm lavash.",
     surface: "olive",
     items: [
@@ -86,6 +98,7 @@ export const menu: MenuCategory[] = [
         image: "/menu/tantuni-wrap.jpg",
         imageAlt:
           "Tantuni Wrap — chopped seared beef with lettuce, tomato, and red onion rolled in lavash, with two house sauces",
+        crop: "50% 50%",
         featured: true,
       },
       {
@@ -97,6 +110,7 @@ export const menu: MenuCategory[] = [
         image: "/menu/chicken-wrap-antakya.jpg",
         imageAlt:
           "Antakya Chicken Wrap — spit-roasted chicken rolled with fries and pickles in lavash",
+        crop: "50% 50%",
       },
       {
         slug: "medi-wrap",
@@ -107,6 +121,7 @@ export const menu: MenuCategory[] = [
         image: "/menu/medi-wrap.jpg",
         imageAlt:
           "Medi Wrap — beef döner with iceberg and red cabbage in lavash, served with fries and pickles",
+        crop: "50% 50%",
       },
       {
         slug: "vegan-cig-kofte-wrap",
@@ -125,18 +140,20 @@ export const menu: MenuCategory[] = [
     id: "bowls",
     numeral: "III",
     title: "Bowls",
+    shortLabel: "Bowls",
     note: "The whole table, in one bowl.",
     surface: "cream",
     items: [
       {
-        slug: "apendos-bowl",
-        name: "Apendos Bowl",
+        slug: "aspendos-bowl",
+        name: "Aspendos Bowl",
         description:
           "Seared beef strips, rice, hummus, spiced chickpeas, çiğ köfte, yogurt dip, flatbread.",
         price: 15,
-        image: "/menu/apendos-bowl.jpg",
+        image: "/menu/aspendos-bowl.jpg",
         imageAlt:
-          "Apendos Bowl — seared beef strips over rice with hummus, spiced chickpeas, çiğ köfte, and yogurt dip",
+          "Aspendos Bowl — seared beef strips over rice with hummus, spiced chickpeas, çiğ köfte, and yogurt dip",
+        crop: "50% 50%",
         featured: true,
       },
       {
@@ -148,6 +165,7 @@ export const menu: MenuCategory[] = [
         image: "/menu/hummus-bowl.jpg",
         imageAlt:
           "Hummus Bowl — chicken döner over hummus with crisp potatoes, slaw, olives, and crispy onions",
+        crop: "50% 50%",
       },
     ],
   },
@@ -155,6 +173,7 @@ export const menu: MenuCategory[] = [
     id: "from-the-counter",
     numeral: "IV",
     title: "From the Counter",
+    shortLabel: "Counter",
     note: "For one hand, or for the middle of the table.",
     surface: "olive",
     items: [
@@ -167,7 +186,7 @@ export const menu: MenuCategory[] = [
         image: "/menu/limra-loaded-fries.jpg",
         imageAlt:
           "Limra Loaded Fries — fries loaded with chicken döner, crispy onions, herb cream, and roasted pepper sauce",
-        featured: true,
+        crop: "50% 50%",
       },
       {
         slug: "amalfi-melt",
@@ -178,6 +197,8 @@ export const menu: MenuCategory[] = [
         image: "/menu/amalfi-melt.jpg",
         imageAlt:
           "Amalfi Melt — beef döner on a toasted roll with greens, red cabbage, and herb cream, pickles alongside",
+        crop: "50% 50%",
+        featured: true,
       },
       {
         slug: "angora-sandwich",
@@ -198,8 +219,29 @@ export const menu: MenuCategory[] = [
         image: "/menu/medi-taco.jpg",
         imageAlt:
           "Medi Taco — three soft tacos with chicken döner, slaw, tomato, and herb drizzle",
+        crop: "50% 50%",
       },
     ],
+  },
+  {
+    id: "the-case",
+    numeral: "V",
+    title: "The Case",
+    shortLabel: "The Case",
+    note: "Chef Elif's baklava and pastries, made fresh for the case.",
+    surface: "cream",
+    kind: "anticipation",
+    items: [],
+  },
+  {
+    id: "espresso-counter",
+    numeral: "VI",
+    title: "The Espresso Counter",
+    shortLabel: "Espresso",
+    note: "Pulled slow, worth lingering.",
+    surface: "olive",
+    kind: "anticipation",
+    items: [],
   },
 ];
 

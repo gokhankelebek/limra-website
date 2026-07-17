@@ -1,67 +1,50 @@
 "use client";
 
-import { useEffect, useRef, useState, type MouseEvent } from "react";
+import { useEffect, useRef, type MouseEvent } from "react";
+import { glideTo, useScrollSpy } from "@/lib/menu-nav";
 
-type RailItem = { id: string; label: string };
-
-/** weighted glide — easeInOutCubic, duration scaled by distance */
-function glideTo(targetY: number, onDone?: () => void) {
-  const startY = window.scrollY;
-  const dist = targetY - startY;
-  if (Math.abs(dist) < 2) return onDone?.();
-  const duration = Math.min(1100, Math.max(650, Math.abs(dist) * 0.35));
-  const ease = (t: number) =>
-    t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-  let start: number | null = null;
-  const step = (ts: number) => {
-    if (start === null) start = ts;
-    const p = Math.min(1, (ts - start) / duration);
-    window.scrollTo(0, startY + dist * ease(p));
-    if (p < 1) requestAnimationFrame(step);
-    else onDone?.();
-  };
-  requestAnimationFrame(step);
-}
+type RailItem = {
+  id: string;
+  numeral: string;
+  title: string;
+  shortLabel: string;
+};
 
 /**
- * Sticky category rail with scrollspy — anchors to menu sections,
- * marks the section currently in view.
+ * Milestone rail — a slim sticky course marker. The active category's
+ * short name sits at the left; the six numerals wait at the right under
+ * a sliding terracotta underline.
  */
 export default function MenuRail({ items }: { items: RailItem[] }) {
-  const [active, setActive] = useState(items[0]?.id);
-  // while a click-glide is in flight, the scrollspy stays quiet so the
-  // active state doesn't flicker through every category passed en route
-  const gliding = useRef(false);
+  const { active, setActive, gliding } = useScrollSpy(items);
   const navRef = useRef<HTMLElement>(null);
+  const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
+  const barRef = useRef<HTMLSpanElement>(null);
 
+  // Slide the underline to the active numeral. DOM-driven so the CSS
+  // transition carries the motion; re-placed on resize.
   useEffect(() => {
-    const sections = items
-      .map((i) => document.getElementById(i.id))
-      .filter((el): el is HTMLElement => el !== null);
-    if (!sections.length) return;
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (gliding.current) return;
-        // pick the entry nearest the top band of the viewport
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-        if (visible[0]) setActive(visible[0].target.id);
-      },
-      { rootMargin: "-20% 0px -65% 0px" }
-    );
-    sections.forEach((s) => io.observe(s));
-    return () => io.disconnect();
-  }, [items]);
+    const place = () => {
+      const el = active ? linkRefs.current[active] : null;
+      const bar = barRef.current;
+      if (!el || !bar) return;
+      bar.style.left = `${el.offsetLeft}px`;
+      bar.style.width = `${el.offsetWidth}px`;
+      bar.style.opacity = "1";
+    };
+    place();
+    window.addEventListener("resize", place);
+    return () => window.removeEventListener("resize", place);
+  }, [active]);
 
   const handleClick = (id: string) => (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     const el = document.getElementById(id);
     if (!el) return;
     setActive(id);
-    const railHeight = navRef.current?.offsetHeight ?? 56;
-    const targetY = el.getBoundingClientRect().top + window.scrollY - railHeight;
+    const railHeight = navRef.current?.offsetHeight ?? 48;
+    const targetY =
+      el.getBoundingClientRect().top + window.scrollY - railHeight;
     const finish = () => {
       history.replaceState(null, "", `#${id}`);
       gliding.current = false;
@@ -75,38 +58,52 @@ export default function MenuRail({ items }: { items: RailItem[] }) {
     glideTo(targetY, finish);
   };
 
+  const activeItem = items.find((i) => i.id === active);
+
   return (
     <nav
       ref={navRef}
       aria-label="Menu categories"
-      className="sticky top-0 z-30 border-b border-olive/15 bg-cream/90 backdrop-blur"
+      className="sticky top-0 z-30 h-12 border-b border-olive/15 bg-cream/90 backdrop-blur"
     >
-      {/* wraps to two centered rows on phones; single 56px line from sm up */}
-      <div className="flex flex-wrap items-center justify-center gap-x-7 px-4 py-2 sm:h-14 sm:flex-nowrap sm:gap-10 sm:px-6 sm:py-0">
-        {items.map((item) => {
-          const isActive = active === item.id;
-          return (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
-              onClick={handleClick(item.id)}
-              aria-current={isActive ? "true" : undefined}
-              className={`relative shrink-0 whitespace-nowrap py-2 font-roman text-[0.68rem] uppercase tracking-[0.28em] transition-colors ${
-                isActive
-                  ? "text-terracotta"
-                  : "text-olive/55 hover:text-olive"
-              }`}
-            >
-              {item.label}
-              <span
-                aria-hidden
-                className={`absolute -bottom-px left-0 h-px w-full bg-terracotta transition-opacity ${
-                  isActive ? "opacity-100" : "opacity-0"
+      <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-4 sm:px-6">
+        {/* Active course — crossfades on change */}
+        <span
+          key={active}
+          className="label anim-fade font-roman uppercase text-olive"
+          style={{ animationDuration: "300ms" }}
+        >
+          {activeItem?.shortLabel}
+        </span>
+
+        {/* Numerals + sliding underline */}
+        <div className="relative flex items-center gap-5 sm:gap-7">
+          {items.map((item) => {
+            const isActive = active === item.id;
+            return (
+              <a
+                key={item.id}
+                ref={(el) => {
+                  linkRefs.current[item.id] = el;
+                }}
+                href={`#${item.id}`}
+                onClick={handleClick(item.id)}
+                aria-current={isActive ? "true" : undefined}
+                aria-label={item.title}
+                className={`py-3.5 font-roman text-[0.7rem] tracking-[0.2em] transition-colors ${
+                  isActive ? "text-terracotta" : "text-olive/45 hover:text-olive"
                 }`}
-              />
-            </a>
-          );
-        })}
+              >
+                {item.numeral}
+              </a>
+            );
+          })}
+          <span
+            ref={barRef}
+            aria-hidden
+            className="absolute bottom-0 left-0 h-px w-0 bg-terracotta opacity-0 transition-[left,width] duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+          />
+        </div>
       </div>
     </nav>
   );

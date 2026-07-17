@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Reveal from "./Reveal";
-import { ADDRESS_LINES, CONTACT, DIRECTIONS_URL } from "@/data/contact";
+import { ADDRESS_LINES, CONTACT, DIRECTIONS_URL, ORDER_URL } from "@/data/contact";
 
 /**
  * Home-page closing strip — where to find us and the two actions that
@@ -8,9 +8,9 @@ import { ADDRESS_LINES, CONTACT, DIRECTIONS_URL } from "@/data/contact";
  */
 export default function VisitStrip() {
   return (
-    <section className="bg-olive-deep px-6 py-16 text-center text-cream lg:py-20">
+    <section className="frame-inset bg-olive-deep px-6 py-16 text-center text-cream lg:py-20">
       <Reveal className="flex flex-col items-center">
-        <p className="font-roman text-[0.7rem] uppercase tracking-[0.4em] text-terracotta-soft">
+        <p className="eyebrow-lg font-roman uppercase text-terracotta-soft">
           Find us
         </p>
         <a
@@ -33,14 +33,14 @@ export default function VisitStrip() {
         </a>
         <div className="mt-9 flex flex-col items-center gap-4 sm:flex-row">
           <Link
-            href="/updates"
-            className="rounded-full bg-terracotta px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-cream transition-colors hover:bg-terracotta-deep"
+            href={ORDER_URL}
+            className="rounded-[2px] bg-terracotta px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-cream transition-colors hover:bg-terracotta-deep"
           >
-            Get opening updates
+            Order online
           </Link>
           <Link
             href="/visit"
-            className="rounded-full border border-cream/40 px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-cream transition-colors hover:border-cream hover:bg-cream hover:text-olive"
+            className="rounded-[2px] border border-cream/40 px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-cream transition-colors hover:border-cream hover:bg-cream hover:text-olive"
           >
             Plan your visit
           </Link>

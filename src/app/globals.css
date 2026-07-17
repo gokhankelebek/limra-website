@@ -38,9 +38,92 @@ body {
   color: var(--color-cream);
 }
 
+/* Focus — one terracotta ring, offset like an inlay, everywhere */
+:focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 3px;
+}
+
+/* Authored scrollbar — olive thumb on a cream-soft track.
+   scrollbar-color covers Firefox; where the -webkit- pseudos exist
+   (Chromium/Safari) we reset it to auto so the 10px styling rules. */
+html {
+  scrollbar-color: var(--color-olive) var(--color-cream-soft);
+}
+@supports selector(::-webkit-scrollbar) {
+  html {
+    scrollbar-color: auto;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-cream-soft);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-olive);
+  }
+}
+
 /* Roman inscriptional letterspacing for eyebrows / the wordmark */
 .tracking-roman {
   letter-spacing: 0.32em;
+}
+
+/* ------------------------------------------------------------------
+   Typographic scale for roman-face labels — three sizes, no more.
+   eyebrow-lg: page mastheads & section heads
+   label:      card / category sub-labels
+   micro:      tiny meta
+   (font-roman + uppercase stay in the markup.)
+------------------------------------------------------------------ */
+@utility eyebrow-lg {
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+}
+@utility label {
+  font-size: 0.66rem;
+  letter-spacing: 0.28em;
+}
+@utility micro {
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+}
+
+/* Pull-quote — the closing-line voice */
+.pull-quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.875rem;
+  line-height: 1.375;
+}
+@media (min-width: 64rem) {
+  .pull-quote {
+    font-size: 2.25rem;
+  }
+}
+
+/* Inset hairline frame — deep-olive sections read as set stone */
+.frame-inset {
+  position: relative;
+}
+.frame-inset::before {
+  content: "";
+  position: absolute;
+  inset: 1.5rem;
+  border: 1px solid color-mix(in oklab, var(--color-cream) 10%, transparent);
+  pointer-events: none;
+}
+
+/* Map tint — pull Google's palette toward ours, keep it legible */
+.map-tint {
+  filter: grayscale(20%) sepia(18%) hue-rotate(50deg) opacity(90%);
+}
+
+/* Photo grade — pulls the cool gray-wood photography toward the cream
+   palette so all twelve frames read as one commission. */
+.photo-grade {
+  filter: sepia(0.12) saturate(0.9) contrast(1.03) brightness(1.02);
 }
 
 /* ------------------------------------------------------------------
@@ -83,13 +166,48 @@ body {
   }
 }
 
+@keyframes limra-rise-lg {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes limra-unveil {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
 .anim-rise {
   opacity: 0;
   animation: limra-rise 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+/* Weight-scaled rise: headlines travel further and slower… */
+.anim-rise-lg {
+  opacity: 0;
+  animation: limra-rise-lg 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+/* …hairlines and small furniture settle quickest */
+.anim-rise-sm {
+  opacity: 0;
+  animation: limra-rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
 .anim-fade {
   opacity: 0;
   animation: limra-fade 0.7s ease forwards;
+}
+/* Image reveal — a curtain lift, top edge first */
+.anim-unveil {
+  clip-path: inset(0 0 100% 0);
+  animation: limra-unveil 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 .anim-seal {
   opacity: 0;
@@ -103,6 +221,56 @@ body {
 .delay-3 { animation-delay: 0.22s; }
 .delay-4 { animation-delay: 0.32s; }
 .delay-5 { animation-delay: 0.44s; }
+
+/* Divider draw — hairlines grow from their origin (set in markup) once
+   the Reveal wrapper gains its anim-* class; marks fade a beat earlier.
+   Also carries the menu leaders (opacity keeps its own hover ease). */
+@media (prefers-reduced-motion: no-preference) {
+  .divider-draw .divider-line {
+    transform: scaleX(0);
+    transition:
+      transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.25s,
+      opacity 0.3s ease;
+  }
+  .divider-draw .divider-mark {
+    opacity: 0;
+    transition: opacity 0.5s ease 0.05s;
+  }
+  .anim-rise .divider-line,
+  .anim-rise-lg .divider-line,
+  .anim-fade .divider-line {
+    transform: scaleX(1);
+  }
+  .anim-rise .divider-mark,
+  .anim-rise-lg .divider-mark,
+  .anim-fade .divider-mark {
+    opacity: 1;
+  }
+
+  /* Vertical plumb-line draw — same contract as divider-draw */
+  .line-draw-y {
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+  }
+  .anim-rise .line-draw-y,
+  .anim-rise-lg .line-draw-y,
+  .anim-fade .line-draw-y {
+    transform: scaleY(1);
+  }
+
+  /* Gated stagger — items fade once the Reveal wrapper arrives;
+     per-item delay set inline */
+  .stagger-fade .stagger-item {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  .anim-rise .stagger-item,
+  .anim-rise-lg .stagger-item,
+  .anim-fade .stagger-item {
+    opacity: 1;
+  }
+}
 
 /* Medallion ring stroke-draw */
 .seal-ring {
@@ -121,13 +289,17 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .anim-rise,
+  .anim-rise-lg,
+  .anim-rise-sm,
   .anim-fade,
+  .anim-unveil,
   .anim-seal,
   .seal-ring,
   .seal-sweep {
     animation: none;
     opacity: 1;
     transform: none;
+    clip-path: none;
     stroke-dashoffset: 0;
   }
 }
@@ -142,7 +314,10 @@ html.intro-pending {
   overflow: hidden;
 }
 .intro-pending main .anim-rise,
+.intro-pending main .anim-rise-lg,
+.intro-pending main .anim-rise-sm,
 .intro-pending main .anim-fade,
+.intro-pending main .anim-unveil,
 .intro-pending main .anim-seal,
 .intro-pending main .seal-ring,
 .intro-pending main .seal-sweep {

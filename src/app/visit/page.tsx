@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Medallion from "@/components/Medallion";
 import Reveal from "@/components/Reveal";
 import SiteFooter from "@/components/SiteFooter";
@@ -15,10 +14,10 @@ import {
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Visit Limra | Mediterranean Restaurant in Holly Springs, NC",
+    absolute: "Visit Limra — Mediterranean Restaurant in Holly Springs, NC",
   },
   description:
-    "Find Limra at 3109 McChesney Hill Loop, Holly Springs, NC 27539. Directions, contact, and reservations for a modern Mediterranean table.",
+    "Find Limra at 3109 McChesney Hill Loop, Holly Springs, NC 27539. Directions, hours, and contact — counter service, no reservations needed.",
   alternates: { canonical: "/visit" },
 };
 
@@ -33,11 +32,11 @@ export default function VisitPage() {
             <Medallion className="h-14 w-14" />
           </Reveal>
           <Reveal delay="delay-2">
-            <p className="mt-8 font-roman text-[0.7rem] uppercase tracking-[0.42em] text-terracotta">
+            <p className="eyebrow-lg mt-8 font-roman uppercase text-terracotta">
               Find us
             </p>
           </Reveal>
-          <Reveal delay="delay-3">
+          <Reveal animation="anim-rise-lg" delay="delay-3">
             <h1 className="mt-5 font-display text-6xl font-medium lg:text-7xl">
               Visit
             </h1>
@@ -64,7 +63,7 @@ export default function VisitPage() {
                 <br />
                 {ADDRESS_LINES[1]}
               </p>
-              <span className="mt-4 inline-flex items-center gap-3 font-roman text-[0.7rem] uppercase tracking-[0.24em] text-terracotta">
+              <span className="label mt-4 inline-flex items-center gap-3 font-roman uppercase text-terracotta">
                 Get directions
                 <span className="h-px w-10 bg-current transition-all group-hover:w-14" />
               </span>
@@ -83,8 +82,8 @@ export default function VisitPage() {
         {/* Hours */}
         <section className="px-6 pb-20">
           <Reveal className="mx-auto max-w-md text-center">
-            <p className="font-roman text-[0.7rem] uppercase tracking-[0.4em] text-terracotta">
-              Hours
+            <p className="eyebrow-lg font-roman uppercase text-terracotta">
+              Hours, from opening day
             </p>
             <div className="mt-7">
               {HOURS.map((h) => (
@@ -101,7 +100,7 @@ export default function VisitPage() {
                 </div>
               ))}
             </div>
-            <p className="mt-6 font-roman text-[0.66rem] uppercase tracking-[0.24em] text-olive/60">
+            <p className="label mt-6 font-roman uppercase text-olive/60">
               {SERVICE_LINE}
             </p>
             <p className="mt-4 font-body text-sm font-light italic text-ink/50">
@@ -116,7 +115,7 @@ export default function VisitPage() {
             <iframe
               title="Map to Limra Mediterranean Restaurant"
               src={MAP_EMBED_URL}
-              className="h-[420px] w-full border-0 grayscale-[35%]"
+              className="map-tint h-[420px] w-full border-0"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               allowFullScreen
@@ -125,26 +124,20 @@ export default function VisitPage() {
         </section>
 
         {/* Closing CTA */}
-        <section className="bg-olive-deep px-6 py-16 text-center text-cream lg:py-20">
+        <section className="frame-inset bg-olive-deep px-6 py-16 text-center text-cream lg:py-20">
           <Reveal className="flex flex-col items-center">
             <Medallion variant="seal" className="h-16 w-16 text-cream" />
-            <p className="mt-7 max-w-md font-body text-xl font-light italic leading-relaxed text-cream/80">
-              The table is set when you are.
+            <p className="pull-quote mt-7 max-w-md text-cream/80">
+              The doors open this summer. The directions already work.
             </p>
             <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row">
               <a
                 href={DIRECTIONS_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-full bg-terracotta px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-cream transition-colors hover:bg-terracotta-deep"
+                className="rounded-[2px] bg-terracotta px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-cream transition-colors hover:bg-terracotta-deep"
               >
                 Get directions
-              </a>
-              <a
-                href={CONTACT.phoneHref}
-                className="rounded-full border border-cream/40 px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-cream transition-colors hover:border-cream hover:bg-cream hover:text-olive"
-              >
-                Call us
               </a>
             </div>
           </Reveal>

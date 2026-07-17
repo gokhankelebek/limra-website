@@ -53,14 +53,14 @@ export default function NotifyForm() {
               href={s.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full border border-olive/40 px-6 py-2.5 font-roman text-[0.7rem] uppercase tracking-[0.18em] text-olive transition-colors hover:border-olive hover:bg-olive hover:text-cream"
+              className="rounded-[2px] border border-olive/40 px-6 py-2.5 font-roman text-[0.7rem] uppercase tracking-[0.18em] text-olive transition-colors hover:border-olive hover:bg-olive hover:text-cream"
             >
               {s.label}
             </a>
           ))}
           <a
             href={CONTACT.phoneHref}
-            className="rounded-full bg-terracotta px-6 py-2.5 font-roman text-[0.7rem] uppercase tracking-[0.18em] text-cream transition-colors hover:bg-terracotta-deep"
+            className="rounded-[2px] bg-terracotta px-6 py-2.5 font-roman text-[0.7rem] uppercase tracking-[0.18em] text-cream transition-colors hover:bg-terracotta-deep"
           >
             Call us
           </a>
@@ -100,12 +100,12 @@ export default function NotifyForm() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="your@email.com"
           aria-label="Email address"
-          className="flex-1 border-b border-olive/30 bg-transparent px-1 py-3 font-body text-lg font-light text-ink placeholder:text-ink/35 focus:border-olive focus:outline-none"
+          className="flex-1 border-b border-olive/30 bg-transparent px-1 py-3 font-body text-lg font-light text-ink placeholder:text-ink/35 focus:border-olive"
         />
         <button
           type="submit"
           disabled={status === "sending"}
-          className="shrink-0 rounded-full bg-terracotta px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-cream transition-colors hover:bg-terracotta-deep disabled:opacity-60"
+          className="shrink-0 rounded-[2px] bg-terracotta px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-cream transition-colors hover:bg-terracotta-deep disabled:opacity-60"
         >
           {status === "sending" ? "One moment" : "Notify me"}
         </button>

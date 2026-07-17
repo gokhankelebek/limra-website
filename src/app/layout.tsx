@@ -73,7 +73,7 @@ const RESTAURANT_SCHEMA = {
   image: `${SITE_URL}/opengraph-image`,
   servesCuisine: "Mediterranean",
   slogan: "A modern Mediterranean table, named for an ancient city.",
-  acceptsReservations: "True",
+  acceptsReservations: "False",
   hasMenu: `${SITE_URL}/menu`,
   telephone: "+1-984-999-5388",
   priceRange: "$$",

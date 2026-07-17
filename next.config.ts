@@ -6,6 +6,16 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: __dirname,
   },
+  async redirects() {
+    return [
+      // The bowl was briefly published under a misspelled slug.
+      {
+        source: "/menu/apendos-bowl",
+        destination: "/menu/aspendos-bowl",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

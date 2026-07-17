@@ -8,7 +8,7 @@ import SiteHeader from "@/components/SiteHeader";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Opening Updates | Limra Mediterranean — Holly Springs, NC",
+    absolute: "Opening Updates — Limra Mediterranean · Holly Springs, NC",
   },
   description:
     "Limra opens this summer in Holly Springs, NC. Leave your email for a quiet note when the doors open — and an invitation to the soft-opening tasting.",
@@ -26,19 +26,25 @@ export default function UpdatesPage() {
             <Medallion animate variant="seal" className="h-16 w-16" />
           </Reveal>
           <Reveal delay="delay-2">
-            <p className="mt-8 font-roman text-[0.7rem] uppercase tracking-[0.42em] text-terracotta">
+            <p className="eyebrow-lg mt-8 font-roman uppercase text-terracotta">
               Opening this summer
             </p>
           </Reveal>
-          <Reveal delay="delay-3">
+          <Reveal animation="anim-rise-lg" delay="delay-3">
             <h1 className="mt-5 font-display text-6xl font-medium lg:text-7xl">
               Be among the first
             </h1>
           </Reveal>
           <Reveal delay="delay-4">
             <p className="mx-auto mt-6 max-w-md font-body text-lg font-light italic leading-relaxed text-ink/70">
-              A quiet note when the doors open — and an invitation to the
-              soft-opening tasting.
+              The soft-opening tasting is invitation-only. Invitations come
+              from this list — then a quiet note when the doors open.
+            </p>
+          </Reveal>
+          <Reveal delay="delay-5">
+            <p className="mx-auto mt-4 max-w-md font-body text-sm font-light leading-relaxed text-ink/55">
+              Online ordering and reservations open with the doors. The list
+              hears first.
             </p>
           </Reveal>
         </div>
@@ -51,22 +57,22 @@ export default function UpdatesPage() {
         </section>
 
         {/* While you wait */}
-        <section className="bg-olive-deep px-6 py-16 text-center text-cream lg:py-20">
+        <section className="frame-inset bg-olive-deep px-6 py-16 text-center text-cream lg:py-20">
           <Reveal className="flex flex-col items-center">
             <Medallion className="h-14 w-14 text-cream" />
-            <p className="mt-7 max-w-md font-body text-xl font-light italic leading-relaxed text-cream/80">
-              While you wait, the table is already set.
+            <p className="pull-quote mt-7 max-w-md text-cream/80">
+              The wait is short. The story is long.
             </p>
             <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row">
               <Link
                 href="/menu"
-                className="rounded-full bg-terracotta px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-cream transition-colors hover:bg-terracotta-deep"
+                className="rounded-[2px] bg-terracotta px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-cream transition-colors hover:bg-terracotta-deep"
               >
                 See the menu
               </Link>
               <Link
                 href="/story"
-                className="rounded-full border border-cream/40 px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-cream transition-colors hover:border-cream hover:bg-cream hover:text-olive"
+                className="rounded-[2px] border border-cream/40 px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-cream transition-colors hover:border-cream hover:bg-cream hover:text-olive"
               >
                 Read our story
               </Link>

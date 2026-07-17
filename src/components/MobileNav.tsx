@@ -10,10 +10,9 @@ const LINKS = [
   { label: "Story", href: "/story" },
   { label: "Gallery", href: "/gallery" },
   { label: "Visit", href: "/visit" },
-  { label: "Updates", href: "/updates" },
 ];
 
-const NUMERALS = ["I", "II", "III", "IV", "V"];
+const NUMERALS = ["I", "II", "III", "IV"];
 
 /**
  * Phone navigation — a full-screen olive overlay in the brand's ceremonial
@@ -79,7 +78,7 @@ export default function MobileNav() {
                 className="anim-rise group flex items-baseline gap-5"
                 style={{ animationDelay: `${0.08 + i * 0.07}s` }}
               >
-                <span className="w-7 shrink-0 font-roman text-[0.62rem] uppercase tracking-[0.24em] text-terracotta-soft">
+                <span className="micro w-7 shrink-0 font-roman uppercase text-terracotta-soft">
                   {NUMERALS[i]}
                 </span>
                 <span className="font-display text-4xl font-medium leading-none text-cream transition-colors group-hover:text-terracotta-soft">

@@ -13,7 +13,7 @@ export default function Reveal({
   className,
 }: {
   children: ReactNode;
-  animation?: "anim-rise" | "anim-fade";
+  animation?: "anim-rise" | "anim-rise-lg" | "anim-rise-sm" | "anim-fade" | "anim-unveil";
   delay?: "delay-1" | "delay-2" | "delay-3" | "delay-4" | "delay-5";
   className?: string;
 }) {

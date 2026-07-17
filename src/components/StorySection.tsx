@@ -1,51 +1,51 @@
+import Image from "next/image";
 import Link from "next/link";
-import Medallion from "./Medallion";
-import ScrollRotate from "./ScrollRotate";
 
 export default function StorySection() {
   return (
-    <section className="relative overflow-hidden bg-olive-deep text-cream">
+    <section className="relative overflow-hidden border-y border-olive/10 bg-cream-soft">
+      {/* The city itself — ink-and-wash Limyra, subject right, text left */}
+      <Image
+        src="/limra-city.jpg"
+        alt="The rock-cut tombs of ancient Limyra, drawn in ink and wash"
+        fill
+        sizes="100vw"
+        className="object-cover object-[72%_35%]"
+      />
+      {/* Parchment wash keeps the reading column clean */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 overflow-hidden opacity-[0.06]"
-      >
-        <div className="wm-80 absolute -left-32 -top-32">
-          <ScrollRotate speed={-0.015} className="h-full w-full">
-            <Medallion className="h-full w-full text-cream" />
-          </ScrollRotate>
-        </div>
-      </div>
+        className="absolute inset-0 bg-gradient-to-r from-cream-soft via-cream-soft/80 to-cream-soft/10"
+      />
 
-      <div className="relative mx-auto grid max-w-6xl gap-14 px-6 py-28 lg:grid-cols-2 lg:items-center lg:gap-20 lg:px-10 lg:py-36">
-        <div>
-          <p className="font-roman text-[0.7rem] uppercase tracking-[0.4em] text-terracotta-soft">
+      <div className="relative mx-auto max-w-6xl px-6 py-28 lg:px-10 lg:py-36">
+        <div className="max-w-md">
+          <p className="eyebrow-lg font-roman uppercase text-terracotta">
             The name
           </p>
-          <h2 className="mt-6 font-display text-5xl font-medium leading-[1.05] text-cream lg:text-6xl">
+          <h2 className="mt-6 font-display text-5xl font-medium leading-[1.05] text-olive lg:text-6xl">
             An ancient city,
             <br />
             a modern table.
           </h2>
-          <p className="mt-7 max-w-md font-body text-lg font-light leading-relaxed text-cream/75">
+          <p className="mt-7 font-body text-lg font-light leading-relaxed text-ink/75">
             Limyra rose in stone on the Mediterranean coast — a city built for
-            gathering, trade, and the long ritual of a shared meal. We borrow its
-            name and its rhythm: honest ingredients, open fire, and a room made
-            for lingering.
+            gathering, trade, and the long ritual of a shared meal. We borrow
+            its name and its rhythm: honest ingredients, open fire, and a room
+            made for lingering.
+          </p>
+          <p className="mt-5 font-body text-lg font-light leading-relaxed text-ink/75">
+            It is kept by Can and Elif Engin — two chefs, fifteen years of
+            professional kitchens between them, and a food truck whose line
+            kept growing until it needed a room.
           </p>
           <Link
             href="/story"
-            className="group mt-9 inline-flex items-center gap-3 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-cream transition-colors hover:text-terracotta-soft"
+            className="group mt-9 inline-flex items-center gap-3 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-olive transition-colors hover:text-terracotta"
           >
             Read the story
             <span className="h-px w-10 bg-current transition-all group-hover:w-14" />
           </Link>
-        </div>
-
-        <div className="flex justify-center lg:justify-end">
-          <Medallion
-            className="h-64 w-64 text-cream/90 lg:h-80 lg:w-80"
-            title="Limra meander seal"
-          />
         </div>
       </div>
     </section>

@@ -10,7 +10,7 @@ import { BLUR } from "@/data/menu-blur";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Gallery | Limra Mediterranean — Holly Springs, NC",
+    absolute: "Gallery — Limra Mediterranean · Holly Springs, NC",
   },
   description:
     "The plates of Limra, photographed as they leave the pass — döner platters, wraps, bowls, and more from the modern Mediterranean table in Holly Springs.",
@@ -30,11 +30,11 @@ export default function GalleryPage() {
             <Medallion className="h-14 w-14" />
           </Reveal>
           <Reveal delay="delay-2">
-            <p className="mt-8 font-roman text-[0.7rem] uppercase tracking-[0.42em] text-terracotta">
+            <p className="eyebrow-lg mt-8 font-roman uppercase text-terracotta">
               The Plates
             </p>
           </Reveal>
-          <Reveal delay="delay-3">
+          <Reveal animation="anim-rise-lg" delay="delay-3">
             <h1 className="mt-5 font-display text-6xl font-medium lg:text-7xl">
               Gallery
             </h1>
@@ -56,7 +56,7 @@ export default function GalleryPage() {
                 delay={STAGGER[i % STAGGER.length]}
               >
                 <Link href={`/menu/${dish.slug}`} className="group block">
-                  <div className="relative overflow-hidden rounded-xl">
+                  <div className="relative overflow-hidden rounded-[2px]">
                     <Image
                       src={dish.image}
                       placeholder="blur"
@@ -65,17 +65,15 @@ export default function GalleryPage() {
                       width={880}
                       height={660}
                       sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 370px"
-                      className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                      className="aspect-[4/3] w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
+                      style={dish.crop ? { objectPosition: dish.crop } : undefined}
                     />
-                    <span className="absolute right-3 top-3 rounded-full bg-terracotta px-3 py-1 font-roman text-[0.64rem] tracking-[0.12em] text-cream">
-                      {dish.price}
-                    </span>
                   </div>
                   <div className="mt-3">
                     <h2 className="font-display text-2xl text-ink transition-colors group-hover:text-terracotta">
                       {dish.name}
                     </h2>
-                    <p className="mt-0.5 font-roman text-[0.62rem] uppercase tracking-[0.28em] text-olive/55">
+                    <p className="label mt-0.5 font-roman uppercase text-olive/55">
                       {dish.category.title}
                     </p>
                   </div>
@@ -86,24 +84,18 @@ export default function GalleryPage() {
         </section>
 
         {/* Closing */}
-        <section className="bg-olive-deep px-6 py-16 text-center text-cream lg:py-20">
+        <section className="frame-inset bg-olive-deep px-6 py-16 text-center text-cream lg:py-20">
           <Reveal className="flex flex-col items-center">
             <Medallion variant="seal" className="h-16 w-16 text-cream" />
-            <p className="mt-7 max-w-md font-body text-xl font-light italic leading-relaxed text-cream/80">
+            <p className="pull-quote mt-7 max-w-md text-cream/80">
               Better in person.
             </p>
             <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row">
               <Link
                 href="/menu"
-                className="rounded-full bg-terracotta px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-cream transition-colors hover:bg-terracotta-deep"
+                className="rounded-[2px] bg-terracotta px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-cream transition-colors hover:bg-terracotta-deep"
               >
                 View the menu
-              </Link>
-              <Link
-                href="/visit"
-                className="rounded-full border border-cream/40 px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-cream transition-colors hover:border-cream hover:bg-cream hover:text-olive"
-              >
-                Plan your visit
               </Link>
             </div>
           </Reveal>

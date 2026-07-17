@@ -2,6 +2,7 @@ import Link from "next/link";
 import Medallion from "./Medallion";
 import MobileNav from "./MobileNav";
 import Wordmark from "./Wordmark";
+import { ORDER_URL } from "@/data/contact";
 
 const NAV = [
   { label: "Menu", href: "/menu" },
@@ -15,7 +16,7 @@ export default function SiteHeader() {
     <header className="absolute inset-x-0 top-0 z-40">
       <a
         href="#main"
-        className="sr-only z-[70] rounded-full bg-olive px-5 py-2 font-roman text-[0.7rem] uppercase tracking-[0.18em] text-cream focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+        className="sr-only z-[70] rounded-[2px] bg-olive px-5 py-2 font-roman text-[0.7rem] uppercase tracking-[0.18em] text-cream focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
       >
         Skip to content
       </a>
@@ -43,10 +44,10 @@ export default function SiteHeader() {
         {/* Actions */}
         <div className="flex items-center gap-3">
           <Link
-            href="/updates"
-            className="rounded-full border border-olive px-5 py-2 font-roman text-[0.72rem] uppercase tracking-[0.18em] text-olive transition-colors hover:bg-olive hover:text-cream"
+            href={ORDER_URL}
+            className="whitespace-nowrap rounded-[2px] border border-olive px-4 py-2 font-roman text-[0.72rem] uppercase tracking-[0.18em] text-olive transition-colors hover:bg-olive hover:text-cream sm:px-5"
           >
-            Updates
+            Order online
           </Link>
           <MobileNav />
         </div>

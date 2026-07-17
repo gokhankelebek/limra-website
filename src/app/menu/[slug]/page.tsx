@@ -6,6 +6,7 @@ import JsonLd from "@/components/JsonLd";
 import Reveal from "@/components/Reveal";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
+import { ORDER_URL } from "@/data/contact";
 import { allDishes, findDish } from "@/data/menu";
 import { BLUR } from "@/data/menu-blur";
 import { SITE_URL } from "@/lib/site";
@@ -23,7 +24,7 @@ export async function generateMetadata({
   const dish = findDish(slug);
   if (!dish) return { title: "Menu" };
   return {
-    title: { absolute: `${dish.name} | Limra Mediterranean — Holly Springs, NC` },
+    title: { absolute: `${dish.name} — Limra Mediterranean · Holly Springs, NC` },
     description: dish.description,
     alternates: { canonical: `/menu/${dish.slug}` },
     openGraph: {
@@ -62,11 +63,6 @@ export default async function DishPage({
     description: dish.description,
     image: `${SITE_URL}${dish.image}`,
     url: `${SITE_URL}/menu/${dish.slug}`,
-    offers: {
-      "@type": "Offer",
-      price: dish.price.toFixed(2),
-      priceCurrency: "USD",
-    },
   };
 
   const tagParts = [
@@ -83,7 +79,7 @@ export default async function DishPage({
           {/* Masthead */}
           <div className="text-center text-olive">
             <Reveal delay="delay-1">
-              <p className="font-roman text-[0.7rem] uppercase tracking-[0.42em] text-terracotta">
+              <p className="eyebrow-lg font-roman uppercase text-terracotta">
                 {dish.category.title}
               </p>
             </Reveal>
@@ -97,44 +93,48 @@ export default async function DishPage({
                 {dish.description}
               </p>
             </Reveal>
-            <Reveal delay="delay-4">
-              <p className="mt-5 font-roman text-lg tracking-[0.12em] text-olive/80">
-                {dish.price}
-              </p>
-              {tagParts.length > 0 && (
-                <p className="mt-2 font-roman text-[0.62rem] uppercase tracking-[0.3em] text-olive/50">
+            {tagParts.length > 0 && (
+              <Reveal delay="delay-4">
+                <p className="micro mt-5 font-roman uppercase text-olive/50">
                   {tagParts.join(" · ")}
                 </p>
-              )}
-            </Reveal>
+              </Reveal>
+            )}
           </div>
 
-          {/* Photo — big, clean, edge to edge inside soft corners */}
-          <Reveal delay="delay-4" className="mt-12 overflow-hidden rounded-3xl">
-            <Image
-              src={dish.image}
-              placeholder="blur"
-              blurDataURL={BLUR[dish.slug]}
-              alt={dish.imageAlt}
-              width={1320}
-              height={990}
-              priority
-              sizes="(max-width: 768px) 100vw, 720px"
-              className="aspect-[4/3] w-full object-cover"
-            />
+          {/* Photo — a matted plaque, same hanging as the hero and menu */}
+          <Reveal
+            animation="anim-unveil"
+            delay="delay-4"
+            className="mt-12 border border-olive/20 bg-cream-soft p-2"
+          >
+            <div className="overflow-hidden">
+              <Image
+                src={dish.image}
+                placeholder="blur"
+                blurDataURL={BLUR[dish.slug]}
+                alt={dish.imageAlt}
+                width={1320}
+                height={990}
+                priority
+                sizes="(max-width: 768px) 100vw, 720px"
+                className="aspect-[4/3] w-full object-cover"
+                style={dish.crop ? { objectPosition: dish.crop } : undefined}
+              />
+            </div>
           </Reveal>
 
           {/* Actions */}
           <Reveal className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link
-              href="/updates"
-              className="rounded-full bg-terracotta px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-cream transition-colors hover:bg-terracotta-deep"
+              href={ORDER_URL}
+              className="rounded-[2px] bg-terracotta px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-cream transition-colors hover:bg-terracotta-deep"
             >
-              Get opening updates
+              Order online
             </Link>
             <Link
               href="/menu"
-              className="rounded-full border border-olive/40 px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-olive transition-colors hover:border-olive hover:bg-olive hover:text-cream"
+              className="rounded-[2px] border border-olive/40 px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-olive transition-colors hover:border-olive hover:bg-olive hover:text-cream"
             >
               Full menu
             </Link>
@@ -144,7 +144,7 @@ export default async function DishPage({
           {siblings.length > 0 && (
             <section className="mt-20 border-t border-olive/15 pt-12">
               <Reveal className="text-center">
-                <p className="font-roman text-[0.65rem] uppercase tracking-[0.4em] text-terracotta">
+                <p className="eyebrow-lg font-roman uppercase text-terracotta">
                   More from {dish.category.title}
                 </p>
               </Reveal>
@@ -156,8 +156,9 @@ export default async function DishPage({
                     delay={(["delay-1", "delay-2", "delay-3"] as const)[i]}
                   >
                     <Link href={`/menu/${sib.slug}`} className="group block">
-                      <div className="overflow-hidden rounded-xl">
-                        <Image
+                      <div className="border border-olive/20 bg-cream-soft p-1.5">
+                        <div className="overflow-hidden">
+                          <Image
                           src={sib.image}
                           placeholder="blur"
                           blurDataURL={BLUR[sib.slug]}
@@ -165,17 +166,14 @@ export default async function DishPage({
                           width={440}
                           height={330}
                           sizes="(max-width: 640px) 90vw, 220px"
-                          className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                          className="aspect-[4/3] w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.03]"
+                          style={sib.crop ? { objectPosition: sib.crop } : undefined}
                         />
+                        </div>
                       </div>
-                      <div className="mt-3 flex items-baseline justify-between gap-3">
-                        <h3 className="font-display text-xl text-ink transition-colors group-hover:text-terracotta">
-                          {sib.name}
-                        </h3>
-                        <p className="shrink-0 font-roman text-sm tracking-[0.12em] text-olive/70">
-                          {sib.price}
-                        </p>
-                      </div>
+                      <h3 className="mt-3 font-display text-xl text-ink transition-colors group-hover:text-terracotta">
+                        {sib.name}
+                      </h3>
                     </Link>
                   </Reveal>
                 ))}

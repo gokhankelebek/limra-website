@@ -84,14 +84,14 @@ export default function AskLimra() {
   }
 
   return (
-    <div className="fixed bottom-5 right-5 z-30">
+    <div className="fixed bottom-4 right-4 z-40 sm:bottom-5 sm:right-5">
       {open && (
-        <div className="mb-3 flex max-h-[70vh] w-[min(92vw,380px)] flex-col overflow-hidden rounded-2xl border border-olive/20 bg-cream">
+        <div className="mb-3 flex max-h-[70vh] w-[min(92vw,380px)] flex-col overflow-hidden rounded-[3px] border border-olive/20 bg-cream">
           {/* Header */}
           <div className="flex items-center gap-3 bg-olive-deep px-4 py-3 text-cream">
             <Medallion variant="seal" className="h-8 w-8 text-cream" />
             <div className="min-w-0 flex-1">
-              <p className="font-roman text-[0.72rem] uppercase tracking-[0.22em]">
+              <p className="label font-roman uppercase">
                 Ask Limra
               </p>
               <p className="truncate font-body text-xs font-light text-cream/60">
@@ -124,7 +124,7 @@ export default function AskLimra() {
                       key={s}
                       type="button"
                       onClick={() => send(s)}
-                      className="rounded-full border border-olive/30 px-3.5 py-1.5 font-body text-sm font-light text-olive transition-colors hover:border-olive hover:bg-olive hover:text-cream"
+                      className="rounded-[2px] border border-olive/30 px-3.5 py-1.5 font-body text-sm font-light text-olive transition-colors hover:border-olive hover:bg-olive hover:text-cream"
                     >
                       {s}
                     </button>
@@ -137,7 +137,7 @@ export default function AskLimra() {
                   t.role === "user" ? (
                     <p
                       key={i}
-                      className="ml-8 rounded-2xl rounded-br-sm bg-olive px-4 py-2.5 font-body text-sm font-light leading-relaxed text-cream"
+                      className="ml-8 rounded-[3px] bg-olive px-4 py-2.5 font-body text-sm font-light leading-relaxed text-cream"
                     >
                       {t.content}
                     </p>
@@ -170,12 +170,12 @@ export default function AskLimra() {
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ask about the menu…"
               aria-label="Your question"
-              className="flex-1 bg-transparent px-2 py-1.5 font-body text-sm font-light text-ink placeholder:text-ink/35 focus:outline-none"
+              className="flex-1 bg-transparent px-2 py-1.5 font-body text-sm font-light text-ink placeholder:text-ink/35"
             />
             <button
               type="submit"
               disabled={busy || !input.trim()}
-              className="rounded-full bg-terracotta px-4 py-2 font-roman text-[0.62rem] uppercase tracking-[0.16em] text-cream transition-colors hover:bg-terracotta-deep disabled:opacity-50"
+              className="rounded-[2px] bg-terracotta px-4 py-2 font-roman text-[0.62rem] uppercase tracking-[0.16em] text-cream transition-colors hover:bg-terracotta-deep disabled:opacity-50"
             >
               Ask
             </button>
@@ -189,9 +189,9 @@ export default function AskLimra() {
         aria-label={open ? "Close Ask Limra" : "Open Ask Limra"}
         aria-expanded={open}
         onClick={() => setOpen(!open)}
-        className="ml-auto flex h-14 w-14 items-center justify-center rounded-full bg-olive text-cream ring-1 ring-cream/40 transition-colors hover:bg-olive-deep"
+        className="ml-auto flex h-12 w-12 items-center justify-center rounded-full bg-cream text-olive shadow-[0_2px_12px_rgba(26,26,23,0.18)] transition-colors hover:bg-cream-deep sm:h-14 sm:w-14"
       >
-        <Medallion className="h-9 w-9" title="Ask Limra" />
+        <Medallion className="h-8 w-8 sm:h-9 sm:w-9" title="Ask Limra" />
       </button>
     </div>
   );
