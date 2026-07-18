@@ -239,23 +239,18 @@ function Threshold({
 }) {
   return (
     <Reveal className="relative text-center">
-      {/* Ghost numeral sits behind the title, clear of the plumb line
-          above it — the line is h-16, so the watermark starts below that. */}
+      {/* Ghost numeral, centred behind the title. */}
       <span
         aria-hidden
-        className={`pointer-events-none absolute inset-x-0 top-20 select-none font-display text-[7rem] leading-none lg:top-16 lg:text-[10rem] ${
+        className={`pointer-events-none absolute inset-x-0 top-0 select-none font-display text-[7rem] leading-none lg:-top-6 lg:text-[10rem] ${
           onOlive ? "text-cream/[0.07]" : "text-olive/[0.07]"
         }`}
       >
         {category.numeral}
       </span>
       <div className="relative">
-        <span
-          aria-hidden
-          className="line-draw-y mx-auto block h-16 w-px bg-current opacity-25"
-        />
         <p
-          className={`eyebrow-lg mt-6 font-roman uppercase ${
+          className={`eyebrow-lg font-roman uppercase ${
             onOlive ? "text-terracotta-soft" : "text-terracotta"
           }`}
         >
