@@ -77,6 +77,10 @@ function buildMenuSchema(categories: MenuCategory[]) {
 
 const STAGGER = ["delay-1", "delay-2", "delay-3", "delay-4"] as const;
 
+/** Base prices always carry cents; upcharges only when they have them. */
+const money = (n: number) => n.toFixed(2);
+const upcharge = (n: number) => (n % 1 === 0 ? `+${n}` : `+${n.toFixed(2)}`);
+
 /**
  * Signature-scale art direction that object-position alone can't do.
  * tantuni: the wrap paper's printed slogans must stay out of frame —
@@ -208,7 +212,7 @@ function DishCard({
               onOlive ? "text-cream/70" : "text-olive/70"
             }`}
           >
-            {item.price}
+            {money(item.price)}
           </span>
         </div>
         <p
@@ -218,6 +222,26 @@ function DishCard({
         >
           {item.description}
         </p>
+        {item.proteins && (
+          <p
+            className={`mt-2.5 font-body text-[0.82rem] font-light leading-relaxed ${
+              onOlive ? "text-cream/50" : "text-ink/50"
+            }`}
+          >
+            {item.proteins.map((p, i) => (
+              <span key={p.name}>
+                {i > 0 && <span aria-hidden> · </span>}
+                {p.name}
+                {p.upcharge > 0 && (
+                  <span className="font-roman tracking-[0.08em]">
+                    {" "}
+                    {upcharge(p.upcharge)}
+                  </span>
+                )}
+              </span>
+            ))}
+          </p>
+        )}
         <DishTags item={item} onOlive={onOlive} />
       </Link>
     </Reveal>

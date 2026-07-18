@@ -1,16 +1,54 @@
 // The real Limra menu — items and photography provided by the owners.
-// PRICES ARE PLACEHOLDERS until Can & Elif confirm the final list.
+// Prices and protein ladders transcribed from the owners' menu boards
+// (limra-screens.vercel.app). Base price includes that item's +$0 protein.
 
 import { ORDER_URL } from "./contact";
 
 export type DietaryTag = "V" | "VG" | "GF" | "N";
 
+/** A build-to-order protein and what it adds to the item's base price. */
+export type ProteinChoice = {
+  name: string;
+  /** dollars over the base price; 0 is the protein the base price buys */
+  upcharge: number;
+  tags?: DietaryTag[];
+};
+
+// Plates and bowls carry the wider ladder; handhelds a shorter one.
+const PLATE_PROTEINS: ProteinChoice[] = [
+  { name: "Falafel", upcharge: 0, tags: ["VG", "GF"] },
+  { name: "Chicken döner", upcharge: 2 },
+  { name: "Tantuni", upcharge: 3 },
+  { name: "Beef döner", upcharge: 4 },
+];
+
+const HANDHELD_PROTEINS: ProteinChoice[] = [
+  { name: "Falafel", upcharge: 0, tags: ["VG", "GF"] },
+  { name: "Chicken döner", upcharge: 1.5 },
+  { name: "Tantuni", upcharge: 2.5 },
+  { name: "Beef döner", upcharge: 3 },
+];
+
+// No falafel option on these two.
+const MEAT_PROTEINS: ProteinChoice[] = [
+  { name: "Chicken döner", upcharge: 0 },
+  { name: "Tantuni", upcharge: 2.5 },
+  { name: "Beef döner", upcharge: 3 },
+];
+
+const ISKENDER_PROTEINS: ProteinChoice[] = [
+  { name: "Chicken döner", upcharge: 0 },
+  { name: "Beef döner", upcharge: 4 },
+];
+
 export type MenuItem = {
   slug: string;
   name: string;
   description: string;
-  /** bare number, no currency symbol — rendered quiet per design spec */
+  /** base price, no currency symbol — rendered quiet per design spec */
   price: number;
+  /** set when the dish is built to order from a protein ladder */
+  proteins?: ProteinChoice[];
   image: string;
   imageAlt: string;
   /** art-directed object-position for cropped renders, e.g. "20% 65%" */
@@ -61,7 +99,8 @@ export const menu: MenuCategory[] = [
         name: "Limra Platter",
         description:
           "Carved lamb-and-beef döner, rice, chopped salad, grilled tomato and pepper, hummus, warm flatbread.",
-        price: 17,
+        price: 14.99,
+        proteins: PLATE_PROTEINS,
         image: "/menu/limra-platter.jpg?v=69cce1d9",
         imageAlt:
           "Limra Platter, carved döner over rice with salad, grilled tomato and pepper, hummus, and grilled flatbread",
@@ -73,7 +112,8 @@ export const menu: MenuCategory[] = [
         name: "İskender Platter",
         description:
           "Sliced from the spit over cut pide, tomato-butter sauce, strained yogurt, roasted peppers.",
-        price: 16,
+        price: 16.99,
+        proteins: ISKENDER_PROTEINS,
         image: "/menu/iskender-platter.jpg?v=04d6950a",
         imageAlt:
           "İskender Platter, sliced döner over cut pide under tomato-butter sauce with strained yogurt, roasted peppers, and pickles",
@@ -94,7 +134,7 @@ export const menu: MenuCategory[] = [
         name: "Tantuni Wrap",
         description:
           "Chopped seared beef, lettuce, tomato, red onion, rolled in thin lavash. Two house sauces.",
-        price: 13,
+        price: 14.5,
         image: "/menu/tantuni-wrap.jpg?v=c2bc7070",
         imageAlt:
           "Tantuni Wrap, chopped seared beef with lettuce, tomato, and red onion rolled in lavash, with two house sauces",
@@ -106,7 +146,7 @@ export const menu: MenuCategory[] = [
         name: "Antakya Chicken Wrap",
         description:
           "Spit-roasted chicken, fries, pickles, warm spiced sauce, rolled in lavash.",
-        price: 12,
+        price: 14.5,
         image: "/menu/chicken-wrap-antakya.jpg?v=f60c7ff8",
         imageAlt:
           "Antakya Chicken Wrap, spit-roasted chicken rolled with fries and pickles in lavash",
@@ -117,7 +157,8 @@ export const menu: MenuCategory[] = [
         name: "Medi Wrap",
         description:
           "Beef döner, iceberg, red cabbage, house white sauce. Served with fries.",
-        price: 12,
+        price: 11.99,
+        proteins: HANDHELD_PROTEINS,
         image: "/menu/medi-wrap.jpg?v=c313a459",
         imageAlt:
           "Medi Wrap, beef döner with iceberg and red cabbage in lavash, served with fries and pickles",
@@ -128,7 +169,7 @@ export const menu: MenuCategory[] = [
         name: "Vegan Çiğ Köfte Wrap",
         description:
           "Hand-kneaded bulgur köfte, crisp greens, tomato, lemon, rolled in lavash.",
-        price: 11,
+        price: 10.99,
         image: "/menu/vegan-cig-kofte-wrap.jpg?v=f18ab94d",
         imageAlt:
           "Vegan Çiğ Köfte Wrap, hand-kneaded bulgur köfte with greens and tomato in lavash, lemon on the side",
@@ -149,7 +190,8 @@ export const menu: MenuCategory[] = [
         name: "Aspendos Bowl",
         description:
           "Seared beef strips, rice, hummus, spiced chickpeas, çiğ köfte, yogurt dip, flatbread.",
-        price: 15,
+        price: 15.99,
+        proteins: PLATE_PROTEINS,
         image: "/menu/aspendos-bowl.jpg?v=a4bbe358",
         imageAlt:
           "Aspendos Bowl, seared beef strips over rice with hummus, spiced chickpeas, çiğ köfte, and yogurt dip",
@@ -161,7 +203,8 @@ export const menu: MenuCategory[] = [
         name: "Hummus Bowl",
         description:
           "Chicken döner over hummus, crisp potatoes, slaw, olives, crispy onions.",
-        price: 13,
+        price: 14.99,
+        proteins: PLATE_PROTEINS,
         image: "/menu/hummus-bowl.jpg?v=5d427352",
         imageAlt:
           "Hummus Bowl, chicken döner over hummus with crisp potatoes, slaw, olives, and crispy onions",
@@ -182,7 +225,8 @@ export const menu: MenuCategory[] = [
         name: "Limra Loaded Fries",
         description:
           "Fries under spit-roasted chicken, crispy onions, herb cream, roasted pepper sauce.",
-        price: 11,
+        price: 14.99,
+        proteins: PLATE_PROTEINS,
         image: "/menu/limra-loaded-fries.jpg?v=338102e7",
         imageAlt:
           "Limra Loaded Fries, fries loaded with chicken döner, crispy onions, herb cream, and roasted pepper sauce",
@@ -193,7 +237,8 @@ export const menu: MenuCategory[] = [
         name: "Amalfi Melt",
         description:
           "Shaved beef on a toasted roll, greens, red cabbage, herb cream.",
-        price: 12,
+        price: 14.49,
+        proteins: MEAT_PROTEINS,
         image: "/menu/amalfi-melt.jpg?v=a75c43b6",
         imageAlt:
           "Amalfi Melt, beef döner on a toasted roll with greens, red cabbage, and herb cream, pickles alongside",
@@ -205,7 +250,8 @@ export const menu: MenuCategory[] = [
         name: "Angora Sandwich",
         description:
           "Spit-roasted chicken in a crisp roll, garlic yogurt, tomato, banana peppers.",
-        price: 12,
+        price: 11.99,
+        proteins: HANDHELD_PROTEINS,
         image: "/menu/angora-sandwich.jpg?v=2794591f",
         imageAlt:
           "Angora Sandwich, chicken döner in a crisp roll with garlic yogurt and tomato, pickles alongside",
@@ -215,7 +261,8 @@ export const menu: MenuCategory[] = [
         name: "Medi Taco",
         description:
           "Three soft tacos, spiced chicken, slaw, tomato, herb drizzle.",
-        price: 11,
+        price: 12.99,
+        proteins: MEAT_PROTEINS,
         image: "/menu/medi-taco.jpg?v=917d091e",
         imageAlt:
           "Medi Taco, three soft tacos with chicken döner, slaw, tomato, and herb drizzle",
