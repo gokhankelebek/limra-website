@@ -29,13 +29,13 @@ export default function StorySection() {
             a modern table.
           </h2>
           <p className="mt-7 font-body text-lg font-light leading-relaxed text-ink/75">
-            Limyra rose in stone on the Mediterranean coast — a city built for
+            Limyra rose in stone on the Mediterranean coast, a city built for
             gathering, trade, and the long ritual of a shared meal. We borrow
             its name and its rhythm: honest ingredients, open fire, and a room
             made for lingering.
           </p>
           <p className="mt-5 font-body text-lg font-light leading-relaxed text-ink/75">
-            It is kept by Can and Elif Engin — two chefs, fifteen years of
+            It is kept by Can and Elif Engin, two chefs with fifteen years of
             professional kitchens between them, and a food truck whose line
             kept growing until it needed a room.
           </p>

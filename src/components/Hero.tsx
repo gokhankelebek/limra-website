@@ -45,7 +45,7 @@ export default function Hero() {
           </span>
           <span className="anim-rise delay-2 mt-8 block">
             <span className="sr-only">
-              — Limra, Holly Springs, North Carolina
+              Limra, Holly Springs, North Carolina
             </span>
             <Wordmark
               aria-hidden

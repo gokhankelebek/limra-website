@@ -8,10 +8,10 @@ import SiteHeader from "@/components/SiteHeader";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Opening Updates — Limra Mediterranean · Holly Springs, NC",
+    absolute: "Opening Updates · Limra Mediterranean · Holly Springs, NC",
   },
   description:
-    "Limra opens this summer in Holly Springs, NC. Leave your email for a quiet note when the doors open — and an invitation to the soft-opening tasting.",
+    "Limra opens this summer in Holly Springs, NC. Leave your email for a quiet note when the doors open, plus an invitation to the soft-opening tasting.",
   alternates: { canonical: "/updates" },
 };
 
@@ -38,7 +38,7 @@ export default function UpdatesPage() {
           <Reveal delay="delay-4">
             <p className="mx-auto mt-6 max-w-md font-body text-lg font-light italic leading-relaxed text-ink/70">
               The soft-opening tasting is invitation-only. Invitations come
-              from this list — then a quiet note when the doors open.
+              from this list, then a quiet note when the doors open.
             </p>
           </Reveal>
           <Reveal delay="delay-5">

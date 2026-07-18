@@ -24,7 +24,7 @@ export async function generateMetadata({
   const dish = findDish(slug);
   if (!dish) return { title: "Menu" };
   return {
-    title: { absolute: `${dish.name} — Limra Mediterranean · Holly Springs, NC` },
+    title: { absolute: `${dish.name} · Limra Mediterranean · Holly Springs, NC` },
     description: dish.description,
     alternates: { canonical: `/menu/${dish.slug}` },
     openGraph: {

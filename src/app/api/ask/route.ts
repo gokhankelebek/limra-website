@@ -127,7 +127,7 @@ export async function POST(req: Request) {
         if (final.stop_reason === "refusal") {
           controller.enqueue(
             encoder.encode(
-              "I'd rather stay with Limra — the menu, the hours, or finding us."
+              "I'd rather stay with Limra: the menu, the hours, or finding us."
             )
           );
         }

@@ -116,7 +116,7 @@ export default function AskLimra() {
             {turns.length === 0 ? (
               <div>
                 <p className="font-body text-sm font-light italic leading-relaxed text-ink/60">
-                  Ask about a dish, dietary needs, hours — anything Limra.
+                  Ask about a dish, dietary needs, or hours.
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {SUGGESTIONS.map((s) => (

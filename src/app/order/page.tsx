@@ -8,7 +8,7 @@ import { CONTACT } from "@/data/contact";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Order Online — Limra Mediterranean · Holly Springs, NC",
+    absolute: "Order Online · Limra Mediterranean · Holly Springs, NC",
   },
   description:
     "Online ordering from Limra Mediterranean begins the day the doors open in Holly Springs, NC. For catering and large gatherings, call us.",

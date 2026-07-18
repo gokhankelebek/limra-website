@@ -23,10 +23,10 @@ import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Menu — Limra Mediterranean Restaurant · Holly Springs, NC",
+    absolute: "Menu · Limra Mediterranean Restaurant · Holly Springs, NC",
   },
   description:
-    "Mediterranean cooking in Holly Springs, NC — döner platters, wraps rolled warm, and bowls built to order. See what's on the table at Limra.",
+    "Mediterranean cooking in Holly Springs, NC. Döner platters, wraps rolled warm, bowls built to order. See what's on the table at Limra.",
   alternates: { canonical: "/menu" },
 };
 

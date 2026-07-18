@@ -10,10 +10,10 @@ import Wordmark from "@/components/Wordmark";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Our Story — Limra Mediterranean · Holly Springs, NC",
+    absolute: "Our Story · Limra Mediterranean · Holly Springs, NC",
   },
   description:
-    "From a food truck window to a table worth staying for — the story of chefs Can & Elif Engin and Limra, a Mediterranean restaurant in Holly Springs, NC.",
+    "From a food truck window to a table worth staying for. The story of chefs Can and Elif Engin and Limra, a Mediterranean restaurant in Holly Springs, NC.",
   alternates: { canonical: "/story" },
 };
 

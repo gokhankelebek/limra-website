@@ -41,14 +41,14 @@ const body = Spectral({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Limra — Mediterranean Restaurant · Holly Springs, NC",
-    template: "%s — Limra",
+    default: "Limra Mediterranean Restaurant · Holly Springs, NC",
+    template: "%s · Limra",
   },
   description:
     "A modern Mediterranean table, named for an ancient city. Mediterranean restaurant and café in Holly Springs, North Carolina.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Limra — Mediterranean Restaurant · Holly Springs, NC",
+    title: "Limra Mediterranean Restaurant · Holly Springs, NC",
     description: "A modern Mediterranean table, named for an ancient city.",
     type: "website",
     siteName: "Limra Mediterranean Restaurant",
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Limra — Mediterranean Restaurant · Holly Springs, NC",
+    title: "Limra Mediterranean Restaurant · Holly Springs, NC",
     description: "A modern Mediterranean table, named for an ancient city.",
   },
 };

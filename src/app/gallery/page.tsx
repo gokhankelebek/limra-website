@@ -10,10 +10,10 @@ import { BLUR } from "@/data/menu-blur";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Gallery — Limra Mediterranean · Holly Springs, NC",
+    absolute: "Gallery · Limra Mediterranean · Holly Springs, NC",
   },
   description:
-    "The plates of Limra, photographed as they leave the pass — döner platters, wraps, bowls, and more from the modern Mediterranean table in Holly Springs.",
+    "The plates of Limra, photographed as they leave the pass. Döner platters, wraps, bowls, and more from the modern Mediterranean table in Holly Springs.",
   alternates: { canonical: "/gallery" },
 };
 

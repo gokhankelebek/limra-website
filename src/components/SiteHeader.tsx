@@ -24,7 +24,7 @@ export default function SiteHeader() {
         {/* Brand lockup */}
         <Link href="/" className="flex items-center gap-3 text-olive">
           <Medallion className="h-10 w-10" />
-          <span className="sr-only">Limra — home</span>
+          <span className="sr-only">Limra home</span>
           <Wordmark aria-hidden className="w-20" />
         </Link>
 

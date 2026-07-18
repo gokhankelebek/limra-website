@@ -14,10 +14,10 @@ import {
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Visit Limra — Mediterranean Restaurant in Holly Springs, NC",
+    absolute: "Visit Limra · Mediterranean Restaurant in Holly Springs, NC",
   },
   description:
-    "Find Limra at 3109 McChesney Hill Loop, Holly Springs, NC 27539. Directions, hours, and contact — counter service, no reservations needed.",
+    "Find Limra at 3109 McChesney Hill Loop, Holly Springs, NC 27539. Directions, hours, and contact. Counter service, no reservations needed.",
   alternates: { canonical: "/visit" },
 };
 
@@ -43,7 +43,7 @@ export default function VisitPage() {
           </Reveal>
           <Reveal delay="delay-4">
             <p className="mx-auto mt-6 max-w-md font-body text-lg font-light italic leading-relaxed text-ink/70">
-              Opening this summer — a seat at the table is closer than you
+              Opening this summer. A seat at the table is closer than you
               think.
             </p>
           </Reveal>

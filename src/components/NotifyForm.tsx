@@ -44,7 +44,7 @@ export default function NotifyForm() {
     return (
       <div className="text-center">
         <p className="font-body text-base font-light italic text-ink/60">
-          The list opens shortly. Follow along in the meantime —
+          The list opens shortly. Follow along in the meantime.
         </p>
         <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
           {SOCIALS.map((s) => (
