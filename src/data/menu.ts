@@ -62,7 +62,7 @@ export const menu: MenuCategory[] = [
         description:
           "Carved lamb-and-beef döner, rice, chopped salad, grilled tomato and pepper, hummus, warm flatbread.",
         price: 17,
-        image: "/menu/limra-platter.jpg",
+        image: "/menu/limra-platter.jpg?v=ab0b4a83",
         imageAlt:
           "Limra Platter, carved döner over rice with salad, grilled tomato and pepper, hummus, and grilled flatbread",
         crop: "50% 50%",
@@ -74,7 +74,7 @@ export const menu: MenuCategory[] = [
         description:
           "Sliced from the spit over cut pide, tomato-butter sauce, strained yogurt, roasted peppers.",
         price: 16,
-        image: "/menu/iskender-platter.jpg",
+        image: "/menu/iskender-platter.jpg?v=3b0de7d8",
         imageAlt:
           "İskender Platter, sliced döner over cut pide under tomato-butter sauce with strained yogurt, roasted peppers, and pickles",
         crop: "50% 50%",
@@ -95,7 +95,7 @@ export const menu: MenuCategory[] = [
         description:
           "Chopped seared beef, lettuce, tomato, red onion, rolled in thin lavash. Two house sauces.",
         price: 13,
-        image: "/menu/tantuni-wrap.jpg",
+        image: "/menu/tantuni-wrap.jpg?v=4305f3da",
         imageAlt:
           "Tantuni Wrap, chopped seared beef with lettuce, tomato, and red onion rolled in lavash, with two house sauces",
         crop: "50% 50%",
@@ -107,7 +107,7 @@ export const menu: MenuCategory[] = [
         description:
           "Spit-roasted chicken, fries, pickles, warm spiced sauce, rolled in lavash.",
         price: 12,
-        image: "/menu/chicken-wrap-antakya.jpg",
+        image: "/menu/chicken-wrap-antakya.jpg?v=53531061",
         imageAlt:
           "Antakya Chicken Wrap, spit-roasted chicken rolled with fries and pickles in lavash",
         crop: "50% 50%",
@@ -118,7 +118,7 @@ export const menu: MenuCategory[] = [
         description:
           "Beef döner, iceberg, red cabbage, house white sauce. Served with fries.",
         price: 12,
-        image: "/menu/medi-wrap.jpg",
+        image: "/menu/medi-wrap.jpg?v=89f97bc1",
         imageAlt:
           "Medi Wrap, beef döner with iceberg and red cabbage in lavash, served with fries and pickles",
         crop: "50% 50%",
@@ -129,7 +129,7 @@ export const menu: MenuCategory[] = [
         description:
           "Hand-kneaded bulgur köfte, crisp greens, tomato, lemon, rolled in lavash.",
         price: 11,
-        image: "/menu/vegan-cig-kofte-wrap.jpg",
+        image: "/menu/vegan-cig-kofte-wrap.jpg?v=aa6fad28",
         imageAlt:
           "Vegan Çiğ Köfte Wrap, hand-kneaded bulgur köfte with greens and tomato in lavash, lemon on the side",
         tags: ["VG"],
@@ -150,7 +150,7 @@ export const menu: MenuCategory[] = [
         description:
           "Seared beef strips, rice, hummus, spiced chickpeas, çiğ köfte, yogurt dip, flatbread.",
         price: 15,
-        image: "/menu/aspendos-bowl.jpg",
+        image: "/menu/aspendos-bowl.jpg?v=ae8ce258",
         imageAlt:
           "Aspendos Bowl, seared beef strips over rice with hummus, spiced chickpeas, çiğ köfte, and yogurt dip",
         crop: "50% 50%",
@@ -162,7 +162,7 @@ export const menu: MenuCategory[] = [
         description:
           "Chicken döner over hummus, crisp potatoes, slaw, olives, crispy onions.",
         price: 13,
-        image: "/menu/hummus-bowl.jpg",
+        image: "/menu/hummus-bowl.jpg?v=01c83f6e",
         imageAlt:
           "Hummus Bowl, chicken döner over hummus with crisp potatoes, slaw, olives, and crispy onions",
         crop: "50% 50%",
@@ -183,7 +183,7 @@ export const menu: MenuCategory[] = [
         description:
           "Fries under spit-roasted chicken, crispy onions, herb cream, roasted pepper sauce.",
         price: 11,
-        image: "/menu/limra-loaded-fries.jpg",
+        image: "/menu/limra-loaded-fries.jpg?v=2eba511d",
         imageAlt:
           "Limra Loaded Fries, fries loaded with chicken döner, crispy onions, herb cream, and roasted pepper sauce",
         crop: "50% 50%",
@@ -194,7 +194,7 @@ export const menu: MenuCategory[] = [
         description:
           "Shaved beef on a toasted roll, greens, red cabbage, herb cream.",
         price: 12,
-        image: "/menu/amalfi-melt.jpg",
+        image: "/menu/amalfi-melt.jpg?v=2cfb6c3b",
         imageAlt:
           "Amalfi Melt, beef döner on a toasted roll with greens, red cabbage, and herb cream, pickles alongside",
         crop: "50% 50%",
@@ -206,7 +206,7 @@ export const menu: MenuCategory[] = [
         description:
           "Spit-roasted chicken in a crisp roll, garlic yogurt, tomato, banana peppers.",
         price: 12,
-        image: "/menu/angora-sandwich.jpg",
+        image: "/menu/angora-sandwich.jpg?v=bd57de24",
         imageAlt:
           "Angora Sandwich, chicken döner in a crisp roll with garlic yogurt and tomato, pickles alongside",
       },
@@ -216,7 +216,7 @@ export const menu: MenuCategory[] = [
         description:
           "Three soft tacos, spiced chicken, slaw, tomato, herb drizzle.",
         price: 11,
-        image: "/menu/medi-taco.jpg",
+        image: "/menu/medi-taco.jpg?v=081d148c",
         imageAlt:
           "Medi Taco, three soft tacos with chicken döner, slaw, tomato, and herb drizzle",
         crop: "50% 50%",

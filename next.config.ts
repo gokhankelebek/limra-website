@@ -6,6 +6,12 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: __dirname,
   },
+  images: {
+    // Dish photos carry a ?v=<content hash> so a re-crop gets a new URL and
+    // never serves from a stale browser or optimizer cache. Omitting `search`
+    // here is what permits that query; the default pattern forbids it.
+    localPatterns: [{ pathname: "/**" }],
+  },
   async redirects() {
     return [
       // The bowl was briefly published under a misspelled slug.
