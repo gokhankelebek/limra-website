@@ -239,9 +239,11 @@ function Threshold({
 }) {
   return (
     <Reveal className="relative text-center">
+      {/* Ghost numeral sits behind the title, clear of the plumb line
+          above it — the line is h-16, so the watermark starts below that. */}
       <span
         aria-hidden
-        className={`pointer-events-none absolute inset-x-0 -top-6 select-none font-display text-[7rem] leading-none lg:text-[10rem] ${
+        className={`pointer-events-none absolute inset-x-0 top-20 select-none font-display text-[7rem] leading-none lg:top-16 lg:text-[10rem] ${
           onOlive ? "text-cream/[0.07]" : "text-olive/[0.07]"
         }`}
       >
