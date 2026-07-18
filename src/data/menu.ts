@@ -62,7 +62,7 @@ export const menu: MenuCategory[] = [
         description:
           "Carved lamb-and-beef döner, rice, chopped salad, grilled tomato and pepper, hummus, warm flatbread.",
         price: 17,
-        image: "/menu/limra-platter.jpg?v=ab0b4a83",
+        image: "/menu/limra-platter.jpg?v=69cce1d9",
         imageAlt:
           "Limra Platter, carved döner over rice with salad, grilled tomato and pepper, hummus, and grilled flatbread",
         crop: "50% 50%",
@@ -74,7 +74,7 @@ export const menu: MenuCategory[] = [
         description:
           "Sliced from the spit over cut pide, tomato-butter sauce, strained yogurt, roasted peppers.",
         price: 16,
-        image: "/menu/iskender-platter.jpg?v=3b0de7d8",
+        image: "/menu/iskender-platter.jpg?v=04d6950a",
         imageAlt:
           "İskender Platter, sliced döner over cut pide under tomato-butter sauce with strained yogurt, roasted peppers, and pickles",
         crop: "50% 50%",
