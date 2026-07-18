@@ -120,6 +120,7 @@ function PlatePhoto({
   aspect,
   width,
   height,
+  uniform = false,
 }: {
   item: MenuItem;
   onOlive: boolean;
@@ -127,8 +128,11 @@ function PlatePhoto({
   aspect: string;
   width: number;
   height: number;
+  uniform?: boolean;
 }) {
-  const art = SIGNATURE_ART[item.slug];
+  // In the uniform grid every plate is framed identically — no per-dish
+  // art-direction that would change one card's crop or proportions.
+  const art = uniform ? undefined : SIGNATURE_ART[item.slug];
   return (
     <div
       className={`relative overflow-hidden rounded-[2px] ${
@@ -161,72 +165,11 @@ function PlatePhoto({
 }
 
 /**
- * Signature plate — each course opens on its featured dish, set
- * full-width. The image side alternates course by course.
+ * Dish card — every plate in a course set identically: a matted photo,
+ * the name drawn out to a quiet price, description, tags. No dish is
+ * featured; each carries the same size and weight in the grid.
  */
-function SignatureDish({
-  item,
-  onOlive,
-  imageLeft,
-}: {
-  item: MenuItem;
-  onOlive: boolean;
-  imageLeft: boolean;
-}) {
-  return (
-    <Reveal animation="anim-fade" delay="delay-1">
-      <Link
-        href={`/menu/${item.slug}`}
-        className="group grid items-center gap-8 sm:grid-cols-[11fr_9fr] lg:gap-12"
-      >
-        <div className={imageLeft ? "" : "sm:order-2"}>
-          <PlatePhoto
-            item={item}
-            onOlive={onOlive}
-            sizes="(max-width: 640px) 90vw, 480px"
-            aspect="aspect-[4/3] sm:aspect-[4/5]"
-            width={880}
-            height={1100}
-          />
-        </div>
-        <div className={imageLeft ? "" : "sm:order-1"}>
-          <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-            <h3
-              className={`font-display text-4xl leading-tight transition-colors ${
-                onOlive
-                  ? "text-cream group-hover:text-terracotta-soft"
-                  : "text-ink group-hover:text-terracotta"
-              }`}
-            >
-              {item.name}
-            </h3>
-            <p
-              className={`shrink-0 font-roman text-sm tracking-[0.12em] ${
-                onOlive ? "text-cream/70" : "text-olive/70"
-              }`}
-            >
-              {item.price}
-            </p>
-          </div>
-          <p
-            className={`mt-4 font-body text-[0.95rem] font-light leading-relaxed ${
-              onOlive ? "text-cream/65" : "text-ink/65"
-            }`}
-          >
-            {item.description}
-          </p>
-          <DishTags item={item} onOlive={onOlive} />
-        </div>
-      </Link>
-    </Reveal>
-  );
-}
-
-/**
- * Inscription row — the remaining dishes set as one carved column:
- * thumb, name, a drawn leader out to the quiet price, description below.
- */
-function InscriptionRow({
+function DishCard({
   item,
   onOlive,
   delay,
@@ -236,68 +179,46 @@ function InscriptionRow({
   delay: (typeof STAGGER)[number];
 }) {
   return (
-    <Reveal
-      animation="anim-fade"
-      delay={delay}
-      className={`divider-draw border-b ${
-        onOlive ? "border-cream/15" : "border-ink/10"
-      }`}
-    >
-      <Link
-        href={`/menu/${item.slug}`}
-        className="group grid grid-cols-[72px_1fr] items-start gap-5 py-6 sm:grid-cols-[88px_1fr]"
-      >
-        <div
-          className={`overflow-hidden rounded-[2px] border ${
-            onOlive ? "border-cream/20" : "border-olive/20"
-          }`}
-        >
-          <Image
-            src={item.image}
-            placeholder="blur"
-            blurDataURL={BLUR[item.slug]}
-            alt={item.imageAlt}
-            width={176}
-            height={176}
-            sizes="88px"
-            className="photo-grade aspect-square w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
-            style={item.crop ? { objectPosition: item.crop } : undefined}
-          />
-        </div>
-        <div>
-          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-            <h3
-              className={`font-display text-xl leading-tight transition-colors sm:text-2xl ${
-                onOlive
-                  ? "text-cream group-hover:text-terracotta-soft"
-                  : "text-ink group-hover:text-terracotta"
-              }`}
-            >
-              {item.name}
-            </h3>
-            <span
-              aria-hidden
-              className="min-w-[4rem] flex-1 -translate-y-[0.3em]"
-            >
-              <span className="divider-line block w-full origin-left border-b border-current opacity-20 group-hover:opacity-40" />
-            </span>
-            <span
-              className={`shrink-0 font-roman text-sm tracking-[0.12em] ${
-                onOlive ? "text-cream/70" : "text-olive/70"
-              }`}
-            >
-              {item.price}
-            </span>
-          </div>
-          <p
-            className={`mt-1.5 font-body text-[0.95rem] font-light leading-relaxed ${
-              onOlive ? "text-cream/60" : "text-ink/60"
+    <Reveal animation="anim-fade" delay={delay}>
+      <Link href={`/menu/${item.slug}`} className="group block">
+        <PlatePhoto
+          item={item}
+          onOlive={onOlive}
+          uniform
+          sizes="(max-width: 640px) 90vw, 360px"
+          aspect="aspect-[4/3]"
+          width={880}
+          height={660}
+        />
+        <div className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+          <h3
+            className={`font-display text-2xl leading-tight transition-colors ${
+              onOlive
+                ? "text-cream group-hover:text-terracotta-soft"
+                : "text-ink group-hover:text-terracotta"
             }`}
           >
-            {item.description}
-          </p>
-          <DishTags item={item} onOlive={onOlive} />
+            {item.name}
+          </h3>
+          <span aria-hidden className="min-w-[2.5rem] flex-1 -translate-y-[0.3em]">
+            <span className="divider-line block w-full origin-left border-b border-current opacity-20 group-hover:opacity-40" />
+          </span>
+          <span
+            className={`shrink-0 font-roman text-sm tracking-[0.12em] ${
+              onOlive ? "text-cream/70" : "text-olive/70"
+            }`}
+          >
+            {item.price}
+          </span>
         </div>
+        <p
+          className={`mt-2 font-body text-[0.95rem] font-light leading-relaxed ${
+            onOlive ? "text-cream/60" : "text-ink/60"
+          }`}
+        >
+          {item.description}
+        </p>
+        <DishTags item={item} onOlive={onOlive} />
       </Link>
     </Reveal>
   );
@@ -379,9 +300,6 @@ function CategorySection({
   index: number;
 }) {
   const onOlive = category.surface === "olive";
-  const signature =
-    category.items.find((i) => i.featured) ?? category.items[0];
-  const rest = category.items.filter((i) => i !== signature);
 
   return (
     <section
@@ -395,32 +313,16 @@ function CategorySection({
       <div className="relative mx-auto max-w-4xl px-6">
         <Threshold category={category} onOlive={onOlive} />
 
-        {signature && (
-          <div className="mt-14">
-            <SignatureDish
-              item={signature}
+        <div className="mt-14 grid gap-x-8 gap-y-12 sm:grid-cols-2">
+          {category.items.map((item, i) => (
+            <DishCard
+              key={item.slug}
+              item={item}
               onOlive={onOlive}
-              imageLeft={index % 2 === 0}
+              delay={STAGGER[i % STAGGER.length]}
             />
-          </div>
-        )}
-
-        {rest.length > 0 && (
-          <div
-            className={`mx-auto mt-14 max-w-2xl border-t ${
-              onOlive ? "border-cream/15" : "border-ink/10"
-            }`}
-          >
-            {rest.map((item, i) => (
-              <InscriptionRow
-                key={item.slug}
-                item={item}
-                onOlive={onOlive}
-                delay={STAGGER[i % STAGGER.length]}
-              />
-            ))}
-          </div>
-        )}
+          ))}
+        </div>
       </div>
     </section>
   );
