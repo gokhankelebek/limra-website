@@ -17,9 +17,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/story" },
 };
 
-// The story is the owners' own text. Wording and order are theirs and
-// must not change; only punctuation was normalized (no em dashes).
-// Any change to their words needs their sign-off.
+// The story follows the owners' telling from limramedi.com: same facts,
+// same order, same beats. The prose was rewritten to read plainer and
+// less machine-written. Needs Can & Elif's sign-off before launch.
 function Movement({
   numeral,
   title,
@@ -129,19 +129,19 @@ export default function StoryPage() {
           <div className="relative">
             <Movement numeral="I" onOlive>
               <p>
-                Limra began long before these doors opened, in a small
-                kitchen on wheels, where every plate had to prove itself in a
-                single bite. No shortcuts. No hiding behind a menu. Just
-                honest Mediterranean food, served fast, fresh, and with
-                intention.
+                Limra started in a food truck, years before this room
+                existed. A truck gives you nowhere to hide. There is no long
+                menu to distract anyone and no dining room to soften a plate
+                that isn&apos;t right. People either come back or they
+                don&apos;t.
               </p>
               <p>
-                As the line kept growing, so did the idea: what if we could
-                keep that same energy, but give it space to breathe?
+                They kept coming back, and the line kept getting longer. The
+                same thought kept surfacing: this works, it just needs more
+                room.
               </p>
               <p>
-                And that&apos;s how Limra found its place at Peterson
-                Station.
+                The room turned out to be Peterson Station.
               </p>
             </Movement>
           </div>
@@ -151,19 +151,18 @@ export default function StoryPage() {
         <section className="bg-cream px-6 py-16 lg:py-24">
           <Movement numeral="II">
             <p>
-              Here, the experience is simple, but deliberate. A buffet
-              that&apos;s truly alive: constantly refreshed, built on real
-              preparation, never shortcuts. Cold meze with balance. Hot
-              dishes that feel like they came from a real kitchen. A döner
-              turning in the background, not for show, but as a daily
-              ritual.
+              The room is simple on purpose. The buffet runs hot and cold and
+              gets refilled through the day, so nothing sits long enough to go
+              tired. Cold meze at one end, hot dishes at the other, cooked
+              properly instead of held under a lamp. The döner turns by the
+              counter from open to close.
             </p>
             <p className="pull-quote text-ink/80">
               Move the way you want to eat.
             </p>
             <p>Quick if you&apos;re in a rush. Slow if you&apos;re not.</p>
             <p>
-              Behind it all is a story of starting over, and aiming higher.
+              All of it comes from having started over once already.
             </p>
           </Movement>
         </section>
@@ -183,29 +182,24 @@ export default function StoryPage() {
           <div className="relative">
             <Movement numeral="III" title="Chefs Can & Elif Engin" onOlive>
               <p>
-                Before Limra, Chef Can spent over 15 years in professional
-                kitchens, working in luxury hotels and preparing protocol
-                meals for heads of state and world leaders. At the peak of
-                that path, he chose to begin again. This time in the U.S.,
-                from a small food truck, rebuilding everything from scratch.
+                Can cooked for fifteen years before Limra. Luxury hotels
+                first, then protocol dinners for heads of state. He left all
+                of it, moved to the States, and started again out of a food
+                truck.
               </p>
               <p>
-                Alongside him is Chef Elif, bringing her own refined touch.
-                Through Elif&apos;s Vanilla Cakery, she created cakes for
-                special events, and now prepares to fill her own counter
-                with pastries and desserts, made fresh for you.
+                Elif ran Elif&apos;s Vanilla Cakery, making cakes for
+                weddings and celebrations. At Limra the pastry counter is
+                hers, made fresh for the case.
               </p>
               <p>
-                At Limra, you&apos;ll taste that balance: signature dishes,
-                wraps, and sandwiches by Chef Can; pastries and desserts from
-                Chef Elif&apos;s counter. Beyond our doors, you&apos;ll
-                find us at your celebrations and gatherings, bringing the
-                same care, flavor, and craftsmanship to every table we touch.
+                So the platters, wraps, and sandwiches come from Can, and the
+                baklava and desserts come from Elif. We cater as well, if
+                you&apos;re feeding people somewhere other than here.
               </p>
               <p>
-                Together, what started as a reset became a direction: not
-                just to open a restaurant, but to build something that
-                reflects the highest level of their craft.
+                Neither of them planned on starting over. It turned into the
+                work they actually wanted to be doing.
               </p>
             </Movement>
           </div>
@@ -215,13 +209,14 @@ export default function StoryPage() {
         <section className="relative overflow-hidden bg-cream px-6 py-16 lg:py-24">
           <Movement numeral="IV">
             <p>
-              Limra isn&apos;t trying to be traditional for the sake of
-              tradition. And it isn&apos;t trying to be modern just to look
-              different. It lives in between: Mediterranean food, adapted to
-              real life.
+              We aren&apos;t trying to run a traditional restaurant, and
+              we aren&apos;t chasing a trend either. It&apos;s Mediterranean
+              food, cooked for the way people actually eat now.
             </p>
-            <p>And more than that:</p>
-            <p>a place to gather, to pause, to share.</p>
+            <p>
+              Mostly we wanted a room where people sit down together and stay
+              a while.
+            </p>
             <p className="pull-quote">
               More than a restaurant. A table that brings people together.
               <span className="label mt-4 block font-roman uppercase not-italic text-terracotta">
