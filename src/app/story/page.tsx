@@ -17,8 +17,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/story" },
 };
 
-// The story itself is the owners' own text, published verbatim from their
-// original telling — do not edit their words without their sign-off.
+// The story is the owners' own text. Wording and order are theirs and
+// must not change; only punctuation was normalized (no em dashes).
+// Any change to their words needs their sign-off.
 function Movement({
   numeral,
   title,
@@ -128,7 +129,7 @@ export default function StoryPage() {
           <div className="relative">
             <Movement numeral="I" onOlive>
               <p>
-                Limra began long before these doors opened — in a small
+                Limra began long before these doors opened, in a small
                 kitchen on wheels, where every plate had to prove itself in a
                 single bite. No shortcuts. No hiding behind a menu. Just
                 honest Mediterranean food, served fast, fresh, and with
@@ -136,7 +137,7 @@ export default function StoryPage() {
               </p>
               <p>
                 As the line kept growing, so did the idea: what if we could
-                keep that same energy — but give it space to breathe?
+                keep that same energy, but give it space to breathe?
               </p>
               <p>
                 And that&apos;s how Limra found its place at Peterson
@@ -150,11 +151,11 @@ export default function StoryPage() {
         <section className="bg-cream px-6 py-16 lg:py-24">
           <Movement numeral="II">
             <p>
-              Here, the experience is simple — but deliberate. A buffet
+              Here, the experience is simple, but deliberate. A buffet
               that&apos;s truly alive: constantly refreshed, built on real
               preparation, never shortcuts. Cold meze with balance. Hot
               dishes that feel like they came from a real kitchen. A döner
-              turning in the background — not for show, but as a daily
+              turning in the background, not for show, but as a daily
               ritual.
             </p>
             <p className="pull-quote text-ink/80">
@@ -162,7 +163,7 @@ export default function StoryPage() {
             </p>
             <p>Quick if you&apos;re in a rush. Slow if you&apos;re not.</p>
             <p>
-              Behind it all is a story of starting over — and aiming higher.
+              Behind it all is a story of starting over, and aiming higher.
             </p>
           </Movement>
         </section>
@@ -185,24 +186,24 @@ export default function StoryPage() {
                 Before Limra, Chef Can spent over 15 years in professional
                 kitchens, working in luxury hotels and preparing protocol
                 meals for heads of state and world leaders. At the peak of
-                that path, he chose to begin again — this time in the U.S.,
+                that path, he chose to begin again. This time in the U.S.,
                 from a small food truck, rebuilding everything from scratch.
               </p>
               <p>
                 Alongside him is Chef Elif, bringing her own refined touch.
                 Through Elif&apos;s Vanilla Cakery, she created cakes for
-                special events — and now prepares to fill her own counter
+                special events, and now prepares to fill her own counter
                 with pastries and desserts, made fresh for you.
               </p>
               <p>
                 At Limra, you&apos;ll taste that balance: signature dishes,
                 wraps, and sandwiches by Chef Can; pastries and desserts from
-                Chef Elif&apos;s counter — and beyond our doors, you&apos;ll
+                Chef Elif&apos;s counter. Beyond our doors, you&apos;ll
                 find us at your celebrations and gatherings, bringing the
                 same care, flavor, and craftsmanship to every table we touch.
               </p>
               <p>
-                Together, what started as a reset became a direction — not
+                Together, what started as a reset became a direction: not
                 just to open a restaurant, but to build something that
                 reflects the highest level of their craft.
               </p>
@@ -216,15 +217,15 @@ export default function StoryPage() {
             <p>
               Limra isn&apos;t trying to be traditional for the sake of
               tradition. And it isn&apos;t trying to be modern just to look
-              different. It lives in between — Mediterranean food, adapted to
+              different. It lives in between: Mediterranean food, adapted to
               real life.
             </p>
-            <p>And more than that —</p>
+            <p>And more than that:</p>
             <p>a place to gather, to pause, to share.</p>
             <p className="pull-quote">
-              More than a restaurant — a table that brings people together.
+              More than a restaurant. A table that brings people together.
               <span className="label mt-4 block font-roman uppercase not-italic text-terracotta">
-                — Can &amp; Elif
+                Can &amp; Elif
               </span>
             </p>
           </Movement>
