@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Medallion from "./Medallion";
-import { ADDRESS_LINES, CONTACT } from "@/data/contact";
+import { ADDRESS_LINES, CONTACT, ORDER_URL } from "@/data/contact";
 
 const LINKS = [
   { label: "Menu", href: "/menu" },
@@ -87,6 +87,15 @@ export default function MobileNav() {
               </Link>
             ))}
           </nav>
+
+          <Link
+            href={ORDER_URL}
+            onClick={() => setOpen(false)}
+            className="anim-rise relative mb-8 block w-full rounded-[2px] bg-terracotta px-8 py-4 text-center font-roman text-[0.74rem] uppercase tracking-[0.2em] text-cream transition-colors hover:bg-terracotta-deep"
+            style={{ animationDelay: "0.45s" }}
+          >
+            Order online
+          </Link>
 
           <div className="anim-fade relative border-t border-cream/15 pt-6" style={{ animationDelay: "0.55s" }}>
             <p className="font-body text-sm font-light leading-relaxed text-cream/65">
