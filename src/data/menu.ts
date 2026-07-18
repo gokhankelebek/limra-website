@@ -150,7 +150,7 @@ export const menu: MenuCategory[] = [
         description:
           "Seared beef strips, rice, hummus, spiced chickpeas, çiğ köfte, yogurt dip, flatbread.",
         price: 15,
-        image: "/menu/aspendos-bowl.jpg?v=ae8ce258",
+        image: "/menu/aspendos-bowl.jpg?v=a4bbe358",
         imageAlt:
           "Aspendos Bowl, seared beef strips over rice with hummus, spiced chickpeas, çiğ köfte, and yogurt dip",
         crop: "50% 50%",
@@ -162,7 +162,7 @@ export const menu: MenuCategory[] = [
         description:
           "Chicken döner over hummus, crisp potatoes, slaw, olives, crispy onions.",
         price: 13,
-        image: "/menu/hummus-bowl.jpg?v=01c83f6e",
+        image: "/menu/hummus-bowl.jpg?v=5d427352",
         imageAlt:
           "Hummus Bowl, chicken döner over hummus with crisp potatoes, slaw, olives, and crispy onions",
         crop: "50% 50%",
