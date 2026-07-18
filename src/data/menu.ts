@@ -236,8 +236,8 @@ export const menu: MenuCategory[] = [
   {
     id: "espresso-counter",
     numeral: "VI",
-    title: "The Espresso Counter",
-    shortLabel: "Espresso",
+    title: "Limra Beverage Counter",
+    shortLabel: "Beverage",
     note: "Pulled slow, worth lingering.",
     surface: "olive",
     kind: "anticipation",
