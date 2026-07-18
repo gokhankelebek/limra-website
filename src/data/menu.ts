@@ -95,7 +95,7 @@ export const menu: MenuCategory[] = [
         description:
           "Chopped seared beef, lettuce, tomato, red onion, rolled in thin lavash. Two house sauces.",
         price: 13,
-        image: "/menu/tantuni-wrap.jpg?v=4305f3da",
+        image: "/menu/tantuni-wrap.jpg?v=c2bc7070",
         imageAlt:
           "Tantuni Wrap, chopped seared beef with lettuce, tomato, and red onion rolled in lavash, with two house sauces",
         crop: "50% 50%",
@@ -107,7 +107,7 @@ export const menu: MenuCategory[] = [
         description:
           "Spit-roasted chicken, fries, pickles, warm spiced sauce, rolled in lavash.",
         price: 12,
-        image: "/menu/chicken-wrap-antakya.jpg?v=53531061",
+        image: "/menu/chicken-wrap-antakya.jpg?v=f60c7ff8",
         imageAlt:
           "Antakya Chicken Wrap, spit-roasted chicken rolled with fries and pickles in lavash",
         crop: "50% 50%",
@@ -118,7 +118,7 @@ export const menu: MenuCategory[] = [
         description:
           "Beef döner, iceberg, red cabbage, house white sauce. Served with fries.",
         price: 12,
-        image: "/menu/medi-wrap.jpg?v=89f97bc1",
+        image: "/menu/medi-wrap.jpg?v=c313a459",
         imageAlt:
           "Medi Wrap, beef döner with iceberg and red cabbage in lavash, served with fries and pickles",
         crop: "50% 50%",
@@ -129,7 +129,7 @@ export const menu: MenuCategory[] = [
         description:
           "Hand-kneaded bulgur köfte, crisp greens, tomato, lemon, rolled in lavash.",
         price: 11,
-        image: "/menu/vegan-cig-kofte-wrap.jpg?v=aa6fad28",
+        image: "/menu/vegan-cig-kofte-wrap.jpg?v=f18ab94d",
         imageAlt:
           "Vegan Çiğ Köfte Wrap, hand-kneaded bulgur köfte with greens and tomato in lavash, lemon on the side",
         tags: ["VG"],
