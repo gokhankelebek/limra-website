@@ -98,12 +98,12 @@ export const menu: MenuCategory[] = [
         slug: "limra-platter",
         name: "Limra Platter",
         description:
-          "Carved lamb-and-beef döner, rice, chopped salad, grilled tomato and pepper, hummus, warm flatbread.",
+          "Mediterranean salad, hummus, seasoned rice, grilled pita, grilled peppers, roasted tomato. Your choice of protein and sauce.",
         price: 14.99,
         proteins: PLATE_PROTEINS,
         image: "/menu/limra-platter.jpg?v=69cce1d9",
         imageAlt:
-          "Limra Platter, carved döner over rice with salad, grilled tomato and pepper, hummus, and grilled flatbread",
+          "Limra Platter, carved döner with seasoned rice, Mediterranean salad, hummus, grilled peppers, roasted tomato, and grilled pita",
         crop: "50% 50%",
         featured: true,
       },
@@ -111,12 +111,12 @@ export const menu: MenuCategory[] = [
         slug: "iskender-platter",
         name: "İskender Platter",
         description:
-          "Sliced from the spit over cut pide, tomato-butter sauce, strained yogurt, roasted peppers.",
+          "Döner over butter-toasted bread with plain yogurt, finished with our warm tomato sauce.",
         price: 16.99,
         proteins: ISKENDER_PROTEINS,
         image: "/menu/iskender-platter.jpg?v=04d6950a",
         imageAlt:
-          "İskender Platter, sliced döner over cut pide under tomato-butter sauce with strained yogurt, roasted peppers, and pickles",
+          "İskender Platter, sliced döner over butter-toasted bread with plain yogurt and warm tomato sauce",
         crop: "50% 50%",
       },
     ],
@@ -133,46 +133,49 @@ export const menu: MenuCategory[] = [
         slug: "tantuni-wrap",
         name: "Tantuni Wrap",
         description:
-          "Chopped seared beef, lettuce, tomato, red onion, rolled in thin lavash. Two house sauces.",
+          "Butter-sautéed seasoned beef tantuni rolled in lavash with tomato, parsley, lettuce, and sumac onions. Garlic aioli.",
         price: 14.5,
         image: "/menu/tantuni-wrap.jpg?v=c2bc7070",
         imageAlt:
-          "Tantuni Wrap, chopped seared beef with lettuce, tomato, and red onion rolled in lavash, with two house sauces",
+          "Tantuni Wrap, butter-sautéed seasoned beef with tomato, parsley, lettuce, and sumac onions rolled in lavash",
         crop: "50% 50%",
         featured: true,
+        note: "Add fries 2.99",
       },
       {
         slug: "chicken-wrap-antakya",
         name: "Antakya Chicken Wrap",
         description:
-          "Spit-roasted chicken, fries, pickles, warm spiced sauce, rolled in lavash.",
+          "Chicken döner rolled in lavash with crispy fries, pickles, lettuce, tomato, sumac onions, and parsley. Garlic aioli and warm tomato sauce.",
         price: 14.5,
         image: "/menu/chicken-wrap-antakya.jpg?v=f60c7ff8",
         imageAlt:
-          "Antakya Chicken Wrap, spit-roasted chicken rolled with fries and pickles in lavash",
+          "Antakya Chicken Wrap, chicken döner rolled in lavash with crispy fries, pickles, lettuce, tomato, and sumac onions",
         crop: "50% 50%",
+        note: "Add fries 2.99",
       },
       {
         slug: "medi-wrap",
         name: "Medi Wrap",
         description:
-          "Beef döner, iceberg, red cabbage, house white sauce. Served with fries.",
+          "Lavash rolled with lettuce, red cabbage, pickles, tomato, and sumac onions. Your choice of protein and sauce.",
         price: 11.99,
         proteins: HANDHELD_PROTEINS,
         image: "/menu/medi-wrap.jpg?v=c313a459",
         imageAlt:
-          "Medi Wrap, beef döner with iceberg and red cabbage in lavash, served with fries and pickles",
+          "Medi Wrap, döner with lettuce, red cabbage, pickles, tomato, and sumac onions rolled in lavash",
         crop: "50% 50%",
+        note: "Add fries 2.99",
       },
       {
         slug: "vegan-cig-kofte-wrap",
         name: "Vegan Çiğ Köfte Wrap",
         description:
-          "Hand-kneaded bulgur köfte, crisp greens, tomato, lemon, rolled in lavash.",
+          "Spicy bulgur blended with fresh herbs, rolled in lavash with lettuce, tomato, crispy onions, pickles, and pomegranate molasses. Mild or spicy.",
         price: 10.99,
         image: "/menu/vegan-cig-kofte-wrap.jpg?v=f18ab94d",
         imageAlt:
-          "Vegan Çiğ Köfte Wrap, hand-kneaded bulgur köfte with greens and tomato in lavash, lemon on the side",
+          "Vegan Çiğ Köfte Wrap, spicy bulgur with fresh herbs, lettuce, tomato, crispy onions, and pickles rolled in lavash",
         tags: ["VG"],
       },
     ],
@@ -189,12 +192,12 @@ export const menu: MenuCategory[] = [
         slug: "aspendos-bowl",
         name: "Aspendos Bowl",
         description:
-          "Seared beef strips, rice, hummus, spiced chickpeas, çiğ köfte, yogurt dip, flatbread.",
+          "Seasoned rice under mixed greens, hummus, smoky baba ghanoush, bulgur ball, red cabbage, sumac onions, tomato, and olives. Your choice of protein and sauce.",
         price: 15.99,
         proteins: PLATE_PROTEINS,
         image: "/menu/aspendos-bowl.jpg?v=a4bbe358",
         imageAlt:
-          "Aspendos Bowl, seared beef strips over rice with hummus, spiced chickpeas, çiğ köfte, and yogurt dip",
+          "Aspendos Bowl, seasoned rice with mixed greens, hummus, baba ghanoush, bulgur ball, red cabbage, sumac onions, tomato, and olives",
         crop: "50% 50%",
         featured: true,
       },
@@ -202,12 +205,12 @@ export const menu: MenuCategory[] = [
         slug: "hummus-bowl",
         name: "Hummus Bowl",
         description:
-          "Chicken döner over hummus, crisp potatoes, slaw, olives, crispy onions.",
+          "Hummus under lettuce, tomato, bulgur ball, red cabbage, pickles, olives, and crispy onions. Your choice of protein and sauce.",
         price: 14.99,
         proteins: PLATE_PROTEINS,
         image: "/menu/hummus-bowl.jpg?v=5d427352",
         imageAlt:
-          "Hummus Bowl, chicken döner over hummus with crisp potatoes, slaw, olives, and crispy onions",
+          "Hummus Bowl, hummus topped with lettuce, tomato, bulgur ball, red cabbage, pickles, olives, and crispy onions",
         crop: "50% 50%",
       },
     ],
@@ -224,49 +227,52 @@ export const menu: MenuCategory[] = [
         slug: "limra-loaded-fries",
         name: "Limra Loaded Fries",
         description:
-          "Fries under spit-roasted chicken, crispy onions, herb cream, roasted pepper sauce.",
+          "Crispy Cajun fries under mozzarella, tomato, red cabbage, pickles, and olives. Your choice of protein and sauce.",
         price: 14.99,
         proteins: PLATE_PROTEINS,
         image: "/menu/limra-loaded-fries.jpg?v=338102e7",
         imageAlt:
-          "Limra Loaded Fries, fries loaded with chicken döner, crispy onions, herb cream, and roasted pepper sauce",
+          "Limra Loaded Fries, crispy Cajun fries with mozzarella, tomato, red cabbage, pickles, and olives",
         crop: "50% 50%",
       },
       {
         slug: "amalfi-melt",
         name: "Amalfi Melt",
         description:
-          "Shaved beef on a toasted roll, greens, red cabbage, herb cream.",
+          "Fresh-baked eight-inch bread layered with arugula, mozzarella, crispy onions, tomato, and banana peppers. Your choice of protein and sauce.",
         price: 14.49,
         proteins: MEAT_PROTEINS,
         image: "/menu/amalfi-melt.jpg?v=a75c43b6",
         imageAlt:
-          "Amalfi Melt, beef döner on a toasted roll with greens, red cabbage, and herb cream, pickles alongside",
+          "Amalfi Melt, eight-inch bread layered with arugula, mozzarella, crispy onions, tomato, and banana peppers",
         crop: "50% 50%",
         featured: true,
+        note: "Add fries 2.99",
       },
       {
         slug: "angora-sandwich",
         name: "Angora Sandwich",
         description:
-          "Spit-roasted chicken in a crisp roll, garlic yogurt, tomato, banana peppers.",
+          "Eight-inch baguette with lettuce, tomato, pickles, and sumac onions. Your choice of protein and sauce.",
         price: 11.99,
         proteins: HANDHELD_PROTEINS,
         image: "/menu/angora-sandwich.jpg?v=2794591f",
         imageAlt:
-          "Angora Sandwich, chicken döner in a crisp roll with garlic yogurt and tomato, pickles alongside",
+          "Angora Sandwich, eight-inch baguette with lettuce, tomato, pickles, and sumac onions",
+        note: "Add fries 2.99",
       },
       {
         slug: "medi-taco",
         name: "Medi Taco",
         description:
-          "Three soft tacos, spiced chicken, slaw, tomato, herb drizzle.",
+          "Three soft tacos with lettuce, tomato, red cabbage, and parsley. Your choice of protein, with Limra sauce.",
         price: 12.99,
         proteins: MEAT_PROTEINS,
         image: "/menu/medi-taco.jpg?v=917d091e",
         imageAlt:
-          "Medi Taco, three soft tacos with chicken döner, slaw, tomato, and herb drizzle",
+          "Medi Taco, three soft tacos with lettuce, tomato, red cabbage, and parsley",
         crop: "50% 50%",
+        note: "Add fries 2.99",
       },
     ],
   },
