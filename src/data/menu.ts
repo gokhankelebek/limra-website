@@ -183,7 +183,7 @@ export const menu: MenuCategory[] = [
         description:
           "Fries under spit-roasted chicken, crispy onions, herb cream, roasted pepper sauce.",
         price: 11,
-        image: "/menu/limra-loaded-fries.jpg?v=2eba511d",
+        image: "/menu/limra-loaded-fries.jpg?v=338102e7",
         imageAlt:
           "Limra Loaded Fries, fries loaded with chicken döner, crispy onions, herb cream, and roasted pepper sauce",
         crop: "50% 50%",
@@ -194,7 +194,7 @@ export const menu: MenuCategory[] = [
         description:
           "Shaved beef on a toasted roll, greens, red cabbage, herb cream.",
         price: 12,
-        image: "/menu/amalfi-melt.jpg?v=2cfb6c3b",
+        image: "/menu/amalfi-melt.jpg?v=a75c43b6",
         imageAlt:
           "Amalfi Melt, beef döner on a toasted roll with greens, red cabbage, and herb cream, pickles alongside",
         crop: "50% 50%",
@@ -206,7 +206,7 @@ export const menu: MenuCategory[] = [
         description:
           "Spit-roasted chicken in a crisp roll, garlic yogurt, tomato, banana peppers.",
         price: 12,
-        image: "/menu/angora-sandwich.jpg?v=bd57de24",
+        image: "/menu/angora-sandwich.jpg?v=2794591f",
         imageAlt:
           "Angora Sandwich, chicken döner in a crisp roll with garlic yogurt and tomato, pickles alongside",
       },
@@ -216,7 +216,7 @@ export const menu: MenuCategory[] = [
         description:
           "Three soft tacos, spiced chicken, slaw, tomato, herb drizzle.",
         price: 11,
-        image: "/menu/medi-taco.jpg?v=081d148c",
+        image: "/menu/medi-taco.jpg?v=917d091e",
         imageAlt:
           "Medi Taco, three soft tacos with chicken döner, slaw, tomato, and herb drizzle",
         crop: "50% 50%",
