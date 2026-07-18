@@ -190,18 +190,18 @@ export default function StoryPage() {
               portrait={
                 <Reveal
                   animation="anim-unveil"
-                  className="mx-auto mt-11 w-full max-w-[336px]"
+                  className="mx-auto mt-11 w-full max-w-[390px]"
                 >
-                  {/* Matted like every other photograph on the site; the
-                      cream mat lifts the navy jackets off the olive ground. */}
-                  <span className="block bg-cream p-2">
+                  {/* The drawing's paper is within a few values of
+                      cream-soft, so mat and sheet read as one page. */}
+                  <span className="block bg-cream-soft p-3">
                     <span className="block overflow-hidden">
                       <Image
-                        src="/chefs-portrait.jpg"
-                        alt="Chefs Can and Elif Engin in navy jackets embroidered with their names"
-                        width={468}
-                        height={780}
-                        sizes="336px"
+                        src="/chefs-drawing.jpg"
+                        alt="Drawing of chefs Can and Elif Engin in their chef jackets, hers with a United States flag on the sleeve, his with a Turkish flag"
+                        width={904}
+                        height={1400}
+                        sizes="390px"
                         className="w-full"
                       />
                     </span>
