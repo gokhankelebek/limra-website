@@ -24,11 +24,13 @@ function Movement({
   numeral,
   title,
   onOlive = false,
+  portrait,
   children,
 }: {
   numeral: string;
   title?: string;
   onOlive?: boolean;
+  portrait?: React.ReactNode;
   children: React.ReactNode;
 }) {
   return (
@@ -68,6 +70,7 @@ function Movement({
           <Medallion className="divider-mark h-5 w-5" />
           <span className="divider-line h-px w-16 origin-left bg-current" />
         </div>
+        {portrait}
         <div
           className={`mx-auto mt-9 max-w-xl space-y-6 font-body text-lg font-light leading-relaxed ${
             onOlive ? "text-cream/75" : "text-ink/75"
@@ -180,7 +183,32 @@ export default function StoryPage() {
             </div>
           </div>
           <div className="relative">
-            <Movement numeral="III" title="Chefs Can & Elif Engin" onOlive>
+            <Movement
+              numeral="III"
+              title="Chefs Can & Elif Engin"
+              onOlive
+              portrait={
+                <Reveal
+                  animation="anim-unveil"
+                  className="mx-auto mt-11 w-full max-w-[336px]"
+                >
+                  {/* Matted like every other photograph on the site; the
+                      cream mat lifts the navy jackets off the olive ground. */}
+                  <span className="block bg-cream p-2">
+                    <span className="block overflow-hidden">
+                      <Image
+                        src="/chefs-portrait.jpg"
+                        alt="Chefs Can and Elif Engin in navy jackets embroidered with their names"
+                        width={468}
+                        height={780}
+                        sizes="336px"
+                        className="w-full"
+                      />
+                    </span>
+                  </span>
+                </Reveal>
+              }
+            >
               <p>
                 Can cooked for fifteen years before Limra. Luxury hotels
                 first, then protocol dinners for heads of state. He left all
