@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import JsonLd from "@/components/JsonLd";
 import Medallion from "@/components/Medallion";
 import Reveal from "@/components/Reveal";
 import SiteFooter from "@/components/SiteFooter";
@@ -11,6 +12,7 @@ import {
   MAP_EMBED_URL,
   SERVICE_LINE,
 } from "@/data/contact";
+import { FAQ, FAQ_SCHEMA } from "@/data/faq";
 
 export const metadata: Metadata = {
   title: {
@@ -24,6 +26,7 @@ export const metadata: Metadata = {
 export default function VisitPage() {
   return (
     <>
+      <JsonLd data={FAQ_SCHEMA} />
       <SiteHeader />
       <main id="main" className="flex-1 bg-cream">
         {/* Masthead */}
@@ -120,6 +123,27 @@ export default function VisitPage() {
               referrerPolicy="no-referrer-when-downgrade"
               allowFullScreen
             />
+          </Reveal>
+        </section>
+
+        {/* Questions we get asked — also the FAQPage schema below */}
+        <section className="px-6 pb-24">
+          <Reveal className="mx-auto max-w-2xl">
+            <h2 className="eyebrow-lg text-center font-roman uppercase text-terracotta">
+              Before you come
+            </h2>
+            <dl className="mt-9 border-t border-olive/15">
+              {FAQ.map(({ q, a }) => (
+                <div key={q} className="border-b border-olive/15 py-6">
+                  <dt className="font-display text-xl leading-tight text-ink">
+                    {q}
+                  </dt>
+                  <dd className="mt-2 font-body text-base font-light leading-relaxed text-ink/65">
+                    {a}
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </Reveal>
         </section>
 

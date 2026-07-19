@@ -11,9 +11,11 @@ import ScrollRotate from "@/components/ScrollRotate";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import {
+  ADD_FRIES_PRICE,
   menu,
   menuClosing,
   menuIntro,
+  SIGNATURE_SAUCES,
   type MenuCategory,
   type MenuItem,
 } from "@/data/menu";
@@ -96,7 +98,11 @@ const SIGNATURE_ART: Record<string, { zoom: string; aspect?: string }> = {
 };
 
 function DishTags({ item, onOlive }: { item: MenuItem; onOlive: boolean }) {
-  const parts = [...(item.tags ?? []), ...(item.note ? [item.note] : [])];
+  const parts = [
+    ...(item.tags ?? []),
+    ...(item.addFries ? [`Add fries ${money(ADD_FRIES_PRICE)}`] : []),
+    ...(item.note ? [item.note] : []),
+  ];
   if (!parts.length) return null;
   return (
     <span className="mt-3 flex flex-wrap gap-1.5">
@@ -349,7 +355,75 @@ function CategorySection({
   );
 }
 
-/** V — The Case. An empty vitrine, announced, not invented. */
+/**
+ * V — Sides & Extras. Priced lines only, no photographs: fries, breads,
+ * sides, and the counter by the pound, set as four inscribed columns.
+ */
+function CounterSection({ category }: { category: MenuCategory }) {
+  return (
+    <section
+      id={category.id}
+      className="relative scroll-mt-12 overflow-hidden bg-cream py-24 text-ink lg:py-32"
+    >
+      <div className="relative mx-auto max-w-4xl px-6">
+        <Threshold category={category} onOlive={false} />
+
+        <div className="mt-14 grid gap-x-12 gap-y-12 sm:grid-cols-2">
+          {(category.counterGroups ?? []).map((group, gi) => (
+            <Reveal
+              key={group.title}
+              animation="anim-fade"
+              delay={STAGGER[gi % STAGGER.length]}
+            >
+              <h3 className="eyebrow-lg font-roman uppercase text-terracotta">
+                {group.title}
+              </h3>
+              <ul className="mt-5 border-t border-ink/10">
+                {group.items.map((line) => (
+                  <li
+                    key={line.name}
+                    className="flex items-baseline gap-3 border-b border-ink/10 py-3"
+                  >
+                    <span className="font-display text-lg leading-tight text-ink">
+                      {line.name}
+                    </span>
+                    {line.size && (
+                      <span className="micro shrink-0 font-roman uppercase text-olive/45">
+                        {line.size}
+                      </span>
+                    )}
+                    <span aria-hidden className="min-w-[1.5rem] flex-1">
+                      <span className="block w-full border-b border-current opacity-15" />
+                    </span>
+                    <span className="shrink-0 font-roman text-sm tracking-[0.12em] text-olive/70">
+                      {money(line.price)}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+          ))}
+        </div>
+
+        {/* The sauces every build-to-order dish chooses from, said once. */}
+        <Reveal className="mt-16 text-center">
+          <h3 className="eyebrow-lg font-roman uppercase text-terracotta">
+            House sauces
+          </h3>
+          <p className="mx-auto mt-4 max-w-lg font-body text-base font-light leading-relaxed text-ink/60">
+            {SIGNATURE_SAUCES.join(" · ")}
+          </p>
+          <p className="mx-auto mt-6 max-w-lg font-body text-sm font-light italic leading-relaxed text-ink/45">
+            Everything is prepared in a shared kitchen. Please tell us about
+            any allergy before you order.
+          </p>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/** VI — The Case. An empty vitrine, announced, not invented. */
 function CaseSection({ category }: { category: MenuCategory }) {
   return (
     <section
@@ -477,7 +551,9 @@ export default function MenuPage() {
         <MenuRail items={navItems} />
 
         {categories.map((category, i) =>
-          category.kind === "anticipation" ? (
+          category.kind === "counter" ? (
+            <CounterSection key={category.id} category={category} />
+          ) : category.kind === "anticipation" ? (
             category.id === "the-case" ? (
               <CaseSection key={category.id} category={category} />
             ) : (
