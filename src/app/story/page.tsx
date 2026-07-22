@@ -190,22 +190,32 @@ export default function StoryPage() {
               portrait={
                 <Reveal
                   animation="anim-unveil"
-                  className="mx-auto mt-11 w-full max-w-[390px]"
+                  className="mx-auto mt-11 w-full max-w-[380px]"
                 >
-                  {/* The drawing's paper is within a few values of
-                      cream-soft, so mat and sheet read as one page. */}
-                  <span className="block bg-cream-soft p-3">
-                    <span className="block overflow-hidden">
-                      <Image
-                        src="/chefs-drawing.jpg"
-                        alt="Drawing of chefs Can and Elif Engin in their chef jackets, hers with a United States flag on the sleeve, his with a Turkish flag"
-                        width={904}
-                        height={1400}
-                        sizes="390px"
-                        className="w-full"
-                      />
+                  {/* A framed print: a wide cream mat, a thin olive keyline
+                      cut around the photograph, and a gallery label beneath. */}
+                  <figure className="bg-cream-soft p-4 shadow-[0_2px_20px_rgba(26,26,23,0.28)] sm:p-5">
+                    <span className="block border border-olive/30 p-[3px]">
+                      <span className="block overflow-hidden">
+                        <Image
+                          src="/chefs-photo.jpg?v=cbb233e1"
+                          alt="Chefs Can and Elif Engin in navy jackets, hers with a United States flag on the sleeve, his with a Turkish flag"
+                          width={615}
+                          height={700}
+                          sizes="380px"
+                          className="w-full"
+                        />
+                      </span>
                     </span>
-                  </span>
+                    <figcaption className="mt-4 text-center">
+                      <span className="label block font-roman uppercase text-olive/70">
+                        Can &amp; Elif Engin
+                      </span>
+                      <span className="micro mt-1 block font-roman uppercase text-olive/45">
+                        Chefs &amp; owners
+                      </span>
+                    </figcaption>
+                  </figure>
                 </Reveal>
               }
             >
