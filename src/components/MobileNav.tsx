@@ -8,11 +8,12 @@ import { ADDRESS_LINES, CONTACT, ORDER_URL } from "@/data/contact";
 const LINKS = [
   { label: "Menu", href: "/menu" },
   { label: "Story", href: "/story" },
+  { label: "Catering", href: "/catering" },
   { label: "Gallery", href: "/gallery" },
   { label: "Visit", href: "/visit" },
 ];
 
-const NUMERALS = ["I", "II", "III", "IV"];
+const NUMERALS = ["I", "II", "III", "IV", "V"];
 
 /**
  * Phone navigation — a full-screen olive overlay in the brand's ceremonial

@@ -15,6 +15,7 @@ const COLS = [
     links: [
       { label: "Menu", href: "/menu" },
       { label: "Our story", href: "/story" },
+      { label: "Catering", href: "/catering" },
       { label: "Gallery", href: "/gallery" },
     ],
   },

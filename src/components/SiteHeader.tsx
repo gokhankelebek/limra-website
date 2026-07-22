@@ -7,6 +7,7 @@ import { ORDER_URL } from "@/data/contact";
 const NAV = [
   { label: "Menu", href: "/menu" },
   { label: "Story", href: "/story" },
+  { label: "Catering", href: "/catering" },
   { label: "Gallery", href: "/gallery" },
   { label: "Visit", href: "/visit" },
 ];
