@@ -12,6 +12,7 @@ import {
   CATERING_AREA,
   CATERING_FACTS,
   CATERING_MENU,
+  CATERING_SERVICE_MODES,
   CATERING_TIERS,
 } from "@/data/catering";
 import { CATERING_EMAIL, CATERING_EMAIL_HREF } from "@/data/contact";
@@ -57,11 +58,7 @@ const STEPS = [
 ];
 
 /** The three service levels — photos land here (WeTransfer). */
-const SERVICE_BAND = [
-  { label: "Pickup", note: "Ready at the counter." },
-  { label: "Delivery", note: "Brought to your door." },
-  { label: "Full Buffet Setup", note: "Delivered and set, 60+ guests." },
-];
+const SERVICE_BAND = CATERING_SERVICE_MODES;
 
 export default function CateringPage() {
   return (

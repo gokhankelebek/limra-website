@@ -112,6 +112,14 @@ export const CATERING_AREA = [
   "Durham",
 ] as const;
 
+/** The three ways catering reaches the guest. Shared by the home teaser
+ *  and the catering page so they never drift apart. */
+export const CATERING_SERVICE_MODES = [
+  { label: "Pickup", note: "Ready at the counter." },
+  { label: "Delivery", note: "Brought to your door." },
+  { label: "Full Buffet Setup", note: "Delivered and set, 60+ guests." },
+] as const;
+
 /** The two service tiers, kept deliberately clear for the guest. */
 export const CATERING_TIERS = [
   {

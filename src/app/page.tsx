@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import StorySection from "@/components/StorySection";
 import PhotoBand from "@/components/PhotoBand";
 import MenuPreview from "@/components/MenuPreview";
+import CateringStrip from "@/components/CateringStrip";
 import VisitStrip from "@/components/VisitStrip";
 import SiteFooter from "@/components/SiteFooter";
 
@@ -16,6 +17,7 @@ export default function Home() {
         <StorySection />
         <PhotoBand />
         <MenuPreview />
+        <CateringStrip />
         <VisitStrip />
       </main>
       <SiteFooter />
