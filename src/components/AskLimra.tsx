@@ -20,6 +20,7 @@ const SUGGESTIONS = [
 export default function AskLimra() {
   const [enabled, setEnabled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [turns, setTurns] = useState<Turn[]>([]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
@@ -30,6 +31,15 @@ export default function AskLimra() {
       .then((r) => r.json())
       .then((d) => setEnabled(Boolean(d.enabled)))
       .catch(() => setEnabled(false));
+  }, []);
+
+  // Hold the launcher back until the visitor has scrolled past the hero, so
+  // it doesn't sit next to the header's Order online button on first view.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 560);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
@@ -83,8 +93,16 @@ export default function AskLimra() {
     }
   }
 
+  const showLauncher = open || scrolled;
+
   return (
-    <div className="fixed bottom-4 right-4 z-40 sm:bottom-5 sm:right-5">
+    <div
+      className={`fixed bottom-4 right-4 z-40 transition-all duration-500 sm:bottom-5 sm:right-5 ${
+        showLauncher
+          ? "translate-y-0 opacity-100"
+          : "pointer-events-none translate-y-3 opacity-0"
+      }`}
+    >
       {open && (
         <div className="mb-3 flex max-h-[70vh] w-[min(92vw,380px)] flex-col overflow-hidden rounded-[3px] border border-olive/20 bg-cream">
           {/* Header */}
@@ -183,8 +201,9 @@ export default function AskLimra() {
         </div>
       )}
 
-      {/* Floating launcher — a labelled pill so it reads as "ask us,"
-          in terracotta so it carries on both cream and olive grounds. */}
+      {/* Floating launcher — squared to match every other button, and in
+          cream (not terracotta) so it doesn't echo the header's Order online.
+          The hairline border and shadow keep it legible on cream grounds. */}
       <button
         type="button"
         aria-label={open ? "Close Ask Limra" : "Open Ask Limra"}
@@ -192,8 +211,8 @@ export default function AskLimra() {
         onClick={() => setOpen(!open)}
         className={
           open
-            ? "ml-auto flex h-12 w-12 items-center justify-center rounded-full bg-cream text-olive shadow-[0_2px_12px_rgba(26,26,23,0.18)] transition-colors hover:bg-cream-deep sm:h-14 sm:w-14"
-            : "ml-auto flex items-center gap-2.5 rounded-full bg-terracotta py-2.5 pl-2.5 pr-4 text-cream shadow-[0_4px_18px_rgba(26,26,23,0.28)] transition-colors hover:bg-terracotta-deep sm:py-3 sm:pl-3 sm:pr-5"
+            ? "ml-auto flex h-12 w-12 items-center justify-center rounded-[2px] border border-olive/20 bg-cream text-olive shadow-[0_4px_18px_rgba(26,26,23,0.16)] transition-colors hover:bg-cream-deep sm:h-14 sm:w-14"
+            : "ml-auto flex items-center gap-2.5 rounded-[2px] border border-olive/25 bg-cream py-2.5 pl-2.5 pr-4 text-olive shadow-[0_4px_18px_rgba(26,26,23,0.16)] transition-colors hover:bg-cream-deep sm:py-3 sm:pl-3 sm:pr-5"
         }
       >
         <Medallion
