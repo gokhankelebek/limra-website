@@ -37,6 +37,13 @@ export const ORDER_URL = "/order";
 
 export const SERVICE_LINE = "Dine-in · Takeout · Delivery";
 
+// Public catering address, shown as the "Email us" action on /catering.
+// CONFIRM with the owners — assumed from the limramedi.com domain. Override
+// with NEXT_PUBLIC_CATERING_EMAIL without a code change.
+export const CATERING_EMAIL =
+  process.env.NEXT_PUBLIC_CATERING_EMAIL || "catering@limramedi.com";
+export const CATERING_EMAIL_HREF = `mailto:${CATERING_EMAIL}`;
+
 // From limramedi.com — used in the footer and Restaurant schema sameAs.
 export const SOCIALS = [
   { label: "Instagram", href: "https://www.instagram.com/limra_mediterranean/" },

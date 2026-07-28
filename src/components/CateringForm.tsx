@@ -1,13 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { CATERING_INTERESTS } from "@/data/catering";
-import { CONTACT } from "@/data/contact";
+import {
+  CATERING_INTERESTS,
+  EVENT_TYPES,
+  SERVICE_TYPES,
+} from "@/data/catering";
+import { CATERING_EMAIL, CATERING_EMAIL_HREF } from "@/data/contact";
 
 type Status = "idle" | "sending" | "sent" | "error" | "fallback";
 
 const field =
   "w-full rounded-[2px] border border-olive/25 bg-cream-soft px-4 py-3 font-body text-base text-ink placeholder:text-ink/35 transition-colors focus:border-olive focus:outline-none";
+const selectField = `${field} appearance-none bg-[length:0] pr-10`;
 const labelCls = "label block font-roman uppercase text-olive/70";
 
 export default function CateringForm() {
@@ -35,6 +40,8 @@ export default function CateringForm() {
           phone: data.get("phone"),
           eventDate: data.get("eventDate"),
           guests: data.get("guests"),
+          eventType: data.get("eventType"),
+          serviceType: data.get("serviceType"),
           message: data.get("message"),
           company: data.get("company"), // honeypot
           interests,
@@ -59,8 +66,8 @@ export default function CateringForm() {
       <div className="rounded-[2px] border border-olive/20 bg-cream-soft p-10 text-center">
         <p className="font-display text-3xl text-olive">Thank you.</p>
         <p className="mx-auto mt-4 max-w-md font-body text-base font-light leading-relaxed text-ink/70">
-          Your inquiry is with us. We will be in touch to shape the table
-          around your event. Hoş geldiniz.
+          Your catering request has been received. Our team will get back to
+          you as soon as possible. Hoş geldiniz.
         </p>
       </div>
     );
@@ -130,7 +137,47 @@ export default function CateringForm() {
             className={`mt-2 ${field}`}
           />
         </div>
+        <div>
+          <label htmlFor="cat-event" className={labelCls}>
+            Event type
+          </label>
+          <select id="cat-event" name="eventType" className={`mt-2 ${selectField}`}>
+            <option value="">Select…</option>
+            {EVENT_TYPES.map((t) => (
+              <option key={t} value={t}>
+                {t}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
+
+      <fieldset>
+        <legend className={labelCls}>Service type</legend>
+        <div className="mt-3 grid gap-2 sm:grid-cols-3">
+          {SERVICE_TYPES.map((t, i) => (
+            <label
+              key={t}
+              className="flex cursor-pointer items-start gap-2.5 rounded-[2px] border border-olive/20 bg-cream-soft px-3.5 py-3 transition-colors has-[:checked]:border-terracotta has-[:checked]:bg-terracotta/5"
+            >
+              <input
+                type="radio"
+                name="serviceType"
+                value={t}
+                defaultChecked={i === 0}
+                className="mt-1 accent-terracotta"
+              />
+              <span className="font-body text-sm font-light leading-snug text-ink/75">
+                {t}
+              </span>
+            </label>
+          ))}
+        </div>
+        <p className="mt-2.5 font-body text-xs font-light leading-relaxed text-ink/45">
+          Delivery and buffet setup may carry a service fee based on location,
+          guest count, and the setup you need.
+        </p>
+      </fieldset>
 
       <fieldset>
         <legend className={labelCls}>What can we bring?</legend>
@@ -171,19 +218,19 @@ export default function CateringForm() {
 
       {status === "error" && (
         <p className="font-body text-sm text-terracotta-deep">
-          Something slipped. Please try again, or call {CONTACT.phoneDisplay}.
+          Something slipped. Please try again, or email {CATERING_EMAIL}.
         </p>
       )}
       {status === "fallback" && (
         <p className="font-body text-sm leading-relaxed text-ink/70">
-          Our inbox isn&apos;t taking messages just yet. Please call{" "}
+          Our inbox isn&apos;t taking messages just yet. Please email us at{" "}
           <a
-            href={CONTACT.phoneHref}
+            href={CATERING_EMAIL_HREF}
             className="text-terracotta underline underline-offset-4"
           >
-            {CONTACT.phoneDisplay}
+            {CATERING_EMAIL}
           </a>{" "}
-          and we&apos;ll set it up by hand.
+          and we&apos;ll take it from there.
         </p>
       )}
 
@@ -193,15 +240,15 @@ export default function CateringForm() {
           disabled={status === "sending"}
           className="rounded-[2px] bg-terracotta px-10 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-cream transition-colors hover:bg-terracotta-deep disabled:opacity-60"
         >
-          {status === "sending" ? "Sending…" : "Send inquiry"}
+          {status === "sending" ? "Sending…" : "Request a quote"}
         </button>
         <span className="font-body text-sm font-light text-ink/50">
-          Or call{" "}
+          Or email{" "}
           <a
-            href={CONTACT.phoneHref}
+            href={CATERING_EMAIL_HREF}
             className="text-olive underline-offset-4 hover:underline"
           >
-            {CONTACT.phoneDisplay}
+            {CATERING_EMAIL}
           </a>
         </span>
       </div>

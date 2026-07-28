@@ -1,12 +1,12 @@
-import { ADDRESS_LINES, CONTACT, SERVICE_LINE } from "./contact";
+import { ADDRESS_LINES, SERVICE_LINE } from "./contact";
 
 /**
  * Questions people actually search before a restaurant opens. Every answer
  * is grounded in the owners' own facts: the boards, the story page, or the
  * contact details. Nothing here is inferred.
  *
- * Deliberately absent until Can & Elif confirm: halal sourcing, the exact
- * opening date, and parking.
+ * Deliberately absent until Can & Elif confirm: the exact opening date and
+ * parking.
  */
 export const FAQ: { q: string; a: string }[] = [
   {
@@ -14,12 +14,16 @@ export const FAQ: { q: string; a: string }[] = [
     a: "Limra opens this summer in Holly Springs. The mailing list hears the date first, along with an invitation to the soft-opening tasting.",
   },
   {
+    q: "Is Limra halal?",
+    a: "Yes. Limra is 100% halal, in the restaurant and in catering.",
+  },
+  {
     q: "Where is Limra?",
     a: `${ADDRESS_LINES[0]}, ${ADDRESS_LINES[1]}. It sits at Peterson Station.`,
   },
   {
     q: "Do you take reservations?",
-    a: `No. Limra is counter service: you order at the counter and take a table. For large gatherings and catering, call ${CONTACT.phoneDisplay}.`,
+    a: "No. Limra is counter service: you order at the counter and take a table. Catering is the exception, and you can request that on the Catering page.",
   },
   {
     q: "Is there anything for vegans?",
@@ -27,11 +31,11 @@ export const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "What can I choose from?",
-    a: "Most dishes are built to order. You pick a protein — falafel, chicken döner, tantuni or beef döner — and one of four house sauces: Limra sauce, tzatziki, harissa mayo or garlic aioli. Each dish page lists its own prices.",
+    a: "Most dishes are built to order. You pick a protein (falafel, chicken döner, tantuni or beef döner) and one of four house sauces: Limra sauce, tzatziki, harissa mayo or garlic aioli. Each dish page lists its own prices.",
   },
   {
     q: "Do you cater?",
-    a: `Yes. The same kitchen travels for celebrations and gatherings. Call ${CONTACT.phoneDisplay} to arrange it.`,
+    a: "Yes. 100% halal catering for 10 to 200+ guests, across Holly Springs, Apex, Cary, Fuquay-Varina, Raleigh, Durham and the Triangle. Pickup and delivery, with full buffet setup for 60 or more. Request a quote on the Catering page.",
   },
   {
     q: "Can I order online, or get delivery?",

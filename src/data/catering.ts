@@ -1,5 +1,5 @@
-// Limra catering menu — transcribed verbatim from the owners' draft
-// (Limra_Catering_Menu_Draft_v3.pdf). Prices and yields are theirs.
+// Limra catering — menu from the owners' draft (Limra_Catering_Menu_Draft_v3.pdf)
+// plus the service facts they confirmed 2026-07-19. Prices and yields are theirs.
 // "TBD" items carry no price until the owners set one.
 
 export type CateringItem = {
@@ -20,13 +20,20 @@ export type CateringSection = {
 
 export const CATERING_MENU: CateringSection[] = [
   {
-    id: "proteins",
-    title: "Proteins",
-    note: "From the spit and the oven, by the pound or by the tray.",
+    id: "by-the-pound",
+    title: "By the Pound",
+    note: "Carved from the vertical spit, priced by the pound.",
     items: [
       { name: "Beef gyro / döner", price: "$22.99", yield: "per lb" },
       { name: "Chicken gyro / döner", price: "$18.99", yield: "per lb" },
       { name: "Tantuni, slow-cooked beef", price: "$21.99", yield: "per lb" },
+    ],
+  },
+  {
+    id: "catering-trays",
+    title: "Catering Trays",
+    note: "Full trays from the kitchen, sized for the table.",
+    items: [
       { name: "Sliced roast beef", price: "$140", yield: "Serves 12" },
       { name: "Chicken piccata", price: "$80", yield: "Serves 10" },
       { name: "Grilled salmon", price: "$130", yield: "Serves 10" },
@@ -85,3 +92,54 @@ export const CATERING_MENU: CateringSection[] = [
 
 /** For the inquiry form: the section titles a guest can note interest in. */
 export const CATERING_INTERESTS = CATERING_MENU.map((s) => s.title);
+
+// ── Service facts (owner-confirmed 2026-07-19) ──────────────────────────
+
+/** Shown as the top-line promise on the catering page. */
+export const CATERING_FACTS = [
+  "100% Halal Mediterranean",
+  "10 – 200+ guests",
+  "Pickup · Delivery · Full Buffet Setup",
+] as const;
+
+/** The Triangle-area towns catering delivers to. */
+export const CATERING_AREA = [
+  "Apex",
+  "Holly Springs",
+  "Cary",
+  "Fuquay-Varina",
+  "Raleigh",
+  "Durham",
+] as const;
+
+/** The two service tiers, kept deliberately clear for the guest. */
+export const CATERING_TIERS = [
+  {
+    range: "10 – 59 guests",
+    title: "Order & pick up",
+    body: "Catering trays and proteins by the pound. Pickup, or standard delivery where available.",
+  },
+  {
+    range: "60 – 200+ guests",
+    title: "Delivery & full buffet setup",
+    body: "We deliver and set the buffet for you. Setup pricing depends on the size, the location, and the service level you need.",
+  },
+] as const;
+
+/** Event types offered in the quote form. */
+export const EVENT_TYPES = [
+  "Corporate event",
+  "Office catering",
+  "Birthday",
+  "Wedding",
+  "Private event",
+  "Special event",
+  "Other",
+] as const;
+
+/** Service types offered in the quote form. */
+export const SERVICE_TYPES = [
+  "Pickup",
+  "Delivery only",
+  "Delivery + buffet setup (60+ guests)",
+] as const;

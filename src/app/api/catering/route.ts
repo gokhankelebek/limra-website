@@ -39,6 +39,8 @@ type Payload = {
   phone: string;
   eventDate: string;
   guests: string;
+  eventType: string;
+  serviceType: string;
   interests: string[];
   message: string;
   /** honeypot — real people leave it empty */
@@ -78,6 +80,8 @@ export async function POST(req: Request) {
   const phone = clean(body.phone, MAX.generic);
   const eventDate = clean(body.eventDate, MAX.generic);
   const guests = clean(body.guests, MAX.generic);
+  const eventType = clean(body.eventType, MAX.generic);
+  const serviceType = clean(body.serviceType, MAX.generic);
   const message = clean(body.message, MAX.message);
   const interests = Array.isArray(body.interests)
     ? body.interests.map((i) => clean(i, 60)).filter(Boolean).slice(0, 12)
@@ -104,6 +108,8 @@ export async function POST(req: Request) {
     ["Phone", phone],
     ["Event date", eventDate],
     ["Guests", guests],
+    ["Event type", eventType],
+    ["Service type", serviceType],
     ["Interested in", interests.join(", ")],
   ].filter(([, v]) => v);
 
@@ -125,27 +131,57 @@ export async function POST(req: Request) {
     message ? `\nMessage:\n${message}` : "",
   ].join("\n");
 
-  try {
-    const res = await fetch("https://api.resend.com/emails", {
+  const send = (payload: Record<string, unknown>) =>
+    fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${RESEND_KEY}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        from: FROM,
-        to: [INBOX],
-        reply_to: email || undefined,
-        subject: `Catering inquiry: ${name}${guests ? ` (${guests})` : ""}`,
-        html,
-        text,
-      }),
+      body: JSON.stringify(payload),
+    });
+
+  // 1) Notify the owners. This one must succeed.
+  try {
+    const res = await send({
+      from: FROM,
+      to: [INBOX],
+      reply_to: email || undefined,
+      subject: `Catering inquiry: ${name}${guests ? ` (${guests})` : ""}`,
+      html,
+      text,
     });
     if (!res.ok) {
       return Response.json({ error: "send-failed" }, { status: 502 });
     }
   } catch {
     return Response.json({ error: "send-failed" }, { status: 502 });
+  }
+
+  // 2) Auto-confirmation to the guest. Best-effort — a failure here must not
+  // fail the request, since the owners already have the inquiry.
+  if (email) {
+    const confirmText =
+      "Thank you for your interest in Limra Catering!\n\n" +
+      "We've received your catering request and our team will review the details. " +
+      "We'll get back to you as soon as possible to discuss availability, menu options, and the next steps.\n\n" +
+      "Thank you for considering Limra for your event.\n\nLimra Mediterranean";
+    try {
+      await send({
+        from: FROM,
+        to: [email],
+        subject: "We received your catering request · Limra Mediterranean",
+        text: confirmText,
+        html: `<p>Thank you for your interest in <strong>Limra Catering</strong>.</p>
+          <p>We've received your catering request and our team will review the details.
+          We'll get back to you as soon as possible to discuss availability, menu
+          options, and the next steps.</p>
+          <p>Thank you for considering Limra for your event.</p>
+          <p style="color:#2d5b14">Limra Mediterranean</p>`,
+      });
+    } catch {
+      // swallow — the owners still got the inquiry
+    }
   }
 
   return Response.json({ ok: true });

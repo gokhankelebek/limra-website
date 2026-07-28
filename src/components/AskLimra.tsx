@@ -183,15 +183,28 @@ export default function AskLimra() {
         </div>
       )}
 
-      {/* Floating button */}
+      {/* Floating launcher — a labelled pill so it reads as "ask us,"
+          in terracotta so it carries on both cream and olive grounds. */}
       <button
         type="button"
         aria-label={open ? "Close Ask Limra" : "Open Ask Limra"}
         aria-expanded={open}
         onClick={() => setOpen(!open)}
-        className="ml-auto flex h-12 w-12 items-center justify-center rounded-full bg-cream text-olive shadow-[0_2px_12px_rgba(26,26,23,0.18)] transition-colors hover:bg-cream-deep sm:h-14 sm:w-14"
+        className={
+          open
+            ? "ml-auto flex h-12 w-12 items-center justify-center rounded-full bg-cream text-olive shadow-[0_2px_12px_rgba(26,26,23,0.18)] transition-colors hover:bg-cream-deep sm:h-14 sm:w-14"
+            : "ml-auto flex items-center gap-2.5 rounded-full bg-terracotta py-2.5 pl-2.5 pr-4 text-cream shadow-[0_4px_18px_rgba(26,26,23,0.28)] transition-colors hover:bg-terracotta-deep sm:py-3 sm:pl-3 sm:pr-5"
+        }
       >
-        <Medallion className="h-8 w-8 sm:h-9 sm:w-9" title="Ask Limra" />
+        <Medallion
+          className={open ? "h-8 w-8 sm:h-9 sm:w-9" : "h-7 w-7 sm:h-8 sm:w-8"}
+          title="Ask Limra"
+        />
+        {!open && (
+          <span className="font-roman text-[0.7rem] uppercase tracking-[0.16em]">
+            Ask Limra
+          </span>
+        )}
       </button>
     </div>
   );
