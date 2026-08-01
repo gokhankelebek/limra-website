@@ -10,6 +10,7 @@ import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import {
   CATERING_AREA,
+  CATERING_CUSTOM_NOTE,
   CATERING_FACTS,
   CATERING_MENU,
   CATERING_SERVICE_MODES,
@@ -249,6 +250,12 @@ export default function CateringPage() {
                 <p className="mt-3 font-body text-sm font-light italic leading-relaxed text-ink/50">
                   {section.note}
                 </p>
+                {section.lead && (
+                  <p className="micro mt-2 inline-flex items-center gap-1.5 font-roman uppercase text-terracotta">
+                    <span aria-hidden>◆</span>
+                    {section.lead}
+                  </p>
+                )}
                 <ul className="mt-5 border-t border-ink/10">
                   {section.items.map((item) => (
                     <li
@@ -287,6 +294,16 @@ export default function CateringPage() {
             <p className="mx-auto mt-3 max-w-xl font-body text-sm font-light leading-relaxed text-ink/50">
               And the surrounding Triangle. Delivery fees depend on distance and
               order size, and are confirmed with your quote.
+            </p>
+          </Reveal>
+
+          {/* Custom / off-menu catering */}
+          <Reveal className="mx-auto mt-16 max-w-2xl rounded-[2px] border border-olive/20 bg-cream-soft p-7 text-center sm:p-9">
+            <p className="eyebrow-lg font-roman uppercase text-terracotta">
+              {CATERING_CUSTOM_NOTE.title}
+            </p>
+            <p className="mx-auto mt-4 max-w-xl font-body text-[0.95rem] font-light leading-relaxed text-ink/65">
+              {CATERING_CUSTOM_NOTE.body}
             </p>
           </Reveal>
         </section>

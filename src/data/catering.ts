@@ -15,6 +15,8 @@ export type CateringSection = {
   title: string;
   /** one line of framing for the section head */
   note: string;
+  /** lead-time requirement, shown as a small emphasized line */
+  lead?: string;
   items: CateringItem[];
 };
 
@@ -23,6 +25,7 @@ export const CATERING_MENU: CateringSection[] = [
     id: "by-the-pound",
     title: "By the Pound",
     note: "Carved from the vertical spit, priced by the pound.",
+    lead: "Minimum 2 hours' notice",
     items: [
       { name: "Beef gyro / döner", price: "$22.99", yield: "per lb" },
       { name: "Chicken gyro / döner", price: "$18.99", yield: "per lb" },
@@ -33,6 +36,7 @@ export const CATERING_MENU: CateringSection[] = [
     id: "catering-trays",
     title: "Catering Trays",
     note: "Full trays from the kitchen, sized for the table.",
+    lead: "Minimum 24 hours' notice",
     items: [
       { name: "Sliced roast beef", price: "$140", yield: "Serves 12" },
       { name: "Chicken piccata", price: "$80", yield: "Serves 10" },
@@ -76,7 +80,7 @@ export const CATERING_MENU: CateringSection[] = [
         price: "$40",
         yield: "Serves 10",
       },
-      { name: "Pasta salad with mozzarella", price: "TBD" },
+      { name: "Pasta salad with mortadella", price: "TBD" },
     ],
   },
   {
@@ -130,9 +134,16 @@ export const CATERING_TIERS = [
   {
     range: "60 – 200+ guests",
     title: "Delivery & full buffet setup",
-    body: "We deliver and set the buffet for you. Setup pricing depends on the size, the location, and the service level you need.",
+    body: "We deliver and set the buffet for you. Minimum 48 hours' notice, planned around availability. Setup pricing depends on the size, the location, and the service level you need.",
   },
 ] as const;
+
+/** Custom / off-menu catering — its own quiet note, since it changes the
+ *  lead time and what we can promise. */
+export const CATERING_CUSTOM_NOTE = {
+  title: "Custom & off-menu",
+  body: "Planning something that isn't on the menu? Reach us at least 48 hours ahead. These are made to order with fresh ingredients sourced for your event, so we can't guarantee last-minute requests, but we'd love to build the menu with you.",
+} as const;
 
 /** Event types offered in the quote form. */
 export const EVENT_TYPES = [
