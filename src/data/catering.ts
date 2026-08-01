@@ -116,6 +116,23 @@ export const CATERING_AREA = [
   "Durham",
 ] as const;
 
+/** Real buffet-setup photos from the owners' events, shown on the catering
+ *  page in place of the old placeholder band. Hashes bust the image cache. */
+export const BUFFET_PHOTOS = [
+  {
+    src: "/catering/buffet-1.jpg?v=18a2faf3",
+    alt: "Limra catering buffet set in a rustic barn — chafing dishes and plated appetizers down a long white-linen table",
+  },
+  {
+    src: "/catering/buffet-2.jpg?v=377ca21b",
+    alt: "A Limra catering spread up close — bulgur rice with lemon, broccoli salad, watermelon, and creamy dip in glass bowls",
+  },
+  {
+    src: "/catering/buffet-3.jpg?v=9d999f09",
+    alt: "A Limra outdoor evening catering buffet under the trees, with guests gathering at golden hour",
+  },
+] as const;
+
 /** The three ways catering reaches the guest. Shared by the home teaser
  *  and the catering page so they never drift apart. */
 export const CATERING_SERVICE_MODES = [

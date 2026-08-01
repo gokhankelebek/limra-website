@@ -9,11 +9,11 @@ import ScrollRotate from "@/components/ScrollRotate";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import {
+  BUFFET_PHOTOS,
   CATERING_AREA,
   CATERING_CUSTOM_NOTE,
   CATERING_FACTS,
   CATERING_MENU,
-  CATERING_SERVICE_MODES,
   CATERING_TIERS,
 } from "@/data/catering";
 import { CATERING_EMAIL, CATERING_EMAIL_HREF } from "@/data/contact";
@@ -51,15 +51,25 @@ const CATERING_SCHEMA = {
   },
 };
 
-/** Kept from the original, tightened to one line each. */
+/** The process, each step tagged with the service mode it maps to. The
+ *  terracotta tag is what used to label the photo band. */
 const STEPS = [
-  { h: "Tell us the table", p: "The occasion, the head count, the date." },
-  { h: "We shape the menu", p: "By the pound and by the tray, to fit the room." },
-  { h: "We set the table", p: "Pickup, delivery, or a full buffet, set for you." },
+  {
+    h: "Tell us the table",
+    p: "The occasion, the head count, the date.",
+    tag: "Pickup",
+  },
+  {
+    h: "We shape the menu",
+    p: "By the pound and by the tray, to fit the room.",
+    tag: "Delivery",
+  },
+  {
+    h: "We set the table",
+    p: "We deliver and set it, ready to serve.",
+    tag: "Full Buffet Setup",
+  },
 ];
-
-/** The three service levels — photos land here (WeTransfer). */
-const SERVICE_BAND = CATERING_SERVICE_MODES;
 
 export default function CateringPage() {
   return (
@@ -136,32 +146,24 @@ export default function CateringPage() {
           </div>
         </div>
 
-        {/* Pickup → Delivery → Full Buffet Setup — the visual band.
-            Placeholders now; drop the WeTransfer photos in when they arrive. */}
+        {/* Real buffet-setup photos from the owners' events */}
         <section className="bg-cream px-6 pb-4 pt-4">
           <div className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-3">
-            {SERVICE_BAND.map((s, i) => (
+            {BUFFET_PHOTOS.map((photo, i) => (
               <Reveal
-                key={s.label}
+                key={photo.src}
                 animation="anim-fade"
                 delay={(["delay-1", "delay-2", "delay-3"] as const)[i]}
               >
-                <div className="group relative aspect-[4/3] overflow-hidden rounded-[2px] border border-olive/20 bg-olive-deep">
-                  {/* medallion watermark stands in until the photo lands */}
-                  <div
-                    aria-hidden
-                    className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-[0.08]"
-                  >
-                    <Medallion className="h-28 w-28 text-cream" />
-                  </div>
-                  <div className="absolute inset-x-0 bottom-0 p-4 text-center">
-                    <p className="label font-roman uppercase text-cream">
-                      {s.label}
-                    </p>
-                    <p className="mt-1 font-body text-xs font-light text-cream/60">
-                      {s.note}
-                    </p>
-                  </div>
+                <div className="group overflow-hidden rounded-[2px] border border-olive/20">
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    width={1200}
+                    height={900}
+                    sizes="(max-width: 640px) 90vw, 380px"
+                    className="aspect-[4/3] w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
+                  />
                 </div>
               </Reveal>
             ))}
@@ -182,6 +184,9 @@ export default function CateringPage() {
                 <h2 className="mt-1 font-display text-xl text-ink">{s.h}</h2>
                 <p className="mx-auto mt-1 max-w-[16rem] font-body text-sm font-light leading-relaxed text-ink/55">
                   {s.p}
+                </p>
+                <p className="label mt-3 font-roman uppercase text-terracotta">
+                  {s.tag}
                 </p>
               </Reveal>
             ))}
