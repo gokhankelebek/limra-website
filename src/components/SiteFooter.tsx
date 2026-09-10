@@ -112,6 +112,13 @@ export default function SiteFooter() {
         <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-olive/15 pt-8 text-ink/55 md:flex-row md:items-center">
           <p className="font-body text-sm">
             © {new Date().getFullYear()} Limra Mediterranean Restaurant
+            <span className="mx-2 text-olive/30">·</span>
+            <Link
+              href="/privacy"
+              className="transition-colors hover:text-terracotta"
+            >
+              Privacy
+            </Link>
           </p>
           <p className="micro font-roman uppercase">
             Limra · Can &amp; Elif

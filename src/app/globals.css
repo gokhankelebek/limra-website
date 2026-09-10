@@ -115,6 +115,39 @@ html {
   pointer-events: none;
 }
 
+/* Long-form policy text (privacy page and any future legal page) */
+.policy-prose {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: color-mix(in oklab, var(--color-ink) 78%, transparent);
+}
+.policy-prose p + p,
+.policy-prose ul + p,
+.policy-prose p + ul {
+  margin-top: 1rem;
+}
+.policy-prose strong {
+  font-weight: 500;
+  color: var(--color-ink);
+}
+.policy-prose ul {
+  padding-left: 1.25rem;
+  list-style: disc;
+}
+.policy-prose li + li {
+  margin-top: 0.5rem;
+}
+.policy-prose a {
+  color: var(--color-olive);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.policy-prose a:hover {
+  color: var(--color-terracotta);
+}
+
 /* Map tint — pull Google's palette toward ours, keep it legible */
 .map-tint {
   filter: grayscale(20%) sepia(18%) hue-rotate(50deg) opacity(90%);
