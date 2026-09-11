@@ -16,7 +16,7 @@ import {
   CATERING_MENU,
   CATERING_TIERS,
 } from "@/data/catering";
-import { CATERING_EMAIL, CATERING_EMAIL_HREF } from "@/data/contact";
+import { CATERING_EMAIL, CATERING_EMAIL_HREF, CONTACT } from "@/data/contact";
 import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -34,7 +34,7 @@ const CATERING_SCHEMA = {
   name: "Limra Mediterranean Catering",
   servesCuisine: "Mediterranean",
   url: `${SITE_URL}/catering`,
-  telephone: "+1-984-999-5388",
+  telephone: CONTACT.phoneSchema,
   email: CATERING_EMAIL,
   areaServed: CATERING_AREA.map((name) => ({
     "@type": "City",

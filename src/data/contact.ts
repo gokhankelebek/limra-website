@@ -6,8 +6,10 @@ export const CONTACT = {
   locality: "Holly Springs",
   region: "NC",
   postalCode: "27539",
-  phoneDisplay: "(984) 999-5388",
-  phoneHref: "tel:+19849995388",
+  phoneDisplay: "(919) 446-6060",
+  phoneHref: "tel:+19194466060",
+  // schema.org telephone (Restaurant / FoodEstablishment JSON-LD)
+  phoneSchema: "+1-919-446-6060",
 } as const;
 
 // Hours as published on limramedi.com: 11am — 9pm, daily.

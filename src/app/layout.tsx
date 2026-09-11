@@ -4,7 +4,7 @@ import Script from "next/script";
 import AskLimra from "@/components/AskLimra";
 import JsonLd from "@/components/JsonLd";
 import { SITE_URL } from "@/lib/site";
-import { HOURS, SOCIALS } from "@/data/contact";
+import { CONTACT, HOURS, SOCIALS } from "@/data/contact";
 import "./globals.css";
 
 // Pre-paint gate for the home-page entrance: hold the page (CSS does the
@@ -75,7 +75,7 @@ const RESTAURANT_SCHEMA = {
   slogan: "A modern Mediterranean table, named for an ancient city.",
   acceptsReservations: "False",
   hasMenu: `${SITE_URL}/menu`,
-  telephone: "+1-984-999-5388",
+  telephone: CONTACT.phoneSchema,
   priceRange: "$$",
   address: {
     "@type": "PostalAddress",
