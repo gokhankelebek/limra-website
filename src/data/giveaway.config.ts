@@ -2,18 +2,20 @@ import { ADDRESS_LINES, CATERING_EMAIL } from "./contact";
 
 // Grand Opening Giveaway: every date, prize, link and name in one place.
 //
-// The entry form URL comes from NEXT_PUBLIC_GIVEAWAY_FORM_URL (set it in
-// Vercel; the /g/enter redirect in next.config.ts reads the same variable).
-// Until it exists, entry buttons point at the how-to-enter section and the
-// page shows a visible "form link coming" note so nobody ships a dead link.
-const FORM_URL = process.env.NEXT_PUBLIC_GIVEAWAY_FORM_URL;
+// The entry form: a Google Form owned by prodigitalstrategy@gmail.com
+// ("Limra Grand Opening Giveaway (entries)"). NEXT_PUBLIC_GIVEAWAY_FORM_URL
+// overrides it without a code change; the /g/enter route reads the same
+// constant so the printed QR codes follow along.
+export const DEFAULT_FORM_URL =
+  "https://docs.google.com/forms/d/e/1FAIpQLSdvYTDGT7f1JviOttZn-1E7RvyIneyMYzTmDHIlh2EvG6wQeA/viewform";
+const FORM_URL = process.env.NEXT_PUBLIC_GIVEAWAY_FORM_URL || DEFAULT_FORM_URL;
 
 export const GIVEAWAY = {
   instagramHandle: "@limra_mediterranean",
   instagramUrl: "https://www.instagram.com/limra_mediterranean/",
   hashtag: "#LimraMediterranean",
-  formUrl: FORM_URL || "#how-to-enter",
-  formConfigured: Boolean(FORM_URL),
+  formUrl: FORM_URL,
+  formConfigured: true,
   // Both instants are Eastern Daylight Time (-04:00); the offsets make them
   // exact regardless of the server's or the visitor's time zone.
   opensAt: "2026-09-27T00:00:00-04:00",
