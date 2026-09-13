@@ -6,6 +6,7 @@ import {
   SEAL_CY,
   RING_R,
 } from "@/components/Medallion";
+import { GIVEAWAY } from "@/data/giveaway.config";
 
 export const runtime = "edge";
 export const alt = "Limra Mediterranean Grand Opening Giveaway: win an iPhone 17 Pro Max";
@@ -18,7 +19,7 @@ const TERRACOTTA = "#A44D14";
 
 const EYEBROW = "GRAND OPENING GIVEAWAY";
 const HEADLINE = "Win an iPhone 17 Pro Max";
-const DATES = "SEPTEMBER 27 · OCTOBER 6, 2026 · HOLLY SPRINGS, NC";
+const DATES = `${GIVEAWAY.opensLabelShort} · ${GIVEAWAY.closesLabelLong} · HOLLY SPRINGS, NC`.toUpperCase();
 const FOOT = "NO PURCHASE NECESSARY · LIMRA MEDITERRANEAN";
 const TEXT = EYEBROW + HEADLINE + DATES + FOOT;
 

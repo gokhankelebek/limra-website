@@ -1,10 +1,11 @@
-import { ADDRESS_LINES, CATERING_EMAIL } from "./contact";
+import { ADDRESS_LINES } from "./contact";
 
 // Grand Opening Giveaway: every date, prize, link and name in one place.
 //
-// Entries are taken on the site itself (/giveaway/enter) and stored two
-// ways by /api/giveaway: mirrored into the Google Form below, which feeds the
-// owners' response Sheet, and emailed with the screenshot via Resend.
+// Entries are taken on the site itself (/giveaway/enter); /api/giveaway
+// mirrors each one into the Google Form below, which feeds the owners'
+// response Sheet (the single list used for the drawing). Verification
+// screenshots travel by Instagram DM, never through the site.
 // NEXT_PUBLIC_GIVEAWAY_FORM_URL overrides the entry URL without a code
 // change (e.g. to fall back to the Google Form directly); /g/enter follows.
 export const GOOGLE_FORM_ID =
@@ -13,7 +14,7 @@ export const GOOGLE_FORM_VIEW_URL = `https://docs.google.com/forms/d/e/${GOOGLE_
 export const GOOGLE_FORM_POST_URL = `https://docs.google.com/forms/d/e/${GOOGLE_FORM_ID}/formResponse`;
 // Google Form field ids (entry.NNN) for the mirror, filled from the live form.
 export const GOOGLE_FORM_ENTRIES: Record<
-  "name" | "handle" | "email" | "phone" | "postType" | "postUrl" | "hashtag" | "screenshot" | "eligibility",
+  "name" | "handle" | "email" | "phone" | "postType" | "postUrl" | "hashtag" | "notes" | "eligibility",
   string
 > = {
   name: "2013828823",
@@ -23,7 +24,7 @@ export const GOOGLE_FORM_ENTRIES: Record<
   postType: "1531223617",
   postUrl: "1484922715",
   hashtag: "282567240",
-  screenshot: "1421246941",
+  notes: "1421246941",
   eligibility: "1863800969",
 };
 const FORM_URL = process.env.NEXT_PUBLIC_GIVEAWAY_FORM_URL || "/giveaway/enter";
@@ -40,13 +41,17 @@ export const GIVEAWAY = {
   closesAt: "2026-10-06T23:59:59-04:00",
   opensLabel: "September 27, 2026",
   closesLabel: "October 6, 2026",
+  opensLabelLong: "September 27, 2026",
+  closesLabelLong: "October 6, 2026",
+  opensLabelShort: "September 27",
   drawDate: "October 8, 2026",
   announceDate: "October 9, 2026",
   claimDeadlineDays: 30,
   restaurantName: "Limra Mediterranean Restaurant",
   restaurantAddress: `${ADDRESS_LINES[0]}, ${ADDRESS_LINES[1]}`,
-  // CONFIRM with the owners; falls back to the catering address.
-  contactEmail: process.env.NEXT_PUBLIC_GIVEAWAY_EMAIL || CATERING_EMAIL,
+  // Owners' decision (13 Sept 2026): Instagram DM is the giveaway's only
+  // contact channel. No email appears in giveaway copy or rules.
+  contactLine: "send a direct message to @limra_mediterranean on Instagram",
   prizes: [
     {
       tier: "Grand Prize",

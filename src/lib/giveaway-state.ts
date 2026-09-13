@@ -14,6 +14,14 @@ export function getGiveawayPhase(now: Date = new Date()): GiveawayPhase {
   return "closed";
 }
 
+// Dry-run mode for testing the entry flow before opening day, in any
+// environment: `?preview=<GIVEAWAY_PREVIEW_KEY>` forces the live phase and
+// tags submissions as TEST. Disabled until the env var is set.
+export function isPreview(param: string | string[] | undefined): boolean {
+  const key = process.env.GIVEAWAY_PREVIEW_KEY;
+  return Boolean(key) && typeof param === "string" && param === key;
+}
+
 // Outside production, `?now=2026-09-25T12:00:00Z` previews any phase without
 // touching the clock. Production ignores the parameter entirely.
 export function resolveNow(param: string | string[] | undefined): Date {

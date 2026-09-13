@@ -4,11 +4,11 @@ import Medallion from "@/components/Medallion";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import RulesBody, { InstagramDisclaimer } from "@/components/giveaway/RulesBody";
+import { GIVEAWAY } from "@/data/giveaway.config";
 
 export const metadata: Metadata = {
   title: { absolute: "Official Rules · Grand Opening Giveaway · Limra Mediterranean" },
-  description:
-    "Official rules for the Limra Mediterranean Restaurant Grand Opening Giveaway, September 27 to October 6, 2026. No purchase necessary.",
+  description: `Official rules for the Limra Mediterranean Restaurant Grand Opening Giveaway, ${GIVEAWAY.opensLabelLong} to ${GIVEAWAY.closesLabelLong}. No purchase necessary.`,
   alternates: { canonical: "/giveaway/rules" },
 };
 

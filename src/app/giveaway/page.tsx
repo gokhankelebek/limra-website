@@ -12,6 +12,7 @@ import {
   CLOSES_AT_MS,
   OPENS_AT_MS,
   getGiveawayPhase,
+  isPreview,
   resolveNow,
   type GiveawayPhase,
 } from "@/lib/giveaway-state";
@@ -45,11 +46,11 @@ export const metadata: Metadata = {
 const FAQ: FaqItem[] = [
   {
     q: "My account is private. Can I still enter?",
-    a: "Yes. Post as usual, then send a screenshot of your post or story to @limra_mediterranean by DM, or upload it with the entry form, so we can verify it.",
+    a: "Yes. Post as usual, then send a screenshot of your post or story to @limra_mediterranean by DM within 24 hours so we can verify it.",
   },
   {
     q: "Can I enter with a Story instead of a Post?",
-    a: "Yes. Stories disappear after 24 hours, so send us a screenshot by DM (or attach it to the entry form) before it does.",
+    a: "Yes. Stories disappear after 24 hours, so send us a screenshot by DM before it does.",
   },
   {
     q: "Do I have to buy something?",
@@ -123,9 +124,9 @@ export default async function GiveawayPage({
 }: {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
-  const { now: nowParam } = await searchParams;
+  const { now: nowParam, preview } = await searchParams;
   const now = resolveNow(nowParam);
-  const phase = getGiveawayPhase(now);
+  const phase = isPreview(preview) ? "live" : getGiveawayPhase(now);
   const serverNow = now.getTime();
   const [grand, second, third] = GIVEAWAY.prizes;
 

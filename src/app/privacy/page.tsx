@@ -56,11 +56,12 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
         </p>
         <p>
           <strong>Giveaway entries.</strong>{" "}During a giveaway, the entry form
-          on this site asks for your name, your Instagram handle, your email and
-          phone, how you posted, and an optional screenshot. The entry is
-          emailed to the restaurant and recorded in a Google Form owned by the
-          restaurant, which is how we keep the list for the drawing. We use it
-          only to verify entries, draw winners, and deliver prizes, as the
+          on this site asks for your name, phone, Instagram username, how you
+          posted, and a few confirmations (email is optional). The entry is
+          recorded in a Google Form owned by the restaurant, which is how we
+          keep the list for the drawing; verification screenshots reach us by
+          Instagram direct message and stay in that conversation. We use all of
+          it only to verify entries, draw winners, and deliver prizes, as the
           official rules describe.
         </p>
         <p>

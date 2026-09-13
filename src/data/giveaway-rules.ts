@@ -21,7 +21,7 @@ export const RULES: Rule[] = [
   {
     title: "Promotion period",
     paragraphs: [
-      "The giveaway begins on September 27, 2026 (grand opening day) and ends on October 6, 2026 at 11:59 PM Eastern Time.",
+      `The giveaway begins on ${GIVEAWAY.opensLabelLong} (grand opening day) and ends on ${GIVEAWAY.closesLabelLong} at 11:59 PM Eastern Time.`,
     ],
   },
   {
@@ -61,7 +61,7 @@ export const RULES: Rule[] = [
   {
     title: "Winner selection",
     paragraphs: [
-      "Winners will be selected by random drawing from all valid entries on October 8, 2026. The drawing will be recorded and shared on Instagram. Winners will be announced on @limra_mediterranean on October 9, 2026 and notified using the contact information provided in the entry form. A winner who does not respond within 72 hours of notification forfeits the prize, and an alternate winner will be selected.",
+      `Winners will be selected by random drawing from all valid entries on ${GIVEAWAY.drawDate}. The drawing will be recorded and shared on Instagram. Winners will be announced on @limra_mediterranean on ${GIVEAWAY.announceDate} and notified using the contact information provided in the entry form. A winner who does not respond within 72 hours of notification forfeits the prize, and an alternate winner will be selected.`,
     ],
   },
   {
@@ -97,7 +97,7 @@ export const RULES: Rule[] = [
   {
     title: "Sponsor",
     paragraphs: [
-      `Limra Mediterranean Restaurant, ${GIVEAWAY.restaurantAddress}. Questions: ${GIVEAWAY.contactEmail}.`,
+      `Limra Mediterranean Restaurant, ${GIVEAWAY.restaurantAddress}. Questions: ${GIVEAWAY.contactLine}.`,
     ],
   },
 ];
