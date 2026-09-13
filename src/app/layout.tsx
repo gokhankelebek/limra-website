@@ -5,7 +5,13 @@ import AskLimra from "@/components/AskLimra";
 import JsonLd from "@/components/JsonLd";
 import { SITE_URL } from "@/lib/site";
 import { CONTACT, HOURS, SOCIALS } from "@/data/contact";
+import { OPENING_DAY_ISO } from "@/data/opening";
 import "./globals.css";
+
+// Every page reads opening-day state (footer hours, hero line, copy), so the
+// static pages re-render at most hourly and flip to the open state on the
+// morning of September 27 without a redeploy.
+export const revalidate = 3600;
 
 // Pre-paint gate for the home-page entrance: hold the page (CSS does the
 // hiding) before first paint so the medallion can build alone. Skipped on
@@ -90,6 +96,7 @@ const RESTAURANT_SCHEMA = {
     dayOfWeek: [...h.schemaDays],
     opens: h.opens,
     closes: h.closes,
+    validFrom: OPENING_DAY_ISO,
   })),
   sameAs: SOCIALS.map((s) => s.href),
 };

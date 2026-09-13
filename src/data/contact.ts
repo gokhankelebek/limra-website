@@ -1,5 +1,6 @@
 // Real NAP details — keep identical everywhere (site, GBP, Yelp, maps)
 // for local-SEO consistency.
+import { OPENING_LABEL, isOpen } from "./opening";
 
 export const CONTACT = {
   streetAddress: "3109 McChesney Hill Loop",
@@ -31,7 +32,10 @@ export const HOURS = [
   },
 ] as const;
 
-export const HOURS_SUMMARY = "From opening day · 11 am – 9 pm";
+// Footer hours line, before and after opening day.
+export function getHoursSummary(open: boolean = isOpen()): string {
+  return open ? "Open daily · 11 am – 9 pm" : `From ${OPENING_LABEL} · 11 am – 9 pm`;
+}
 
 // Every "Order online" button points here — swap for the real ordering
 // platform URL the day it exists.

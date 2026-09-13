@@ -35,7 +35,7 @@ function subscribeJsonp(email: string): Promise<{ result: string; msg: string }>
   });
 }
 
-export default function NotifyForm() {
+export default function NotifyForm({ open = false }: { open?: boolean }) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
 
@@ -72,7 +72,9 @@ export default function NotifyForm() {
   if (status === "done") {
     return (
       <p className="text-center font-body text-lg font-light italic leading-relaxed text-ink/75">
-        One warm hello, on its way. We&apos;ll write when the doors open.
+        {open
+          ? "One warm hello, on its way. We'll write when there is something worth saying."
+          : "One warm hello, on its way. We'll write when the doors open."}
       </p>
     );
   }

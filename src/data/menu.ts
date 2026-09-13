@@ -3,6 +3,7 @@
 // (limra-screens.vercel.app). Base price includes that item's +$0 protein.
 
 import { ORDER_URL } from "./contact";
+import { OPENING_LABEL } from "./opening";
 
 export type DietaryTag = "V" | "VG" | "GF" | "N";
 
@@ -113,7 +114,8 @@ export const menuIntro = {
 };
 
 export const menuClosing = {
-  line: "The first tables are set this summer.",
+  linePre: `The first tables are set ${OPENING_LABEL}.`,
+  lineOpen: "The table is set. Come as you are.",
   primary: { label: "Order online", href: ORDER_URL },
   secondary: { label: "Plan your visit", href: "/visit" },
 };

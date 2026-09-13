@@ -1,5 +1,5 @@
 import Anthropic from "@anthropic-ai/sdk";
-import { SYSTEM_PROMPT } from "@/lib/concierge";
+import { getSystemPrompt } from "@/lib/concierge";
 
 export const runtime = "nodejs";
 
@@ -77,7 +77,7 @@ export async function POST(req: Request) {
     system: [
       {
         type: "text",
-        text: SYSTEM_PROMPT,
+        text: getSystemPrompt(),
         cache_control: { type: "ephemeral" },
       },
     ],

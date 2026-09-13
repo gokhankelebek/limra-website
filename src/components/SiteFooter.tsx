@@ -1,11 +1,12 @@
 import Link from "next/link";
 import Medallion from "./Medallion";
 import Wordmark from "./Wordmark";
+import { isOpen } from "@/data/opening";
 import {
   ADDRESS_LINES,
   CONTACT,
   DIRECTIONS_URL,
-  HOURS_SUMMARY,
+  getHoursSummary,
   SOCIALS,
 } from "@/data/contact";
 
@@ -23,12 +24,13 @@ const COLS = [
     title: "Visit",
     links: [
       { label: "Find us", href: "/visit" },
-      { label: "Opening updates", href: "/updates" },
+      { label: "Updates", href: "/updates" },
     ],
   },
 ];
 
 export default function SiteFooter() {
+  const open = isOpen();
   return (
     <footer className="bg-cream-soft text-olive">
       <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
@@ -89,7 +91,7 @@ export default function SiteFooter() {
                 {CONTACT.phoneDisplay}
               </a>
               <br />
-              {HOURS_SUMMARY}
+              {getHoursSummary(open)}
             </p>
             <p className="micro mt-5 font-roman uppercase text-olive/85">
               {SOCIALS.map((s, i) => (

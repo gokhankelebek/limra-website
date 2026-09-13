@@ -5,17 +5,25 @@ import NotifyForm from "@/components/NotifyForm";
 import Reveal from "@/components/Reveal";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
+import { OPENING_LABEL, OPENING_LABEL_LONG, isOpen } from "@/data/opening";
 
-export const metadata: Metadata = {
-  title: {
-    absolute: "Opening Updates · Limra Mediterranean · Holly Springs, NC",
-  },
-  description:
-    "Limra opens this summer in Holly Springs, NC. Leave your email for a quiet note when the doors open, plus an invitation to the soft-opening tasting.",
-  alternates: { canonical: "/updates" },
-};
+export function generateMetadata(): Metadata {
+  const open = isOpen();
+  return {
+    title: {
+      absolute: open
+        ? "Updates · Limra Mediterranean · Holly Springs, NC"
+        : "Opening Updates · Limra Mediterranean · Holly Springs, NC",
+    },
+    description: open
+      ? "Leave your email for the occasional note from Limra Mediterranean in Holly Springs, NC: new dishes, seasonal specials, and what is happening at the table."
+      : `Limra opens ${OPENING_LABEL_LONG} in Holly Springs, NC. Leave your email for a quiet note when the doors open, plus an invitation to the soft-opening tasting.`,
+    alternates: { canonical: "/updates" },
+  };
+}
 
 export default function UpdatesPage() {
+  const open = isOpen();
   return (
     <>
       <SiteHeader />
@@ -27,32 +35,34 @@ export default function UpdatesPage() {
           </Reveal>
           <Reveal delay="delay-2">
             <p className="eyebrow-lg mt-8 font-roman uppercase text-terracotta">
-              Opening this summer
+              {open ? "Updates" : `Opening ${OPENING_LABEL}`}
             </p>
           </Reveal>
           <Reveal animation="anim-rise-lg" delay="delay-3">
             <h1 className="mt-5 font-display text-6xl font-medium lg:text-7xl">
-              Be among the first
+              {open ? "Stay at the table" : "Be among the first"}
             </h1>
           </Reveal>
           <Reveal delay="delay-4">
             <p className="mx-auto mt-6 max-w-md font-body text-lg font-light italic leading-relaxed text-ink/70">
-              The soft-opening tasting is invitation-only. Invitations come
-              from this list, then a quiet note when the doors open.
+              {open
+                ? "The doors are open. Leave your email for the occasional note: new dishes, seasonal specials, and what is happening at Limra."
+                : "The soft-opening tasting is invitation-only. Invitations come from this list, then a quiet note when the doors open."}
             </p>
           </Reveal>
-          <Reveal delay="delay-5">
-            <p className="mx-auto mt-4 max-w-md font-body text-sm font-light leading-relaxed text-ink/55">
-              Online ordering and reservations open with the doors. The list
-              hears first.
-            </p>
-          </Reveal>
+          {!open && (
+            <Reveal delay="delay-5">
+              <p className="mx-auto mt-4 max-w-md font-body text-sm font-light leading-relaxed text-ink/55">
+                Online ordering opens with the doors. The list hears first.
+              </p>
+            </Reveal>
+          )}
         </div>
 
         {/* Capture */}
         <section className="px-6 pb-24">
           <Reveal>
-            <NotifyForm />
+            <NotifyForm open={open} />
           </Reveal>
         </section>
 

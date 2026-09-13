@@ -15,6 +15,7 @@ import {
   ORIGIN_X,
   ORIGIN_Y,
 } from "@/components/Wordmark";
+import { isOpen } from "@/data/opening";
 
 export const runtime = "edge";
 export const alt = "Limra Mediterranean Restaurant";
@@ -26,8 +27,9 @@ const CREAM = "#FEEBCB";
 const TERRACOTTA = "#A44D14";
 
 const TAGLINE_TOP = "MEDITERRANEAN RESTAURANT";
-const TAGLINE_BOTTOM = "HOLLY SPRINGS, NC · OPENING SUMMER 2026";
-const TAGLINE = TAGLINE_TOP + TAGLINE_BOTTOM;
+const TAGLINE_BOTTOM_PRE = "HOLLY SPRINGS, NC · OPENING SEPTEMBER 27";
+const TAGLINE_BOTTOM_OPEN = "HOLLY SPRINGS, NC · OPEN DAILY 11 AM – 9 PM";
+const TAGLINE = TAGLINE_TOP + TAGLINE_BOTTOM_PRE + TAGLINE_BOTTOM_OPEN;
 
 // Roman caps for the tagline — fetched per render on the edge; if the fetch
 // fails the line still renders in the default face rather than 500ing.
@@ -54,6 +56,7 @@ async function loadMarcellus(): Promise<ArrayBuffer | null> {
 // Wordmark and seal built entirely from the official brand vectors.
 export default async function OpenGraphImage() {
   const marcellus = await loadMarcellus();
+  const taglineBottom = isOpen() ? TAGLINE_BOTTOM_OPEN : TAGLINE_BOTTOM_PRE;
   return new ImageResponse(
     (
       <div
@@ -110,7 +113,7 @@ export default async function OpenGraphImage() {
             {TAGLINE_TOP}
           </div>
           <div style={{ display: "flex", fontSize: 20, letterSpacing: 6 }}>
-            {TAGLINE_BOTTOM}
+            {taglineBottom}
           </div>
         </div>
       </div>

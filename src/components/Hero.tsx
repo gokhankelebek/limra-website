@@ -5,11 +5,13 @@ import Medallion from "./Medallion";
 import ScrollRotate from "./ScrollRotate";
 import Wordmark from "./Wordmark";
 import { ORDER_URL } from "@/data/contact";
+import { isOpen, statusLine } from "@/data/opening";
 import { findDish } from "@/data/menu";
 import { BLUR } from "@/data/menu-blur";
 
 export default function Hero() {
   const heroDish = findDish("limra-platter");
+  const open = isOpen();
 
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-cream lg:grid lg:grid-cols-2">
@@ -74,16 +76,18 @@ export default function Hero() {
         </div>
 
         <p className="label anim-rise delay-5 mt-9 font-roman uppercase text-terracotta">
-          Opening this summer
+          {open ? "Open daily · 11 am – 9 pm" : statusLine(false)}
         </p>
-        <p className="anim-rise delay-5 mt-3">
-          <Link
-            href="/updates"
-            className="font-body text-sm font-light italic text-ink/60 underline-offset-4 hover:underline"
-          >
-            Invitations to the soft-opening tasting go to the list first.
-          </Link>
-        </p>
+        {!open && (
+          <p className="anim-rise delay-5 mt-3">
+            <Link
+              href="/updates"
+              className="font-body text-sm font-light italic text-ink/60 underline-offset-4 hover:underline"
+            >
+              Invitations to the soft-opening tasting go to the list first.
+            </Link>
+          </p>
+        )}
 
         {/* Mobile: the signature plate as a small matted plaque — an object
             in the composition, not a banner. Desktop version below. */}

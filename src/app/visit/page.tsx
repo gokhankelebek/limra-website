@@ -12,7 +12,8 @@ import {
   MAP_EMBED_URL,
   SERVICE_LINE,
 } from "@/data/contact";
-import { FAQ, FAQ_SCHEMA } from "@/data/faq";
+import { getFaq, getFaqSchema } from "@/data/faq";
+import { OPENING_LABEL, isOpen } from "@/data/opening";
 
 export const metadata: Metadata = {
   title: {
@@ -24,9 +25,11 @@ export const metadata: Metadata = {
 };
 
 export default function VisitPage() {
+  const open = isOpen();
+  const faq = getFaq(open);
   return (
     <>
-      <JsonLd data={FAQ_SCHEMA} />
+      <JsonLd data={getFaqSchema(open)} />
       <SiteHeader />
       <main id="main" className="flex-1 bg-cream">
         {/* Masthead */}
@@ -46,8 +49,9 @@ export default function VisitPage() {
           </Reveal>
           <Reveal delay="delay-4">
             <p className="mx-auto mt-6 max-w-md font-body text-lg font-light italic leading-relaxed text-ink/70">
-              Opening this summer. A seat at the table is closer than you
-              think.
+              {open
+                ? "Counter service, no reservations. A seat at the table is closer than you think."
+                : `Opening ${OPENING_LABEL}. A seat at the table is closer than you think.`}
             </p>
           </Reveal>
         </div>
@@ -86,7 +90,7 @@ export default function VisitPage() {
         <section className="px-6 pb-20">
           <Reveal className="mx-auto max-w-md text-center">
             <p className="eyebrow-lg font-roman uppercase text-terracotta">
-              Hours, from opening day
+              {open ? "Hours" : `Hours, from ${OPENING_LABEL}`}
             </p>
             <div className="mt-7">
               {HOURS.map((h) => (
@@ -133,7 +137,7 @@ export default function VisitPage() {
               Before you come
             </h2>
             <dl className="mt-9 border-t border-olive/15">
-              {FAQ.map(({ q, a }) => (
+              {faq.map(({ q, a }) => (
                 <div key={q} className="border-b border-olive/15 py-6">
                   <dt className="font-display text-xl leading-tight text-ink">
                     {q}
@@ -152,7 +156,9 @@ export default function VisitPage() {
           <Reveal className="flex flex-col items-center">
             <Medallion variant="seal" className="h-16 w-16 text-cream" />
             <p className="pull-quote mt-7 max-w-md text-cream/80">
-              The doors open this summer. The directions already work.
+              {open
+                ? "The doors are open. The directions still work."
+                : `The doors open ${OPENING_LABEL}. The directions already work.`}
             </p>
             <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row">
               <a

@@ -20,6 +20,7 @@ import {
   type MenuItem,
 } from "@/data/menu";
 import { BLUR } from "@/data/menu-blur";
+import { isOpen } from "@/data/opening";
 import { DIRECTIONS_URL } from "@/data/contact";
 import { SITE_URL } from "@/lib/site";
 
@@ -569,7 +570,7 @@ export default function MenuPage() {
           <Reveal className="flex flex-col items-center">
             <Medallion animate variant="seal" className="h-20 w-20" />
             <p className="pull-quote mt-8 max-w-md text-ink/75">
-              {menuClosing.line}
+              {isOpen() ? menuClosing.lineOpen : menuClosing.linePre}
             </p>
             <div className="mt-9 flex flex-col items-center gap-6 sm:flex-row sm:gap-8">
               <Link

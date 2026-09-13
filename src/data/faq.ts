@@ -1,4 +1,5 @@
 import { ADDRESS_LINES, SERVICE_LINE } from "./contact";
+import { OPENING_LABEL_LONG } from "./opening";
 
 /**
  * Questions people actually search before a restaurant opens. Every answer
@@ -8,11 +9,19 @@ import { ADDRESS_LINES, SERVICE_LINE } from "./contact";
  * Deliberately absent until Can & Elif confirm: the exact opening date and
  * parking.
  */
-export const FAQ: { q: string; a: string }[] = [
-  {
-    q: "When does Limra open?",
-    a: "Limra opens this summer in Holly Springs. The mailing list hears the date first, along with an invitation to the soft-opening tasting.",
-  },
+export type FaqEntry = { q: string; a: string };
+
+export function getFaq(open: boolean): FaqEntry[] {
+  return [
+  open
+    ? {
+        q: "When is Limra open?",
+        a: "Every day, 11 am to 9 pm. Holiday hours may differ.",
+      }
+    : {
+        q: "When does Limra open?",
+        a: `Limra opens ${OPENING_LABEL_LONG} in Holly Springs. The mailing list hears first, along with an invitation to the soft-opening tasting.`,
+      },
   {
     q: "Is Limra halal?",
     a: "Yes. Limra is 100% halal, in the restaurant and in catering.",
@@ -39,20 +48,25 @@ export const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "Can I order online, or get delivery?",
-    a: `Online ordering opens with the doors. ${SERVICE_LINE} once we are open.`,
+    a: open
+      ? `Online ordering is coming soon. ${SERVICE_LINE}; call us to order ahead for pickup.`
+      : `Online ordering opens with the doors. ${SERVICE_LINE} once we are open.`,
   },
   {
     q: "How do you handle food allergies?",
     a: "Every dish page lists its allergens. Everything is prepared in a shared kitchen, so please tell us about any allergy before you order.",
   },
-];
+  ];
+}
 
-export const FAQ_SCHEMA = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: FAQ.map(({ q, a }) => ({
-    "@type": "Question",
-    name: q,
-    acceptedAnswer: { "@type": "Answer", text: a },
-  })),
-};
+export function getFaqSchema(open: boolean) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: getFaq(open).map(({ q, a }) => ({
+      "@type": "Question",
+      name: q,
+      acceptedAnswer: { "@type": "Answer", text: a },
+    })),
+  };
+}

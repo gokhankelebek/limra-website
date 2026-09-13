@@ -5,17 +5,22 @@ import Reveal from "@/components/Reveal";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import { CONTACT } from "@/data/contact";
+import { OPENING_LABEL, OPENING_LABEL_LONG, isOpen } from "@/data/opening";
 
-export const metadata: Metadata = {
-  title: {
-    absolute: "Order Online · Limra Mediterranean · Holly Springs, NC",
-  },
-  description:
-    "Online ordering from Limra Mediterranean begins the day the doors open in Holly Springs, NC. For catering and large gatherings, call us.",
-  alternates: { canonical: "/order" },
-};
+export function generateMetadata(): Metadata {
+  return {
+    title: {
+      absolute: "Order Online · Limra Mediterranean · Holly Springs, NC",
+    },
+    description: isOpen()
+      ? "Order from Limra Mediterranean in Holly Springs, NC: call ahead for pickup or order at the counter. Online ordering is coming soon."
+      : `Online ordering from Limra Mediterranean begins ${OPENING_LABEL_LONG}, the day the doors open in Holly Springs, NC.`,
+    alternates: { canonical: "/order" },
+  };
+}
 
 export default function OrderPage() {
+  const open = isOpen();
   return (
     <>
       <SiteHeader />
@@ -31,13 +36,14 @@ export default function OrderPage() {
           </Reveal>
           <Reveal animation="anim-rise-lg" delay="delay-3">
             <h1 className="mt-5 font-display text-5xl font-medium lg:text-6xl">
-              The counter opens this summer.
+              {open ? "Order at the counter, or call ahead." : `The counter opens ${OPENING_LABEL}.`}
             </h1>
           </Reveal>
           <Reveal delay="delay-4">
             <p className="mx-auto mt-6 max-w-md font-body text-lg font-light italic leading-relaxed text-ink/70">
-              Online ordering begins the day the doors open. For catering and
-              large gatherings, call us.
+              {open
+                ? "Online ordering is on its way. Until then, call us to order ahead for pickup, or come in; the counter moves fast."
+                : "Online ordering begins the day the doors open. For catering and large gatherings, use the Catering page."}
             </p>
           </Reveal>
           <Reveal delay="delay-5">
