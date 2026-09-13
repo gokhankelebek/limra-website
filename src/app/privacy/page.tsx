@@ -55,6 +55,12 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
           in the restaurant&apos;s inbox.
         </p>
         <p>
+          <strong>Giveaway entries.</strong>{" "}During a giveaway, the entry form
+          asks for your name, your Instagram handle, and a way to reach you. We
+          use it only to verify entries, draw winners, and deliver prizes, as
+          the official rules describe.
+        </p>
+        <p>
           <strong>Ask Limra.</strong>{" "}Our website includes a concierge that
           answers questions about the menu, hours, and the restaurant. The
           questions you type, and the conversation so far in that window, are
@@ -127,6 +133,10 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
           <li>
             <strong>Google Maps</strong>: powers the embedded map on the Visit
             page.
+          </li>
+          <li>
+            <strong>Google Forms</strong>: hosts the giveaway entry form and
+            stores entries on our behalf while a giveaway runs.
           </li>
         </ul>
         <p>

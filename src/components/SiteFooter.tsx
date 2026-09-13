@@ -47,7 +47,7 @@ export default function SiteFooter() {
 
           {COLS.map((col) => (
             <div key={col.title}>
-              <p className="label font-roman uppercase text-terracotta">
+              <p className="label font-roman uppercase text-terracotta-deep">
                 {col.title}
               </p>
               <ul className="mt-5 space-y-3">
@@ -67,7 +67,7 @@ export default function SiteFooter() {
 
           {/* Contact */}
           <div>
-            <p className="label font-roman uppercase text-terracotta">
+            <p className="label font-roman uppercase text-terracotta-deep">
               Find us
             </p>
             <p className="mt-5 font-body text-base font-light leading-relaxed text-ink/70">
@@ -91,7 +91,7 @@ export default function SiteFooter() {
               <br />
               {HOURS_SUMMARY}
             </p>
-            <p className="micro mt-5 font-roman uppercase text-olive/60">
+            <p className="micro mt-5 font-roman uppercase text-olive/85">
               {SOCIALS.map((s, i) => (
                 <span key={s.label}>
                   {i > 0 && " · "}
@@ -109,7 +109,7 @@ export default function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-olive/15 pt-8 text-ink/55 md:flex-row md:items-center">
+        <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-olive/15 pt-8 text-ink/70 md:flex-row md:items-center">
           <p className="font-body text-sm">
             © {new Date().getFullYear()} Limra Mediterranean Restaurant
             <span className="mx-2 text-olive/30">·</span>

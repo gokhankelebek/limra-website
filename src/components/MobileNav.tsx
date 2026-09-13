@@ -11,9 +11,10 @@ const LINKS = [
   { label: "Catering", href: "/catering" },
   { label: "Gallery", href: "/gallery" },
   { label: "Visit", href: "/visit" },
+  { label: "Giveaway", href: "/giveaway" },
 ];
 
-const NUMERALS = ["I", "II", "III", "IV", "V"];
+const NUMERALS = ["I", "II", "III", "IV", "V", "VI"];
 
 /**
  * Phone navigation — a full-screen olive overlay in the brand's ceremonial

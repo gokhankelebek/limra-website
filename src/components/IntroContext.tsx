@@ -54,6 +54,9 @@ export default function IntroProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!document.documentElement.classList.contains("intro-pending")) return;
+    // Syncing to the `intro-pending` class the pre-paint gate script set on
+    // <html>: an external system, so the synchronous setState is deliberate.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setPhase("building");
 
     const landTimer = setTimeout(() => {

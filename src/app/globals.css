@@ -148,6 +148,21 @@ html {
   color: var(--color-terracotta);
 }
 
+/* Print: the rules page prints as plain text, no chrome */
+@media print {
+  header,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+  main {
+    padding-top: 0 !important;
+  }
+  .policy-prose {
+    color: #000;
+  }
+}
+
 /* Map tint — pull Google's palette toward ours, keep it legible */
 .map-tint {
   filter: grayscale(20%) sepia(18%) hue-rotate(50deg) opacity(90%);

@@ -10,6 +10,7 @@ const NAV = [
   { label: "Catering", href: "/catering" },
   { label: "Gallery", href: "/gallery" },
   { label: "Visit", href: "/visit" },
+  { label: "Giveaway", href: "/giveaway" },
 ];
 
 export default function SiteHeader() {
@@ -30,12 +31,14 @@ export default function SiteHeader() {
         </Link>
 
         {/* Primary nav */}
-        <nav className="hidden items-center gap-9 md:flex">
+        <nav className="hidden items-center gap-5 md:flex lg:gap-9">
           {NAV.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="font-roman text-[0.78rem] uppercase tracking-[0.2em] text-olive/80 transition-colors hover:text-terracotta"
+              className={`font-roman text-[0.7rem] uppercase tracking-[0.14em] transition-colors hover:text-terracotta lg:text-[0.78rem] lg:tracking-[0.2em] ${
+                item.href === "/giveaway" ? "text-terracotta" : "text-olive/80"
+              }`}
             >
               {item.label}
             </Link>

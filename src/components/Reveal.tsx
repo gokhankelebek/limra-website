@@ -1,6 +1,23 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+  type ReactNode,
+} from "react";
+
+// prefers-reduced-motion as an external store, so honoring it never needs a
+// setState inside an effect.
+const REDUCED_MOTION = "(prefers-reduced-motion: reduce)";
+function subscribeReducedMotion(onChange: () => void) {
+  const mq = window.matchMedia(REDUCED_MOTION);
+  mq.addEventListener("change", onChange);
+  return () => mq.removeEventListener("change", onChange);
+}
+const getReducedMotion = () => window.matchMedia(REDUCED_MOTION).matches;
+const getServerReducedMotion = () => false;
 
 /**
  * Plays one of the existing entrance animations when the element first
@@ -19,14 +36,15 @@ export default function Reveal({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [shown, setShown] = useState(false);
+  const reducedMotion = useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotion,
+    getServerReducedMotion
+  );
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setShown(true);
-      return;
-    }
+    if (!el || reducedMotion) return;
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -38,9 +56,9 @@ export default function Reveal({
     );
     io.observe(el);
     return () => io.disconnect();
-  }, []);
+  }, [reducedMotion]);
 
-  const classes = shown
+  const classes = shown || reducedMotion
     ? [animation, delay, className].filter(Boolean).join(" ")
     : ["opacity-0", className].filter(Boolean).join(" ");
 
