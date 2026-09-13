@@ -2,13 +2,31 @@ import { ADDRESS_LINES, CATERING_EMAIL } from "./contact";
 
 // Grand Opening Giveaway: every date, prize, link and name in one place.
 //
-// The entry form: a Google Form owned by prodigitalstrategy@gmail.com
-// ("Limra Grand Opening Giveaway (entries)"). NEXT_PUBLIC_GIVEAWAY_FORM_URL
-// overrides it without a code change; the /g/enter route reads the same
-// constant so the printed QR codes follow along.
-export const DEFAULT_FORM_URL =
-  "https://docs.google.com/forms/d/e/1FAIpQLSdvYTDGT7f1JviOttZn-1E7RvyIneyMYzTmDHIlh2EvG6wQeA/viewform";
-const FORM_URL = process.env.NEXT_PUBLIC_GIVEAWAY_FORM_URL || DEFAULT_FORM_URL;
+// Entries are taken on the site itself (/giveaway/enter) and stored two
+// ways by /api/giveaway: mirrored into the Google Form below, which feeds the
+// owners' response Sheet, and emailed with the screenshot via Resend.
+// NEXT_PUBLIC_GIVEAWAY_FORM_URL overrides the entry URL without a code
+// change (e.g. to fall back to the Google Form directly); /g/enter follows.
+export const GOOGLE_FORM_ID =
+  "1FAIpQLSdvYTDGT7f1JviOttZn-1E7RvyIneyMYzTmDHIlh2EvG6wQeA";
+export const GOOGLE_FORM_VIEW_URL = `https://docs.google.com/forms/d/e/${GOOGLE_FORM_ID}/viewform`;
+export const GOOGLE_FORM_POST_URL = `https://docs.google.com/forms/d/e/${GOOGLE_FORM_ID}/formResponse`;
+// Google Form field ids (entry.NNN) for the mirror, filled from the live form.
+export const GOOGLE_FORM_ENTRIES: Record<
+  "name" | "handle" | "email" | "phone" | "postType" | "postUrl" | "hashtag" | "screenshot" | "eligibility",
+  string
+> = {
+  name: "2013828823",
+  handle: "994683946",
+  email: "2009953304",
+  phone: "766307150",
+  postType: "1531223617",
+  postUrl: "1484922715",
+  hashtag: "282567240",
+  screenshot: "1421246941",
+  eligibility: "1863800969",
+};
+const FORM_URL = process.env.NEXT_PUBLIC_GIVEAWAY_FORM_URL || "/giveaway/enter";
 
 export const GIVEAWAY = {
   instagramHandle: "@limra_mediterranean",

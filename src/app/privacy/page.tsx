@@ -56,9 +56,12 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
         </p>
         <p>
           <strong>Giveaway entries.</strong>{" "}During a giveaway, the entry form
-          asks for your name, your Instagram handle, and a way to reach you. We
-          use it only to verify entries, draw winners, and deliver prizes, as
-          the official rules describe.
+          on this site asks for your name, your Instagram handle, your email and
+          phone, how you posted, and an optional screenshot. The entry is
+          emailed to the restaurant and recorded in a Google Form owned by the
+          restaurant, which is how we keep the list for the drawing. We use it
+          only to verify entries, draw winners, and deliver prizes, as the
+          official rules describe.
         </p>
         <p>
           <strong>Ask Limra.</strong>{" "}Our website includes a concierge that
@@ -135,8 +138,8 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
             page.
           </li>
           <li>
-            <strong>Google Forms</strong>: hosts the giveaway entry form and
-            stores entries on our behalf while a giveaway runs.
+            <strong>Google Forms</strong>: stores giveaway entries on our
+            behalf while a giveaway runs.
           </li>
         </ul>
         <p>
