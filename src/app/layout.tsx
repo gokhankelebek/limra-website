@@ -10,7 +10,7 @@ import "./globals.css";
 
 // Every page reads opening-day state (footer hours, hero line, copy), so the
 // static pages re-render at most hourly and flip to the open state on the
-// morning of September 27 without a redeploy.
+// morning of opening day (src/data/opening.ts) without a redeploy.
 export const revalidate = 3600;
 
 // Pre-paint gate for the home-page entrance: hold the page (CSS does the

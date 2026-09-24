@@ -15,7 +15,7 @@ import {
   ORIGIN_X,
   ORIGIN_Y,
 } from "@/components/Wordmark";
-import { isOpen } from "@/data/opening";
+import { OPENING_LABEL, isOpen } from "@/data/opening";
 
 export const runtime = "edge";
 export const alt = "Limra Mediterranean Restaurant";
@@ -27,7 +27,7 @@ const CREAM = "#FEEBCB";
 const TERRACOTTA = "#A44D14";
 
 const TAGLINE_TOP = "MEDITERRANEAN RESTAURANT";
-const TAGLINE_BOTTOM_PRE = "HOLLY SPRINGS, NC · OPENING SEPTEMBER 27";
+const TAGLINE_BOTTOM_PRE = `HOLLY SPRINGS, NC · OPENING ${OPENING_LABEL.toUpperCase()}`;
 const TAGLINE_BOTTOM_OPEN = "HOLLY SPRINGS, NC · OPEN DAILY 11 AM – 9 PM";
 const TAGLINE = TAGLINE_TOP + TAGLINE_BOTTOM_PRE + TAGLINE_BOTTOM_OPEN;
 
