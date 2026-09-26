@@ -9,15 +9,16 @@ import { ADDRESS_LINES, CATERING_EMAIL, CATERING_EMAIL_HREF, CONTACT } from "@/d
 export const metadata: Metadata = {
   title: { absolute: "Privacy · Limra Mediterranean · Holly Springs, NC" },
   description:
-    "How Limra Mediterranean Restaurant handles the little information this website collects: opening-updates emails, catering inquiries, questions asked of the menu concierge, and basic technical data.",
+    "How Limra Mediterranean Restaurant handles the information this website collects: opening-updates emails, catering inquiries, giveaway entries, questions asked of the menu concierge, the Meta Pixel, and basic technical data.",
   alternates: { canonical: "/privacy" },
 };
 
-const EFFECTIVE = "September 10, 2026";
+const EFFECTIVE = "September 26, 2026";
 
 // Plain-English policy. Keep each section honest to what the code does:
 // NotifyForm (email list), /api/catering (Resend), /api/ask (Anthropic),
-// /go (scan log), IntroContext (sessionStorage), Visit page (Maps embed).
+// /go (scan log), IntroContext (sessionStorage), Visit page (Maps embed),
+// MetaPixel (Meta Pixel, PageView only).
 const SECTIONS: { title: string; body: React.ReactNode }[] = [
   {
     title: "The short version",
@@ -28,8 +29,9 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
         emailed to the restaurant. If you ask our menu concierge a question,
         the words you type are sent to the service that answers them. Our
         hosting provider records ordinary technical data, as every
-        website&apos;s does. We do not sell personal information, and we run
-        no advertising trackers.
+        website&apos;s does. We use the Meta Pixel to measure visits from our
+        Facebook and Instagram posts and ads. We do not sell personal
+        information.
       </p>
     ),
   },
@@ -95,11 +97,23 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
     body: (
       <>
         <p>
-          We do not set advertising or cross-site tracking cookies. The website
-          uses your browser&apos;s session storage for one small thing: to
-          remember that you have already seen the opening animation, so it does
-          not replay on every page. That note lives only in your browser and
-          clears when you close it.
+          The website uses your browser&apos;s session storage for one small
+          thing: to remember that you have already seen the opening animation,
+          so it does not replay on every page. That note lives only in your
+          browser and clears when you close it.
+        </p>
+        <p>
+          <strong>Meta Pixel.</strong>{" "}Our pages include the Meta Pixel, a
+          small piece of code from Meta Platforms (the company behind Facebook
+          and Instagram). It tells Meta which of our pages were viewed, along
+          with standard browser details and cookies Meta sets, so we can see how
+          many people reach us from our posts and ads and show our ads to people
+          likely to be nearby. We send Meta page views only; nothing you type
+          into our forms is shared with it. Meta may link these visits to your
+          Facebook or Instagram account under its own privacy policy. You can
+          control this in your Facebook or Instagram ad settings (look for
+          &quot;Activity information from ad partners&quot;), or block
+          third-party cookies in your browser.
         </p>
         <p>
           The map on our Visit page is embedded from Google Maps, and the social
@@ -142,6 +156,10 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
             <strong>Google Forms</strong>: stores giveaway entries on our
             behalf while a giveaway runs.
           </li>
+          <li>
+            <strong>Meta</strong>: receives page-view information through the
+            Meta Pixel, as described above, to measure and target our ads.
+          </li>
         </ul>
         <p>
           We may also disclose information if the law requires it, or to
@@ -157,8 +175,9 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
         You can unsubscribe from opening updates at any time using the link in
         any email, or by asking us. You can ask what information we hold about
         you, ask us to correct it, or ask us to delete it, and we will do so
-        unless we are required to keep it. There is no account to manage and
-        nothing to opt out of beyond that.
+        unless we are required to keep it. For the Meta Pixel, use your
+        Facebook or Instagram ad settings or your browser&apos;s cookie
+        controls. There is no account to manage.
       </p>
     ),
   },

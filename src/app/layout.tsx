@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Marcellus, Spectral } from "next/font/google";
 import Script from "next/script";
 import AskLimra from "@/components/AskLimra";
 import JsonLd from "@/components/JsonLd";
+import MetaPixel from "@/components/MetaPixel";
 import { SITE_URL } from "@/lib/site";
 import { CONTACT, HOURS, SOCIALS } from "@/data/contact";
 import { OPENING_DAY_ISO } from "@/data/opening";
@@ -121,6 +122,8 @@ export default function RootLayout({
         <JsonLd data={RESTAURANT_SCHEMA} />
         {children}
         <AskLimra />
+        {/* Production builds only, so local development never pollutes the pixel. */}
+        {process.env.NODE_ENV === "production" && <MetaPixel />}
       </body>
     </html>
   );
