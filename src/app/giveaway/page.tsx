@@ -21,16 +21,16 @@ import {
 // than being frozen at build time.
 export const dynamic = "force-dynamic";
 
-const TITLE = "Grand Opening Giveaway: Win an iPhone 17 Pro Max · Limra Mediterranean";
+const TITLE = "Grand Opening Giveaway: Win an iPhone 18 Pro · Limra Mediterranean";
 const DESCRIPTION =
-  "Follow, post a photo at Limra, and enter. Ten days, ten prizes, including an Apple iPhone 17 Pro Max. No purchase necessary. Holly Springs, NC.";
+  "Follow, post a photo at Limra, and enter. Ten days, ten prizes, including a brand-new Apple iPhone 18 Pro. No purchase necessary. Holly Springs, NC.";
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
   description: DESCRIPTION,
   alternates: { canonical: "/giveaway" },
   openGraph: {
-    title: "Grand Opening Giveaway: Win an iPhone 17 Pro Max",
+    title: "Grand Opening Giveaway: Win an iPhone 18 Pro",
     description: DESCRIPTION,
     url: "/giveaway",
     type: "website",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Grand Opening Giveaway: Win an iPhone 17 Pro Max",
+    title: "Grand Opening Giveaway: Win an iPhone 18 Pro",
     description: DESCRIPTION,
   },
 };
@@ -155,7 +155,7 @@ export default async function GiveawayPage({
           </div>
           <div>
             <h1 className="mx-auto mt-5 max-w-2xl font-display text-[2.6rem] font-medium leading-[1.05] text-ink sm:text-6xl lg:text-7xl">
-              Snap. Tag. Win an iPhone 17 Pro Max.
+              Snap. Tag. Win an iPhone 18 Pro.
             </h1>
           </div>
 

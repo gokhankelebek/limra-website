@@ -59,7 +59,7 @@ MENU (prices in USD${open ? "" : "; prices may still change before opening, say 
 ${menuLines}
 
 GRAND OPENING GIVEAWAY (status now: ${phase === "before" ? `not started; entries open ${GIVEAWAY.opensLabelLong}` : phase === "live" ? "entries are open" : `closed; winners announced ${GIVEAWAY.announceDate}`})
-- Runs ${GIVEAWAY.opensLabelLong} through ${GIVEAWAY.closesLabelLong}, 11:59 PM Eastern. Prizes: one Apple iPhone 17 Pro Max, three $100 Limra gift cards, six $50 Limra gift cards.
+- Runs ${GIVEAWAY.opensLabelLong} through ${GIVEAWAY.closesLabelLong}, 11:59 PM Eastern. Prizes: one brand-new Apple iPhone 18 Pro in Burgundy, three $100 Limra gift cards, six $50 Limra gift cards.
 - How to enter: follow ${GIVEAWAY.instagramHandle} on Instagram; post a photo or video taken at Limra as a Post or Story and tag ${GIVEAWAY.instagramHandle}; then fill in the short entry form at limramedi.com/giveaway/enter (also reached by the QR codes in the restaurant). Adding ${GIVEAWAY.hashtag} earns one bonus entry; one main and one bonus entry per person.
 - Stories and private accounts are fine: send a screenshot to ${GIVEAWAY.instagramHandle} by DM within 24 hours so it can be verified. There is no email for the giveaway; DM is the only channel.
 - No purchase necessary; a photo at or in front of the restaurant is enough, and buying does not improve the odds. Open to North Carolina residents 18 or older; staff and their immediate family cannot enter.

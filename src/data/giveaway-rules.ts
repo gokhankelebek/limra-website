@@ -50,12 +50,12 @@ export const RULES: Rule[] = [
   {
     title: "Prizes",
     list: [
-      "One (1) Grand Prize: Apple iPhone 17 Pro Max (approximate retail value $1,000).",
+      "One (1) Grand Prize: Apple iPhone 18 Pro in Burgundy, new (approximate retail value $1,200).",
       "Three (3) Second Prizes: $100 Limra Mediterranean gift card each.",
       "Six (6) Third Prizes: $50 Limra Mediterranean gift card each.",
     ],
     after: [
-      "Total approximate retail value of all prizes: $1,600. Prizes are non-transferable and may not be redeemed for cash. Limit one prize per person.",
+      "Total approximate retail value of all prizes: $1,800. Prizes are non-transferable and may not be redeemed for cash. Limit one prize per person.",
     ],
   },
   {

@@ -56,8 +56,8 @@ export const GIVEAWAY = {
     {
       tier: "Grand Prize",
       count: 1,
-      name: "Apple iPhone 17 Pro Max",
-      value: "approx. $1,000",
+      name: "Apple iPhone 18 Pro",
+      value: "Burgundy · approx. $1,200",
     },
     { tier: "Second Prize", count: 3, name: "$100 Limra Gift Card" },
     { tier: "Third Prize", count: 6, name: "$50 Limra Gift Card" },

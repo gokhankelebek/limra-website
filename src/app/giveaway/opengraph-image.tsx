@@ -9,7 +9,7 @@ import {
 import { GIVEAWAY } from "@/data/giveaway.config";
 
 export const runtime = "edge";
-export const alt = "Limra Mediterranean Grand Opening Giveaway: win an iPhone 17 Pro Max";
+export const alt = "Limra Mediterranean Grand Opening Giveaway: win an iPhone 18 Pro";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -18,7 +18,7 @@ const CREAM = "#FEEBCB";
 const TERRACOTTA = "#A44D14";
 
 const EYEBROW = "GRAND OPENING GIVEAWAY";
-const HEADLINE = "Win an iPhone 17 Pro Max";
+const HEADLINE = "Win an iPhone 18 Pro";
 const DATES = `${GIVEAWAY.opensLabelShort} · ${GIVEAWAY.closesLabelLong} · HOLLY SPRINGS, NC`.toUpperCase();
 const FOOT = "NO PURCHASE NECESSARY · LIMRA MEDITERRANEAN";
 const TEXT = EYEBROW + HEADLINE + DATES + FOOT;
