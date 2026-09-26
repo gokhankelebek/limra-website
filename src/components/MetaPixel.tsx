@@ -4,13 +4,21 @@ import { usePathname } from "next/navigation";
 import Script from "next/script";
 import { useEffect, useRef } from "react";
 
-// Meta (Facebook/Instagram) Pixel. Standard PageView only; no form data is
-// ever sent. The base code fires the first PageView; App Router navigations
-// don't reload the page, so later route changes fire their own.
+// Meta (Facebook/Instagram) Pixel. PageView everywhere, Lead on a giveaway
+// entry; no form data is ever sent. The base code fires the first PageView;
+// App Router navigations don't reload the page, so later route changes fire
+// their own.
 export const META_PIXEL_ID =
   process.env.NEXT_PUBLIC_META_PIXEL_ID || "928335230352027";
 
 type Fbq = (...args: unknown[]) => void;
+
+// Fire a standard Meta event. A no-op when the pixel isn't loaded (local
+// development, blockers). Never pass personal data in params.
+export function trackPixel(event: string, params?: Record<string, string | number>) {
+  if (typeof window === "undefined") return;
+  (window as unknown as { fbq?: Fbq }).fbq?.("track", event, params);
+}
 
 const BASE_CODE = `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${META_PIXEL_ID}');fbq('track','PageView');`;
 
@@ -23,7 +31,7 @@ export default function MetaPixel() {
       first.current = false;
       return;
     }
-    (window as unknown as { fbq?: Fbq }).fbq?.("track", "PageView");
+    trackPixel("PageView");
   }, [pathname]);
 
   return (

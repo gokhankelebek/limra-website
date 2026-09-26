@@ -18,7 +18,7 @@ const EFFECTIVE = "September 26, 2026";
 // Plain-English policy. Keep each section honest to what the code does:
 // NotifyForm (email list), /api/catering (Resend), /api/ask (Anthropic),
 // /go (scan log), IntroContext (sessionStorage), Visit page (Maps embed),
-// MetaPixel (Meta Pixel, PageView only).
+// MetaPixel (Meta Pixel: PageView, plus Lead on a giveaway entry).
 const SECTIONS: { title: string; body: React.ReactNode }[] = [
   {
     title: "The short version",
@@ -108,8 +108,9 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
           and Instagram). It tells Meta which of our pages were viewed, along
           with standard browser details and cookies Meta sets, so we can see how
           many people reach us from our posts and ads and show our ads to people
-          likely to be nearby. We send Meta page views only; nothing you type
-          into our forms is shared with it. Meta may link these visits to your
+          likely to be nearby. We send Meta page views and, when you enter a
+          giveaway, a note that an entry was made; nothing you type into our
+          forms is shared with it. Meta may link these visits to your
           Facebook or Instagram account under its own privacy policy. You can
           control this in your Facebook or Instagram ad settings (look for
           &quot;Activity information from ad partners&quot;), or block
@@ -157,8 +158,9 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
             behalf while a giveaway runs.
           </li>
           <li>
-            <strong>Meta</strong>: receives page-view information through the
-            Meta Pixel, as described above, to measure and target our ads.
+            <strong>Meta</strong>: receives page views and giveaway-entry
+            counts through the Meta Pixel, as described above, to measure and
+            target our ads.
           </li>
         </ul>
         <p>

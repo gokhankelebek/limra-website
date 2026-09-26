@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { GIVEAWAY } from "@/data/giveaway.config";
+import { trackPixel } from "@/components/MetaPixel";
 
 type Status = "idle" | "sending" | "sent" | "error" | "fallback" | "closed";
 
@@ -70,6 +71,11 @@ export default function EntryForm({
           window.localStorage.setItem(STORAGE_KEY, handle);
         } catch {
           /* ignore */
+        }
+        // Count real first entries only: test-mode and repeat submissions
+        // would inflate what the ads appear to deliver.
+        if (!previewKey && !priorHandle) {
+          trackPixel("Lead", { content_name: "Grand Opening Giveaway" });
         }
         setStatus("sent");
         form.reset();
