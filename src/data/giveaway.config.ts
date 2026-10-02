@@ -44,6 +44,7 @@ export const GIVEAWAY = {
   opensLabelLong: "October 2, 2026",
   closesLabelLong: "October 11, 2026",
   opensLabelShort: "October 2",
+  closesLabelShort: "October 11",
   drawDate: "October 13, 2026",
   announceDate: "October 14, 2026",
   claimDeadlineDays: 30,

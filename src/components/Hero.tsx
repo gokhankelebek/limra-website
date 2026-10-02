@@ -5,6 +5,9 @@ import Medallion from "./Medallion";
 import ScrollRotate from "./ScrollRotate";
 import Wordmark from "./Wordmark";
 import { ORDER_URL } from "@/data/contact";
+import OpenStatus from "./OpenStatus";
+import { GIVEAWAY } from "@/data/giveaway.config";
+import { getGiveawayPhase } from "@/lib/giveaway-state";
 import { isOpen, statusLine } from "@/data/opening";
 import { findDish } from "@/data/menu";
 import { BLUR } from "@/data/menu-blur";
@@ -12,6 +15,7 @@ import { BLUR } from "@/data/menu-blur";
 export default function Hero() {
   const heroDish = findDish("limra-platter");
   const open = isOpen();
+  const giveawayLive = open && getGiveawayPhase() === "live";
 
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-cream lg:grid lg:grid-cols-2">
@@ -75,9 +79,23 @@ export default function Hero() {
           </Link>
         </div>
 
-        <p className="label anim-rise delay-5 mt-9 font-roman uppercase text-terracotta">
-          {open ? "Open daily · 11 am – 9 pm" : statusLine(false)}
-        </p>
+        {open ? (
+          <div className="anim-rise delay-5 mt-9 flex flex-col items-center gap-3">
+            <OpenStatus />
+            {giveawayLive && (
+              <Link
+                href="/giveaway"
+                className="font-body text-sm font-light italic text-ink/70 underline-offset-4 hover:text-terracotta hover:underline"
+              >
+                Grand opening giveaway through {GIVEAWAY.closesLabelShort}: win an {GIVEAWAY.prizes[0].name}.
+              </Link>
+            )}
+          </div>
+        ) : (
+          <p className="label anim-rise delay-5 mt-9 font-roman uppercase text-terracotta">
+            {statusLine(false)}
+          </p>
+        )}
         {!open && (
           <p className="anim-rise delay-5 mt-3">
             <Link
