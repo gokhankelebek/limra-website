@@ -10,12 +10,13 @@ export type DietaryTag = "V" | "VG" | "GF" | "N";
 /** A build-to-order protein and what it adds to the item's base price. */
 export type ProteinChoice = {
   name: string;
-  /** dollars over the base price; 0 is the protein the base price buys */
+  /** dollars over the base price; 0 is the protein the base price buys,
+   *  negative takes money off (İskender with chicken) */
   upcharge: number;
   tags?: DietaryTag[];
 };
 
-// Plates and bowls carry the wider ladder; handhelds a shorter one.
+// Plates, bowls, wraps and sandwiches share one ladder (owners, Oct 2026).
 const PLATE_PROTEINS: ProteinChoice[] = [
   { name: "Falafel", upcharge: 0, tags: ["VG", "GF"] },
   { name: "Chicken döner", upcharge: 2 },
@@ -23,23 +24,17 @@ const PLATE_PROTEINS: ProteinChoice[] = [
   { name: "Beef döner", upcharge: 4 },
 ];
 
-const HANDHELD_PROTEINS: ProteinChoice[] = [
-  { name: "Falafel", upcharge: 0, tags: ["VG", "GF"] },
-  { name: "Chicken döner", upcharge: 1.5 },
-  { name: "Tantuni", upcharge: 2.5 },
-  { name: "Beef döner", upcharge: 3 },
-];
-
-// No falafel option on these two.
+// No falafel option on the Amalfi Melt.
 const MEAT_PROTEINS: ProteinChoice[] = [
   { name: "Chicken döner", upcharge: 0 },
   { name: "Tantuni", upcharge: 2.5 },
   { name: "Beef döner", upcharge: 3 },
 ];
 
+// Beef is the base price; choosing chicken takes $3 off.
 const ISKENDER_PROTEINS: ProteinChoice[] = [
-  { name: "Chicken döner", upcharge: 0 },
-  { name: "Beef döner", upcharge: 4 },
+  { name: "Beef döner", upcharge: 0 },
+  { name: "Chicken döner", upcharge: -3 },
 ];
 
 /** The four house sauces offered on build-to-order dishes. */
@@ -50,7 +45,7 @@ export const SIGNATURE_SAUCES = [
   "Garlic aioli",
 ] as const;
 
-/** Add-on offered on the wraps, sandwiches and tacos. */
+/** Add-on offered on the wraps and sandwiches. */
 export const ADD_FRIES_PRICE = 2.99;
 
 /** A plain priced line: fries, breads, sides, proteins by the pound. */
@@ -149,7 +144,7 @@ export const menu: MenuCategory[] = [
         name: "İskender Platter",
         description:
           "Döner over butter-toasted bread with plain yogurt, finished with our warm tomato sauce.",
-        price: 16.99,
+        price: 19,
         proteins: ISKENDER_PROTEINS,
         image: "/menu/iskender-platter.jpg?v=04d6950a",
         allergens: ["Wheat","Milk"],
@@ -200,7 +195,7 @@ export const menu: MenuCategory[] = [
         description:
           "Lavash rolled with lettuce, red cabbage, pickles, tomato, and sumac onions. Your choice of protein and sauce.",
         price: 11.99,
-        proteins: HANDHELD_PROTEINS,
+        proteins: PLATE_PROTEINS,
         image: "/menu/medi-wrap.jpg?v=c313a459",
         sauces: SIGNATURE_SAUCES,
         allergens: ["Wheat (lavash)"],
@@ -306,27 +301,13 @@ export const menu: MenuCategory[] = [
         description:
           "Eight-inch baguette with lettuce, tomato, pickles, and sumac onions. Your choice of protein and sauce.",
         price: 11.99,
-        proteins: HANDHELD_PROTEINS,
+        proteins: PLATE_PROTEINS,
         image: "/menu/angora-sandwich.jpg?v=2794591f",
         sauces: SIGNATURE_SAUCES,
         allergens: ["Wheat (baguette)"],
         addFries: true,
         imageAlt:
           "Angora Sandwich, eight-inch baguette with lettuce, tomato, pickles, and sumac onions",
-      },
-      {
-        slug: "medi-taco",
-        name: "Medi Taco",
-        description:
-          "Three soft tacos with lettuce, tomato, red cabbage, and parsley. Your choice of protein, with Limra sauce.",
-        price: 12.99,
-        proteins: MEAT_PROTEINS,
-        image: "/menu/medi-taco.jpg?v=917d091e",
-        allergens: ["Wheat (tortilla)"],
-        addFries: true,
-        imageAlt:
-          "Medi Taco, three soft tacos with lettuce, tomato, red cabbage, and parsley",
-        crop: "50% 50%",
       },
     ],
   },
@@ -344,7 +325,6 @@ export const menu: MenuCategory[] = [
         title: "Fries",
         items: [
           { name: "Cajun seasoning", size: "8 oz", price: 4.99 },
-          { name: "Parmesan garlic", size: "8 oz", price: 5.99 },
           { name: "Classic, no salt", size: "8 oz", price: 4.99 },
         ],
       },
@@ -356,22 +336,11 @@ export const menu: MenuCategory[] = [
         ],
       },
       {
-        title: "Sides",
-        items: [
-          { name: "Rice", size: "8 oz", price: 4.5 },
-          { name: "Hummus", size: "8 oz", price: 6.99 },
-          { name: "Baba ganoush", size: "8 oz", price: 6.99 },
-          { name: "Çiğ köfte", size: "8 oz", price: 7.99 },
-          { name: "Mediterranean salad", size: "250 g", price: 7.99 },
-        ],
-      },
-      {
         title: "By the pound",
         items: [
-          { name: "Beef döner", size: "1 lb", price: 23.99 },
-          { name: "Chicken döner", size: "1 lb", price: 17.99 },
-          { name: "Beef tantuni", size: "1 lb", price: 21.99 },
-          { name: "Falafel", size: "4 pieces", price: 5.99, tags: ["VG", "GF"] },
+          { name: "Beef döner", size: "½ lb", price: 13.99 },
+          { name: "Chicken döner", size: "½ lb", price: 10.99 },
+          { name: "Beef tantuni", size: "½ lb", price: 12.99 },
         ],
       },
     ],

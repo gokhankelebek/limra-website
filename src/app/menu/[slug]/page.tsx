@@ -16,7 +16,8 @@ export function generateStaticParams() {
 }
 
 const money = (n: number) => n.toFixed(2);
-const upcharge = (n: number) => (n % 1 === 0 ? `+$${n}` : `+$${n.toFixed(2)}`);
+const upcharge = (n: number) =>
+  `${n < 0 ? "\u2212" : "+"}$${Math.abs(n) % 1 === 0 ? Math.abs(n) : Math.abs(n).toFixed(2)}`;
 
 /**
  * A search description distinct from the on-page copy: leads with price and

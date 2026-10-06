@@ -9,7 +9,7 @@ const RAIL_SLUGS = [
   "tantuni-wrap",
   "aspendos-bowl",
   "limra-loaded-fries",
-  "medi-taco",
+  "amalfi-melt",
   "iskender-platter",
 ];
 

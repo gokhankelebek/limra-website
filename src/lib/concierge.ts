@@ -14,17 +14,34 @@ import { getGiveawayPhase } from "@/lib/giveaway-state";
 // site's own data. Built per request (the opening-day status changes
 // once); byte-stable otherwise, so the prompt prefix can cache.
 
+const dollars = (n: number) => `$${n % 1 === 0 ? n : n.toFixed(2)}`;
+
 const menuLines = menu
   .map((category) => {
     const items = category.items
       .map((i) => {
         const tags = [...(i.tags ?? []), ...(i.note ? [i.note] : [])];
-        return `- ${i.name} ($${i.price}): ${i.description}${
+        const proteins = i.proteins?.length
+          ? ` Protein: ${i.proteins
+              .map((p) => `${p.name} ${dollars(i.price + p.upcharge)}`)
+              .join(", ")}.`
+          : "";
+        return `- ${i.name} (${dollars(i.price)}): ${i.description}${proteins}${
           tags.length ? ` [${tags.join(", ")}]` : ""
         }`;
       })
       .join("\n");
-    return `${category.title}: ${category.note}\n${items}`;
+    const counter = (category.counterGroups ?? [])
+      .map(
+        (g) =>
+          `${g.title}: ${g.items
+            .map((c) => `${c.name}${c.size ? ` (${c.size})` : ""} ${dollars(c.price)}`)
+            .join(", ")}`
+      )
+      .join("\n");
+    return [`${category.title}: ${category.note}`, items, counter]
+      .filter(Boolean)
+      .join("\n");
   })
   .join("\n\n");
 

@@ -20,6 +20,12 @@ const nextConfig: NextConfig = {
         destination: "/menu/aspendos-bowl",
         permanent: true,
       },
+      // Off the menu for now (owners, Oct 2026); temporary so it can return.
+      {
+        source: "/menu/medi-taco",
+        destination: "/menu",
+        permanent: false,
+      },
     ];
   },
 };
