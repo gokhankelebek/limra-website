@@ -6,7 +6,7 @@ import {
   EVENT_TYPES,
   SERVICE_TYPES,
 } from "@/data/catering";
-import { CATERING_EMAIL, CATERING_EMAIL_HREF } from "@/data/contact";
+import { CATERING_EMAIL, CATERING_EMAIL_HREF, CONTACT } from "@/data/contact";
 
 type Status = "idle" | "sending" | "sent" | "error" | "fallback";
 
@@ -67,7 +67,11 @@ export default function CateringForm() {
         <p className="font-display text-3xl text-olive">Thank you.</p>
         <p className="mx-auto mt-4 max-w-md font-body text-base font-light leading-relaxed text-ink/70">
           Your catering request has been received. Our team will get back to
-          you as soon as possible. Hoş geldiniz.
+          you as soon as possible. For anything urgent, call{" "}
+          <a href={CONTACT.phoneHref} className="whitespace-nowrap text-olive underline-offset-4 hover:underline">
+            {CONTACT.phoneDisplay}
+          </a>
+          . Hoş geldiniz.
         </p>
       </div>
     );
@@ -218,17 +222,22 @@ export default function CateringForm() {
 
       {status === "error" && (
         <p className="font-body text-sm text-terracotta-deep">
-          Something slipped. Please try again, or email {CATERING_EMAIL}.
+          Something slipped and your request didn&apos;t go through. Please try
+          again, or call us at{" "}
+          <a href={CONTACT.phoneHref} className="whitespace-nowrap underline underline-offset-4">
+            {CONTACT.phoneDisplay}
+          </a>
+          .
         </p>
       )}
       {status === "fallback" && (
         <p className="font-body text-sm leading-relaxed text-ink/70">
-          Our inbox isn&apos;t taking messages just yet. Please email us at{" "}
+          The form isn&apos;t taking requests right now. Please call us at{" "}
           <a
-            href={CATERING_EMAIL_HREF}
-            className="text-terracotta underline underline-offset-4"
+            href={CONTACT.phoneHref}
+            className="whitespace-nowrap text-terracotta underline underline-offset-4"
           >
-            {CATERING_EMAIL}
+            {CONTACT.phoneDisplay}
           </a>{" "}
           and we&apos;ll take it from there.
         </p>
@@ -243,12 +252,12 @@ export default function CateringForm() {
           {status === "sending" ? "Sending…" : "Request a quote"}
         </button>
         <span className="font-body text-sm font-light text-ink/50">
-          Or email{" "}
+          Or {CATERING_EMAIL ? "email" : "call"}{" "}
           <a
-            href={CATERING_EMAIL_HREF}
-            className="text-olive underline-offset-4 hover:underline"
+            href={CATERING_EMAIL_HREF ?? CONTACT.phoneHref}
+            className="whitespace-nowrap text-olive underline-offset-4 hover:underline"
           >
-            {CATERING_EMAIL}
+            {CATERING_EMAIL ?? CONTACT.phoneDisplay}
           </a>
         </span>
       </div>

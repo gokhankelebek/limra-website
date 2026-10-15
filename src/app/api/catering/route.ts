@@ -1,20 +1,24 @@
-// Catering inquiry endpoint. Emails each submission via Resend.
+// Catering inquiry endpoint.
 //
-// To go live, set in Vercel:
-//   RESEND_API_KEY   — from resend.com (free tier is plenty)
-//   CATERING_INBOX   — where inquiries are delivered (the owners' address)
-//   CATERING_FROM    — a verified Resend sender, e.g. "Limra <catering@limramedi.com>"
-//                      (defaults to Resend's onboarding sender for testing)
-//
-// Until RESEND_API_KEY and CATERING_INBOX exist, the route reports itself
-// disabled and the form tells the guest to call instead — nothing is lost.
+// 1) Every inquiry is stored in the "Limra Catering Inquiries" Google Form and
+//    its response Sheet (src/data/catering-form.ts); Google emails the form
+//    owner for each new row. This is what makes the form work today.
+// 2) Optional email path via Resend, once these exist in Vercel:
+//      RESEND_API_KEY  from resend.com
+//      CATERING_INBOX  where inquiries are emailed (an inbox the owners read)
+//      CATERING_FROM   a verified Resend sender, e.g. "Limra <catering@limramedi.com>"
+//    With it, the owners also get a formatted email and the guest a confirmation.
+// The request succeeds if either path stored the inquiry.
+
+import { CATERING_FORM_ENTRIES, CATERING_FORM_POST_URL } from "@/data/catering-form";
 
 export const runtime = "nodejs";
 
 const RESEND_KEY = process.env.RESEND_API_KEY;
 const INBOX = process.env.CATERING_INBOX;
 const FROM = process.env.CATERING_FROM || "Limra Catering <onboarding@resend.dev>";
-const ENABLED = Boolean(RESEND_KEY && INBOX);
+const EMAIL_ENABLED = Boolean(RESEND_KEY && INBOX);
+const ENABLED = true;
 
 const MAX = { name: 120, contact: 160, message: 1200, generic: 200 };
 
@@ -94,12 +98,48 @@ export async function POST(req: Request) {
     );
   }
 
-  if (!ENABLED) {
-    // Not wired yet — tell the client to fall back to phone.
-    return Response.json(
-      { error: "unconfigured", fallback: "phone" },
-      { status: 503 }
-    );
+  // 1) Store in the Google Sheet. Google answers a good submission with its
+  // confirmation page; a rejected one re-renders the form fields, and a closed
+  // form says so. Both count as not stored.
+  const E = CATERING_FORM_ENTRIES;
+  const form = new URLSearchParams();
+  form.set(`entry.${E.name}`, name);
+  form.set(`entry.${E.email}`, email || "-");
+  form.set(`entry.${E.phone}`, phone || "-");
+  form.set(`entry.${E.eventDate}`, eventDate || "-");
+  form.set(`entry.${E.guests}`, guests || "-");
+  form.set(`entry.${E.eventType}`, eventType || "-");
+  form.set(`entry.${E.serviceType}`, serviceType || "-");
+  form.set(`entry.${E.interests}`, interests.join(", ") || "-");
+  form.set(`entry.${E.message}`, message || "-");
+  form.set("fvv", "1");
+  form.set("pageHistory", "0");
+
+  let stored = false;
+  try {
+    const res = await fetch(CATERING_FORM_POST_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: form.toString(),
+      redirect: "manual",
+    });
+    const page = res.status === 200 ? await res.text() : "";
+    stored =
+      (res.status >= 300 && res.status < 400) ||
+      (res.status === 200 &&
+        !/name="entry\.\d+"/.test(page) &&
+        !/no longer accepting/i.test(page));
+    if (!stored) {
+      console.error("catering sheet rejected", res.status, page.slice(0, 200).replace(/\s+/g, " "));
+    }
+  } catch (err) {
+    console.error("catering sheet failed", err);
+  }
+
+  if (!EMAIL_ENABLED) {
+    return stored
+      ? Response.json({ ok: true })
+      : Response.json({ error: "store-failed" }, { status: 502 });
   }
 
   const lines = [
@@ -141,7 +181,8 @@ export async function POST(req: Request) {
       body: JSON.stringify(payload),
     });
 
-  // 1) Notify the owners. This one must succeed.
+  // 2) Email the owners. Required only when the Sheet store failed.
+  let emailed = false;
   try {
     const res = await send({
       from: FROM,
@@ -151,14 +192,15 @@ export async function POST(req: Request) {
       html,
       text,
     });
-    if (!res.ok) {
-      return Response.json({ error: "send-failed" }, { status: 502 });
-    }
+    emailed = res.ok;
   } catch {
-    return Response.json({ error: "send-failed" }, { status: 502 });
+    emailed = false;
+  }
+  if (!stored && !emailed) {
+    return Response.json({ error: "store-failed" }, { status: 502 });
   }
 
-  // 2) Auto-confirmation to the guest. Best-effort — a failure here must not
+  // 3) Auto-confirmation to the guest. Best-effort — a failure here must not
   // fail the request, since the owners already have the inquiry.
   if (email) {
     const confirmText =

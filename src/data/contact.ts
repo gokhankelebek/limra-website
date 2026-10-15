@@ -43,12 +43,15 @@ export const ORDER_URL = "/order";
 
 export const SERVICE_LINE = "Dine-in · Takeout · Delivery";
 
-// Public catering address, shown as the "Email us" action on /catering.
-// CONFIRM with the owners — assumed from the limramedi.com domain. Override
-// with NEXT_PUBLIC_CATERING_EMAIL without a code change.
-export const CATERING_EMAIL =
-  process.env.NEXT_PUBLIC_CATERING_EMAIL || "catering@limramedi.com";
-export const CATERING_EMAIL_HREF = `mailto:${CATERING_EMAIL}`;
+// Public catering address. limramedi.com has no mailbox yet (no MX records,
+// Oct 2026), so nothing is shown until NEXT_PUBLIC_CATERING_EMAIL is set in
+// Vercel to an address that really receives mail. Until then the site points
+// guests to the catering form and the phone.
+export const CATERING_EMAIL: string | null =
+  process.env.NEXT_PUBLIC_CATERING_EMAIL || null;
+export const CATERING_EMAIL_HREF: string | null = CATERING_EMAIL
+  ? `mailto:${CATERING_EMAIL}`
+  : null;
 
 // From limramedi.com — used in the footer and Restaurant schema sameAs.
 export const SOCIALS = [

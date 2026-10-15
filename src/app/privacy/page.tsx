@@ -13,10 +13,11 @@ export const metadata: Metadata = {
   alternates: { canonical: "/privacy" },
 };
 
-const EFFECTIVE = "September 26, 2026";
+const EFFECTIVE = "October 15, 2026";
 
 // Plain-English policy. Keep each section honest to what the code does:
-// NotifyForm (email list), /api/catering (Resend), /api/ask (Anthropic),
+// NotifyForm (email list), /api/catering (Google Form + Sheet; Resend
+// optional), /api/ask (Anthropic),
 // /go (scan log), IntroContext (sessionStorage), Visit page (Maps embed),
 // MetaPixel (Meta Pixel: PageView, plus Lead on a giveaway entry).
 const SECTIONS: { title: string; body: React.ReactNode }[] = [
@@ -26,7 +27,7 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
       <p>
         This website collects very little. If you sign up for opening updates,
         we keep your email address. If you send a catering inquiry, it is
-        emailed to the restaurant. If you ask our menu concierge a question,
+        recorded for the restaurant to answer. If you ask our menu concierge a question,
         the words you type are sent to the service that answers them. Our
         hosting provider records ordinary technical data, as every
         website&apos;s does. We use the Meta Pixel to measure visits from our
@@ -51,10 +52,9 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
           name, a way to reach you (email or phone), and details about your
           event: date, guest count, occasion, service style, and anything you
           choose to tell us. We use this only to answer your inquiry and plan
-          your event. The form delivers your message to the restaurant by
-          email and, if you gave an address, sends you a short confirmation.
-          This website does not keep a database of inquiries; the copy lives
-          in the restaurant&apos;s inbox.
+          your event. The inquiry is recorded in a Google Form and spreadsheet
+          the restaurant manages, which is where the team reads and answers
+          it. This website itself does not keep a copy.
         </p>
         <p>
           <strong>Giveaway entries.</strong>{" "}During a giveaway, the entry form
@@ -138,8 +138,8 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
             opening-updates list and sends our emails.
           </li>
           <li>
-            <strong>Resend</strong>: delivers catering inquiries to the
-            restaurant and the confirmation email to you.
+            <strong>Google Forms and Google Sheets</strong>: store catering
+            inquiries on our behalf so the team can answer them.
           </li>
           <li>
             <strong>Anthropic</strong>: provides the AI model behind Ask Limra
@@ -265,8 +265,12 @@ export default function PrivacyPage() {
                 {ADDRESS_LINES[1]}
                 <br />
                 <a href={CONTACT.phoneHref}>{CONTACT.phoneDisplay}</a>
-                <br />
-                <a href={CATERING_EMAIL_HREF}>{CATERING_EMAIL}</a>
+                {CATERING_EMAIL_HREF && (
+                  <>
+                    <br />
+                    <a href={CATERING_EMAIL_HREF}>{CATERING_EMAIL}</a>
+                  </>
+                )}
               </p>
             </div>
           </Reveal>
