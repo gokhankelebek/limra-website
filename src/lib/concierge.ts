@@ -35,7 +35,7 @@ const menuLines = menu
       .map(
         (g) =>
           `${g.title}: ${g.items
-            .map((c) => `${c.name}${c.size ? ` (${c.size})` : ""} ${dollars(c.price)}`)
+            .map((c) => `${c.name}${c.size ? ` (${c.size})` : ""} ${c.from ? "from " : ""}${dollars(c.price)}`)
             .join(", ")}`
       )
       .join("\n");

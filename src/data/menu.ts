@@ -42,12 +42,16 @@ export const SIGNATURE_SAUCES = [
 /** Add-on offered on the wraps and sandwiches. */
 export const ADD_FRIES_PRICE = 2.99;
 
-/** A plain priced line: fries, breads, sides, proteins by the pound. */
+/** A plain priced line: fries, breads, proteins by the pound, desserts, drinks. */
 export type CounterItem = {
   name: string;
   /** portion as the boards state it, e.g. "8 oz", "1 lb", "4 pieces" */
   size?: string;
+  /** one short line under the name (desserts) */
+  description?: string;
   price: number;
+  /** true when sizes vary and `price` is the smallest ("from 4.49") */
+  from?: boolean;
   tags?: DietaryTag[];
 };
 
@@ -92,8 +96,10 @@ export type MenuCategory = {
   /** "anticipation", announced at the threshold, set at opening */
   kind?: "anticipation" | "counter";
   items: MenuItem[];
-  /** priced lists for the "counter" kind: fries, breads, sides, proteins */
+  /** priced lists for the "counter" kind: fries, breads, desserts, drinks */
   counterGroups?: CounterGroup[];
+  /** small italic line under a counter course (e.g. daily availability) */
+  footnote?: string;
 };
 
 export const menuIntro = {
@@ -339,6 +345,7 @@ export const menu: MenuCategory[] = [
       },
     ],
   },
+  // Desserts and drinks as listed on Limra's Toast ordering page (Oct 2026).
   {
     id: "the-case",
     numeral: "VI",
@@ -346,8 +353,47 @@ export const menu: MenuCategory[] = [
     shortLabel: "The Case",
     note: "Chef Elif's baklava and pastries, made fresh for the case.",
     surface: "cream",
-    kind: "anticipation",
+    kind: "counter",
     items: [],
+    footnote:
+      "The case changes through the day. Ask at the counter what is out today.",
+    counterGroups: [
+      {
+        title: "Mediterranean",
+        items: [
+          { name: "Pistachio baklava", description: "Flaky phyllo, pistachios, syrup.", price: 5.95, tags: ["N"] },
+          { name: "Walnut baklava", description: "Flaky phyllo, walnuts, syrup.", price: 4.99, tags: ["N"] },
+          { name: "Chocolate pistachio baklava", description: "Phyllo with pistachios and chocolate.", price: 3.95, tags: ["N"] },
+          { name: "Pistachio kadayıf", description: "Crisp shredded pastry, pistachios, syrup.", price: 5.5, tags: ["N"] },
+          { name: "Şekerpare", description: "Soft semolina cookies soaked in syrup.", price: 3.99 },
+          { name: "Acıbadem", description: "Almond cookie, crisp outside, chewy within.", price: 3.99, tags: ["N"] },
+          { name: "Şambali", price: 5.49 },
+          { name: "Apple tart", price: 5.99 },
+        ],
+      },
+      {
+        title: "Classic",
+        items: [
+          { name: "Lemon cheesecake", price: 7.5 },
+          { name: "Berry cheesecake", description: "Topped with mixed berry sauce.", price: 7.5 },
+          { name: "Lotus cheesecake", description: "Biscoff cookie butter and crumble.", price: 7.5 },
+          { name: "San Sebastián cheesecake", description: "Basque-style, burnt top, creamy center.", price: 7.99 },
+          { name: "Tiramisu", price: 6.99 },
+          { name: "Profiteroles", price: 7.99 },
+          { name: "Karpatka", price: 7.49 },
+          { name: "Dubai tart", description: "Pistachio cream, crisp kataifi, chocolate.", price: 6.49, tags: ["N"] },
+          { name: "Dubai cup", price: 7.99 },
+          { name: "Banana pudding", description: "Vanilla wafers and pastry cream.", price: 6.49 },
+          { name: "Magnolia", description: "Strawberries, vanilla wafers, pastry cream.", price: 5.99 },
+          { name: "Pavlova", description: "Crisp meringue, pastry cream, fresh fruit.", price: 5.99 },
+          { name: "New York cookie", description: "Thick, soft-baked, gooey center.", price: 6.5 },
+          { name: "Slatka pita", price: 5.99 },
+          { name: "Chocolate espresso cake", price: 4.99 },
+          { name: "Supangle", description: "Rich Turkish chocolate pudding.", price: 5.49 },
+          { name: "Rice pudding", description: "Baked, with milk and cinnamon.", price: 4.99 },
+        ],
+      },
+    ],
   },
   {
     id: "espresso-counter",
@@ -356,8 +402,53 @@ export const menu: MenuCategory[] = [
     shortLabel: "Beverage",
     note: "Pulled slow, worth lingering.",
     surface: "olive",
-    kind: "anticipation",
+    kind: "counter",
     items: [],
+    counterGroups: [
+      {
+        title: "Espresso",
+        items: [
+          { name: "Americano", price: 3.49, from: true },
+          { name: "Cappuccino", price: 4.49, from: true },
+          { name: "Latte", price: 4.99, from: true },
+          { name: "Mocha", price: 5.99, from: true },
+          { name: "Hot chocolate", price: 4.99, from: true },
+        ],
+      },
+      {
+        title: "Iced espresso",
+        items: [
+          { name: "Iced americano", price: 3.99, from: true },
+          { name: "Iced latte", price: 4.99, from: true },
+          { name: "Iced caramel latte", price: 5.49, from: true },
+          { name: "Iced vanilla latte", price: 5.49, from: true },
+          { name: "Iced mocha", price: 5.49, from: true },
+        ],
+      },
+      {
+        title: "Limra signatures",
+        items: [
+          { name: "Tea, free refills", size: "8 oz", price: 0.99 },
+          { name: "Ayran", description: "Yogurt drink.", price: 2.99 },
+          { name: "Şalgam", description: "Spiced turnip drink.", price: 2.99 },
+          { name: "Gazoz", description: "Traditional sparkling soda.", price: 3.5 },
+          { name: "Hibiscus sherbet", price: 3.5 },
+        ],
+      },
+      {
+        title: "Soft drinks & water",
+        items: [
+          { name: "Coca-Cola, Diet Coke, Pepsi, Fanta, Mountain Dew", price: 2.5 },
+          { name: "Mexican bottled sodas", price: 3.5 },
+          { name: "Orange juice", price: 3.5 },
+          { name: "Orange juice, bottled", price: 2 },
+          { name: "San Pellegrino", price: 3.5 },
+          { name: "Sparkling water", price: 2.5 },
+          { name: "Turkish sparkling water", price: 2 },
+          { name: "Bottled water", price: 2 },
+        ],
+      },
+    ],
   },
 ];
 

@@ -41,7 +41,7 @@ const DIET_MAP: Record<string, string> = {
 
 // Menu structured data generated from the live menu model — updates
 // automatically when the sample data is swapped for the real menu.
-// Anticipation courses (no items yet) stay out of the schema.
+// Priced counter lists are added as their own sections.
 function buildMenuSchema(categories: MenuCategory[]) {
   return {
     "@context": "https://schema.org",
@@ -49,7 +49,8 @@ function buildMenuSchema(categories: MenuCategory[]) {
     name: "Limra Menu",
     description:
       "Platters from the spit, wraps rolled warm, bowls for the middle of the day.",
-    hasMenuSection: categories
+    hasMenuSection: [
+      ...categories
       .filter((category) => category.items.length > 0)
       .map((category) => ({
         "@type": "MenuSection",
@@ -75,6 +76,24 @@ function buildMenuSchema(categories: MenuCategory[]) {
             : {}),
         })),
       })),
+      // Priced lists (sides, desserts, drinks): one section per group.
+      ...categories.flatMap((category) =>
+        (category.counterGroups ?? []).map((group) => ({
+          "@type": "MenuSection",
+          name: `${category.title}: ${group.title}`,
+          hasMenuItem: group.items.map((line) => ({
+            "@type": "MenuItem",
+            name: line.name,
+            ...(line.description ? { description: line.description } : {}),
+            offers: {
+              "@type": "Offer",
+              price: line.price.toFixed(2),
+              priceCurrency: "USD",
+            },
+          })),
+        }))
+      ),
+    ],
   };
 }
 
@@ -358,17 +377,46 @@ function CategorySection({
 }
 
 /**
- * V — Sides & Extras. Priced lines only, no photographs: fries, breads,
- * sides, and the counter by the pound, set as four inscribed columns.
+ * Priced courses with no photographs: Sides & Extras, The Case (desserts)
+ * and the Beverage Counter. Inscribed columns of name, rule and price, on
+ * cream or deep olive to keep the menu's alternating rhythm.
  */
 function CounterSection({ category }: { category: MenuCategory }) {
+  const onOlive = category.surface === "olive";
+  const isSides = category.id === "sides";
+  const isCase = category.id === "the-case";
+  const tone = onOlive
+    ? {
+        section: "frame-inset bg-olive-deep text-cream",
+        group: "text-terracotta-soft",
+        rule: "border-cream/15",
+        name: "text-cream",
+        size: "text-cream/45",
+        desc: "text-cream/55",
+        price: "text-cream/70",
+        foot: "text-cream/50",
+      }
+    : {
+        section: isCase
+          ? "border-y border-olive/15 bg-cream-deep text-ink"
+          : "bg-cream text-ink",
+        group: "text-terracotta",
+        rule: "border-ink/10",
+        name: "text-ink",
+        size: "text-olive/45",
+        desc: "text-ink/55",
+        price: "text-olive/70",
+        foot: "text-ink/45",
+      };
+
   return (
     <section
       id={category.id}
-      className="relative scroll-mt-12 overflow-hidden bg-cream py-24 text-ink lg:py-32"
+      className={`relative scroll-mt-12 overflow-hidden py-24 lg:py-32 ${tone.section}`}
     >
+      {onOlive && <OliveWatermark flip />}
       <div className="relative mx-auto max-w-4xl px-6">
-        <Threshold category={category} onOlive={false} />
+        <Threshold category={category} onOlive={onOlive} />
 
         <div className="mt-14 grid gap-x-12 gap-y-12 sm:grid-cols-2">
           {(category.counterGroups ?? []).map((group, gi) => (
@@ -377,29 +425,47 @@ function CounterSection({ category }: { category: MenuCategory }) {
               animation="anim-fade"
               delay={STAGGER[gi % STAGGER.length]}
             >
-              <h3 className="eyebrow-lg font-roman uppercase text-terracotta">
+              <h3 className={`eyebrow-lg font-roman uppercase ${tone.group}`}>
                 {group.title}
               </h3>
-              <ul className="mt-5 border-t border-ink/10">
+              <ul className={`mt-5 border-t ${tone.rule}`}>
                 {group.items.map((line) => (
-                  <li
-                    key={line.name}
-                    className="flex items-baseline gap-3 border-b border-ink/10 py-3"
-                  >
-                    <span className="font-display text-lg leading-tight text-ink">
-                      {line.name}
-                    </span>
-                    {line.size && (
-                      <span className="micro shrink-0 font-roman uppercase text-olive/45">
-                        {line.size}
+                  <li key={line.name} className={`border-b py-3 ${tone.rule}`}>
+                    <div className="flex items-baseline gap-3">
+                      <span className={`font-display text-lg leading-tight ${tone.name}`}>
+                        {line.name}
                       </span>
+                      {line.size && (
+                        <span className={`micro shrink-0 font-roman uppercase ${tone.size}`}>
+                          {line.size}
+                        </span>
+                      )}
+                      {line.tags?.includes("N") && (
+                        <span
+                          className={`micro shrink-0 font-roman uppercase ${tone.size}`}
+                          title="Contains nuts"
+                        >
+                          N
+                        </span>
+                      )}
+                      <span aria-hidden className="min-w-[1.5rem] flex-1">
+                        <span className="block w-full border-b border-current opacity-15" />
+                      </span>
+                      <span className={`shrink-0 font-roman text-sm tracking-[0.12em] ${tone.price}`}>
+                        {line.from && (
+                          <span className="mr-1 font-body text-xs normal-case tracking-normal italic opacity-80">
+                            from
+                          </span>
+                        )}
+                        {line.from && " "}
+                        {money(line.price)}
+                      </span>
+                    </div>
+                    {line.description && (
+                      <p className={`mt-1 font-body text-sm font-light leading-snug ${tone.desc}`}>
+                        {line.description}
+                      </p>
                     )}
-                    <span aria-hidden className="min-w-[1.5rem] flex-1">
-                      <span className="block w-full border-b border-current opacity-15" />
-                    </span>
-                    <span className="shrink-0 font-roman text-sm tracking-[0.12em] text-olive/70">
-                      {money(line.price)}
-                    </span>
                   </li>
                 ))}
               </ul>
@@ -407,100 +473,36 @@ function CounterSection({ category }: { category: MenuCategory }) {
           ))}
         </div>
 
+        {category.footnote && (
+          <Reveal className="mt-12 text-center">
+            <p className={`mx-auto max-w-lg font-body text-sm font-light italic leading-relaxed ${tone.foot}`}>
+              {category.footnote}
+            </p>
+          </Reveal>
+        )}
+
         {/* The sauces every build-to-order dish chooses from, said once. */}
-        <Reveal className="mt-16 text-center">
-          <h3 className="eyebrow-lg font-roman uppercase text-terracotta">
-            House sauces
-          </h3>
-          <p className="mx-auto mt-4 max-w-lg font-body text-base font-light leading-relaxed text-ink/60">
-            {SIGNATURE_SAUCES.join(" · ")}
-          </p>
-          <p className="mx-auto mt-6 max-w-lg font-body text-sm font-light italic leading-relaxed text-ink/45">
-            Everything is prepared in a shared kitchen. Please tell us about
-            any allergy before you order.
-          </p>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-/** VI — The Case. An empty vitrine, announced, not invented. */
-function CaseSection({ category }: { category: MenuCategory }) {
-  return (
-    <section
-      id={category.id}
-      className="relative scroll-mt-12 overflow-hidden border-y border-olive/15 bg-cream-deep py-24 text-ink lg:py-32"
-    >
-      <div className="mx-auto max-w-4xl px-6">
-        <Threshold category={category} onOlive={false} />
-
-        {/* The vitrine — six empty panes waiting for opening day */}
-        <Reveal
-          animation="anim-fade"
-          className="stagger-fade mx-auto mt-12 max-w-3xl"
-        >
-          <div className="grid grid-cols-3 gap-px bg-olive/25 p-px sm:grid-cols-6">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <div
-                key={i}
-                className="stagger-item flex aspect-square items-center justify-center bg-cream-deep"
-                style={{ transitionDelay: `${i * 60}ms` }}
-              >
-                <span
-                  className="stagger-item"
-                  style={{ transitionDelay: `${i * 60 + 150}ms` }}
-                >
-                  <Medallion className="h-6 w-6 text-olive opacity-[0.15]" />
-                </span>
-              </div>
-            ))}
-          </div>
-        </Reveal>
-
-        <Reveal className="mt-10 flex items-center justify-center gap-4">
-          <span aria-hidden className="h-px w-10 bg-olive/25" />
-          <p className="font-roman text-[0.6rem] uppercase tracking-[0.3em] text-terracotta">
-            Set at opening
-          </p>
-          <span aria-hidden className="h-px w-10 bg-olive/25" />
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-/** VI — The Espresso Counter. The pour, the couplet, the seal. */
-function EspressoSection({ category }: { category: MenuCategory }) {
-  return (
-    <section
-      id={category.id}
-      className="frame-inset relative scroll-mt-12 overflow-hidden bg-olive-deep py-24 text-cream lg:py-32"
-    >
-      <OliveWatermark flip />
-      <div className="relative mx-auto max-w-4xl px-6">
-        {/* the couplet carries the note at centerpiece scale */}
-        <Threshold category={category} onOlive hideNote />
-
-        <Reveal className="mt-12 flex flex-col items-center text-center">
-          <span
-            aria-hidden
-            className="line-draw-y block h-16 w-px bg-terracotta-soft sm:h-24"
-            style={{ transitionDelay: "0.2s" }}
-          />
-          <p className="mt-8 max-w-xl font-display text-3xl italic leading-[1.3] sm:text-4xl lg:text-5xl">
-            Pulled slow,
-            <br />
-            worth lingering.
-          </p>
-          <Medallion
-            variant="seal"
-            className="mt-10 h-12 w-12 text-cream opacity-[0.18] sm:h-16 sm:w-16"
-          />
-          <p className="mt-8 font-roman text-[0.6rem] uppercase tracking-[0.3em] text-cream/50">
-            The counter opens with the room
-          </p>
-        </Reveal>
+        {isSides && (
+          <Reveal className="mt-16 text-center">
+            <h3 className="eyebrow-lg font-roman uppercase text-terracotta">
+              House sauces
+            </h3>
+            <p className="mx-auto mt-4 max-w-lg font-body text-base font-light leading-relaxed text-ink/60">
+              {SIGNATURE_SAUCES.join(" · ")}
+            </p>
+            <p className="mx-auto mt-6 max-w-lg font-body text-sm font-light italic leading-relaxed text-ink/45">
+              Everything is prepared in a shared kitchen. Please tell us about
+              any allergy before you order.
+            </p>
+          </Reveal>
+        )}
+        {isCase && (
+          <Reveal className="mt-4 text-center">
+            <p className={`mx-auto max-w-lg font-body text-sm font-light italic leading-relaxed ${tone.foot}`}>
+              N contains nuts. Please tell us about any allergy before you order.
+            </p>
+          </Reveal>
+        )}
       </div>
     </section>
   );
@@ -555,12 +557,6 @@ export default function MenuPage() {
         {categories.map((category, i) =>
           category.kind === "counter" ? (
             <CounterSection key={category.id} category={category} />
-          ) : category.kind === "anticipation" ? (
-            category.id === "the-case" ? (
-              <CaseSection key={category.id} category={category} />
-            ) : (
-              <EspressoSection key={category.id} category={category} />
-            )
           ) : (
             <CategorySection key={category.id} category={category} index={i} />
           )
