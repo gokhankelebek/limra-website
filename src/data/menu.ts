@@ -316,11 +316,24 @@ export const menu: MenuCategory[] = [
     numeral: "V",
     title: "Sides & Extras",
     shortLabel: "Sides",
-    note: "Fries, breads, and the counter by the pound.",
+    note: "The open table by weight, fries, soup, bread, and the spit by the half pound.",
     surface: "cream",
     kind: "counter",
     items: [],
     counterGroups: [
+      // Toast lists this as "Open Buffet: Bowl, $13.99/lb". On the site it is
+      // the open table; never lead with the word "buffet".
+      {
+        title: "The open table",
+        items: [
+          {
+            name: "Open table bowl",
+            size: "per lb",
+            description: "Fill a bowl from the hot and cold dishes, priced by weight.",
+            price: 13.99,
+          },
+        ],
+      },
       {
         title: "Fries",
         items: [
@@ -329,8 +342,9 @@ export const menu: MenuCategory[] = [
         ],
       },
       {
-        title: "Breads",
+        title: "Soup & bread",
         items: [
+          { name: "Soup", price: 5 },
           { name: "Grilled pita", size: "1 piece", price: 0.99 },
           { name: "Warm lavash", size: "1 piece", price: 0.99 },
         ],
