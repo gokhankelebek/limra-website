@@ -10,7 +10,6 @@ const NAV = [
   { label: "Catering", href: "/catering" },
   { label: "Gallery", href: "/gallery" },
   { label: "Visit", href: "/visit" },
-  { label: "Giveaway", href: "/giveaway" },
 ];
 
 export default function SiteHeader() {

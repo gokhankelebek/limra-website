@@ -47,6 +47,7 @@ export const GIVEAWAY = {
   closesLabelShort: "October 11",
   drawDate: "October 13, 2026",
   announceDate: "October 14, 2026",
+  announcedAt: "2026-10-14T00:00:00-04:00",
   claimDeadlineDays: 30,
   restaurantName: "Limra Mediterranean Restaurant",
   restaurantAddress: `${ADDRESS_LINES[0]}, ${ADDRESS_LINES[1]}`,

@@ -12,6 +12,7 @@ import {
   CLOSES_AT_MS,
   OPENS_AT_MS,
   getGiveawayPhase,
+  isAnnounced,
   isPreview,
   resolveNow,
   type GiveawayPhase,
@@ -176,8 +177,9 @@ export default async function GiveawayPage({
                 role="status"
                 className="max-w-md rounded-[2px] border border-olive/20 bg-cream-soft px-6 py-4 font-body text-base font-light leading-relaxed text-ink/80"
               >
-                Entries are closed. Winners will be announced on Instagram on{" "}
-                {GIVEAWAY.announceDate}.
+                {isAnnounced()
+                  ? `Entries are closed. Winners were announced on Instagram on ${GIVEAWAY.announceDate}. Thank you to everyone who came to the table.`
+                  : `Entries are closed. Winners will be announced on Instagram on ${GIVEAWAY.announceDate}.`}
               </p>
             )}
             <EntryCta phase={phase} />

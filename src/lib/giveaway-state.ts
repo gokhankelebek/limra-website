@@ -6,6 +6,12 @@ export type GiveawayPhase = "before" | "live" | "closed";
 // cutoff does not depend on the server's or the visitor's time zone.
 export const OPENS_AT_MS = Date.parse(GIVEAWAY.opensAt);
 export const CLOSES_AT_MS = Date.parse(GIVEAWAY.closesAt);
+export const ANNOUNCED_AT_MS = Date.parse(GIVEAWAY.announcedAt);
+
+/** True from the morning winners are announced: copy switches to past tense. */
+export function isAnnounced(now: Date = new Date()): boolean {
+  return now.getTime() >= ANNOUNCED_AT_MS;
+}
 
 export function getGiveawayPhase(now: Date = new Date()): GiveawayPhase {
   const t = now.getTime();

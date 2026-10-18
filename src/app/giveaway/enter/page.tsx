@@ -6,7 +6,7 @@ import SiteHeader from "@/components/SiteHeader";
 import EntryForm from "@/components/giveaway/EntryForm";
 import { InstagramDisclaimer } from "@/components/giveaway/RulesBody";
 import { GIVEAWAY, GOOGLE_FORM_VIEW_URL } from "@/data/giveaway.config";
-import { getGiveawayPhase, isPreview, resolveNow } from "@/lib/giveaway-state";
+import { getGiveawayPhase, isAnnounced, isPreview, resolveNow } from "@/lib/giveaway-state";
 
 export const dynamic = "force-dynamic";
 
@@ -52,7 +52,9 @@ export default async function GiveawayEnterPage({
               ? "Two minutes, one form. Have your Instagram handle ready."
               : phase === "before"
                 ? `Come back on ${GIVEAWAY.opensLabel}. Until then, follow ${GIVEAWAY.instagramHandle}.`
-                : `Winners will be announced on Instagram on ${GIVEAWAY.announceDate}.`}
+                : isAnnounced()
+                  ? `Winners were announced on Instagram on ${GIVEAWAY.announceDate}. Follow ${GIVEAWAY.instagramHandle} for what comes next.`
+                  : `Winners will be announced on Instagram on ${GIVEAWAY.announceDate}.`}
           </p>
         </section>
 
