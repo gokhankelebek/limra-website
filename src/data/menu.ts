@@ -12,7 +12,7 @@ export type DietaryTag = "V" | "VG" | "GF" | "N";
 export type ProteinChoice = {
   name: string;
   /** dollars over the base price; 0 is the protein the base price buys,
-   *  negative takes money off (İskender with chicken) */
+   *  negative takes money off */
   upcharge: number;
   tags?: DietaryTag[];
 };
@@ -23,12 +23,6 @@ const PLATE_PROTEINS: ProteinChoice[] = [
   { name: "Chicken döner", upcharge: 2 },
   { name: "Tantuni", upcharge: 3 },
   { name: "Beef döner", upcharge: 4 },
-];
-
-// Beef is the base price; choosing chicken takes $3 off.
-const ISKENDER_PROTEINS: ProteinChoice[] = [
-  { name: "Beef döner", upcharge: 0 },
-  { name: "Chicken döner", upcharge: -3 },
 ];
 
 /** The four house sauces offered on build-to-order dishes. */
@@ -143,13 +137,12 @@ export const menu: MenuCategory[] = [
         slug: "iskender-platter",
         name: "İskender Platter",
         description:
-          "Döner over butter-toasted bread with plain yogurt, finished with our warm tomato sauce.",
+          "Beef döner over butter-toasted bread with plain yogurt, finished with our warm tomato sauce.",
         price: 19.99,
-        proteins: ISKENDER_PROTEINS,
         image: "/menu/iskender-platter.jpg?v=04d6950a",
         allergens: ["Wheat","Milk"],
         imageAlt:
-          "İskender Platter, sliced döner over butter-toasted bread with plain yogurt and warm tomato sauce",
+          "İskender Platter, sliced beef döner over butter-toasted bread with plain yogurt and warm tomato sauce",
         crop: "50% 50%",
       },
     ],
