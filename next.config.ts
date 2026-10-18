@@ -28,6 +28,12 @@ const nextConfig: NextConfig = {
           "https://order.toasttab.com/online/limra-mediterranean-restaurant",
         permanent: false,
       },
+      // The grand opening giveaway (Oct 2026) is over and its code removed.
+      // Old links and the printed QR codes (/g, /g/enter) land on the home page.
+      { source: "/giveaway", destination: "/", permanent: true },
+      { source: "/giveaway/:path*", destination: "/", permanent: true },
+      { source: "/g", destination: "/", permanent: true },
+      { source: "/g/:path*", destination: "/", permanent: true },
       // Off the menu for now (owners, Oct 2026); temporary so it can return.
       {
         source: "/menu/medi-taco",

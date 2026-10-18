@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { usePathname } from "next/navigation";
 import Medallion from "./Medallion";
 import { CONTACT } from "@/data/contact";
 
@@ -26,7 +25,6 @@ export default function AskLimra() {
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const pathname = usePathname();
 
   useEffect(() => {
     fetch("/api/ask")
@@ -55,8 +53,7 @@ export default function AskLimra() {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight });
   }, [turns, open]);
 
-  // Hidden on the giveaway pages, which carry their own sticky entry bar.
-  if (!enabled || pathname?.startsWith("/giveaway")) return null;
+  if (!enabled) return null;
 
   async function send(text: string) {
     const question = text.trim();

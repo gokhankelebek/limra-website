@@ -4,8 +4,8 @@ import { usePathname } from "next/navigation";
 import Script from "next/script";
 import { useEffect, useRef } from "react";
 
-// Meta (Facebook/Instagram) Pixel. PageView everywhere, Lead on a giveaway
-// entry; no form data is ever sent. The base code fires the first PageView;
+// Meta (Facebook/Instagram) Pixel. PageView on every page; no form data is
+// ever sent. The base code fires the first PageView;
 // App Router navigations don't reload the page, so later route changes fire
 // their own.
 export const META_PIXEL_ID =

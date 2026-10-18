@@ -36,7 +36,7 @@ export default function SiteHeader() {
               key={item.href}
               href={item.href}
               className={`font-roman text-[0.7rem] uppercase tracking-[0.14em] transition-colors hover:text-terracotta lg:text-[0.78rem] lg:tracking-[0.2em] ${
-                item.href === "/giveaway" ? "text-terracotta" : "text-olive/80"
+                "text-olive/80"
               }`}
             >
               {item.label}

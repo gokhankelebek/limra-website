@@ -9,17 +9,17 @@ import { ADDRESS_LINES, CATERING_EMAIL, CATERING_EMAIL_HREF, CONTACT } from "@/d
 export const metadata: Metadata = {
   title: { absolute: "Privacy · Limra Mediterranean · Holly Springs, NC" },
   description:
-    "How Limra Mediterranean Restaurant handles the information this website collects: opening-updates emails, catering inquiries, giveaway entries, questions asked of the menu concierge, the Meta Pixel, and basic technical data.",
+    "How Limra Mediterranean Restaurant handles the information this website collects: opening-updates emails, catering inquiries, questions asked of the menu concierge, the Meta Pixel, and basic technical data.",
   alternates: { canonical: "/privacy" },
 };
 
-const EFFECTIVE = "October 15, 2026";
+const EFFECTIVE = "October 18, 2026";
 
 // Plain-English policy. Keep each section honest to what the code does:
 // NotifyForm (email list), /api/catering (Google Form + Sheet; Resend
 // optional), /api/ask (Anthropic),
 // /go (scan log), IntroContext (sessionStorage), Visit page (Maps embed),
-// MetaPixel (Meta Pixel: PageView, plus Lead on a giveaway entry).
+// MetaPixel (Meta Pixel, PageView only).
 const SECTIONS: { title: string; body: React.ReactNode }[] = [
   {
     title: "The short version",
@@ -57,14 +57,10 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
           it. This website itself does not keep a copy.
         </p>
         <p>
-          <strong>Giveaway entries.</strong>{" "}During a giveaway, the entry form
-          on this site asks for your name, phone, Instagram username, how you
-          posted, and a few confirmations (email is optional). The entry is
-          recorded in a Google Form owned by the restaurant, which is how we
-          keep the list for the drawing; verification screenshots reach us by
-          Instagram direct message and stay in that conversation. We use all of
-          it only to verify entries, draw winners, and deliver prizes, as the
-          official rules describe.
+          <strong>Past giveaway.</strong>{" "}Entries to our grand opening
+          giveaway in October 2026 were recorded in a Google Form the
+          restaurant manages. We use them only to verify winners and deliver
+          prizes, as that giveaway&apos;s rules described.
         </p>
         <p>
           <strong>Ask Limra.</strong>{" "}Our website includes a concierge that
@@ -108,9 +104,8 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
           and Instagram). It tells Meta which of our pages were viewed, along
           with standard browser details and cookies Meta sets, so we can see how
           many people reach us from our posts and ads and show our ads to people
-          likely to be nearby. We send Meta page views and, when you enter a
-          giveaway, a note that an entry was made; nothing you type into our
-          forms is shared with it. Meta may link these visits to your
+          likely to be nearby. We send Meta page views only; nothing you type
+          into our forms is shared with it. Meta may link these visits to your
           Facebook or Instagram account under its own privacy policy. You can
           control this in your Facebook or Instagram ad settings (look for
           &quot;Activity information from ad partners&quot;), or block
@@ -154,13 +149,8 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
             page.
           </li>
           <li>
-            <strong>Google Forms</strong>: stores giveaway entries on our
-            behalf while a giveaway runs.
-          </li>
-          <li>
-            <strong>Meta</strong>: receives page views and giveaway-entry
-            counts through the Meta Pixel, as described above, to measure and
-            target our ads.
+            <strong>Meta</strong>: receives page views through the Meta Pixel,
+            as described above, to measure and target our ads.
           </li>
         </ul>
         <p>
