@@ -1,6 +1,7 @@
 // The real Limra menu — items and photography provided by the owners.
-// Prices and protein ladders transcribed from the owners' menu boards
-// (limra-screens.vercel.app). Base price includes that item's +$0 protein.
+// Prices and protein ladders match Limra's Toast online ordering page, which
+// the owners named the source of truth (Oct 2026). Base price includes that
+// item's +$0 protein.
 
 import { ORDER_URL } from "./contact";
 import { OPENING_LABEL } from "./opening";
@@ -16,19 +17,12 @@ export type ProteinChoice = {
   tags?: DietaryTag[];
 };
 
-// Plates, bowls, wraps and sandwiches share one ladder (owners, Oct 2026).
+// Plates, bowls, wraps and sandwiches share one ladder (Toast, Oct 2026).
 const PLATE_PROTEINS: ProteinChoice[] = [
   { name: "Falafel", upcharge: 0, tags: ["VG", "GF"] },
   { name: "Chicken döner", upcharge: 2 },
   { name: "Tantuni", upcharge: 3 },
   { name: "Beef döner", upcharge: 4 },
-];
-
-// No falafel option on the Amalfi Melt.
-const MEAT_PROTEINS: ProteinChoice[] = [
-  { name: "Chicken döner", upcharge: 0 },
-  { name: "Tantuni", upcharge: 2.5 },
-  { name: "Beef döner", upcharge: 3 },
 ];
 
 // Beef is the base price; choosing chicken takes $3 off.
@@ -129,7 +123,7 @@ export const menu: MenuCategory[] = [
         name: "Limra Platter",
         description:
           "Mediterranean salad, hummus, seasoned rice, grilled pita, grilled peppers, roasted tomato. Your choice of protein and sauce.",
-        price: 14.99,
+        price: 15.99,
         proteins: PLATE_PROTEINS,
         image: "/menu/limra-platter.jpg?v=69cce1d9",
         sauces: SIGNATURE_SAUCES,
@@ -144,7 +138,7 @@ export const menu: MenuCategory[] = [
         name: "İskender Platter",
         description:
           "Döner over butter-toasted bread with plain yogurt, finished with our warm tomato sauce.",
-        price: 19,
+        price: 19.99,
         proteins: ISKENDER_PROTEINS,
         image: "/menu/iskender-platter.jpg?v=04d6950a",
         allergens: ["Wheat","Milk"],
@@ -285,7 +279,7 @@ export const menu: MenuCategory[] = [
         description:
           "Fresh-baked eight-inch bread layered with arugula, mozzarella, crispy onions, tomato, and banana peppers. Your choice of protein and sauce.",
         price: 14.49,
-        proteins: MEAT_PROTEINS,
+        proteins: PLATE_PROTEINS,
         image: "/menu/amalfi-melt.jpg?v=a75c43b6",
         sauces: SIGNATURE_SAUCES,
         allergens: ["Wheat (bread)","Milk (mozzarella)"],
