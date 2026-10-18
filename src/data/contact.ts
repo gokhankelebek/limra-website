@@ -37,9 +37,11 @@ export function getHoursSummary(open: boolean = isOpen()): string {
   return open ? "Open daily · 11 am – 9 pm" : `From ${OPENING_LABEL} · 11 am – 9 pm`;
 }
 
-// Every "Order online" button points here — swap for the real ordering
-// platform URL the day it exists.
-export const ORDER_URL = "/order";
+// Online ordering (pickup and delivery) runs on Toast. Every "Order online"
+// button links here directly; limramedi.com/order redirects here too
+// (next.config.ts), for printed materials and short links.
+export const ORDER_URL =
+  "https://order.toasttab.com/online/limra-mediterranean-restaurant";
 
 export const SERVICE_LINE = "Dine-in · Takeout · Delivery";
 

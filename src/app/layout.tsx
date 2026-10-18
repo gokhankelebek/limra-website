@@ -5,7 +5,7 @@ import AskLimra from "@/components/AskLimra";
 import JsonLd from "@/components/JsonLd";
 import MetaPixel from "@/components/MetaPixel";
 import { SITE_URL } from "@/lib/site";
-import { CONTACT, HOURS, SOCIALS } from "@/data/contact";
+import { CONTACT, HOURS, ORDER_URL, SOCIALS } from "@/data/contact";
 import { OPENING_DAY_ISO } from "@/data/opening";
 import "./globals.css";
 
@@ -100,6 +100,17 @@ const RESTAURANT_SCHEMA = {
     validFrom: OPENING_DAY_ISO,
   })),
   sameAs: SOCIALS.map((s) => s.href),
+  potentialAction: {
+    "@type": "OrderAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: ORDER_URL,
+      actionPlatform: [
+        "https://schema.org/DesktopWebPlatform",
+        "https://schema.org/MobileWebPlatform",
+      ],
+    },
+  },
 };
 
 export default function RootLayout({

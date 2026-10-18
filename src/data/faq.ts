@@ -49,7 +49,7 @@ export function getFaq(open: boolean): FaqEntry[] {
   {
     q: "Can I order online, or get delivery?",
     a: open
-      ? `Online ordering is coming soon. ${SERVICE_LINE}; call us to order ahead for pickup.`
+      ? "Yes. Order online for pickup or delivery at limramedi.com/order, or order at the counter. You can also call us to order ahead."
       : `Online ordering opens with the doors. ${SERVICE_LINE} once we are open.`,
   },
   {

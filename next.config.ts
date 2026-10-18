@@ -20,6 +20,14 @@ const nextConfig: NextConfig = {
         destination: "/menu/aspendos-bowl",
         permanent: true,
       },
+      // Short link for online ordering (Toast). Temporary, so the target can
+      // change if the ordering platform does.
+      {
+        source: "/order",
+        destination:
+          "https://order.toasttab.com/online/limra-mediterranean-restaurant",
+        permanent: false,
+      },
       // Off the menu for now (owners, Oct 2026); temporary so it can return.
       {
         source: "/menu/medi-taco",
