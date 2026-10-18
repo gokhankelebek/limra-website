@@ -342,11 +342,16 @@ export const menu: MenuCategory[] = [
         ],
       },
       {
-        title: "Soup & bread",
+        title: "Soup, bread & sauce",
         items: [
           { name: "Soup", price: 5 },
           { name: "Grilled pita", size: "1 piece", price: 0.99 },
           { name: "Warm lavash", size: "1 piece", price: 0.99 },
+          {
+            name: "Extra sauce",
+            description: "Limra sauce, tzatziki, harissa mayo, or garlic aioli.",
+            price: 0.99,
+          },
         ],
       },
       {
