@@ -3,20 +3,20 @@
 // 1) Every inquiry is stored in the "Limra Catering Inquiries" Google Form and
 //    its response Sheet (src/data/catering-form.ts); Google emails the form
 //    owner for each new row. This is what makes the form work today.
-// 2) Optional email path via Resend, once these exist in Vercel:
-//      RESEND_API_KEY  from resend.com
-//      CATERING_INBOX  where inquiries are emailed (an inbox the owners read)
-//      CATERING_FROM   a verified Resend sender, e.g. "Limra <catering@limramedi.com>"
-//    With it, the owners also get a formatted email and the guest a confirmation.
+// 2) Email via Resend, on whenever RESEND_API_KEY is set in Vercel. Each
+//    inquiry goes to catering@limramedi.com (reply goes straight to the guest)
+//    and the guest gets a confirmation. The sender domain limramedi.com must be
+//    verified in Resend. Optional overrides: CATERING_INBOX, CATERING_FROM.
 // The request succeeds if either path stored the inquiry.
 
 import { CATERING_FORM_ENTRIES, CATERING_FORM_POST_URL } from "@/data/catering-form";
+import { CATERING_EMAIL } from "@/data/contact";
 
 export const runtime = "nodejs";
 
 const RESEND_KEY = process.env.RESEND_API_KEY;
-const INBOX = process.env.CATERING_INBOX;
-const FROM = process.env.CATERING_FROM || "Limra Catering <onboarding@resend.dev>";
+const INBOX = process.env.CATERING_INBOX || CATERING_EMAIL;
+const FROM = process.env.CATERING_FROM || `Limra Catering <${CATERING_EMAIL}>`;
 const EMAIL_ENABLED = Boolean(RESEND_KEY && INBOX);
 const ENABLED = true;
 
@@ -193,8 +193,9 @@ export async function POST(req: Request) {
       text,
     });
     emailed = res.ok;
-  } catch {
-    emailed = false;
+    if (!emailed) console.error("catering email rejected", res.status, await res.text());
+  } catch (err) {
+    console.error("catering email failed", err);
   }
   if (!stored && !emailed) {
     return Response.json({ error: "store-failed" }, { status: 502 });
@@ -212,6 +213,7 @@ export async function POST(req: Request) {
       await send({
         from: FROM,
         to: [email],
+        reply_to: CATERING_EMAIL,
         subject: "We received your catering request · Limra Mediterranean",
         text: confirmText,
         html: `<p>Thank you for your interest in <strong>Limra Catering</strong>.</p>
