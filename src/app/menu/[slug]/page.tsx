@@ -7,6 +7,7 @@ import Reveal from "@/components/Reveal";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import { ORDER_URL } from "@/data/contact";
+import { isOpen } from "@/data/opening";
 import { ADD_FRIES_PRICE, allDishes, findDish } from "@/data/menu";
 import { BLUR } from "@/data/menu-blur";
 import { SITE_URL } from "@/lib/site";
@@ -78,6 +79,9 @@ export default async function DishPage({
     .slice(0, 3);
 
   const url = `${SITE_URL}/menu/${dish.slug}`;
+  const availability = isOpen()
+    ? "https://schema.org/InStock"
+    : "https://schema.org/PreOrder";
 
   // One Offer per protein so the price range is explicit, otherwise a single
   // Offer at the listed price.
@@ -87,13 +91,13 @@ export default async function DishPage({
         name: `${dish.name} with ${p.name}`,
         price: money(dish.price + p.upcharge),
         priceCurrency: "USD",
-        availability: "https://schema.org/PreOrder",
+        availability,
       }))
     : {
         "@type": "Offer",
         price: money(dish.price),
         priceCurrency: "USD",
-        availability: "https://schema.org/PreOrder",
+        availability,
       };
 
   const diets = new Set<string>();
@@ -119,9 +123,6 @@ export default async function DishPage({
         url,
         offers,
         ...(diets.size ? { suitableForDiet: [...diets] } : {}),
-        ...(dish.allergens?.length
-          ? { hasAllergen: dish.allergens.join(", ") }
-          : {}),
         menuAddOn: dish.addFries
           ? [
               {

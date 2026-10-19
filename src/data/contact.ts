@@ -68,9 +68,14 @@ export const ADDRESS_LINES = [
 
 const FULL_ADDRESS = `${CONTACT.streetAddress}, ${CONTACT.locality}, ${CONTACT.region} ${CONTACT.postalCode}`;
 
-export const DIRECTIONS_URL = `https://maps.google.com/?q=${encodeURIComponent(
-  `Limra Mediterranean Restaurant, ${FULL_ADDRESS}`
-)}`;
+// The Google Business Profile listing (Maps place id as a cid), so
+// "Directions" opens the real listing with reviews and hours. Also used in
+// the Restaurant schema as hasMap / sameAs.
+export const GOOGLE_MAPS_URL = "https://maps.google.com/?cid=603393125474039192";
+export const DIRECTIONS_URL = GOOGLE_MAPS_URL;
+
+// Read from the Google Maps listing, Oct 2026.
+export const GEO = { latitude: 35.6797808, longitude: -78.8077473 } as const;
 
 export const MAP_EMBED_URL = `https://www.google.com/maps?q=${encodeURIComponent(
   FULL_ADDRESS

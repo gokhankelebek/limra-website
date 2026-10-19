@@ -5,7 +5,14 @@ import AskLimra from "@/components/AskLimra";
 import JsonLd from "@/components/JsonLd";
 import MetaPixel from "@/components/MetaPixel";
 import { SITE_URL } from "@/lib/site";
-import { CONTACT, HOURS, ORDER_URL, SOCIALS } from "@/data/contact";
+import {
+  CONTACT,
+  GEO,
+  GOOGLE_MAPS_URL,
+  HOURS,
+  ORDER_URL,
+  SOCIALS,
+} from "@/data/contact";
 import { OPENING_DAY_ISO } from "@/data/opening";
 import "./globals.css";
 
@@ -52,7 +59,7 @@ export const metadata: Metadata = {
     template: "%s · Limra",
   },
   description:
-    "A modern Mediterranean table, named for an ancient city. Mediterranean restaurant and café in Holly Springs, North Carolina.",
+    "Mediterranean and Turkish kitchen in Holly Springs, NC. Döner from the spit, wraps, bowls and falafel, all 100% halal. Dine in, take out, or order delivery.",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Limra Mediterranean Restaurant · Holly Springs, NC",
@@ -68,8 +75,8 @@ export const metadata: Metadata = {
   },
 };
 
-// Site-wide Restaurant schema. Hours and socials match limramedi.com.
-// TODO: add geo coordinates once GBP is live.
+// Site-wide Restaurant schema. Hours, address and coordinates match the
+// Google Business Profile (GOOGLE_MAPS_URL).
 const RESTAURANT_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "Restaurant",
@@ -77,8 +84,12 @@ const RESTAURANT_SCHEMA = {
   alternateName: "Limra",
   url: SITE_URL,
   logo: `${SITE_URL}/icon.svg`,
-  image: `${SITE_URL}/opengraph-image`,
-  servesCuisine: "Mediterranean",
+  image: [
+    `${SITE_URL}/menu/limra-platter.jpg`,
+    `${SITE_URL}/chefs-photo.jpg`,
+    `${SITE_URL}/opengraph-image`,
+  ],
+  servesCuisine: ["Mediterranean", "Turkish"],
   slogan: "A modern Mediterranean table, named for an ancient city.",
   acceptsReservations: "False",
   hasMenu: `${SITE_URL}/menu`,
@@ -93,6 +104,8 @@ const RESTAURANT_SCHEMA = {
     postalCode: "27539",
     addressCountry: "US",
   },
+  geo: { "@type": "GeoCoordinates", ...GEO },
+  hasMap: GOOGLE_MAPS_URL,
   openingHoursSpecification: HOURS.map((h) => ({
     "@type": "OpeningHoursSpecification",
     dayOfWeek: [...h.schemaDays],
@@ -100,7 +113,7 @@ const RESTAURANT_SCHEMA = {
     closes: h.closes,
     validFrom: OPENING_DAY_ISO,
   })),
-  sameAs: SOCIALS.map((s) => s.href),
+  sameAs: [GOOGLE_MAPS_URL, ...SOCIALS.map((s) => s.href)],
   potentialAction: {
     "@type": "OrderAction",
     target: {

@@ -72,6 +72,10 @@ export default function MenuPreview() {
         <h2 className="mt-5 font-display text-5xl font-medium text-olive lg:text-6xl">
           Come hungry.
         </h2>
+        <p className="mx-auto mt-5 max-w-xl font-body text-lg font-light leading-relaxed text-ink/70">
+          Beef and chicken döner carved from the spit, tantuni, İskender, falafel,
+          and bowls built to order. Everything we serve is 100% halal.
+        </p>
       </Reveal>
 
       <Reveal animation="anim-fade" delay="delay-2">

@@ -21,10 +21,10 @@ import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Catering · 100% Halal Mediterranean · Holly Springs & the Triangle",
+    absolute: "Halal Catering in Holly Springs & the Triangle · Limra",
   },
   description:
-    "100% halal Mediterranean catering for 10 to 200+ guests across Holly Springs, Apex, Cary, Raleigh, Durham and the Triangle. Pickup, delivery, and full buffet setup. Request a quote from Limra.",
+    "100% halal Mediterranean catering for 10 to 200+ guests in Holly Springs, Apex, Cary, Raleigh and the Triangle. Pickup, delivery or full buffet setup.",
   alternates: { canonical: "/catering" },
 };
 
