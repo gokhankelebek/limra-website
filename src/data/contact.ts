@@ -11,6 +11,9 @@ export const CONTACT = {
   phoneHref: "tel:+19194466060",
   // schema.org telephone (Restaurant / FoodEstablishment JSON-LD)
   phoneSchema: "+1-919-446-6060",
+  // General inbox (Google Workspace on limramedi.com since Oct 2026)
+  email: "info@limramedi.com",
+  emailHref: "mailto:info@limramedi.com",
 } as const;
 
 // Hours as published on limramedi.com: 11am — 9pm, daily.
@@ -45,15 +48,10 @@ export const ORDER_URL =
 
 export const SERVICE_LINE = "Dine-in · Takeout · Delivery";
 
-// Public catering address. limramedi.com has no mailbox yet (no MX records,
-// Oct 2026), so nothing is shown until NEXT_PUBLIC_CATERING_EMAIL is set in
-// Vercel to an address that really receives mail. Until then the site points
-// guests to the catering form and the phone.
-export const CATERING_EMAIL: string | null =
-  process.env.NEXT_PUBLIC_CATERING_EMAIL || null;
-export const CATERING_EMAIL_HREF: string | null = CATERING_EMAIL
-  ? `mailto:${CATERING_EMAIL}`
-  : null;
+// Catering inbox (Google Workspace). The /catering form still files every
+// inquiry in the Google Sheet; this is for guests who would rather write.
+export const CATERING_EMAIL = "catering@limramedi.com";
+export const CATERING_EMAIL_HREF = `mailto:${CATERING_EMAIL}`;
 
 // From limramedi.com — used in the footer and Restaurant schema sameAs.
 export const SOCIALS = [

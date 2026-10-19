@@ -35,7 +35,7 @@ const CATERING_SCHEMA = {
   servesCuisine: "Mediterranean",
   url: `${SITE_URL}/catering`,
   telephone: CONTACT.phoneSchema,
-  ...(CATERING_EMAIL ? { email: CATERING_EMAIL } : {}),
+  email: CATERING_EMAIL,
   areaServed: CATERING_AREA.map((name) => ({
     "@type": "City",
     name: `${name}, NC`,
@@ -136,10 +136,10 @@ export default function CateringPage() {
                   Request a quote
                 </Link>
                 <a
-                  href={CATERING_EMAIL_HREF ?? CONTACT.phoneHref}
+                  href={CATERING_EMAIL_HREF}
                   className="rounded-[2px] border border-olive/40 px-8 py-3.5 font-roman text-[0.74rem] uppercase tracking-[0.2em] text-olive transition-colors hover:border-olive hover:bg-olive hover:text-cream"
                 >
-                  {CATERING_EMAIL ? "Email us" : `Call ${CONTACT.phoneDisplay}`}
+                  Email us
                 </a>
               </div>
             </Reveal>
@@ -340,9 +340,14 @@ export default function CateringPage() {
               <p className="mx-auto mt-5 max-w-md font-body text-base font-light leading-relaxed text-cream/70">
                 Tell us about your event and we will build a menu and a quote
                 around it.{" "}
-                {CATERING_EMAIL
-                  ? `Prefer email? Reach us at ${CATERING_EMAIL}.`
-                  : `Prefer to talk it through? Call ${CONTACT.phoneDisplay}.`}
+                Prefer email? Write to{" "}
+                <a
+                  href={CATERING_EMAIL_HREF}
+                  className="text-cream underline-offset-4 hover:underline"
+                >
+                  {CATERING_EMAIL}
+                </a>
+                , or call {CONTACT.phoneDisplay}.
               </p>
             </Reveal>
 

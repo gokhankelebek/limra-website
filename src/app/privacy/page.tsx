@@ -4,7 +4,7 @@ import Medallion from "@/components/Medallion";
 import Reveal from "@/components/Reveal";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
-import { ADDRESS_LINES, CATERING_EMAIL, CATERING_EMAIL_HREF, CONTACT } from "@/data/contact";
+import { ADDRESS_LINES, CONTACT } from "@/data/contact";
 
 export const metadata: Metadata = {
   title: { absolute: "Privacy · Limra Mediterranean · Holly Springs, NC" },
@@ -255,12 +255,8 @@ export default function PrivacyPage() {
                 {ADDRESS_LINES[1]}
                 <br />
                 <a href={CONTACT.phoneHref}>{CONTACT.phoneDisplay}</a>
-                {CATERING_EMAIL_HREF && (
-                  <>
-                    <br />
-                    <a href={CATERING_EMAIL_HREF}>{CATERING_EMAIL}</a>
-                  </>
-                )}
+                <br />
+                <a href={CONTACT.emailHref}>{CONTACT.email}</a>
               </p>
             </div>
           </Reveal>

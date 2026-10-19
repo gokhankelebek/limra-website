@@ -252,12 +252,12 @@ export default function CateringForm() {
           {status === "sending" ? "Sending…" : "Request a quote"}
         </button>
         <span className="font-body text-sm font-light text-ink/50">
-          Or {CATERING_EMAIL ? "email" : "call"}{" "}
+          Or email{" "}
           <a
-            href={CATERING_EMAIL_HREF ?? CONTACT.phoneHref}
+            href={CATERING_EMAIL_HREF}
             className="whitespace-nowrap text-olive underline-offset-4 hover:underline"
           >
-            {CATERING_EMAIL ?? CONTACT.phoneDisplay}
+            {CATERING_EMAIL}
           </a>
         </span>
       </div>

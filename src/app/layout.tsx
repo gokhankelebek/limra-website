@@ -83,6 +83,7 @@ const RESTAURANT_SCHEMA = {
   acceptsReservations: "False",
   hasMenu: `${SITE_URL}/menu`,
   telephone: CONTACT.phoneSchema,
+  email: CONTACT.email,
   priceRange: "$$",
   address: {
     "@type": "PostalAddress",

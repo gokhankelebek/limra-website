@@ -91,6 +91,13 @@ export default function SiteFooter() {
                 {CONTACT.phoneDisplay}
               </a>
               <br />
+              <a
+                href={CONTACT.emailHref}
+                className="transition-colors hover:text-terracotta"
+              >
+                {CONTACT.email}
+              </a>
+              <br />
               {getHoursSummary(open)}
             </p>
             <p className="micro mt-5 font-roman uppercase text-olive/85">

@@ -1,6 +1,7 @@
 import { menu } from "@/data/menu";
 import {
   ADDRESS_LINES,
+  CATERING_EMAIL,
   CONTACT,
   HOURS,
   SERVICE_LINE,
@@ -61,11 +62,12 @@ Status: ${open ? `Limra is open. Hours: ${hoursLines}. Guests can order online f
 Concept: an elevated Mediterranean bistro: döner and gyro carved from the vertical spit, an open table of hot and cold dishes replenished through the day, a case of baklava and pastries, and the Limra Beverage Counter. Counter service: order at the counter, no reservations needed. ${SERVICE_LINE}. (If a guest says "buffet," you may confirm that's the open table, but never lead with that word.)
 Chefs: Can and Elif Engin, husband and wife. Chef Can spent over fifteen years in professional kitchens, including luxury hotels and protocol dinners; he restarted in the U.S. from a food truck. Chef Elif ran Elif's Vanilla Cakery and keeps Limra's pastry counter.
 Halal: Limra is 100% halal.
-Catering: Limra caters celebrations and gatherings, 10 to 200+ guests, 100% halal. Pickup and delivery; delivery with full buffet setup for 60+ guests (a setup fee may apply by size, location, and service level). Delivers across Holly Springs, Apex, Cary, Fuquay-Varina, Raleigh, Durham and the Triangle. Guests request a quote with the form on the Catering page; point them there first, or to the phone for anything urgent. There is no catering email address.
+Catering: Limra caters celebrations and gatherings, 10 to 200+ guests, 100% halal. Pickup and delivery; delivery with full buffet setup for 60+ guests (a setup fee may apply by size, location, and service level). Delivers across Holly Springs, Apex, Cary, Fuquay-Varina, Raleigh, Durham and the Triangle. Guests request a quote with the form on the Catering page; point them there first, or to the phone for anything urgent. Guests who prefer email can write to ${CATERING_EMAIL}.
 The name: Limra comes from Limyra, an ancient city in Lycia on the Mediterranean coast of what is now Turkey.
 
 ADDRESS: ${ADDRESS_LINES[0]}, ${ADDRESS_LINES[1]}
 PHONE: ${CONTACT.phoneDisplay}
+EMAIL: ${CONTACT.email} (general questions; catering: ${CATERING_EMAIL})
 HOURS${open ? "" : " (from opening day)"}: ${hoursLines}. Holiday hours may differ.
 SOCIAL: ${SOCIALS.map((s) => `${s.label}: ${s.href}`).join(" · ")}
 

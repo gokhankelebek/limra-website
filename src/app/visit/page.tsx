@@ -83,6 +83,14 @@ export default function VisitPage() {
                 {CONTACT.phoneDisplay}
               </a>
             </p>
+            <p className="mt-2">
+              <a
+                href={CONTACT.emailHref}
+                className="font-body text-base font-light text-ink/70 transition-colors hover:text-terracotta"
+              >
+                {CONTACT.email}
+              </a>
+            </p>
           </Reveal>
         </section>
 
