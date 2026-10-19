@@ -13,11 +13,11 @@ export const metadata: Metadata = {
   alternates: { canonical: "/privacy" },
 };
 
-const EFFECTIVE = "October 18, 2026";
+const EFFECTIVE = "October 19, 2026";
 
 // Plain-English policy. Keep each section honest to what the code does:
-// NotifyForm (email list), /api/catering (Google Form + Sheet; Resend
-// optional), /api/ask (Anthropic),
+// NotifyForm (email list), /api/catering (emailed via Resend to the
+// restaurant's Google Workspace inbox), /api/ask (Anthropic),
 // /go (scan log), IntroContext (sessionStorage), Visit page (Maps embed),
 // MetaPixel (Meta Pixel, PageView only).
 const SECTIONS: { title: string; body: React.ReactNode }[] = [
@@ -52,9 +52,10 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
           name, a way to reach you (email or phone), and details about your
           event: date, guest count, occasion, service style, and anything you
           choose to tell us. We use this only to answer your inquiry and plan
-          your event. The inquiry is recorded in a Google Form and spreadsheet
-          the restaurant manages, which is where the team reads and answers
-          it. This website itself does not keep a copy.
+          your event. The inquiry is emailed to the restaurant&apos;s catering
+          inbox, where the team reads and answers it, and you get a copy by
+          email if you gave us your address. This website itself does not keep
+          a copy.
         </p>
         <p>
           <strong>Past giveaway.</strong>{" "}Entries to our grand opening
@@ -133,8 +134,12 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
             opening-updates list and sends our emails.
           </li>
           <li>
-            <strong>Google Forms and Google Sheets</strong>: store catering
-            inquiries on our behalf so the team can answer them.
+            <strong>Resend</strong>: delivers catering inquiries to our inbox
+            and sends you a confirmation.
+          </li>
+          <li>
+            <strong>Google Workspace</strong>: hosts the restaurant&apos;s email,
+            and Google Forms holds the past giveaway entries.
           </li>
           <li>
             <strong>Anthropic</strong>: provides the AI model behind Ask Limra

@@ -1,24 +1,24 @@
-// Catering inquiry endpoint.
-//
-// 1) Every inquiry is stored in the "Limra Catering Inquiries" Google Form and
-//    its response Sheet (src/data/catering-form.ts); Google emails the form
-//    owner for each new row. This is what makes the form work today.
-// 2) Email via Resend, on whenever RESEND_API_KEY is set in Vercel. Each
-//    inquiry goes to catering@limramedi.com (reply goes straight to the guest)
-//    and the guest gets a confirmation. The sender domain limramedi.com must be
-//    verified in Resend. Optional overrides: CATERING_INBOX, CATERING_FROM.
-// The request succeeds if either path stored the inquiry.
+// Catering inquiry endpoint. Each inquiry is emailed through Resend to
+// catering@limramedi.com, laid out so the request reads at one look
+// (src/lib/catering-email.ts); Reply goes straight to the guest, and the guest
+// gets a confirmation with a copy of what they sent. Needs RESEND_API_KEY in
+// Vercel and limramedi.com verified in Resend. Optional overrides:
+// CATERING_INBOX, CATERING_FROM. Resend's dashboard keeps a log of every email.
 
-import { CATERING_FORM_ENTRIES, CATERING_FORM_POST_URL } from "@/data/catering-form";
 import { CATERING_EMAIL } from "@/data/contact";
+import {
+  confirmationEmail,
+  inquiryEmail,
+  inquirySubject,
+  type Inquiry,
+} from "@/lib/catering-email";
 
 export const runtime = "nodejs";
 
 const RESEND_KEY = process.env.RESEND_API_KEY;
 const INBOX = process.env.CATERING_INBOX || CATERING_EMAIL;
 const FROM = process.env.CATERING_FROM || `Limra Catering <${CATERING_EMAIL}>`;
-const EMAIL_ENABLED = Boolean(RESEND_KEY && INBOX);
-const ENABLED = true;
+const ENABLED = Boolean(RESEND_KEY);
 
 const MAX = { name: 120, contact: 160, message: 1200, generic: 200 };
 
@@ -56,10 +56,15 @@ function clean(v: unknown, max: number): string {
   return v.replace(/\s+/g, " ").trim().slice(0, max);
 }
 
-function esc(s: string): string {
-  return s.replace(/[<>&]/g, (c) =>
-    c === "<" ? "&lt;" : c === ">" ? "&gt;" : "&amp;"
-  );
+// Like clean(), but keeps the guest's line breaks.
+function cleanText(v: unknown, max: number): string {
+  if (typeof v !== "string") return "";
+  return v
+    .replace(/\r\n?/g, "\n")
+    .replace(/[^\S\n]+/g, " ")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim()
+    .slice(0, max);
 }
 
 export async function POST(req: Request) {
@@ -86,7 +91,7 @@ export async function POST(req: Request) {
   const guests = clean(body.guests, MAX.generic);
   const eventType = clean(body.eventType, MAX.generic);
   const serviceType = clean(body.serviceType, MAX.generic);
-  const message = clean(body.message, MAX.message);
+  const message = cleanText(body.message, MAX.message);
   const interests = Array.isArray(body.interests)
     ? body.interests.map((i) => clean(i, 60)).filter(Boolean).slice(0, 12)
     : [];
@@ -98,78 +103,21 @@ export async function POST(req: Request) {
     );
   }
 
-  // 1) Store in the Google Sheet. Google answers a good submission with its
-  // confirmation page; a rejected one re-renders the form fields, and a closed
-  // form says so. Both count as not stored.
-  const E = CATERING_FORM_ENTRIES;
-  const form = new URLSearchParams();
-  form.set(`entry.${E.name}`, name);
-  form.set(`entry.${E.email}`, email || "-");
-  form.set(`entry.${E.phone}`, phone || "-");
-  form.set(`entry.${E.eventDate}`, eventDate || "-");
-  form.set(`entry.${E.guests}`, guests || "-");
-  form.set(`entry.${E.eventType}`, eventType || "-");
-  form.set(`entry.${E.serviceType}`, serviceType || "-");
-  form.set(`entry.${E.interests}`, interests.join(", ") || "-");
-  form.set(`entry.${E.message}`, message || "-");
-  form.set("fvv", "1");
-  form.set("pageHistory", "0");
-
-  let stored = false;
-  try {
-    const res = await fetch(CATERING_FORM_POST_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: form.toString(),
-      redirect: "manual",
-    });
-    const page = res.status === 200 ? await res.text() : "";
-    stored =
-      (res.status >= 300 && res.status < 400) ||
-      (res.status === 200 &&
-        !/name="entry\.\d+"/.test(page) &&
-        !/no longer accepting/i.test(page));
-    if (!stored) {
-      console.error("catering sheet rejected", res.status, page.slice(0, 200).replace(/\s+/g, " "));
-    }
-  } catch (err) {
-    console.error("catering sheet failed", err);
+  if (!ENABLED) {
+    return Response.json({ error: "unavailable" }, { status: 503 });
   }
 
-  if (!EMAIL_ENABLED) {
-    return stored
-      ? Response.json({ ok: true })
-      : Response.json({ error: "store-failed" }, { status: 502 });
-  }
-
-  const lines = [
-    ["Name", name],
-    ["Email", email],
-    ["Phone", phone],
-    ["Event date", eventDate],
-    ["Guests", guests],
-    ["Event type", eventType],
-    ["Service type", serviceType],
-    ["Interested in", interests.join(", ")],
-  ].filter(([, v]) => v);
-
-  const html = `
-    <h2>New catering inquiry</h2>
-    <table cellpadding="6" style="border-collapse:collapse">
-      ${lines
-        .map(
-          ([k, v]) =>
-            `<tr><td style="color:#2d5b14"><strong>${k}</strong></td><td>${esc(v)}</td></tr>`
-        )
-        .join("")}
-    </table>
-    ${message ? `<p><strong>Message</strong><br>${esc(message).replace(/\n/g, "<br>")}</p>` : ""}
-  `;
-
-  const text = [
-    ...lines.map(([k, v]) => `${k}: ${v}`),
-    message ? `\nMessage:\n${message}` : "",
-  ].join("\n");
+  const inquiry: Inquiry = {
+    name,
+    email,
+    phone,
+    eventDate,
+    guests,
+    eventType,
+    serviceType,
+    interests,
+    message,
+  };
 
   const send = (payload: Record<string, unknown>) =>
     fetch("https://api.resend.com/emails", {
@@ -181,50 +129,38 @@ export async function POST(req: Request) {
       body: JSON.stringify(payload),
     });
 
-  // 2) Email the owners. Required only when the Sheet store failed.
-  let emailed = false;
+  // 1) The inquiry to the restaurant. This is the only copy, so a failure
+  // fails the request and the guest is shown the phone number.
   try {
     const res = await send({
       from: FROM,
       to: [INBOX],
       reply_to: email || undefined,
-      subject: `Catering inquiry: ${name}${guests ? ` (${guests})` : ""}`,
-      html,
-      text,
+      subject: inquirySubject(inquiry),
+      ...inquiryEmail(inquiry),
     });
-    emailed = res.ok;
-    if (!emailed) console.error("catering email rejected", res.status, await res.text());
+    if (!res.ok) {
+      console.error("catering email rejected", res.status, await res.text());
+      return Response.json({ error: "send-failed" }, { status: 502 });
+    }
   } catch (err) {
     console.error("catering email failed", err);
-  }
-  if (!stored && !emailed) {
-    return Response.json({ error: "store-failed" }, { status: 502 });
+    return Response.json({ error: "send-failed" }, { status: 502 });
   }
 
-  // 3) Auto-confirmation to the guest. Best-effort — a failure here must not
-  // fail the request, since the owners already have the inquiry.
+  // 2) Confirmation to the guest. Best-effort: the restaurant already has
+  // the inquiry.
   if (email) {
-    const confirmText =
-      "Thank you for your interest in Limra Catering!\n\n" +
-      "We've received your catering request and our team will review the details. " +
-      "We'll get back to you as soon as possible to discuss availability, menu options, and the next steps.\n\n" +
-      "Thank you for considering Limra for your event.\n\nLimra Mediterranean";
     try {
       await send({
         from: FROM,
         to: [email],
         reply_to: CATERING_EMAIL,
         subject: "We received your catering request · Limra Mediterranean",
-        text: confirmText,
-        html: `<p>Thank you for your interest in <strong>Limra Catering</strong>.</p>
-          <p>We've received your catering request and our team will review the details.
-          We'll get back to you as soon as possible to discuss availability, menu
-          options, and the next steps.</p>
-          <p>Thank you for considering Limra for your event.</p>
-          <p style="color:#2d5b14">Limra Mediterranean</p>`,
+        ...confirmationEmail(inquiry),
       });
     } catch {
-      // swallow — the owners still got the inquiry
+      // swallow
     }
   }
 
