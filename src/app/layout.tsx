@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Marcellus, Spectral } from "next/font/google";
 import Script from "next/script";
 import AskLimra from "@/components/AskLimra";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import JsonLd from "@/components/JsonLd";
 import MetaPixel from "@/components/MetaPixel";
 import { SITE_URL } from "@/lib/site";
@@ -61,6 +62,8 @@ export const metadata: Metadata = {
   description:
     "Mediterranean and Turkish kitchen in Holly Springs, NC. Döner from the spit, wraps, bowls and falafel, all 100% halal. Dine in, take out, or order delivery.",
   alternates: { canonical: "/" },
+  // Search Console ownership for https://limramedi.com/ (gokhankelebek@gmail.com).
+  verification: { google: "h8WSOXXqjfJVp6TGczrtNfBuoA3nJransejsEPpxB84" },
   openGraph: {
     title: "Limra Mediterranean Restaurant · Holly Springs, NC",
     description: "A modern Mediterranean table, named for an ancient city.",
@@ -149,6 +152,7 @@ export default function RootLayout({
         <AskLimra />
         {/* Production builds only, so local development never pollutes the pixel. */}
         {process.env.NODE_ENV === "production" && <MetaPixel />}
+        {process.env.NODE_ENV === "production" && <GoogleAnalytics />}
       </body>
     </html>
   );
