@@ -21,7 +21,7 @@ export function isOpen(now: Date = new Date()): boolean {
   return now.getTime() >= OPENING_AT_MS;
 }
 
-/** "Opening <date>" before the day; "Open daily" after. */
+/** "Opening <date>" before the day; "11 am – 9 pm · Closed Tuesdays" after. */
 export function statusLine(open: boolean = isOpen()): string {
-  return open ? "Open daily" : `Opening ${OPENING_LABEL}`;
+  return open ? "11 am – 9 pm · Closed Tuesdays" : `Opening ${OPENING_LABEL}`;
 }

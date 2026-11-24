@@ -9,6 +9,7 @@ import {
   CONTACT,
   DIRECTIONS_URL,
   HOURS,
+  CLOSED_DAY,
   MAP_EMBED_URL,
   SERVICE_LINE,
 } from "@/data/contact";
@@ -114,6 +115,14 @@ export default function VisitPage() {
                   </p>
                 </div>
               ))}
+              <div className="flex items-baseline justify-between gap-6 border-t border-olive/15 py-4">
+                <p className="font-body text-base font-light text-ink/75">
+                  {CLOSED_DAY}
+                </p>
+                <p className="shrink-0 font-roman text-sm tracking-[0.14em] text-terracotta/80">
+                  Closed
+                </p>
+              </div>
             </div>
             <p className="label mt-6 font-roman uppercase text-olive/60">
               {SERVICE_LINE}
