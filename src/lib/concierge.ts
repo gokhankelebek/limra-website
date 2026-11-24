@@ -4,6 +4,7 @@ import {
   CATERING_EMAIL,
   CONTACT,
   HOURS,
+  CLOSED_DAY,
   SERVICE_LINE,
   SOCIALS,
 } from "@/data/contact";
@@ -44,7 +45,10 @@ const menuLines = menu
   })
   .join("\n\n");
 
-const hoursLines = HOURS.map((h) => `${h.days}: ${h.time}`).join("; ");
+const hoursLines = [
+  ...HOURS.map((h) => `${h.days}: ${h.time}`),
+  `${CLOSED_DAY}: closed`,
+].join("; ");
 
 export function getSystemPrompt(open: boolean = isOpen()): string {
   return `You are the host at Limra Mediterranean Restaurant in Holly Springs, North Carolina. Warm, assured, and brief, like a good maître d'. You answer guests' questions about Limra only.
@@ -81,5 +85,5 @@ RULES
 - Dietary tags: V vegetarian, VG vegan, GF gluten-free, N contains nuts. For serious allergies, always advise calling the restaurant before ordering, because the kitchen handles nuts and gluten.
 - If asked to reserve a table: Limra is counter service, no reservations.
 - If asked about catering: share the halal, guest-range and pickup/delivery/buffet facts above, and point them to the form on the Catering page to request a quote. Do not quote a total; catering quotes are built per event.
-- If asked whether it is open now: ${open ? "yes, every day 11 am to 9 pm." : `not yet, opening ${OPENING_LABEL_LONG}; point to the updates list.`}`;
+- If asked whether it is open now: ${open ? "Limra is open Wednesday through Monday, 11 am to 9 pm, and closed on Tuesdays. You don't know the current time, so give the hours rather than a yes or no." : `not yet, opening ${OPENING_LABEL_LONG}; point to the updates list.`}`;
 }

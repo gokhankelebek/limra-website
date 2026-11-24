@@ -16,7 +16,7 @@ export function getFaq(open: boolean): FaqEntry[] {
   open
     ? {
         q: "When is Limra open?",
-        a: "Every day, 11 am to 9 pm. Holiday hours may differ.",
+        a: "Wednesday through Monday, 11 am to 9 pm. We\u2019re closed on Tuesdays. Holiday hours may differ.",
       }
     : {
         q: "When does Limra open?",

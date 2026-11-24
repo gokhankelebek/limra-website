@@ -16,14 +16,14 @@ export const CONTACT = {
   emailHref: "mailto:info@limramedi.com",
 } as const;
 
-// Hours as published on limramedi.com: 11am — 9pm, daily.
+// Hours: 11 am – 9 pm, every day except Tuesday (closed).
+export const CLOSED_DAY = "Tuesday";
 export const HOURS = [
   {
-    days: "Every day",
+    days: "Wednesday – Monday",
     time: "11 am – 9 pm",
     schemaDays: [
       "Monday",
-      "Tuesday",
       "Wednesday",
       "Thursday",
       "Friday",
@@ -37,7 +37,9 @@ export const HOURS = [
 
 // Footer hours line, before and after opening day.
 export function getHoursSummary(open: boolean = isOpen()): string {
-  return open ? "Open daily · 11 am – 9 pm" : `From ${OPENING_LABEL} · 11 am – 9 pm`;
+  return open
+    ? "11 am – 9 pm · Closed Tuesdays"
+    : `From ${OPENING_LABEL} · 11 am – 9 pm · Closed Tuesdays`;
 }
 
 // Online ordering (pickup and delivery) runs on Toast. Every "Order online"

@@ -1,7 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import { HOURS } from "@/data/contact";
+import { CLOSED_DAY, HOURS } from "@/data/contact";
 
 // Live "open now" badge for the hero. The page itself is cached for up to an
 // hour, so the open/closed call is made in the visitor's browser against the
@@ -10,7 +10,7 @@ import { HOURS } from "@/data/contact";
 const TZ = "America/New_York";
 const { opens, closes } = HOURS[0];
 
-type State = "open" | "before" | "after";
+type State = "open" | "before" | "after" | "afterBeforeClosed" | "closedToday";
 
 function minutes(hhmm: string): number {
   const [h, m] = hhmm.split(":").map(Number);
@@ -23,22 +23,28 @@ function label(hhmm: string): string {
   return `${hour}${m ? `:${String(m).padStart(2, "0")}` : ""} ${h < 12 ? "am" : "pm"}`;
 }
 
-function nowInEastern(): number {
+// Day of week and minutes since midnight, on the restaurant's clock.
+function nowInEastern(): { day: string; t: number } {
   const parts = new Intl.DateTimeFormat("en-US", {
     timeZone: TZ,
+    weekday: "long",
     hour: "numeric",
     minute: "numeric",
     hourCycle: "h23",
   }).formatToParts(new Date());
-  const get = (t: string) => Number(parts.find((p) => p.type === t)?.value ?? 0);
-  return get("hour") * 60 + get("minute");
+  const get = (t: string) => parts.find((p) => p.type === t)?.value ?? "";
+  return { day: get("weekday"), t: Number(get("hour")) * 60 + Number(get("minute")) };
 }
 
+const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const nextDay = (day: string) => DAYS[(DAYS.indexOf(day) + 1) % 7];
+
 function getState(): State {
-  const t = nowInEastern();
+  const { day, t } = nowInEastern();
+  if (day === CLOSED_DAY) return "closedToday";
   if (t < minutes(opens)) return "before";
   if (t < minutes(closes)) return "open";
-  return "after";
+  return nextDay(day) === CLOSED_DAY ? "afterBeforeClosed" : "after";
 }
 
 function subscribe(onChange: () => void) {
@@ -50,10 +56,20 @@ function subscribe(onChange: () => void) {
   };
 }
 
+const reopenDay = nextDay(CLOSED_DAY);
+
 const COPY: Record<State, { lead: string; detail: string }> = {
   open: { lead: "Open now", detail: `until ${label(closes)}` },
   before: { lead: "Opens today", detail: `at ${label(opens)}` },
   after: { lead: "Closed now", detail: `opens ${label(opens)} tomorrow` },
+  afterBeforeClosed: {
+    lead: "Closed now",
+    detail: `opens ${reopenDay} at ${label(opens)}`,
+  },
+  closedToday: {
+    lead: `Closed ${CLOSED_DAY}s`,
+    detail: `opens ${reopenDay} at ${label(opens)}`,
+  },
 };
 
 export default function OpenStatus({ className = "" }: { className?: string }) {
@@ -86,7 +102,7 @@ export default function OpenStatus({ className = "" }: { className?: string }) {
       ) : (
         <span>
           Now open
-          <span className="text-olive/60"> · daily {label(opens)} – {label(closes)}</span>
+          <span className="text-olive/60"> · {label(opens)} – {label(closes)} · Closed Tue</span>
         </span>
       )}
     </p>
